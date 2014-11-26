@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android=" http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+
+    <string name="app_name">药盾</string>
+    <string name="text_about">关于</string>
+    <string name="text_more">更多</string>
+    <string name="exit_dialog_title">您的操作将会退出</string>
+    <string name="title_back_text">返回</string>
+    <string name="more_check_newversion_dlg_title">检测到新版本<xliff:g>%1$s</xliff:g></string>
+    <string name="more_check_newversion_btn_update_later">稍后更新</string>
+    <string name="more_check_newversion_btn_update">下载更新</string>
+    <string name="force_download_start">当前进度：0%</string>
+    <string name="no_return_data">无返回数据的提示</string>
+    <string name="unknow_version_name">未知版本</string>
+    <string name="button_text_yes">好的</string>
+    <string name="button_text_no">取消</string>
+    <string name="button_text_tips">提示</string>
+    <string name="btn_txt_no">否</string>
+    <string name="btn_txt_yes">是</string>
+    <!-- 登录 -->
+    <string name="button_text_login">登录</string>
+    <string name="toast_login_error">登录信息不能为空</string>
+    <string name="hint_input_childname">请输入孩子名称</string>
+    <string name="hint_input_tel">请输入您的手机号</string>
+    <string name="display_password">显示号码</string>
+    <!-- 关于我们 -->
+    <string name="text_version_code">当前版本&#160;v&#160;%s</string>
+    <string name="text_company_tel">联系电话：0755&#8211;83055641</string>
+    <string name="text_400_tel">客服电话：400&#8211;8362&#8211;808</string>
+    <string name="text_tel_no">0755&#8211;83055641</string>
+    <string name="text_400_no">400&#8211;836&#8211;2808</string>
+    <string name="text_copy_right">©深圳市爱壳思网络科技有限公司&#160;版权所有</string>
+    <string name="text_app_description">&#160;&#160;&#160;&#160;深圳市爱壳思网络科技有限公司紧抓当前移动互联网信息产业高速发展的契机，坚持“追求卓越、服务第一”的经营理念， 尊重人才、注重技术，以不懈的努力、更高的目标来要求自己,不断完善自身管理模式和服务品质。</string>
+    <string name="bottom_tab_yaodun">药盾</string>
+    <string name="bottom_tab_medicine_knowledge">用药知识</string>
+    <string name="bottom_tab_more">更多</string>
+    <!-- TAG用ID -->
+    <item name="tag_sign_type" type="id"></item>
+    <item name="tag_sign_viewholder" type="id"></item>
+    <item name="tag_image_load_finish" type="id"></item>
+    <item name="imageview_id" type="id"></item>
+
+</resources>

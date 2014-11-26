@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <color name="white">#FFFFFF</color>
+    <color name="login_bg">#F5F5F5</color>
+    <color name="black">#000000</color>
+    <color name="gray">#cccccc</color>
+    <color name="actionbar_background_start">#3A5FCD</color>
+    <color name="actionbar_background_end">#27408B</color>
+    <color name="divider_line_color">#dfdfdf</color>
+    <color name="white_80_alpha">#ccffffff</color>
+    <color name="pop_list_pressed">#bdbdbd</color>
+    <color name="title_bg_blue">#2D93D9</color>
+    <color name="news_gray">#9C9C9C</color>
+
+</resources>

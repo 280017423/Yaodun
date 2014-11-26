@@ -1,0 +1,21 @@
+package com.yaodun.app.listener;
+
+import com.qianjiang.framework.model.VersionInfo;
+
+/**
+ * 新版本检测回调接口
+ * 
+ */
+public interface NewVersionListener {
+	/**
+	 * 
+	 * @Name onUpdateReturned
+	 * @Description 检查新版本回调函数
+	 * @param versionInfo
+	 * @Author Administrator
+	 * @Date 2014年4月15日 下午3:22:47
+	 * 
+	 */
+	void onUpdateReturned(VersionInfo versionInfo);
+
+}

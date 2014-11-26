@@ -1,0 +1,10 @@
+<resources>
+
+    <!-- 文字大小dimen -->
+    <dimen name="size_1">20sp</dimen>
+    <dimen name="size_2">20sp</dimen>
+    <dimen name="size_3">20sp</dimen>
+    <dimen name="size_4">20sp</dimen>
+    <dimen name="border_radius_with_dimensions">0.7dp</dimen>
+
+</resources>
