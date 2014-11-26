@@ -18,6 +18,12 @@ public class MoreActivity extends YaodunActivityBase implements OnClickListener 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_more);
+		initView();
+	}
+
+	private void initView() {
+		TextView titleTextView = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
+		titleTextView.setText(R.string.text_more);
 	}
 
 	@Override

@@ -2,16 +2,13 @@ package com.yaodun.app.activity;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 
 import com.qianjiang.framework.authentication.BaseLoginProcessor;
@@ -30,7 +27,7 @@ import com.yaodun.app.req.UserReq;
  * 
  * @author zou.sq
  */
-public class LoginActivity extends YaodunActivityBase implements OnClickListener, OnCheckedChangeListener {
+public class LoginActivity extends YaodunActivityBase implements OnClickListener {
 	private static final int DIALOG_EXIT_APP = 0;
 	private static final int DELAY_TIME = 500;
 	private static final String TAG = "LoginActivity";
@@ -38,7 +35,6 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 	private LOGIN_TYPE mLoginType;
 	// 登录来源动作标记
 	private String mIdentify;
-	private CheckBox mCbHidePwd;
 	private EditText mEdtChildName;
 	private EditText mEdtTel;
 	private LoadingUpView mLoadingUpView;
@@ -52,7 +48,6 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 	}
 
 	private void setListener() {
-		mCbHidePwd.setOnCheckedChangeListener(this);
 	}
 
 	private void initVariable() {
@@ -64,9 +59,7 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 		mLoadingUpView = new LoadingUpView(this, true);
 		mLoadingUpView.setCancelable(false);
 		mEdtChildName = (EditText) findViewById(R.id.edt_child_name);
-		mCbHidePwd = (CheckBox) findViewById(R.id.cb_hide_pwd);
 		mEdtTel = (EditText) findViewById(R.id.edt_tel);
-		mEdtTel.setTransformationMethod(PasswordTransformationMethod.getInstance());
 	}
 
 	private void checkAndLogin() {
@@ -100,9 +93,6 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 					case R.id.btn_login:
 						checkAndLogin();
 						break;
-					case R.id.ll_hide_pwd:
-						mCbHidePwd.setChecked(!mCbHidePwd.isChecked());
-						break;
 
 					default:
 						break;
@@ -114,7 +104,7 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 	/**
 	 * 异步登录
 	 * 
-	 * @author zeng.ww
+	 * @author zou.sq
 	 * @since 2012-7-16 下午03:26:10
 	 */
 	class AsyncLogin extends AsyncTask<String, Void, ActionResult> {
@@ -203,18 +193,5 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 	private void doExitLoginActivity() {
 		// 底层已做关闭处理
 		LoginProcessor.getInstance().onLoginCancel(this, mIdentify, MainActivityGroup.class);
-	}
-
-	@Override
-	public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-		if (isChecked) {
-			mEdtTel.setTransformationMethod(null);
-		} else {
-			mEdtTel.setTransformationMethod(PasswordTransformationMethod.getInstance());
-		}
-		String info = mEdtTel.getText().toString().trim();
-		if (!StringUtil.isNullOrEmpty(info)) {
-			mEdtTel.setSelection(info.length());
-		}
 	}
 }

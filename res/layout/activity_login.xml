@@ -83,7 +83,7 @@
                 android:layout_toRightOf="@id/iv_login_clock"
                 android:background="@null"
                 android:hint="@string/hint_input_tel"
-                android:inputType="number"
+                android:inputType="textPassword"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
                 android:singleLine="true"
@@ -101,41 +101,11 @@
         </RelativeLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/ll_hide_pwd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/ll_login_info"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="10dp"
-        android:onClick="onClick"
-        android:orientation="horizontal" >
-
-        <CheckBox
-            android:id="@+id/cb_hide_pwd"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:layout_gravity="center_vertical"
-            android:background="@drawable/cb_selector"
-            android:button="@null"
-            android:checked="false" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginLeft="10dp"
-            android:gravity="center"
-            android:text="@string/display_password"
-            android:textColor="@color/news_gray"
-            android:textSize="16sp" />
-    </LinearLayout>
-
     <Button
         android:id="@+id/btn_login"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
-        android:layout_below="@id/ll_hide_pwd"
+        android:layout_below="@id/ll_login_info"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:layout_marginTop="42dp"

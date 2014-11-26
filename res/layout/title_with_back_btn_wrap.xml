@@ -3,9 +3,7 @@
     android:id="@+id/title_with_back_title_btn_bk"
     android:layout_width="fill_parent"
     android:layout_height="45dp"
-    android:background="@color/title_bg_blue" >
-
-    <!-- huang.b   2013-08-15 修改中间title的布局方式为对齐两端边缘，，解决某些机型上不显示全部省略号的情况 ，右边按钮必须为invisible，不能为none 不然当none的时候，中间title不会对齐显示问题 -->
+    android:background="@color/main_color" >
 
     <LinearLayout
         android:layout_width="fill_parent"
