@@ -76,7 +76,7 @@ public class QrCodeActivityBase extends YaodunActivityBase implements Callback {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_capture);
+		setContentView(R.layout.activity_qrcode);
 
 		captureFor = getIntent().getIntExtra(KEY_CAPTURE_FOR, CAPTURE_FOR_NONE);
 
