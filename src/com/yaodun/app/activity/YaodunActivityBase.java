@@ -22,6 +22,7 @@ import com.yaodun.app.widget.CustomDialog.Builder;
  * @author zou.sq
  */
 public class YaodunActivityBase extends QJActivityBase implements IDialogProtocol {
+    protected final String TAG = getClass().getSimpleName();
 	protected ImageLoader mImageLoader = ImageLoader.getInstance();
 
 	@Override
