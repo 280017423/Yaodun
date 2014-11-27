@@ -48,6 +48,8 @@ public class JYTBottomTab extends BottomTab {
 		bottomItems.add(new BottomItem(R.drawable.msg_icon_selector, ZouApplication.CONTEXT
 				.getString(R.string.bottom_tab_medicine_knowledge)));
 		bottomItems.add(new BottomItem(R.drawable.msg_icon_selector, ZouApplication.CONTEXT
+				.getString(R.string.text_doctor_consult)));
+		bottomItems.add(new BottomItem(R.drawable.msg_icon_selector, ZouApplication.CONTEXT
 				.getString(R.string.bottom_tab_more)));
 		return bottomItems;
 	}

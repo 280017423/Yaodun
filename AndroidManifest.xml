@@ -94,12 +94,22 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".activity.RegisterActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".activity.YaodunActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name=".activity.MedicineKnowledgeActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.DoctorConsultActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>

@@ -2,13 +2,12 @@ package com.yaodun.app.activity;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.text.method.PasswordTransformationMethod;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import com.qianjiang.framework.authentication.BaseLoginProcessor;
@@ -29,6 +28,7 @@ import com.yaodun.app.req.UserReq;
  */
 public class LoginActivity extends YaodunActivityBase implements OnClickListener {
 	private static final int DIALOG_EXIT_APP = 0;
+	private static final int REGISTER_ACTIVITY_REQUEST_CODE = 10;
 	private static final int DELAY_TIME = 500;
 	private static final String TAG = "LoginActivity";
 	private boolean mIsLogining;
@@ -92,6 +92,10 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 				switch (v.getId()) {
 					case R.id.btn_login:
 						checkAndLogin();
+						break;
+					case R.id.btn_register:
+						Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+						startActivityForResult(intent, REGISTER_ACTIVITY_REQUEST_CODE);
 						break;
 
 					default:
@@ -187,11 +191,16 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 		doExitLoginActivity();
 	}
 
-	/**
-	 * 退出操作
-	 */
 	private void doExitLoginActivity() {
 		// 底层已做关闭处理
 		LoginProcessor.getInstance().onLoginCancel(this, mIdentify, MainActivityGroup.class);
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (RESULT_OK == resultCode && REGISTER_ACTIVITY_REQUEST_CODE == requestCode && null != data) {
+			// TODO 处理注册成功逻辑
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 }

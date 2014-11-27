@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
@@ -25,8 +24,6 @@ import com.qianjiang.framework.widget.BottomTab;
 import com.qianjiang.framework.widget.BottomTab.OnBottomCheckedListener;
 import com.yaodun.app.R;
 import com.yaodun.app.listener.NewVersionListener;
-import com.yaodun.app.manager.UserMgr;
-import com.yaodun.app.model.UserInfoModel;
 import com.yaodun.app.req.AppReq;
 import com.yaodun.app.widget.CustomProgressDialog;
 import com.yaodun.app.widget.CustomProgressDialog.DIALOG_DEFAULT_LAYOUT_TYPE;
@@ -45,7 +42,11 @@ public class MainActivityGroup extends YaodunActivityBase {
 	private BottomTab mBottomTab;
 	private VersionInfo mCurrentVersionInfo;
 	// 获取MaxID是否成功
-	private Class<?>[] mClasses = { YaodunActivity.class, MedicineKnowledgeActivity.class, MoreActivity.class };
+	private Class<?>[] mClasses = {
+			YaodunActivity.class,
+			MedicineKnowledgeActivity.class,
+			DoctorConsultActivity.class,
+			MoreActivity.class };
 	private Handler mCheckVersionHandler = new Handler() {
 		@SuppressWarnings("deprecation")
 		public void handleMessage(Message msg) {

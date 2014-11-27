@@ -27,7 +27,7 @@
                 android:layout_weight="0"
                 android:gravity="center_horizontal"
                 android:text="正在下载更新"
-                android:textColor="@color/news_gray"
+                android:textColor="@color/register_gray"
                 android:textSize="@dimen/size_1" />
 
             <View

@@ -4,6 +4,7 @@
     <string name="app_name">药盾</string>
     <string name="text_about">关于</string>
     <string name="text_more">更多</string>
+    <string name="text_doctor_consult">药师咨询</string>
     <string name="exit_dialog_title">您的操作将会退出</string>
     <string name="title_back_text">返回</string>
     <string name="more_check_newversion_dlg_title">检测到新版本<xliff:g>%1$s</xliff:g></string>
@@ -23,6 +24,16 @@
     <string name="hint_input_childname">请输入孩子名称</string>
     <string name="hint_input_tel">请输入您的手机号</string>
     <string name="display_password">显示号码</string>
+    <!-- 注册 -->
+    <string name="text_register">注册</string>
+    <string name="text_submit">提交</string>
+    <string name="text_sex">性别</string>
+    <string name="please_choose">请选择</string>
+    <string name="title_text_register">会员注册</string>
+    <string name="hint_input_phone_number">请输入您的手机号码</string>
+    <string name="hint_input_pwd">请输入密码</string>
+    <string name="hint_input_pwd_again">再次确认密码</string>
+    <string name="hint_input_nickname">昵称</string>
     <!-- 关于我们 -->
     <string name="text_version_code">当前版本&#160;v&#160;%s</string>
     <string name="text_company_tel">联系电话：0755&#8211;83055641</string>
