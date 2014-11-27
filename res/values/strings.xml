@@ -51,4 +51,13 @@
     <item name="tag_image_load_finish" type="id"></item>
     <item name="imageview_id" type="id"></item>
 
+    
+    <!-- 条码及二维码扫描 -->
+    <string name="msg_default_status">美啦提醒您：请在镜头范围内进行扫描。  </string>
+    <string name="capture_msg">请将条形码或二维码对准扫描框，即可自动帮你查询。</string>
+    <string name="manual_input_msg">请输入产品条形码：</string>
+    <string name="manual_input_title">手动输入条形码</string>
+    <string name="capture_manual_txt">手动输入</string>
+    
+    
 </resources>
