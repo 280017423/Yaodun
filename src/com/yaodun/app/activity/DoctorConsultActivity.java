@@ -17,7 +17,7 @@ public class DoctorConsultActivity extends YaodunActivityBase implements OnClick
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_more);
+		setContentView(R.layout.activity_doctor_consult);
 		initView();
 	}
 
