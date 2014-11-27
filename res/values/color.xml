@@ -2,6 +2,7 @@
 <resources>
 
     <color name="white">#FFFFFF</color>
+    <color name="table_normal">#F1F1F1</color>
     <!-- 主色 -->
     <color name="main_color">#87B934</color>
     <!-- 界面背景色 -->
