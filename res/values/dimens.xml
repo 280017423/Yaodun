@@ -7,4 +7,7 @@
     <dimen name="size_4">14sp</dimen>
     <dimen name="border_radius_with_dimensions">0.7dp</dimen>
 
+    <!-- 首页分类按钮距离 -->
+    <dimen name="btn_w">50dp</dimen>
+    <dimen name="btn_h">50dp</dimen>
 </resources>

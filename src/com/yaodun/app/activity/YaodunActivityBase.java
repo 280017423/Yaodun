@@ -8,6 +8,7 @@ import android.view.KeyEvent;
 
 import com.qianjiang.framework.app.QJActivityBase;
 import com.qianjiang.framework.imageloader.core.ImageLoader;
+import com.qianjiang.framework.util.EvtLog;
 import com.qianjiang.framework.util.QJActivityManager;
 import com.qianjiang.framework.widget.LoadingUpView;
 import com.yaodun.app.R;
@@ -29,6 +30,7 @@ public class YaodunActivityBase extends QJActivityBase implements IDialogProtoco
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		QJActivityManager.getInstance().pushActivity(this);
+		EvtLog.d("activityName", getClass().getName());
 	}
 
 	@SuppressWarnings("deprecation")

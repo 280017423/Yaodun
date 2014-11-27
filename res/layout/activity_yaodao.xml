@@ -1,8 +1,165 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/yaodao_bg"
-    android:orientation="vertical" >
+    android:background="@drawable/yaodao_bg" >
 
-</LinearLayout>
+    <!-- 大众用药查询 -->
+    <RelativeLayout 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true">
+        <Button 
+            android:id="@+id/btn_people"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="-30dp"
+            android:background="@drawable/login_usericon"/>
+    </RelativeLayout>
+    
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="70dp"
+        android:orientation="vertical" >
+
+        <!-- 儿童 -->
+
+        <LinearLayout
+            android:id="@+id/layout_kid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/more_icon_selector" >
+            </Button>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="儿童用药查询"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <!-- 孕妇 -->
+
+        <LinearLayout
+            android:id="@+id/layout_pregnant"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="@dimen/btn_w"
+                android:layout_height="@dimen/btn_h"
+                android:background="@drawable/more_icon_selector" >
+            </Button>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="孕妇用药查询"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+        <!-- 老人 -->
+
+        <LinearLayout
+            android:id="@+id/layout_old"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="@dimen/btn_w"
+                android:layout_height="@dimen/btn_h"
+                android:background="@drawable/more_icon_selector" >
+            </Button>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="孕妇用药查询"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- 重复用药 -->
+
+        <LinearLayout
+            android:id="@+id/layout_repeat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="@dimen/btn_w"
+                android:layout_height="@dimen/btn_h"
+                android:background="@drawable/more_icon_selector" >
+            </Button>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="孕妇用药查询"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- 用药禁忌 -->
+
+        <LinearLayout
+            android:id="@+id/layout_avoid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="15dp"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="@dimen/btn_w"
+                android:layout_height="@dimen/btn_h"
+                android:background="@drawable/more_icon_selector" >
+            </Button>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="孕妇用药查询"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <!-- 抗生素 -->
+
+        <LinearLayout
+            android:id="@+id/layout_antibiotic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal" >
+
+            <Button
+                android:layout_width="@dimen/btn_w"
+                android:layout_height="@dimen/btn_h"
+                android:background="@drawable/more_icon_selector" >
+            </Button>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="孕妇用药查询"
+                android:textColor="@color/white"
+                android:textSize="12sp" />
+        </LinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
