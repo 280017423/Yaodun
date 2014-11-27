@@ -19,11 +19,11 @@
     <string name="btn_txt_no">否</string>
     <string name="btn_txt_yes">是</string>
     <!-- 登录 -->
-    <string name="button_text_login">登录</string>
+    <string name="button_text_login">马上登录</string>
     <string name="toast_login_error">登录信息不能为空</string>
-    <string name="hint_input_childname">请输入孩子名称</string>
-    <string name="hint_input_tel">请输入您的手机号</string>
-    <string name="display_password">显示号码</string>
+    <string name="phone_number">手机</string>
+    <string name="password">密码</string>
+    <string name="text_register_account">注册帐号</string>
     <!-- 注册 -->
     <string name="text_register">注册</string>
     <string name="text_submit">提交</string>
@@ -51,13 +51,11 @@
     <item name="tag_image_load_finish" type="id"></item>
     <item name="imageview_id" type="id"></item>
 
-    
     <!-- 条码及二维码扫描 -->
     <string name="msg_default_status">美啦提醒您：请在镜头范围内进行扫描。  </string>
     <string name="capture_msg">请将条形码或二维码对准扫描框，即可自动帮你查询。</string>
     <string name="manual_input_msg">请输入产品条形码：</string>
     <string name="manual_input_title">手动输入条形码</string>
     <string name="capture_manual_txt">手动输入</string>
-    
-    
+
 </resources>

@@ -7,11 +7,11 @@
 
     <ImageView
         android:id="@+id/iv_suer_head"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_centerHorizontal="true"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="70dp"
+        android:layout_marginTop="40dp"
         android:contentDescription="@null"
         android:src="@drawable/ic_launcher" />
 
@@ -20,85 +20,39 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_suer_head"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="35dp"
+        android:background="@drawable/edt_register_bg"
         android:orientation="vertical"
-        android:paddingLeft="20dp"
-        android:paddingRight="20dp" >
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" >
 
-        <RelativeLayout
+        <EditText
+            android:id="@+id/edt_child_name"
             android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:orientation="horizontal" >
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="@string/phone_number"
+            android:singleLine="true"
+            android:textColorHint="#B4B4B4" />
 
-            <ImageView
-                android:id="@+id/iv_login_phone"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_horizontal"
-                android:contentDescription="@null"
-                android:src="@drawable/user" />
-
-            <EditText
-                android:id="@+id/edt_child_name"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/iv_login_phone"
-                android:background="@null"
-                android:hint="@string/hint_input_childname"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:singleLine="true"
-                android:textColorHint="@color/register_gray" />
-
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="0.7dp"
-                android:layout_alignBottom="@id/edt_child_name"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/iv_login_phone"
-                android:background="#5c5B5B"
-                android:contentDescription="@null" />
-        </RelativeLayout>
-
-        <RelativeLayout
+        <ImageView
             android:layout_width="fill_parent"
-            android:layout_height="30dp"
-            android:layout_marginTop="20dp"
-            android:orientation="horizontal" >
+            android:layout_height="0.7dp"
+            android:background="#B4B4B4"
+            android:contentDescription="@null" />
 
-            <ImageView
-                android:id="@+id/iv_login_clock"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_horizontal"
-                android:contentDescription="@null"
-                android:src="@drawable/phone" />
-
-            <EditText
-                android:id="@+id/edt_tel"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/iv_login_clock"
-                android:background="@null"
-                android:hint="@string/hint_input_tel"
-                android:inputType="textPassword"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
-                android:singleLine="true"
-                android:textColorHint="@color/register_gray"
-                android:textSize="15sp" />
-
-            <ImageView
-                android:layout_width="fill_parent"
-                android:layout_height="0.7dp"
-                android:layout_alignBottom="@id/edt_tel"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/iv_login_clock"
-                android:background="#5c5B5B"
-                android:contentDescription="@null" />
-        </RelativeLayout>
+        <EditText
+            android:id="@+id/edt_tel"
+            android:layout_width="fill_parent"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:singleLine="true"
+            android:textColorHint="#B4B4B4"
+            android:textSize="15sp" />
     </LinearLayout>
 
     <Button
@@ -106,9 +60,9 @@
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_below="@id/ll_login_info"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="42dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/btn_login_selector"
         android:gravity="center"
         android:onClick="onClick"
@@ -121,13 +75,13 @@
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_below="@id/btn_login"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/btn_login_selector"
+        android:background="@drawable/btn_login_register_selector"
         android:gravity="center"
         android:onClick="onClick"
-        android:text="@string/text_register"
+        android:text="@string/text_register_account"
         android:textColor="@color/white"
         android:textSize="16sp" />
 

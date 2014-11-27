@@ -6,6 +6,7 @@
     <color name="main_color">#87b934</color>
     <!-- 界面背景色 -->
     <color name="main_bg">#e8e8e8</color>
+    <color name="register_bg">#f5f5f5</color>
     <color name="login_bg">#96C440</color>
     <color name="register_stroke_color">#DFDFDF</color>
     <color name="register_gray">#9C9C9C</color>
