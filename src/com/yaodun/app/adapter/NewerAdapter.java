@@ -46,7 +46,11 @@ public class NewerAdapter extends PagerAdapter {
 	 */
 	public NewerAdapter(Activity activity) {
 		this.mContext = activity;
-		this.mImages = new int[] { R.drawable.newer_guiding_1, R.drawable.newer_guiding_2, R.drawable.newer_guiding_3 };
+		this.mImages = new int[] {
+				R.drawable.newer_guiding_1,
+				R.drawable.newer_guiding_2,
+				R.drawable.newer_guiding_3,
+				R.drawable.newer_guiding_4 };
 		mScreenWidth = activity.getWindowManager().getDefaultDisplay().getWidth();
 	}
 
