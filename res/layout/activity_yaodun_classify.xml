@@ -9,16 +9,10 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-<<<<<<< HEAD:res/layout/activity_yaodun_classify.xml
-        android:layout_centerVertical="true">
-        <ImageView 
-            android:id="@+id/iv_people"
-=======
         android:layout_centerVertical="true" >
 
-        <Button
-            android:id="@+id/btn_people"
->>>>>>> 68385e663089244fce2f346aa1181ffa11d39e34:res/layout/activity_yaodao.xml
+        <ImageView
+            android:id="@+id/iv_people"
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginLeft="-30dp"
@@ -38,9 +32,9 @@
             android:id="@+id/layout_kid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:clickable="true"
             android:gravity="center_vertical"
-            android:clickable="true" >
+            android:orientation="horizontal" >
 
             <ImageView
                 android:layout_width="50dp"
