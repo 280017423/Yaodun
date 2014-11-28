@@ -9,6 +9,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.qianjiang.framework.authentication.BaseLoginProcessor;
 import com.qianjiang.framework.authentication.BaseLoginProcessor.LOGIN_TYPE;
@@ -58,6 +59,8 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 	private void initView() {
 		mLoadingUpView = new LoadingUpView(this, true);
 		mLoadingUpView.setCancelable(false);
+		TextView titleTextView = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
+		titleTextView.setText(R.string.button_title_login);
 		mEdtChildName = (EditText) findViewById(R.id.edt_child_name);
 		mEdtTel = (EditText) findViewById(R.id.edt_tel);
 	}

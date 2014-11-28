@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:drawable="@drawable/btn_newer_guiding_start_normal" android:state_pressed="false"></item>
-    <item android:drawable="@drawable/btn_newer_guiding_start_pressed" android:state_pressed="true"></item>
+    <item android:state_pressed="true"><shape>
+            <solid android:color="#FF9900" />
+
+            <stroke android:width="0.7dp" android:color="#F0C52D" />
+
+            <corners android:radius="5dp" />
+        </shape></item>
+    <item android:state_pressed="false"><shape>
+            <solid android:color="#89BB39" />
+
+            <stroke android:width="0.7dp" android:color="#E4C34E" />
+
+            <corners android:radius="5dp" />
+        </shape></item>
 
 </selector>

@@ -6,11 +6,16 @@
 
     <Button
         android:id="@+id/btn_jump_to_main"
-        android:layout_width="254dp"
-        android:layout_height="60dp"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
         android:layout_gravity="bottom|center_horizontal"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@color/transparent"
         android:focusable="false"
+        android:text="@string/use_right_now"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_2"
         android:visibility="visible" >
     </Button>
 

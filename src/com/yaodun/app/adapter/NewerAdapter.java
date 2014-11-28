@@ -33,10 +33,9 @@ import com.yaodun.app.util.SharedPreferenceUtil;
 public class NewerAdapter extends PagerAdapter {
 
 	private static final String TAG = "NewerAdapter";
-	private static final int BOTTOM_MARGIN = 55;
+	private static final int BOTTOM_MARGIN = 40;
 	private Activity mContext;
 	private int[] mImages;
-	private int mScreenWidth;
 
 	/**
 	 * 构造函数
@@ -51,7 +50,6 @@ public class NewerAdapter extends PagerAdapter {
 				R.drawable.newer_guiding_2,
 				R.drawable.newer_guiding_3,
 				R.drawable.newer_guiding_4 };
-		mScreenWidth = activity.getWindowManager().getDefaultDisplay().getWidth();
 	}
 
 	/**
@@ -90,8 +88,6 @@ public class NewerAdapter extends PagerAdapter {
 		mItem.mBtnJump = (Button) itemView.findViewById(R.id.btn_jump_to_main);
 		if (mImages.length > 0) {
 			FrameLayout.LayoutParams params = (LayoutParams) mItem.mBtnJump.getLayoutParams();
-			params.width = mScreenWidth / 2;
-			params.height = params.width / 4;
 			params.bottomMargin = UIUtil.dip2px(mContext, BOTTOM_MARGIN);
 			mItem.mBtnJump.setLayoutParams(params);
 			mItem.mBtnJump.setOnClickListener(new OnClickListener() {
@@ -104,10 +100,10 @@ public class NewerAdapter extends PagerAdapter {
 				}
 			});
 			if (mImages.length - 1 == position) {
-				mItem.mBtnJump.setEnabled(true);
+				mItem.mBtnJump.setVisibility(View.VISIBLE);
 				mItem.mBtnJump.setBackgroundResource(R.drawable.btn_newer_guiding_start_selector);
 			} else {
-				mItem.mBtnJump.setEnabled(false);
+				mItem.mBtnJump.setVisibility(View.GONE);
 				mItem.mBtnJump.setBackgroundColor(mContext.getResources().getColor(R.color.transparent));
 			}
 			itemView.setBackgroundResource(mImages[position % mImages.length]);

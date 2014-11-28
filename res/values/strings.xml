@@ -2,6 +2,7 @@
 <resources xmlns:android=" http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <string name="app_name">药盾</string>
+    <string name="use_right_now">马上开始体验</string>
     <string name="text_about">关于</string>
     <string name="text_more">更多</string>
     <string name="text_doctor_consult">药师咨询</string>
@@ -20,10 +21,14 @@
     <string name="btn_txt_yes">是</string>
     <!-- 登录 -->
     <string name="button_text_login">马上登录</string>
+    <string name="button_title_login">会员登录</string>
     <string name="toast_login_error">登录信息不能为空</string>
-    <string name="phone_number">手机</string>
+    <string name="phone_number">登录名或手机号</string>
     <string name="password">密码</string>
-    <string name="text_register_account">注册帐号</string>
+    <string name="text_register_account">注册新帐号</string>
+    <string name="text_forget_pwd">忘记密码</string>
+    <string name="text_qq_login">使用QQ登录</string>
+    <string name="text_weixin_login">使用微信登录</string>
     <!-- 注册 -->
     <string name="text_register">注册</string>
     <string name="text_submit">提交</string>
