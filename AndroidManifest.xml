@@ -103,7 +103,17 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.YaodunActivity"
+            android:name=".activity.YaodunActivityGroup"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.YaodunClassifyActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.YaodunSearchActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>

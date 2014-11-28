@@ -13,18 +13,18 @@ import com.yaodun.app.R;
  * 
  * @author zou.sq
  */
-public class YaodunActivity extends YaodunActivityBase implements OnClickListener {
+public class YaodunSearchActivity extends YaodunActivityBase implements OnClickListener {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_yaodao);
+		setContentView(R.layout.activity_yaodun);
 		initView();
 	}
 
 	private void initView() {
-        Button btnPeople = (Button) findViewById(R.id.btn_people);
-        btnPeople.setOnClickListener(this);
+//        Button btnPeople = (Button) findViewById(R.id.btn_people);
+//        btnPeople.setOnClickListener(this);
     }
 
     @Override

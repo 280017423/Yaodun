@@ -43,7 +43,7 @@ public class MainActivityGroup extends YaodunActivityBase {
 	private VersionInfo mCurrentVersionInfo;
 	// 获取MaxID是否成功
 	private Class<?>[] mClasses = {
-			YaodunActivity.class,
+			YaodunActivityGroup.class,
 			MedicineKnowledgeActivity.class,
 			DoctorConsultActivity.class,
 			MoreActivity.class };
