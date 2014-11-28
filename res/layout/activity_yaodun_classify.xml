@@ -2,21 +2,29 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/yaodao_bg" >
+    android:background="@color/login_bg" >
 
     <!-- 大众用药查询 -->
-    <RelativeLayout 
+
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+<<<<<<< HEAD:res/layout/activity_yaodun_classify.xml
         android:layout_centerVertical="true">
         <ImageView 
             android:id="@+id/iv_people"
+=======
+        android:layout_centerVertical="true" >
+
+        <Button
+            android:id="@+id/btn_people"
+>>>>>>> 68385e663089244fce2f346aa1181ffa11d39e34:res/layout/activity_yaodao.xml
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:layout_marginLeft="-30dp"
-            android:background="@drawable/login_usericon"/>
+            android:background="@drawable/login_usericon" />
     </RelativeLayout>
-    
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

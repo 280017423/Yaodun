@@ -56,17 +56,17 @@ public class JYTBottomTab extends BottomTab {
 
 	@Override
 	protected int getBackGroupRes() {
-		return R.color.title_bg_blue;
+		return R.color.table_normal;
 	}
 
 	@Override
 	protected int getSelectedViewRes() {
-		return R.color.white;
+		return R.color.register_stroke_color;
 	}
 
 	@Override
 	protected int getSelectedTextColorRes() {
-		return R.color.gray;
+		return R.color.register_gray;
 	}
 
 }
