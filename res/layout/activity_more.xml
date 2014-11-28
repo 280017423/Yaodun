@@ -27,11 +27,20 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="left|center_vertical"
-                android:paddingLeft="20dp"
+                android:paddingLeft="40dp"
                 android:text="我的收藏"
                 android:textColor="@color/register_gray"
                 android:textSize="@dimen/size_4" />
 
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/icon_collect"
+                android:contentDescription="@null" />
+
             <View
                 style="@style/divider_line_style"
                 android:layout_alignParentBottom="true"
@@ -47,11 +56,20 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="left|center_vertical"
-                android:paddingLeft="20dp"
+                android:paddingLeft="40dp"
                 android:text="告诉朋友"
                 android:textColor="@color/register_gray"
                 android:textSize="@dimen/size_4" />
 
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/icon_share"
+                android:contentDescription="@null" />
+
             <View
                 style="@style/divider_line_style"
                 android:layout_alignParentBottom="true"
@@ -67,11 +85,20 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="left|center_vertical"
-                android:paddingLeft="20dp"
+                android:paddingLeft="40dp"
                 android:text="公司简介"
                 android:textColor="@color/register_gray"
                 android:textSize="@dimen/size_4" />
 
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/icon_introduce"
+                android:contentDescription="@null" />
+
             <View
                 style="@style/divider_line_style"
                 android:layout_alignParentBottom="true"
@@ -87,11 +114,20 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="left|center_vertical"
-                android:paddingLeft="20dp"
+                android:paddingLeft="40dp"
                 android:text="关于我们"
                 android:textColor="@color/register_gray"
                 android:textSize="@dimen/size_4" />
 
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/icon_about"
+                android:contentDescription="@null" />
+
             <View
                 style="@style/divider_line_style"
                 android:layout_alignParentBottom="true"
@@ -107,11 +143,20 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="left|center_vertical"
-                android:paddingLeft="20dp"
+                android:paddingLeft="40dp"
                 android:text="意见反馈"
                 android:textColor="@color/register_gray"
                 android:textSize="@dimen/size_4" />
 
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/icon_introduce"
+                android:contentDescription="@null" />
+
             <View
                 style="@style/divider_line_style"
                 android:layout_alignParentBottom="true"
@@ -127,11 +172,20 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="left|center_vertical"
-                android:paddingLeft="20dp"
+                android:paddingLeft="40dp"
                 android:text="申明"
                 android:textColor="@color/register_gray"
                 android:textSize="@dimen/size_4" />
 
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/icon_declare"
+                android:contentDescription="@null" />
+
             <View
                 style="@style/divider_line_style"
                 android:layout_alignParentBottom="true"
@@ -147,10 +201,19 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:gravity="left|center_vertical"
-                android:paddingLeft="20dp"
+                android:paddingLeft="40dp"
                 android:text="检查更新"
                 android:textColor="@color/register_gray"
                 android:textSize="@dimen/size_4" />
+
+            <ImageView
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/icon_check_version"
+                android:contentDescription="@null" />
 
             <View
                 style="@style/divider_line_style"
