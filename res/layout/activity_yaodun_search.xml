@@ -7,6 +7,40 @@
     <include
         android:id="@+id/layout_title"
         layout="@layout/title_with_back_btn_wrap" />
-    
-    
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/layout_title"
+        android:orientation="vertical" >
+
+        <!-- 输入框 -->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icon_qq" />
+
+            <EditText
+                android:id="@+id/et_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:hint="请输入药品名称"
+                android:layout_weight="1" />
+
+            <ImageView
+                android:id="@+id/iv_qrcode"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/icon_qq" />
+        </LinearLayout>
+    </LinearLayout>
+
 </RelativeLayout>
