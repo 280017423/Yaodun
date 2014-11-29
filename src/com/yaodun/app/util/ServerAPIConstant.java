@@ -15,6 +15,7 @@ public class ServerAPIConstant {
 	public static final String API_ROOT_URL = "api_root_url";
 	public static final String KEY_APP_SIGN = "appSign";
 	public static final String LOGIN_API = "/child/login";
+	public static final String SEARCH_MEDICINE_API = "/DrugBasicCheck/searchDrug";
 	public static final String GET_TEACHERS_API = "/sms/gettearchers";
 	public static final String GET_CLASS_NEWS_API = "/article/list4cls";
 	public static final String GET_SCHOOL_NEWS_API = "/article/list4sch";
@@ -43,6 +44,7 @@ public class ServerAPIConstant {
 	public static final String KEY_APP = "app";
 	public static final String KEY_FROME_ID = "from_id";
 	public static final String KEY_ID = "id";
+	public static final String KEY_KEYWORD = "keyword";
 	public static final String KEY_PAGE = "page";
 	public static final String KEY_VIDEOCATEGORY = "videoCategory";
 	public static final String KEY_MAX_ID = "max_id";
