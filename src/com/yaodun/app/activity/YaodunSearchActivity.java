@@ -24,9 +24,11 @@ import android.widget.TextView;
 
 import com.qianjiang.framework.util.UIUtil;
 import com.yaodun.app.R;
+import com.yaodun.app.adapter.DetectRuleAdapter;
 import com.yaodun.app.adapter.SearchedMedicineNameAdapter;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.authentication.LoginProcessor;
+import com.yaodun.app.model.DetectRuleBean;
 import com.yaodun.app.model.MedicineBean;
 import com.yaodun.app.req.UserReq;
 
@@ -38,7 +40,7 @@ import com.yaodun.app.req.UserReq;
 public class YaodunSearchActivity extends YaodunActivityBase implements OnClickListener, OnItemClickListener {
 
     boolean mIsSearching = false;
-    boolean isMedicineQuery = false;
+    boolean mIsMedicineQuery = false;
     TextView mTvTitle;
     EditText mEtName;
     ListView lvSearchedNames;
@@ -46,7 +48,10 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
     SearchedMedicineNameAdapter searchAdapter;
     List<MedicineBean> searchList = new ArrayList<MedicineBean>();
     List<MedicineBean> addList = new ArrayList<MedicineBean>();
-
+    ListView lvDetectRules;
+    DetectRuleAdapter detectAdapter;
+    List<DetectRuleBean> detectList = new ArrayList<DetectRuleBean>();
+    
     TextWatcher watcher = new TextWatcher() {
         
         @Override
@@ -94,6 +99,10 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
         lvSearchedNames.setAdapter(searchAdapter);
         lvSearchedNames.setOnItemClickListener(this);
         lvSearchedNames.setVisibility(searchList.size()>0?View.VISIBLE:View.GONE);
+        
+        lvDetectRules = (ListView) findViewById(R.id.lv_rules);
+        detectAdapter = new DetectRuleAdapter(mContext, detectList);
+        lvDetectRules.setAdapter(detectAdapter);
     }
 
     /**
@@ -145,7 +154,46 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
      * 药品检测查询
      */
     void doMedicineQuery(){
-        
+        if(mIsMedicineQuery){
+            return;
+        }
+        mIsMedicineQuery = true;
+        new AsyncTask<String, Void, ActionResult>() {
+
+            @Override
+            protected ActionResult doInBackground(String... params) {
+//                return UserReq.searchMedicineName(keyword);
+                ActionResult result = new ActionResult();
+                result.ResultCode = ActionResult.RESULT_CODE_SUCCESS;
+                List<DetectRuleBean> list = new ArrayList<DetectRuleBean>();
+                DetectRuleBean d1 = new DetectRuleBean();
+                d1.title = "同一药物不同药名同时使用";
+                d1.content = "如：属于重复用药，建议只使用其中的xxxxxxxxxxxxxx一种";
+                DetectRuleBean d2 = new DetectRuleBean();
+                d2.title = "同一药物不同药名同时使用";
+                d2.content = "如：属于重复用药，建议只使用其中的xxxxxxxxxxxxxx一种";
+                list.add(d1);
+                list.add(d2);
+                result.ResultObject = list;
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(ActionResult result) {
+                if (result != null && ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
+                    detectList.clear();
+                    List<DetectRuleBean> tmpList = (List<DetectRuleBean>)result.ResultObject;
+                    if(tmpList != null){
+                        detectList.addAll(tmpList);
+                    }
+                    detectAdapter.notifyDataSetChanged();
+                } else {
+                    showErrorMsg(result);
+                }
+                mIsMedicineQuery = false;
+            }
+        }.execute();
+
     }
     
     /**

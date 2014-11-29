@@ -9,192 +9,205 @@
         android:id="@+id/layout_title"
         layout="@layout/title_with_back_btn_wrap" />
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/layout_title"
-        android:orientation="vertical" >
-
-        <!-- 输入框 -->
+        android:scrollbars="none"
+        android:fillViewport="true" >
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:layout_below="@id/layout_title"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@drawable/edt_register_bg"
-            android:gravity="center_vertical"
-            android:orientation="horizontal" >
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
+            <!-- 输入框 -->
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/layout_title"
                 android:layout_marginLeft="10dp"
-                android:contentDescription="@null"
-                android:src="@drawable/icon_search" />
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/edt_register_bg"
+                android:gravity="center_vertical"
+                android:orientation="horizontal" >
 
-            <EditText
-                android:id="@+id/et_name"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_weight="1"
-                android:background="@null"
-                android:hint="请输入药品名称"
-                android:textColor="@color/content_gray"
-                android:textSize="14dp" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:contentDescription="@null"
+                    android:src="@drawable/icon_search" />
 
-            <ImageView
-                android:id="@+id/iv_qrcode"
-                android:layout_width="48dp"
-                android:layout_height="fill_parent"
-                android:background="@drawable/icon_scanner"
-                android:contentDescription="@null" />
-        </LinearLayout>
+                <EditText
+                    android:id="@+id/et_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:hint="请输入药品名称"
+                    android:textColor="@color/content_gray"
+                    android:textSize="14dp" />
 
-        <!-- 药名 -->
+                <ImageView
+                    android:id="@+id/iv_qrcode"
+                    android:layout_width="48dp"
+                    android:layout_height="fill_parent"
+                    android:background="@drawable/icon_scanner"
+                    android:contentDescription="@null" />
+            </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/layout_medicine_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:orientation="vertical" />
+            <!-- 药名 -->
 
-        <Button
-            android:id="@+id/btn_search"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/corner_green_selector"
-            android:gravity="center"
-            android:text="查询"
-            android:textColor="@color/white"
-            android:textSize="20sp" />
-
-        <!-- 查询结果 -->
-
-        <TextView
-            android:id="@+id/tv_query_result"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="15dp"
-            android:text="查询结果"
-            android:textColor="@color/main_color"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_query_result_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/stroke_df_f0"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="10dp"
-            android:text="药品阿莫西林与xx属于同类药物"
-            android:textColor="@color/title_gray"
-            android:textSize="14sp" />
-        <!-- 药师建议 -->
-
-        <TextView
-            android:id="@+id/tv_advices"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="15dp"
-            android:text="药师建议"
-            android:textColor="@color/main_color"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_advices_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:text="建议只用一种"
-            android:textColor="@color/title_gray"
-            android:textSize="14sp" />
-
-        <LinearLayout
-            android:id="@+id/layout_advices_operations"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/stroke_e8_ff"
-            android:gravity="center_vertical"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:orientation="horizontal" >
-            <com.yaodun.app.widget.DrawableLeftGravityCenterTextView 
-                android:id="@+id/tv_advice_op_advice"
+            <LinearLayout
+                android:id="@+id/layout_medicine_name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left|center_vertical"
-                android:text="药师建议"
-                android:textColor="@color/content_gray"
-                android:textSize="12sp"
-                android:drawableLeft="@drawable/more_icon_pressed"/>
-            <View 
-                android:layout_width="1px"
-                android:layout_height="match_parent"
-                android:background="@color/e8"/>
-            <com.yaodun.app.widget.DrawableLeftGravityCenterTextView 
-                android:id="@+id/tv_advice_op_comment"
+                android:background="@color/white"
+                android:orientation="vertical" />
+
+            <Button
+                android:id="@+id/btn_search"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="left|center_vertical"
-                android:text="赞（1234）"
-                android:textColor="@color/content_gray"
-                android:textSize="12sp"
-                android:drawableLeft="@drawable/more_icon_pressed"/>
-            <View 
-                android:layout_width="1px"
-                android:layout_height="match_parent"
-                android:background="@color/e8"/>
-            <TextView 
-                android:id="@+id/tv_advice_op_tips"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_height="45dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/corner_green_selector"
                 android:gravity="center"
-                android:text="提示：仅供参考"
-                android:textColor="@color/content_gray"
-                android:textSize="12sp"
-                />
-            
+                android:text="查询"
+                android:textColor="@color/white"
+                android:textSize="20sp" />
+
+            <!-- 查询结果 -->
+
+            <TextView
+                android:id="@+id/tv_query_result"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:text="查询结果"
+                android:textColor="@color/main_color"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_query_result_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stroke_df_f0"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:text="药品阿莫西林与xx属于同类药物"
+                android:textColor="@color/title_gray"
+                android:textSize="14sp" />
+            <!-- 药师建议 -->
+
+            <TextView
+                android:id="@+id/tv_advices"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:text="药师建议"
+                android:textColor="@color/main_color"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_advices_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:text="建议只用一种"
+                android:textColor="@color/title_gray"
+                android:textSize="14sp" />
+
+            <LinearLayout
+                android:id="@+id/layout_advices_operations"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/stroke_e8_ff"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <com.yaodun.app.widget.DrawableLeftGravityCenterTextView
+                    android:id="@+id/tv_advice_op_advice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/more_icon_pressed"
+                    android:gravity="left|center_vertical"
+                    android:text="药师建议"
+                    android:textColor="@color/content_gray"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/e8" />
+
+                <com.yaodun.app.widget.DrawableLeftGravityCenterTextView
+                    android:id="@+id/tv_advice_op_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/more_icon_pressed"
+                    android:gravity="left|center_vertical"
+                    android:text="赞（1234）"
+                    android:textColor="@color/content_gray"
+                    android:textSize="12sp" />
+
+                <View
+                    android:layout_width="1px"
+                    android:layout_height="match_parent"
+                    android:background="@color/e8" />
+
+                <TextView
+                    android:id="@+id/tv_advice_op_tips"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="提示：仅供参考"
+                    android:textColor="@color/content_gray"
+                    android:textSize="12sp" />
+            </LinearLayout>
+            <!-- 检测规则 -->
+
+            <TextView
+                android:id="@+id/tv_rules"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="15dp"
+                android:text="检测规则"
+                android:textColor="@color/main_color"
+                android:textSize="16sp" />
+
+            <com.yaodun.app.widget.MListView
+                android:id="@+id/lv_rules"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:divider="@color/e8"
+                android:dividerHeight="1dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingBottom="10dp" />
         </LinearLayout>
-        <!-- 检测规则 -->
-
-        <TextView
-            android:id="@+id/tv_rules"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="15dp"
-            android:text="检测规则"
-            android:textColor="@color/main_color"
-            android:textSize="16sp" />
-
-        <com.yaodun.app.widget.MListView
-            android:id="@+id/lv_rules"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-
+    </ScrollView>
     <!-- 关键字匹配的药名 -->
 
     <com.yaodun.app.widget.MListView
