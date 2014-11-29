@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/login_bg" >
+    android:background="#6EBD23" >
 
     <!-- 大众用药查询 -->
 
@@ -13,10 +13,11 @@
 
         <ImageView
             android:id="@+id/iv_people"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="-30dp"
-            android:background="@drawable/login_usericon" />
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-1dp"
+            android:background="@drawable/icon_medicine_common"
+            android:contentDescription="@null" />
     </RelativeLayout>
 
     <LinearLayout
@@ -39,15 +40,17 @@
             <ImageView
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:background="@drawable/more_icon_selector" >
+                android:background="@drawable/icon_medicine_child"
+                android:contentDescription="@null" >
             </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="儿童用药查询"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="@dimen/size_4" />
         </LinearLayout>
         <!-- 孕妇 -->
 
@@ -62,15 +65,17 @@
             <ImageView
                 android:layout_width="@dimen/btn_w"
                 android:layout_height="@dimen/btn_h"
-                android:background="@drawable/more_icon_selector" >
+                android:background="@drawable/icon_medicine_pregnant"
+                android:contentDescription="@null" >
             </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
                 android:text="孕妇用药查询"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="@dimen/size_4" />
         </LinearLayout>
         <!-- 老人 -->
 
@@ -86,15 +91,17 @@
             <ImageView
                 android:layout_width="@dimen/btn_w"
                 android:layout_height="@dimen/btn_h"
-                android:background="@drawable/more_icon_selector" >
+                android:background="@drawable/icon_medicine_old"
+                android:contentDescription="@null" >
             </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="孕妇用药查询"
+                android:layout_marginLeft="10dp"
+                android:text="老人用药查询"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="@dimen/size_4" />
         </LinearLayout>
 
         <!-- 重复用药 -->
@@ -111,15 +118,17 @@
             <ImageView
                 android:layout_width="@dimen/btn_w"
                 android:layout_height="@dimen/btn_h"
-                android:background="@drawable/more_icon_selector" >
+                android:background="@drawable/icon_medicine_repeat"
+                android:contentDescription="@null" >
             </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="孕妇用药查询"
+                android:layout_marginLeft="10dp"
+                android:text="重复用药查询"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="@dimen/size_4" />
         </LinearLayout>
 
         <!-- 用药禁忌 -->
@@ -136,15 +145,17 @@
             <ImageView
                 android:layout_width="@dimen/btn_w"
                 android:layout_height="@dimen/btn_h"
-                android:background="@drawable/more_icon_selector" >
+                android:background="@drawable/icon_medicine_forbid"
+                android:contentDescription="@null" >
             </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="孕妇用药查询"
+                android:layout_marginLeft="10dp"
+                android:text="药品禁忌用药查询"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="@dimen/size_4" />
         </LinearLayout>
 
         <!-- 抗生素 -->
@@ -159,15 +170,17 @@
             <ImageView
                 android:layout_width="@dimen/btn_w"
                 android:layout_height="@dimen/btn_h"
-                android:background="@drawable/more_icon_selector" >
+                android:background="@drawable/icon_medicine_antibiotic"
+                android:contentDescription="@null" >
             </ImageView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="孕妇用药查询"
+                android:layout_marginLeft="10dp"
+                android:text="抗生素用药查询"
                 android:textColor="@color/white"
-                android:textSize="12sp" />
+                android:textSize="@dimen/size_4" />
         </LinearLayout>
     </LinearLayout>
 

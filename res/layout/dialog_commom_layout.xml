@@ -42,7 +42,7 @@
                 android:gravity="center_horizontal"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:textColor="@color/black"
+                android:textColor="@color/register_gray"
                 android:textSize="@dimen/size_2" />
 
             <TextView
@@ -78,9 +78,9 @@
                     android:layout_width="0dp"
                     android:layout_height="40dp"
                     android:layout_weight="1"
-                    android:background="@drawable/btn_save_bg"
+                    android:background="@drawable/btn_cancel_bg"
                     android:text="@string/btn_txt_yes"
-                    android:textColor="@color/title_bg_blue"
+                    android:textColor="@color/register_gray"
                     android:textSize="@dimen/size_2" />
 
                 <Button
@@ -89,7 +89,7 @@
                     android:layout_height="40dp"
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:background="@drawable/tongyong_button_bg"
+                    android:background="@drawable/btn_login_selector"
                     android:text="@string/btn_txt_no"
                     android:textColor="@color/white"
                     android:textSize="@dimen/size_2" />

@@ -18,28 +18,37 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/edt_register_bg"
             android:gravity="center_vertical"
             android:orientation="horizontal" >
 
             <ImageView
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/icon_qq" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="10dp"
+                android:contentDescription="@null"
+                android:src="@drawable/icon_search" />
 
             <EditText
                 android:id="@+id/et_name"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_weight="1"
                 android:background="@null"
-                android:hint="请输入药品名称"
-                android:layout_weight="1" />
+                android:hint="请输入药品名称" />
 
             <ImageView
                 android:id="@+id/iv_qrcode"
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:src="@drawable/icon_qq" />
+                android:layout_width="48dp"
+                android:layout_height="fill_parent"
+                android:background="@drawable/icon_scanner"
+                android:contentDescription="@null" />
         </LinearLayout>
     </LinearLayout>
 
