@@ -19,6 +19,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_below="@id/layout_title"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
@@ -57,19 +58,28 @@
             android:id="@+id/layout_medicine_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
             android:orientation="vertical" />
 
         <Button
             android:id="@+id/btn_search"
             android:layout_width="match_parent"
             android:layout_height="45dp"
+            android:layout_margin="10dp"
             android:background="@drawable/corner_green_selector"
             android:gravity="center"
             android:text="查询"
             android:textColor="@color/white"
-            android:textSize="20sp"
-            android:layout_margin="10dp" />
+            android:textSize="20sp" />
     </LinearLayout>
+
+    <!-- 关键字匹配的药名 -->
+
+    <com.yaodun.app.widget.MListView
+        android:id="@+id/lv_names"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="97dp" />
 
 </RelativeLayout>

@@ -1,28 +1,69 @@
 
 package com.yaodun.app.activity;
 
-import android.content.Intent;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.w3c.dom.ls.LSSerializer;
+
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
+import android.widget.ListView;
 import android.widget.TextView;
 
-import com.qianjiang.framework.util.EvtLog;
+import com.qianjiang.framework.util.UIUtil;
 import com.yaodun.app.R;
+import com.yaodun.app.adapter.SearchedMedicineNameAdapter;
+import com.yaodun.app.authentication.ActionResult;
+import com.yaodun.app.authentication.LoginProcessor;
+import com.yaodun.app.model.MedicineBean;
+import com.yaodun.app.req.UserReq;
 
 /**
  * 药盾--查询页面
  * 
  * @author zou.sq
  */
-public class YaodunSearchActivity extends YaodunActivityBase implements OnClickListener {
+public class YaodunSearchActivity extends YaodunActivityBase implements OnClickListener, OnItemClickListener {
 
+    boolean mIsSearching = false;
+    boolean isMedicineQuery = false;
     TextView mTvTitle;
     EditText mEtName;
+    ListView lvSearchedNames;
+    LinearLayout layoutAddedNames;
+    SearchedMedicineNameAdapter searchAdapter;
+    List<MedicineBean> searchList = new ArrayList<MedicineBean>();
+    List<MedicineBean> addList = new ArrayList<MedicineBean>();
 
+    TextWatcher watcher = new TextWatcher() {
+        
+        @Override
+        public void onTextChanged(CharSequence text, int arg1, int arg2, int arg3) {
+            searchMedicineName(text.toString().trim());
+        }
+        
+        @Override
+        public void beforeTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
+            
+        }
+        
+        @Override
+        public void afterTextChanged(Editable arg0) {
+            
+        }
+    };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,10 +81,104 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
         mTvTitle.setText("大众用药查询");
         
         mEtName = (EditText) findViewById(R.id.et_name);
+        mEtName.addTextChangedListener(watcher);
         ImageView ivQrcode = (ImageView) findViewById(R.id.iv_qrcode);
         ivQrcode.setOnClickListener(this);
+        
+        layoutAddedNames = (LinearLayout) findViewById(R.id.layout_medicine_name);
+        Button btnSearch = (Button) findViewById(R.id.btn_search);
+        btnSearch.setOnClickListener(this);
+        
+        lvSearchedNames = (ListView) findViewById(R.id.lv_names);
+        searchAdapter = new SearchedMedicineNameAdapter(mContext, searchList);
+        lvSearchedNames.setAdapter(searchAdapter);
+        lvSearchedNames.setOnItemClickListener(this);
+        lvSearchedNames.setVisibility(searchList.size()>0?View.VISIBLE:View.GONE);
     }
 
+    /**
+     * 根据关键字查药名
+     * @param keyword
+     */
+    void searchMedicineName(final String keyword){
+        if(mIsSearching){
+            return;
+        }
+        mIsSearching = true;
+        new AsyncTask<String, Void, ActionResult>() {
+
+            @Override
+            protected ActionResult doInBackground(String... params) {
+//                return UserReq.searchMedicineName(keyword);
+                ActionResult result = new ActionResult();
+                result.ResultCode = ActionResult.RESULT_CODE_SUCCESS;
+                List<MedicineBean> list = new ArrayList<MedicineBean>();
+                MedicineBean m1 = new MedicineBean();
+                m1.name = "阿莫";
+                MedicineBean m2 = new MedicineBean();
+                m2.name = "西林";
+                list.add(m1);
+                list.add(m2);
+                result.ResultObject = list;
+                return result;
+            }
+
+            @Override
+            protected void onPostExecute(ActionResult result) {
+                if (result != null && ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
+                    searchList.clear();
+                    List<MedicineBean> tmpList = (List<MedicineBean>)result.ResultObject;
+                    if(tmpList != null){
+                        searchList.addAll(tmpList);
+                    }
+                    searchAdapter.notifyDataSetChanged();
+                    lvSearchedNames.setVisibility(searchList.size()>0?View.VISIBLE:View.GONE);
+                } else {
+                    showErrorMsg(result);
+                }
+                mIsSearching = false;
+            }
+        }.execute();
+
+    }
+    /**
+     * 药品检测查询
+     */
+    void doMedicineQuery(){
+        
+    }
+    
+    /**
+     * 将选择的药名填到页面上
+     * @param addList
+     */
+    void addMedicineNames(){
+        if(addList == null || addList.size() == 0){
+            layoutAddedNames.setVisibility(View.GONE);
+        }else{
+            layoutAddedNames.setVisibility(View.VISIBLE);
+            layoutAddedNames.removeAllViews();
+            for(int i=0; i<addList.size(); ++i){
+                final View itemView = View.inflate(mContext, R.layout.item_medicine_name, null);
+                final int pos = i;
+                TextView tvName = (TextView) itemView.findViewById(R.id.tv);
+                tvName.setText(addList.get(i).name);
+                View vMove = itemView.findViewById(R.id.iv);
+                vMove.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View arg0) {
+                        layoutAddedNames.removeViewAt(pos);
+                        addList.remove(pos);
+                    }
+                });
+                LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+                int dp10 = UIUtil.dip2px(mContext, 10);
+                lp.setMargins(dp10, dp10, dp10, 0);
+                layoutAddedNames.addView(itemView, lp);
+            }
+        }
+    }
+    
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -53,9 +188,19 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
             case R.id.iv_qrcode:
                 startActivity(QrCodeActivity.getStartActIntent(mContext));
                 break;
+            case R.id.btn_search:
+                doMedicineQuery();
+                break;
             default:
                 break;
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
+        lvSearchedNames.setVisibility(View.GONE);
+        addList.add(searchList.get(position));
+        addMedicineNames();
     }
 
     void goClassify() {
