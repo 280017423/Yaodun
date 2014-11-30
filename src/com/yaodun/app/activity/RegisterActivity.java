@@ -68,10 +68,10 @@ public class RegisterActivity extends YaodunActivityBase implements OnClickListe
 			return;
 		}
 		ImeUtil.hideSoftInput(this);
-		String phone = mEdtPhone.toString().trim();
-		String pwd = mEdtPwd.toString().trim();
-		String pwdAgain = mEdtPwdAgain.toString().trim();
-		String nickname = mEdtNickname.toString().trim();
+		String phone = mEdtPhone.getText().toString().trim();
+		String pwd = mEdtPwd.getText().toString().trim();
+		String pwdAgain = mEdtPwdAgain.getText().toString().trim();
+		String nickname = mEdtNickname.getText().toString().trim();
 		if (StringUtil.isNullOrEmpty(phone)) {
 			toast("请输入手机号");
 			return;
