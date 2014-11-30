@@ -43,13 +43,13 @@ public class JYTBottomTab extends BottomTab {
 	@Override
 	protected List<BottomItem> initBottomItems() {
 		List<BottomItem> bottomItems = new ArrayList<BottomItem>();
-		bottomItems.add(new BottomItem(R.drawable.msg_icon_selector, ZouApplication.CONTEXT
+		bottomItems.add(new BottomItem(R.drawable.yaodun_icon_selector, ZouApplication.CONTEXT
 				.getString(R.string.bottom_tab_yaodun)));
-		bottomItems.add(new BottomItem(R.drawable.msg_icon_selector, ZouApplication.CONTEXT
+		bottomItems.add(new BottomItem(R.drawable.medicine_knowledge_icon_selector, ZouApplication.CONTEXT
 				.getString(R.string.bottom_tab_medicine_knowledge)));
-		bottomItems.add(new BottomItem(R.drawable.msg_icon_selector, ZouApplication.CONTEXT
+		bottomItems.add(new BottomItem(R.drawable.doctor_consult_icon_selector, ZouApplication.CONTEXT
 				.getString(R.string.text_doctor_consult)));
-		bottomItems.add(new BottomItem(R.drawable.msg_icon_selector, ZouApplication.CONTEXT
+		bottomItems.add(new BottomItem(R.drawable.more_icon_selector, ZouApplication.CONTEXT
 				.getString(R.string.bottom_tab_more)));
 		return bottomItems;
 	}
@@ -68,6 +68,7 @@ public class JYTBottomTab extends BottomTab {
 	protected int getSelectedTextColorRes() {
 		return R.color.tv_tab_selecte_color;
 	}
+
 	@Override
 	protected int getNormalTextColorRes() {
 		return R.color.tv_tab_normal_color;
