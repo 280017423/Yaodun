@@ -63,4 +63,7 @@
     <string name="manual_input_title">手动输入条形码</string>
     <string name="capture_manual_txt">手动输入</string>
 
+    <!-- 药师咨询 -->
+    <string name="tips_doctor_consule_empty_view">暂时没有药师咨询记录</string>
+
 </resources>

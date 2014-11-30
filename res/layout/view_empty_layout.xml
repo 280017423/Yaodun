@@ -11,7 +11,7 @@
         android:ellipsize="end"
         android:gravity="center"
         android:singleLine="true"
-        android:textColor="#05B0DE"
-        android:textSize="@dimen/size_2" />
+        android:textColor="@color/main_color"
+        android:textSize="@dimen/size_3" />
 
 </RelativeLayout>
