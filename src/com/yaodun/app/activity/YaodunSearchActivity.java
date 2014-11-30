@@ -34,18 +34,18 @@ import com.yaodun.app.model.MedicineBean;
  */
 public class YaodunSearchActivity extends YaodunActivityBase implements OnClickListener, OnItemClickListener {
 
-	boolean mIsSearching = false;
-	boolean mIsMedicineQuery = false;
-	TextView mTvTitle;
-	EditText mEtName;
-	ListView lvSearchedNames;
-	LinearLayout layoutAddedNames;
-	SearchedMedicineNameAdapter searchAdapter;
-	List<MedicineBean> searchList = new ArrayList<MedicineBean>();
-	List<MedicineBean> addList = new ArrayList<MedicineBean>();
-	ListView lvDetectRules;
-	DetectRuleAdapter detectAdapter;
-	List<DetectRuleBean> detectList = new ArrayList<DetectRuleBean>();
+	private boolean mIsSearching;
+	private boolean mIsMedicineQuery;
+	private TextView mTvTitle;
+	private EditText mEtName;
+	private ListView lvSearchedNames;
+	private LinearLayout layoutAddedNames;
+	private SearchedMedicineNameAdapter searchAdapter;
+	private List<MedicineBean> searchList = new ArrayList<MedicineBean>();
+	private List<MedicineBean> addList = new ArrayList<MedicineBean>();
+	private ListView lvDetectRules;
+	private DetectRuleAdapter detectAdapter;
+	private List<DetectRuleBean> detectList = new ArrayList<DetectRuleBean>();
 
 	TextWatcher watcher = new TextWatcher() {
 
@@ -76,9 +76,8 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		// title
 		View left = findViewById(R.id.title_with_back_title_btn_left);
 		left.setOnClickListener(this);
-		// TextView tvLeft = (TextView)
-		// findViewById(R.id.tv_title_with_back_left);
-		left.setBackgroundResource(R.drawable.btn_back_bg);
+		TextView tvLeft = (TextView) findViewById(R.id.tv_title_with_back_left);
+		tvLeft.setBackgroundResource(R.drawable.btn_back_bg);
 		mTvTitle = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
 		mTvTitle.setText("大众用药查询");
 

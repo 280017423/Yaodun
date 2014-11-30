@@ -1,6 +1,5 @@
 package com.yaodun.app.activity;
 
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
