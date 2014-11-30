@@ -1,4 +1,3 @@
-
 package com.yaodun.app.req;
 
 import java.util.ArrayList;
@@ -26,91 +25,125 @@ import com.yaodun.app.util.ServerAPIConstant;
  */
 public class UserReq {
 
-    /**
-     * 用户登录
-     * 
-     * @param name 用户名字
-     * @param tel 用户电话
-     * @return ActionResult 请求结构数据
-     */
-    public static ActionResult login(String name, String tel) {
-        ActionResult result = new ActionResult();
-        String url = ServerAPIConstant.getUrl(ServerAPIConstant.LOGIN_API);
-        List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_CHILREN_NAME, name));
-        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_MOBILE, tel));
-        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_APP, ServerAPIConstant
-                .getAppSign()));
-        try {
-            JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
-            if (jsonResult != null) {
-                if (jsonResult.isOK()) {
-                    UserInfoModel userInfoModel = jsonResult.getData(
-                            ServerAPIConstant.KEY_CHILDREN_INFO,
-                            UserInfoModel.class);
-                    // 保存用户信息
-                    UserMgr.saveUserInfo(userInfoModel);
-                }
-                result.ResultObject = jsonResult.Msg; // 登录成功有积分提示语
-                result.ResultCode = jsonResult.Code;
-            } else {
-                result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
-                result.ResultObject = QJApplicationBase.CONTEXT
-                        .getString(R.string.network_is_not_available);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
-        }
-        return result;
-    }
+	/**
+	 * 用户注册
+	 * 
+	 * @param name
+	 *            用户名字
+	 * @param tel
+	 *            用户电话
+	 * @return ActionResult 请求结构数据
+	 */
+	public static ActionResult register(String name, String tel) {
+		ActionResult result = new ActionResult();
+		String url = ServerAPIConstant.getUrl(ServerAPIConstant.LOGIN_API);
+		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_CHILREN_NAME, name));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_MOBILE, tel));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_APP, ServerAPIConstant.getAppSign()));
+		try {
+			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
+			if (jsonResult != null) {
+				if (jsonResult.isOK()) {
+					UserInfoModel userInfoModel = jsonResult.getData(ServerAPIConstant.KEY_CHILDREN_INFO,
+							UserInfoModel.class);
+					// 保存用户信息
+					UserMgr.saveUserInfo(userInfoModel);
+				}
+				result.ResultObject = jsonResult.Msg; // 登录成功有积分提示语
+				result.ResultCode = jsonResult.Code;
+			} else {
+				result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+				result.ResultObject = QJApplicationBase.CONTEXT.getString(R.string.network_is_not_available);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+		}
+		return result;
+	}
 
-    /**
-     * 自动登录
-     * 
-     * @return true: 成功 false:失败
-     */
-    public static ActionResult autoLogin() {
-        ActionResult result = new ActionResult();
-        UserInfoModel user = UserMgr.getUserInfoModel();
-        if (null != user && !StringUtil.isNullOrEmpty(user.getName())
-                && !StringUtil.isNullOrEmpty(user.getMobile())) {
-            result = login(user.getName(), user.getMobile());
-        }
-        return result;
-    }
+	/**
+	 * 用户登录
+	 * 
+	 * @param name
+	 *            用户名字
+	 * @param tel
+	 *            用户电话
+	 * @return ActionResult 请求结构数据
+	 */
+	public static ActionResult login(String name, String tel) {
+		ActionResult result = new ActionResult();
+		String url = ServerAPIConstant.getUrl(ServerAPIConstant.LOGIN_API);
+		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_CHILREN_NAME, name));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_MOBILE, tel));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_APP, ServerAPIConstant.getAppSign()));
+		try {
+			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
+			if (jsonResult != null) {
+				if (jsonResult.isOK()) {
+					UserInfoModel userInfoModel = jsonResult.getData(ServerAPIConstant.KEY_CHILDREN_INFO,
+							UserInfoModel.class);
+					// 保存用户信息
+					UserMgr.saveUserInfo(userInfoModel);
+				}
+				result.ResultObject = jsonResult.Msg; // 登录成功有积分提示语
+				result.ResultCode = jsonResult.Code;
+			} else {
+				result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+				result.ResultObject = QJApplicationBase.CONTEXT.getString(R.string.network_is_not_available);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+		}
+		return result;
+	}
 
-    /**
-     * 根据关键字搜药名
-     * 
-     * @param keyword
-     * @return
-     */
-    public static ActionResult searchMedicineName(String keyword) {
-        ActionResult result = new ActionResult();
-        String url = ServerAPIConstant.getUrl(ServerAPIConstant.SEARCH_MEDICINE_API);
-        List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_KEYWORD, keyword));
-        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_APP, ServerAPIConstant
-                .getAppSign()));
-        try {
-            JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
-            if (jsonResult != null) {
-                if (jsonResult.isOK()) {
-                    result.ResultObject = jsonResult.getData(ServerAPIConstant.KEY_CHILDREN_INFO,
-                            new TypeToken<List<MedicineBean>>() {
-                            }.getType());
-                }
-                result.ResultCode = jsonResult.Code;
-            } else {
-                result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
-                result.ResultObject = QJApplicationBase.CONTEXT
-                        .getString(R.string.network_is_not_available);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
-        }
-        return result;
-    }
+	/**
+	 * 自动登录
+	 * 
+	 * @return true: 成功 false:失败
+	 */
+	public static ActionResult autoLogin() {
+		ActionResult result = new ActionResult();
+		UserInfoModel user = UserMgr.getUserInfoModel();
+		if (null != user && !StringUtil.isNullOrEmpty(user.getName()) && !StringUtil.isNullOrEmpty(user.getMobile())) {
+			result = login(user.getName(), user.getMobile());
+		}
+		return result;
+	}
+
+	/**
+	 * 根据关键字搜药名
+	 * 
+	 * @param keyword
+	 * @return
+	 */
+	public static ActionResult searchMedicineName(String keyword) {
+		ActionResult result = new ActionResult();
+		String url = ServerAPIConstant.getUrl(ServerAPIConstant.SEARCH_MEDICINE_API);
+		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_KEYWORD, keyword));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_APP, ServerAPIConstant.getAppSign()));
+		try {
+			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
+			if (jsonResult != null) {
+				if (jsonResult.isOK()) {
+					result.ResultObject = jsonResult.getData(ServerAPIConstant.KEY_CHILDREN_INFO,
+							new TypeToken<List<MedicineBean>>() {
+							}.getType());
+				}
+				result.ResultCode = jsonResult.Code;
+			} else {
+				result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+				result.ResultObject = QJApplicationBase.CONTEXT.getString(R.string.network_is_not_available);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+		}
+		return result;
+	}
 }

@@ -85,7 +85,6 @@
         android:textSize="@dimen/size_4" />
 
     <LinearLayout
-        android:id="@+id/ll_child_sex"
         android:layout_width="fill_parent"
         android:layout_height="40dp"
         android:layout_below="@id/edt_child_nickname"
@@ -104,18 +103,35 @@
             android:textColor="#969696"
             android:textSize="@dimen/size_4" />
 
-        <Button
-            android:id="@+id/btn_choose_sex"
+        <RelativeLayout
+            android:id="@+id/rl_choose_sex"
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_marginLeft="1dp"
             android:layout_weight="4"
             android:background="@drawable/btn_register_sex_bg"
-            android:gravity="left|center_vertical"
-            android:paddingLeft="10dp"
-            android:text="@string/please_choose"
-            android:textColor="@color/register_gray"
-            android:textSize="@dimen/size_4" />
+            android:clickable="true" >
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:background="@null"
+                android:clickable="false"
+                android:gravity="left|center_vertical"
+                android:paddingLeft="10dp"
+                android:text="@string/please_choose"
+                android:textColor="@color/register_gray"
+                android:textSize="@dimen/size_4" />
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/icon_arrow_down"
+                android:contentDescription="@null" />
+        </RelativeLayout>
     </LinearLayout>
 
     <Button

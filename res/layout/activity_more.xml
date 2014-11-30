@@ -10,7 +10,6 @@
         layout="@layout/title_with_back_btn_wrap" />
 
     <LinearLayout
-        android:id="@+id/ll_login_info"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
@@ -20,10 +19,12 @@
         android:orientation="vertical" >
 
         <RelativeLayout
+            android:id="@+id/rl_more_collect"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:background="@drawable/more_item_top_bg"
-            android:clickable="true" >
+            android:clickable="true"
+            android:onClick="onClick" >
 
             <TextView
                 android:layout_width="fill_parent"
@@ -60,10 +61,12 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_more_share"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:background="@drawable/more_item_mid_bg"
-            android:clickable="true" >
+            android:clickable="true"
+            android:onClick="onClick" >
 
             <TextView
                 android:layout_width="fill_parent"
@@ -100,10 +103,12 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_more_introduce"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:background="@drawable/more_item_mid_bg"
-            android:clickable="true" >
+            android:clickable="true"
+            android:onClick="onClick" >
 
             <TextView
                 android:layout_width="fill_parent"
@@ -140,10 +145,12 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_more_about"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:background="@drawable/more_item_mid_bg"
-            android:clickable="true" >
+            android:clickable="true"
+            android:onClick="onClick" >
 
             <TextView
                 android:layout_width="fill_parent"
@@ -180,10 +187,12 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_more_suggest"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:background="@drawable/more_item_mid_bg"
-            android:clickable="true" >
+            android:clickable="true"
+            android:onClick="onClick" >
 
             <TextView
                 android:layout_width="fill_parent"
@@ -209,7 +218,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="10dp"
-                android:background="@drawable/icon_introduce"
+                android:background="@drawable/icon_suggest"
                 android:contentDescription="@null" />
 
             <View
@@ -220,10 +229,12 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_more_declare"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:background="@drawable/more_item_mid_bg"
-            android:clickable="true" >
+            android:clickable="true"
+            android:onClick="onClick" >
 
             <TextView
                 android:layout_width="fill_parent"
@@ -260,10 +271,12 @@
         </RelativeLayout>
 
         <RelativeLayout
+            android:id="@+id/rl_more_check_version"
             android:layout_width="fill_parent"
             android:layout_height="40dp"
             android:background="@drawable/more_item_bottom_bg"
-            android:clickable="true" >
+            android:clickable="true"
+            android:onClick="onClick" >
 
             <TextView
                 android:layout_width="fill_parent"
