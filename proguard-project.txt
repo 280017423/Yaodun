@@ -90,7 +90,7 @@
 
 
 #保持model不要混淆
--keep class com.qianjiang.jyt.model.** { *; 
+-keep class com.yaodun.app.model.** { *; 
 }
 -keep class com.qianjiang.framework.model.** { *; 
 }
@@ -122,7 +122,7 @@
 -keep class com.umeng*.** {*; 
 }
 
--keep public class com.qianjiang.jyt.R$*{
+-keep public class com.yaodun.app.R$*{
     public static final int *;
 }
 -keep class com.tencent.open.TDialog$*
