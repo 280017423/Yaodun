@@ -27,6 +27,7 @@ public class YaodunActivityGroup extends YaodunActivityBase implements OnClickLi
 		initView();
 	}
 
+	@SuppressWarnings("deprecation")
 	private void initView() {
 		mRlContainer = (RelativeLayout) findViewById(R.id.layout_container);
 		classifyIntent = new Intent(this, YaodunClassifyActivity.class);

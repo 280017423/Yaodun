@@ -1,14 +1,11 @@
 package com.yaodun.app.activity;
 
-import com.qianjiang.framework.util.EvtLog;
-import com.zxing.decoding.QrCodeActivityBase;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.nfc.Tag;
-import android.util.Log;
+
+import com.qianjiang.framework.util.EvtLog;
+import com.zxing.decoding.QrCodeActivityBase;
 
 public class QrCodeActivity extends QrCodeActivityBase {
 

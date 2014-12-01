@@ -35,5 +35,5 @@ public class ConstantSet {
 	public static final String SYSTEM_CONFIG_DEBUG_LOG_ENABLE = "system_config_debug_log_enable";
 	public static final String SYSTEM_CONFIG_API_ROOT_URL = "SYSTEM_CONFIG_API_ROOT_URL";
 	public static final String KEY_IS_WIFI_MODE = "KEY_IS_WIFI_MODE";
-	public static final String EXTRA_EXCHANGE_MODEL = "EXTRA_EXCHANGE_MODEL";
+	public static final String EXTRA_LOGIN_STATUS = "EXTRA_LOGIN_STATUS";
 }

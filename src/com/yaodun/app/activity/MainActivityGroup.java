@@ -13,6 +13,8 @@ import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 import android.widget.TextView;
 
+import com.qianjiang.framework.authentication.BaseLoginProcessor;
+import com.qianjiang.framework.authentication.BaseLoginProcessor.LOGIN_TYPE;
 import com.qianjiang.framework.model.VersionInfo;
 import com.qianjiang.framework.util.AppDownloader;
 import com.qianjiang.framework.util.AppDownloader.DownloadProgressListener;
@@ -24,7 +26,9 @@ import com.qianjiang.framework.widget.BottomTab;
 import com.qianjiang.framework.widget.BottomTab.OnBottomCheckedListener;
 import com.yaodun.app.R;
 import com.yaodun.app.listener.NewVersionListener;
+import com.yaodun.app.manager.UserMgr;
 import com.yaodun.app.req.AppReq;
+import com.yaodun.app.util.ConstantSet;
 import com.yaodun.app.widget.CustomProgressDialog;
 import com.yaodun.app.widget.CustomProgressDialog.DIALOG_DEFAULT_LAYOUT_TYPE;
 
@@ -38,9 +42,12 @@ public class MainActivityGroup extends YaodunActivityBase {
 	private static final String TAG = "MainActivityGroup";
 	private static final int DIALOG_HAS_NEW_VERSION = 0;
 	private static final int DIALOG_EXIT_APP = 1;
+	private static final int MORE_TAB = 3;
+	private static final int ACTIVITYGROUP_TAB_LOGIN = 4;
 	private RelativeLayout mRlContainer;
 	private BottomTab mBottomTab;
 	private VersionInfo mCurrentVersionInfo;
+	private int mCurrentPosition;
 	// 获取MaxID是否成功
 	private Class<?>[] mClasses = {
 			YaodunActivityGroup.class,
@@ -48,7 +55,7 @@ public class MainActivityGroup extends YaodunActivityBase {
 			DoctorConsultActivity.class,
 			MoreActivity.class };
 	private Handler mCheckVersionHandler = new Handler() {
-		@SuppressWarnings("deprecation")
+		@Override
 		public void handleMessage(Message msg) {
 			if (DIALOG_HAS_NEW_VERSION == msg.what) {
 				showDialog(DIALOG_HAS_NEW_VERSION);
@@ -67,9 +74,8 @@ public class MainActivityGroup extends YaodunActivityBase {
 	}
 
 	private void initStartIndex() {
-		int msgType = 0;
 		// 默认显示第一个界面
-		mBottomTab.setSelectedIndex(msgType);
+		mBottomTab.setSelectedIndex(0);
 	}
 
 	private void checkUpdate() {
@@ -98,8 +104,15 @@ public class MainActivityGroup extends YaodunActivityBase {
 		mBottomTab = (BottomTab) findViewById(R.id.bottom_tab);
 		mBottomTab.setOnBottomCheckedListener(new OnBottomCheckedListener() {
 			@Override
-			public void onBottomCheckedListener(int checkedPos) {
-				setCurActivity(null, checkedPos);
+			public void onBottomCheckedListener(final int checkedPos) {
+				if (MORE_TAB == checkedPos && !UserMgr.hasUserInfo()) {
+					Intent intent = new Intent(MainActivityGroup.this, LoginActivity.class);
+					intent.putExtra(BaseLoginProcessor.KEY_LOGIN_TYPE, LOGIN_TYPE.From_ActivityGroup_Tab);
+					startActivityForResult(intent, ACTIVITYGROUP_TAB_LOGIN);
+				} else {
+					mCurrentPosition = checkedPos;
+					setCurActivity(null, checkedPos);
+				}
 			}
 		});
 	}
@@ -116,6 +129,7 @@ public class MainActivityGroup extends YaodunActivityBase {
 		} else {
 			intent.setClass(this, targetClass);
 		}
+		@SuppressWarnings("deprecation")
 		View activityView = getLocalActivityManager().startActivity(intent.getComponent().getShortClassName(), intent)
 				.getDecorView();
 		mRlContainer.addView(activityView, new RelativeLayout.LayoutParams(
@@ -135,9 +149,18 @@ public class MainActivityGroup extends YaodunActivityBase {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (resultCode == RESULT_OK) {
-			YaodunActivityBase activity = (YaodunActivityBase) getLocalActivityManager().getCurrentActivity();
-			activity.handleActivityResult(requestCode, resultCode, data);
-			EvtLog.d(TAG, "onActivityResult");
+			if (ACTIVITYGROUP_TAB_LOGIN == requestCode) {
+				if (null != data && data.getBooleanExtra(ConstantSet.EXTRA_LOGIN_STATUS, false)) {
+					mCurrentPosition = MORE_TAB;
+					mBottomTab.setSelectedIndex(mCurrentPosition);
+				} else {
+					mBottomTab.setSelectedIndex(mCurrentPosition);
+				}
+			} else {
+				YaodunActivityBase activity = (YaodunActivityBase) getLocalActivityManager().getCurrentActivity();
+				activity.handleActivityResult(requestCode, resultCode, data);
+				EvtLog.d(TAG, "onActivityResult");
+			}
 		}
 	}
 

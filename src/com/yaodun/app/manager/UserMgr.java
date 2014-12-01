@@ -89,7 +89,7 @@ public class UserMgr {
 	 */
 	public static boolean hasUserInfo() {
 		UserInfoModel userInfoModel = getUserInfoModel();
-		return userInfoModel != null && !StringUtil.isNullOrEmpty(userInfoModel.getChildrenId());
+		return userInfoModel != null && !StringUtil.isNullOrEmpty(userInfoModel.getUserId());
 	}
 
 }

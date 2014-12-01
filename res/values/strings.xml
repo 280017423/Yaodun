@@ -30,7 +30,6 @@
     <string name="text_qq_login">使用QQ登录</string>
     <string name="text_weixin_login">使用微信登录</string>
     <!-- 注册 -->
-    <string name="text_register">注册</string>
     <string name="text_submit">提交</string>
     <string name="text_sex">性别</string>
     <string name="please_choose">请选择</string>

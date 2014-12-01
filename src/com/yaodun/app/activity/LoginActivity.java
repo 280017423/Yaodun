@@ -21,6 +21,7 @@ import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.authentication.LoginProcessor;
 import com.yaodun.app.req.UserReq;
+import com.yaodun.app.util.ConstantSet;
 
 /**
  * 登录界面
@@ -80,9 +81,7 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 			toast(getString(R.string.network_is_not_available));
 			return;
 		}
-		if (null != mLoadingUpView && !mLoadingUpView.isShowing()) {
-			mLoadingUpView.showPopup();
-		}
+		showLoadingUpView(mLoadingUpView);
 		mIsLogining = true;
 		new AsyncLogin().execute(childName, edtTel);
 	}
@@ -134,23 +133,30 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 		@Override
 		protected void onPostExecute(ActionResult result) {
 			if (result != null && ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
-				// 增加登录成功提示语
-				String loginInfo = (String) result.ResultObject;
-				toast(loginInfo);
-				LoginProcessor.getInstance().onLoginSuccess(LoginActivity.this, mIdentify);
+				if (LOGIN_TYPE.From_ActivityGroup_Tab.equals(mLoginType)) {
+					jumpToActivityGroup(true);
+				} else {
+					LoginProcessor.getInstance().onLoginSuccess(LoginActivity.this, mIdentify);
+				}
 			} else {
 				// 登录失败
-				LoginProcessor.getInstance().onLoginError(LoginActivity.this, mIdentify);
+				if (!LOGIN_TYPE.From_ActivityGroup_Tab.equals(mLoginType)) {
+					LoginProcessor.getInstance().onLoginError(LoginActivity.this, mIdentify);
+				}
 				showErrorMsg(result);
 			}
-			if (null != mLoadingUpView && mLoadingUpView.isShowing()) {
-				mLoadingUpView.dismiss();
-			}
+			dismissLoadingUpView(mLoadingUpView);
 			mIsLogining = false;
 		}
 	}
 
-	@SuppressWarnings("deprecation")
+	private void jumpToActivityGroup(boolean loginSuccess) {
+		Intent intent = new Intent(this, MainActivityGroup.class);
+		intent.putExtra(ConstantSet.EXTRA_LOGIN_STATUS, loginSuccess);
+		setResult(RESULT_OK, intent);
+		finish();
+	}
+
 	@Override
 	protected Dialog onCreateDialog(int id) {
 		switch (id) {
@@ -176,7 +182,6 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 		super.onNegativeBtnClick(id, dialog, which);
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// 是退出APP的那个LoginType时，才退出
@@ -184,8 +189,11 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 			showDialog(DIALOG_EXIT_APP);
 			return false;
 		} else if (keyCode == KeyEvent.KEYCODE_BACK) {
-			// 其他的退出，需要传递参数给底层
-			toBack();
+			if (LOGIN_TYPE.From_ActivityGroup_Tab.equals(mLoginType)) {
+				jumpToActivityGroup(false);
+			} else {
+				toBack();
+			}
 		}
 		return super.onKeyDown(keyCode, event);
 	}

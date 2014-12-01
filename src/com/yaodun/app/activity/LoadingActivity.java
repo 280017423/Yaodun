@@ -8,13 +8,10 @@ import android.content.pm.PackageManager.NameNotFoundException;
 import android.os.Bundle;
 import android.view.KeyEvent;
 
-import com.qianjiang.framework.authentication.BaseLoginProcessor.LOGIN_TYPE;
 import com.qianjiang.framework.util.EvtLog;
 import com.qianjiang.framework.util.PackageUtil;
 import com.qianjiang.framework.util.StringUtil;
 import com.yaodun.app.R;
-import com.yaodun.app.authentication.ActionProcessor;
-import com.yaodun.app.manager.UserMgr;
 import com.yaodun.app.util.ConstantSet;
 import com.yaodun.app.util.SharedPreferenceUtil;
 
@@ -42,13 +39,7 @@ public class LoadingActivity extends YaodunActivityBase {
 				if (isJumpNewerGuiding()) {
 					startActivity(new Intent(LoadingActivity.this, NewerGuidingActivity.class));
 				} else {
-					// 如果已经有用户信息了，跳转到首页，没有用户信息，跳转到登录界面
-					if (UserMgr.hasUserInfo()) {
-						startActivity(new Intent(LoadingActivity.this, MainActivityGroup.class));
-					} else {
-						new ActionProcessor(true).startActivity(LoadingActivity.this, new Intent(
-								LoadingActivity.this, MainActivityGroup.class), LOGIN_TYPE.Exit_To_Cancel_Apk);
-					}
+					startActivity(new Intent(LoadingActivity.this, MainActivityGroup.class));
 				}
 				finish();
 			}

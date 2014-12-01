@@ -10,7 +10,6 @@ import android.widget.TextView;
 
 import com.yaodun.app.R;
 import com.yaodun.app.model.DetectRuleBean;
-import com.yaodun.app.model.DetectRuleBean;
 
 public class DetectRuleAdapter extends BaseAdapter {
     Context context;

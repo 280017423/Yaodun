@@ -12,14 +12,11 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.FrameLayout.LayoutParams;
 
-import com.qianjiang.framework.authentication.BaseLoginProcessor.LOGIN_TYPE;
 import com.qianjiang.framework.util.EvtLog;
 import com.qianjiang.framework.util.PackageUtil;
 import com.qianjiang.framework.util.UIUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.activity.MainActivityGroup;
-import com.yaodun.app.authentication.ActionProcessor;
-import com.yaodun.app.manager.UserMgr;
 import com.yaodun.app.util.ConstantSet;
 import com.yaodun.app.util.SharedPreferenceUtil;
 
@@ -45,11 +42,7 @@ public class NewerAdapter extends PagerAdapter {
 	 */
 	public NewerAdapter(Activity activity) {
 		this.mContext = activity;
-		this.mImages = new int[] {
-				R.drawable.newer_guiding_1,
-				R.drawable.newer_guiding_2,
-				R.drawable.newer_guiding_3,
-				R.drawable.newer_guiding_4 };
+		this.mImages = new int[] { R.drawable.newer_guiding_1, R.drawable.newer_guiding_2, R.drawable.newer_guiding_3 };
 	}
 
 	/**
@@ -159,14 +152,7 @@ public class NewerAdapter extends PagerAdapter {
 	}
 
 	private void jumpToMain() {
-		// 如果已经有用户信息了，跳转到首页，没有用户信息，跳转到登录界面
-		if (UserMgr.hasUserInfo()) {
-			mContext.startActivity(new Intent(mContext, MainActivityGroup.class));
-		} else {
-			new ActionProcessor(true).startActivity(mContext, new Intent(mContext, MainActivityGroup.class),
-					LOGIN_TYPE.Exit_To_Cancel_Apk);
-		}
+		mContext.startActivity(new Intent(mContext, MainActivityGroup.class));
 		mContext.finish();
 	}
-
 }

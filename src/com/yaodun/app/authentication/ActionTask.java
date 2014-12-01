@@ -10,7 +10,6 @@ import com.qianjiang.framework.authentication.BaseActionTask;
 import com.qianjiang.framework.authentication.BaseLoginProcessor.LOGIN_TYPE;
 import com.qianjiang.framework.model.ActionModel;
 import com.qianjiang.framework.util.EvtLog;
-import com.qianjiang.framework.util.StringUtil;
 import com.yaodun.app.activity.MainActivityGroup;
 import com.yaodun.app.listener.IActionListener;
 import com.yaodun.app.req.UserReq;
@@ -134,17 +133,6 @@ public class ActionTask extends BaseActionTask<ActionResult> {
 			// 进入到登录界面
 			LoginProcessor.getInstance().processorToLogin(action);
 		} else if (ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
-			action.getActivity().runOnUiThread(new Runnable() {
-
-				@Override
-				public void run() {
-					// 增加登录成功提示语
-					String loginInfo = (String) result.ResultObject;
-					if (!StringUtil.isNullOrEmpty(loginInfo)) {
-						Toast.makeText(action.getActivity(), loginInfo, Toast.LENGTH_LONG).show();
-					}
-				}
-			});
 			// 登录成功，继续之前网络请求
 			action.setIsAfterAutoLogin(true);
 			LoginProcessor.getInstance().doAction(action, false);

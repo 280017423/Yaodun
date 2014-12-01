@@ -4,76 +4,32 @@ import com.qianjiang.framework.orm.BaseModel;
 
 public class UserInfoModel extends BaseModel {
 	private static final long serialVersionUID = -4763716679331905978L;
-	private String childrenId;
-	private String name;
-	private String mobile;
-	private String sex;
-	private String nClass;
-	private String schoolId;
-	private String schoolName;
-	private int status;
+	private String userId;
+	private String userName;
+	private String password;
 
-	public String getChildrenId() {
-		return childrenId;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setChildrenId(String childrenId) {
-		this.childrenId = childrenId;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public String getName() {
-		return name;
+	public String getUserName() {
+		return userName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 
-	public String getMobile() {
-		return mobile;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setMobile(String mobile) {
-		this.mobile = mobile;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
-	}
-
-	public String getnClass() {
-		return nClass;
-	}
-
-	public void setnClass(String nClass) {
-		this.nClass = nClass;
-	}
-
-	public String getSchoolId() {
-		return schoolId;
-	}
-
-	public void setSchoolId(String schoolId) {
-		this.schoolId = schoolId;
-	}
-
-	public String getSchoolName() {
-		return schoolName;
-	}
-
-	public void setSchoolName(String schoolName) {
-		this.schoolName = schoolName;
-	}
-
-	public int getStatus() {
-		return status;
-	}
-
-	public void setStatus(int status) {
-		this.status = status;
-	}
 }
