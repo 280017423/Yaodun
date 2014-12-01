@@ -6,6 +6,9 @@ package com.yaodun.app.util;
 public class ConstantSet {
 	public static final String APP_SIGN = "JYT";
 	public static final String TIME_PATTERN = "yyyy-MM-dd HH:mm";
+	
+	public static final String APP_KEY_QQ = "222222";
+    
 	// 其他变量
 	public static final int INFO_NUM_IN_ONE_PAGE = 20;
 	public static final int VIDEO_NUM_IN_ONE_PAGE = 12;
