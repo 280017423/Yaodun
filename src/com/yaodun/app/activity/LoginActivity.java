@@ -221,6 +221,7 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
             // TODO 处理注册成功逻辑
         }
         super.onActivityResult(requestCode, resultCode, data);
+        mTencent.onActivityResult(requestCode, resultCode, data);
     }
 
     void doQQLogin() {
