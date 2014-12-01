@@ -23,6 +23,10 @@
     <!-- 摄像头权限 -->
     <uses-permission android:name="android.permission.CAMERA" />
 
+    <!-- QQ登录 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:name="com.yaodun.app.app.ZouApplication"
         android:allowBackup="true"
@@ -140,6 +144,21 @@
             android:name=".activity.QrCodeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
+        </activity>
+
+        <!-- qq登录 -->
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="tencent你的AppId" />
+            </intent-filter>
         </activity>
     </application>
 

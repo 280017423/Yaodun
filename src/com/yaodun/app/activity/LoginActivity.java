@@ -13,10 +13,14 @@ import android.widget.TextView;
 
 import com.qianjiang.framework.authentication.BaseLoginProcessor;
 import com.qianjiang.framework.authentication.BaseLoginProcessor.LOGIN_TYPE;
+import com.qianjiang.framework.util.EvtLog;
 import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.NetUtil;
 import com.qianjiang.framework.util.StringUtil;
 import com.qianjiang.framework.widget.LoadingUpView;
+import com.tencent.tauth.IUiListener;
+import com.tencent.tauth.Tencent;
+import com.tencent.tauth.UiError;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.authentication.LoginProcessor;
@@ -40,6 +44,7 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 	private EditText mEdtChildName;
 	private EditText mEdtTel;
 	private LoadingUpView mLoadingUpView;
+	private Tencent mTencent;
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -53,6 +58,7 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 	}
 
 	private void initVariable() {
+		mTencent = Tencent.createInstance(ConstantSet.APP_KEY_QQ, getApplicationContext());
 		mIdentify = getIntent().getStringExtra(BaseLoginProcessor.IDENTIFY);
 		mLoginType = (LOGIN_TYPE) getIntent().getExtras().get(BaseLoginProcessor.KEY_LOGIN_TYPE);
 	}
@@ -99,7 +105,11 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 						Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
 						startActivityForResult(intent, REGISTER_ACTIVITY_REQUEST_CODE);
 						break;
-
+					case R.id.btn_login_qq:
+						doQQLogin();
+						break;
+					case R.id.btn_login_weixin:
+						break;
 					default:
 						break;
 				}
@@ -213,5 +223,28 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 			// TODO 处理注册成功逻辑
 		}
 		super.onActivityResult(requestCode, resultCode, data);
+		mTencent.onActivityResult(requestCode, resultCode, data);
+	}
+
+	void doQQLogin() {
+		if (!mTencent.isSessionValid()) {
+			mTencent.login(this, "all", new IUiListener() {
+
+				@Override
+				public void onError(UiError arg0) {
+					EvtLog.d(TAG, "onError");
+				}
+
+				@Override
+				public void onComplete(Object arg0) {
+					EvtLog.d(TAG, arg0.toString());
+				}
+
+				@Override
+				public void onCancel() {
+					EvtLog.d(TAG, "onCancel");
+				}
+			});
+		}
 	}
 }
