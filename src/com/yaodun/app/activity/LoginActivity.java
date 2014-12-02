@@ -1,8 +1,11 @@
 package com.yaodun.app.activity;
 
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -18,6 +21,9 @@ import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.NetUtil;
 import com.qianjiang.framework.util.StringUtil;
 import com.qianjiang.framework.widget.LoadingUpView;
+import com.tencent.mm.sdk.modelmsg.SendAuth;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
@@ -45,6 +51,17 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 	private EditText mEdtTel;
 	private LoadingUpView mLoadingUpView;
 	private Tencent mTencent;
+	private IWXAPI mWxApi;
+	private SendAuth.Req req;
+	BroadcastReceiver wxReceiver = new BroadcastReceiver(){
+        @Override
+        public void onReceive(Context arg0, Intent arg1) {
+            if(arg1.hasExtra(ConstantSet.EXTRA_TOKEN)){
+                String token = arg1.getStringExtra(ConstantSet.EXTRA_TOKEN);
+            }
+        }
+	    
+	};
 
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -52,13 +69,14 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 		initVariable();
 		initView();
 		setListener();
+		registerReceiver(wxReceiver, new IntentFilter(ConstantSet.ACTION_WEIXIN_LOGIN));
 	}
 
 	private void setListener() {
 	}
 
 	private void initVariable() {
-		mTencent = Tencent.createInstance(ConstantSet.APP_KEY_QQ, getApplicationContext());
+		mTencent = Tencent.createInstance(ConstantSet.APP_ID_QQ, getApplicationContext());
 		mIdentify = getIntent().getStringExtra(BaseLoginProcessor.IDENTIFY);
 		mLoginType = (LOGIN_TYPE) getIntent().getExtras().get(BaseLoginProcessor.KEY_LOGIN_TYPE);
 	}
@@ -246,5 +264,15 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 				}
 			});
 		}
+	}
+	void doWeixinLogin(){
+	    if(mWxApi == null){
+	        mWxApi = WXAPIFactory.createWXAPI(this, ConstantSet.APP_ID_WX, true);
+	        mWxApi.registerApp(ConstantSet.APP_ID_WX);
+	    }
+	    req = new SendAuth.Req();
+	    req.scope = "snsapi_userinfo";
+	    req.state = "wechat_sdk_demo_test";
+	    mWxApi.sendReq(req);
 	}
 }
