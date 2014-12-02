@@ -14,7 +14,11 @@ public class ServerAPIConstant {
 	// API地址
 	public static final String API_ROOT_URL = "api_root_url";
 	public static final String KEY_APP_SIGN = "appSign";
-	public static final String LOGIN_API = "/loginInterface";
+
+	public static final String LOGIN_INTERFACE = "/User/loginInterface";
+	public static final String ADD_INTERFACE = "/User/addInterface";
+	public static final String CHANGE_PASSWORD = "/User/changePassword";
+
 	public static final String SEARCH_MEDICINE_API = "/DrugBasicCheck/searchDrug";
 	public static final String GET_TEACHERS_API = "/sms/gettearchers";
 	public static final String GET_CLASS_NEWS_API = "/article/list4cls";
@@ -41,6 +45,11 @@ public class ServerAPIConstant {
 	public static final String KEY_CLASS_NAME = "className";
 	public static final String KEY_USERNAME = "userName";
 	public static final String KEY_PASSWORD = "passWord";
+	public static final String KEY_EMAIL = "email";
+	public static final String KEY_TELEPHONE = "telephone";
+	public static final String KEY_SEX = "sex";
+	public static final String KEY_BIRTHDAY = "birthday";
+
 	public static final String KEY_APP = "app";
 	public static final String KEY_FROME_ID = "from_id";
 	public static final String KEY_ID = "id";

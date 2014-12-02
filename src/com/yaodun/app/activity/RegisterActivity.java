@@ -26,7 +26,7 @@ public class RegisterActivity extends YaodunActivityBase implements OnClickListe
 	private EditText mEdtPwd;
 	private EditText mEdtPwdAgain;
 	private EditText mEdtNickname;
-	private int mSexValue = -1;
+	private String mSexValue;
 	private boolean mIsLogining;
 	private LoadingUpView mLoadingUpView;
 
@@ -92,34 +92,34 @@ public class RegisterActivity extends YaodunActivityBase implements OnClickListe
 			toast("请输入昵称");
 			return;
 		}
-		if (-1 == mSexValue) {
-			toast("请选择性别");
-			return;
-		}
 		if (!NetUtil.isNetworkAvailable()) {
 			toast(getString(R.string.network_is_not_available));
 			return;
 		}
 		mIsLogining = true;
 		showLoadingUpView(mLoadingUpView);
-		new AsyncLogin().execute(phone, pwd, nickname);
+		new AsyncLogin().execute(nickname, pwd, phone);
 	}
 
 	class AsyncLogin extends AsyncTask<String, Void, ActionResult> {
 
 		@Override
 		protected ActionResult doInBackground(String... params) {
-			String userName = "";
-			String userTel = "";
+			String nickname = "";
+			String pwd = "";
+			String phone = "";
 			if (params != null) {
 				if (params.length > 0) {
-					userName = params[0];
+					nickname = params[0];
 				}
 				if (params.length > 1) {
-					userTel = params[1];
+					pwd = params[1];
+				}
+				if (params.length > 2) {
+					phone = params[2];
 				}
 			}
-			return UserReq.register(userName, userTel);
+			return UserReq.register(nickname, pwd, phone, mSexValue);
 		}
 
 		@Override

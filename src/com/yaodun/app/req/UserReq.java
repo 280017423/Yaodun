@@ -34,11 +34,16 @@ public class UserReq {
 	 *            用户电话
 	 * @return ActionResult 请求结构数据
 	 */
-	public static ActionResult register(String name, String tel) {
+	public static ActionResult register(String name, String pwd, String telephone, String sex) {
 		ActionResult result = new ActionResult();
-		String url = ServerAPIConstant.getUrl(ServerAPIConstant.LOGIN_API);
+		String url = ServerAPIConstant.getUrl(ServerAPIConstant.ADD_INTERFACE);
 		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_APP, ServerAPIConstant.getAppSign()));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USERNAME, name));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_PASSWORD, pwd));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_EMAIL, ""));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_TELEPHONE, telephone));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_SEX, sex));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_BIRTHDAY, "2012-12-01"));
 		try {
 			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
 			if (jsonResult != null) {
@@ -72,7 +77,7 @@ public class UserReq {
 	 */
 	public static ActionResult login(String name, String pwd) {
 		ActionResult result = new ActionResult();
-		String url = ServerAPIConstant.getUrl(ServerAPIConstant.LOGIN_API);
+		String url = ServerAPIConstant.getUrl(ServerAPIConstant.LOGIN_INTERFACE);
 		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USERNAME, name));
 		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_PASSWORD, pwd));
