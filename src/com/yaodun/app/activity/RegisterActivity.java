@@ -7,12 +7,14 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.qianjiang.framework.authentication.BaseLoginProcessor.LOGIN_TYPE;
 import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.NetUtil;
 import com.qianjiang.framework.util.StringUtil;
 import com.qianjiang.framework.widget.LoadingUpView;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
+import com.yaodun.app.authentication.LoginProcessor;
 import com.yaodun.app.req.UserReq;
 
 /**
@@ -26,8 +28,8 @@ public class RegisterActivity extends YaodunActivityBase implements OnClickListe
 	private EditText mEdtPwd;
 	private EditText mEdtPwdAgain;
 	private EditText mEdtNickname;
-	private String mSexValue;
-	private boolean mIsLogining;
+	private int mSexValue;
+	private boolean mIsRegister;
 	private LoadingUpView mLoadingUpView;
 
 	@Override
@@ -64,7 +66,7 @@ public class RegisterActivity extends YaodunActivityBase implements OnClickListe
 	}
 
 	private void checkAndSubmit() {
-		if (mIsLogining) {
+		if (mIsRegister) {
 			return;
 		}
 		ImeUtil.hideSoftInput(this);
@@ -96,7 +98,7 @@ public class RegisterActivity extends YaodunActivityBase implements OnClickListe
 			toast(getString(R.string.network_is_not_available));
 			return;
 		}
-		mIsLogining = true;
+		mIsRegister = true;
 		showLoadingUpView(mLoadingUpView);
 		new AsyncLogin().execute(nickname, pwd, phone);
 	}
@@ -119,14 +121,20 @@ public class RegisterActivity extends YaodunActivityBase implements OnClickListe
 					phone = params[2];
 				}
 			}
-			return UserReq.register(nickname, pwd, phone, mSexValue);
+			return UserReq.register(nickname, pwd, phone, mSexValue + "");
 		}
 
 		@Override
 		protected void onPostExecute(ActionResult result) {
-			// TODO 处理注册之后的逻辑(跳转到登录界面做自动登录)
+			if (result != null && ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
+				toast("恭喜，注册成功");
+				setResult(RESULT_OK);
+				finish();
+			} else {
+				showErrorMsg(result);
+			}
 			dismissLoadingUpView(mLoadingUpView);
-			mIsLogining = false;
+			mIsRegister = false;
 		}
 	}
 

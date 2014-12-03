@@ -30,6 +30,8 @@ import com.tencent.tauth.UiError;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.authentication.LoginProcessor;
+import com.yaodun.app.manager.UserMgr;
+import com.yaodun.app.model.UserInfoModel;
 import com.yaodun.app.req.UserReq;
 import com.yaodun.app.util.ConstantSet;
 
@@ -53,14 +55,14 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 	private Tencent mTencent;
 	private IWXAPI mWxApi;
 	private SendAuth.Req req;
-	BroadcastReceiver wxReceiver = new BroadcastReceiver(){
-        @Override
-        public void onReceive(Context arg0, Intent arg1) {
-            if(arg1.hasExtra(ConstantSet.EXTRA_TOKEN)){
-                String token = arg1.getStringExtra(ConstantSet.EXTRA_TOKEN);
-            }
-        }
-	    
+	BroadcastReceiver wxReceiver = new BroadcastReceiver() {
+		@Override
+		public void onReceive(Context arg0, Intent arg1) {
+			if (arg1.hasExtra(ConstantSet.EXTRA_TOKEN)) {
+				String token = arg1.getStringExtra(ConstantSet.EXTRA_TOKEN);
+			}
+		}
+
 	};
 
 	protected void onCreate(Bundle savedInstanceState) {
@@ -239,9 +241,13 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (RESULT_OK == resultCode && REGISTER_ACTIVITY_REQUEST_CODE == requestCode && null != data) {
 			// TODO 处理注册成功逻辑
+			UserInfoModel userInfoModel = UserMgr.getUserInfoModel();
+			EvtLog.d("aaa", userInfoModel.toString());
 		}
 		super.onActivityResult(requestCode, resultCode, data);
-		mTencent.onActivityResult(requestCode, resultCode, data);
+		// if (null != mTencent) {
+		// mTencent.onActivityResult(requestCode, resultCode, data);
+		// }
 	}
 
 	void doQQLogin() {
@@ -265,14 +271,15 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 			});
 		}
 	}
-	void doWeixinLogin(){
-	    if(mWxApi == null){
-	        mWxApi = WXAPIFactory.createWXAPI(this, ConstantSet.APP_ID_WX, true);
-	        mWxApi.registerApp(ConstantSet.APP_ID_WX);
-	    }
-	    req = new SendAuth.Req();
-	    req.scope = "snsapi_userinfo";
-	    req.state = "wechat_sdk_demo_test";
-	    mWxApi.sendReq(req);
+
+	void doWeixinLogin() {
+		if (mWxApi == null) {
+			mWxApi = WXAPIFactory.createWXAPI(this, ConstantSet.APP_ID_WX, true);
+			mWxApi.registerApp(ConstantSet.APP_ID_WX);
+		}
+		req = new SendAuth.Req();
+		req.scope = "snsapi_userinfo";
+		req.state = "wechat_sdk_demo_test";
+		mWxApi.sendReq(req);
 	}
 }

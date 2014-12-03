@@ -32,4 +32,9 @@ public class UserInfoModel extends BaseModel {
 		this.password = password;
 	}
 
+	@Override
+	public String toString() {
+		return "UserInfoModel [userId=" + userId + ", userName=" + userName + ", password=" + password + "]";
+	}
+
 }
