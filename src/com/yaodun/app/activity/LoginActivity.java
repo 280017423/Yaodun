@@ -50,7 +50,7 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 	// 登录来源动作标记
 	private String mIdentify;
 	private EditText mEdtChildName;
-	private EditText mEdtTel;
+	private EditText mEdtPwd;
 	private LoadingUpView mLoadingUpView;
 	private Tencent mTencent;
 	private IWXAPI mWxApi;
@@ -89,7 +89,7 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 		TextView titleTextView = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
 		titleTextView.setText(R.string.button_title_login);
 		mEdtChildName = (EditText) findViewById(R.id.edt_child_name);
-		mEdtTel = (EditText) findViewById(R.id.edt_tel);
+		mEdtPwd = (EditText) findViewById(R.id.edt_tel);
 	}
 
 	private void checkAndLogin() {
@@ -97,7 +97,7 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 			return;
 		}
 		String childName = mEdtChildName.getText().toString();
-		String edtTel = mEdtTel.getText().toString();
+		String edtTel = mEdtPwd.getText().toString();
 		if (StringUtil.isNullOrEmpty(childName) || StringUtil.isNullOrEmpty(edtTel)) {
 			toast(getString(R.string.toast_login_error));
 			return;
@@ -240,9 +240,10 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		if (RESULT_OK == resultCode && REGISTER_ACTIVITY_REQUEST_CODE == requestCode && null != data) {
-			// TODO 处理注册成功逻辑
-			UserInfoModel userInfoModel = UserMgr.getUserInfoModel();
-			EvtLog.d("aaa", userInfoModel.toString());
+			UserInfoModel userInfoModel = (UserInfoModel) data.getSerializableExtra(ConstantSet.KEY_USERINFOMODEL);
+			mEdtChildName.setText(userInfoModel.getUserName());
+			mEdtPwd.setText(userInfoModel.getPassword());
+			checkAndLogin();
 		}
 		super.onActivityResult(requestCode, resultCode, data);
 		// if (null != mTencent) {
@@ -281,5 +282,13 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 		req.scope = "snsapi_userinfo";
 		req.state = "wechat_sdk_demo_test";
 		mWxApi.sendReq(req);
+	}
+
+	@Override
+	protected void onDestroy() {
+		if (null != wxReceiver) {
+			unregisterReceiver(wxReceiver);
+		}
+		super.onDestroy();
 	}
 }

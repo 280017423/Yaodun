@@ -1,5 +1,6 @@
 package com.yaodun.app.activity;
 
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +16,9 @@ import com.qianjiang.framework.widget.LoadingUpView;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.authentication.LoginProcessor;
+import com.yaodun.app.model.UserInfoModel;
 import com.yaodun.app.req.UserReq;
+import com.yaodun.app.util.ConstantSet;
 
 /**
  * 注册界面
@@ -121,14 +124,22 @@ public class RegisterActivity extends YaodunActivityBase implements OnClickListe
 					phone = params[2];
 				}
 			}
-			return UserReq.register(nickname, pwd, phone, mSexValue + "");
+			UserInfoModel model = new UserInfoModel();
+			model.setUserName(nickname);
+			model.setPassword(pwd);
+			model.setEmail("");
+			model.setGender(mSexValue + "");
+			model.setTelephone(phone);
+			return UserReq.register(model);
 		}
 
 		@Override
 		protected void onPostExecute(ActionResult result) {
 			if (result != null && ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
 				toast("恭喜，注册成功");
-				setResult(RESULT_OK);
+				Intent intent = new Intent(RegisterActivity.this, LoadingActivity.class);
+				intent.putExtra(ConstantSet.KEY_USERINFOMODEL, (UserInfoModel) result.ResultObject);
+				setResult(RESULT_OK, intent);
 				finish();
 			} else {
 				showErrorMsg(result);

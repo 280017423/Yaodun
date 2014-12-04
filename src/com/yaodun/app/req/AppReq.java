@@ -35,8 +35,8 @@ public class AppReq {
 			return;
 		}
 		try {
-
-			String apiUrl = ServerAPIConstant.getVersionCheckUrl();
+			// TODO
+			String apiUrl = "";
 			List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 			postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_VERSION, PackageUtil.getVersionCode() + ""));
 			postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_APP, ServerAPIConstant.getAppSign()));

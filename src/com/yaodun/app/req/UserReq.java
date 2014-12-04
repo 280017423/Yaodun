@@ -28,32 +28,32 @@ public class UserReq {
 	/**
 	 * 用户注册
 	 * 
-	 * @param name
-	 *            用户名字
-	 * @param tel
-	 *            用户电话
+	 * @param model
+	 *            用户对象
 	 * @return ActionResult 请求结构数据
 	 */
-	public static ActionResult register(String name, String pwd, String telephone, String sex) {
+	public static ActionResult register(UserInfoModel model) {
 		ActionResult result = new ActionResult();
 		String url = ServerAPIConstant.getUrl(ServerAPIConstant.ADD_INTERFACE);
 		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USERNAME, name));
-		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_PASSWORD, pwd));
-		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_EMAIL, ""));
-		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_TELEPHONE, telephone));
-		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_SEX, sex));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USERNAME, model.getUserName()));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_PASSWORD, model.getPassword()));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_EMAIL, model.getEmail()));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_TELEPHONE, model.getTelephone()));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_SEX, model.getGender()));
 		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_BIRTHDAY, "2012-12-01"));
 		try {
 			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
 			if (jsonResult != null) {
 				if (jsonResult.isOK()) {
-					UserInfoModel userInfoModel = jsonResult.getData(ServerAPIConstant.KEY_CHILDREN_INFO,
-							UserInfoModel.class);
-					// 保存用户信息
-					UserMgr.saveUserInfo(userInfoModel);
+					UserInfoModel userInfoModel = jsonResult.getData(UserInfoModel.class);
+					if (null != userInfoModel) {
+						model.setUserId(userInfoModel.getUserId());
+					}
+					result.ResultObject = model; // 登录成功有积分提示语
+				} else {
+					result.ResultObject = jsonResult.Msg; // 登录成功有积分提示语
 				}
-				result.ResultObject = jsonResult.Msg; // 登录成功有积分提示语
 				result.ResultCode = jsonResult.Code;
 			} else {
 				result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;

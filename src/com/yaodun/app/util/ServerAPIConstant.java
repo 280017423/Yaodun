@@ -84,16 +84,6 @@ public class ServerAPIConstant {
 	public static final String KEY_POINTRULE = "pointRule";
 	public static final String KEY_ACTIVERULE = "activeRule";
 
-	public static final String[] API_ROOT_URL_ARRAY = new String[] {
-			AppUtil.getMetaDataByKey(QJApplicationBase.CONTEXT, API_ROOT_URL),
-			"http://ikisappv3.api.weare-team.com/api",
-			"http://54.251.110.27:8091/api" };
-
-	public static final String[] VERSION_URL_ARRAY = new String[] {
-			"http://version.api.ikisos.com/api/version/checkVersion",
-			"http://version.api.weare-team.com/api/version/checkVersion",
-			"http://54.251.110.27:8093/api/version/checkVersion" };
-
 	/**
 	 * 
 	 * @Description 获取api接口地址，带切换的功能
@@ -103,17 +93,7 @@ public class ServerAPIConstant {
 	 * 
 	 */
 	public static String getApiRootUrl() {
-		int index = SharedPreferenceUtil.getIntegerValueByKey(QJApplicationBase.CONTEXT, ConstantSet.KEY_API_URL_FILE,
-				ConstantSet.KEY_API_URL_INDEX);
-		if (SharedPreferenceUtil.INVALID_CODE == index) {
-			index = 0;
-			String localUrl = SharedPreferenceUtil.getStringValueByKey(QJApplicationBase.CONTEXT,
-					ConstantSet.FILE_JYT_CONFIG, ConstantSet.SYSTEM_CONFIG_API_ROOT_URL);
-			if (!StringUtil.isNullOrEmpty(localUrl)) {
-				return localUrl;
-			}
-		}
-		return API_ROOT_URL_ARRAY[index % API_ROOT_URL_ARRAY.length];
+		return AppUtil.getMetaDataByKey(QJApplicationBase.CONTEXT, API_ROOT_URL);
 	}
 
 	/**
@@ -133,22 +113,5 @@ public class ServerAPIConstant {
 	 */
 	public static String getUrl(String interfaceName) {
 		return getApiRootUrl() + interfaceName;
-	}
-
-	/**
-	 * 
-	 * @Description 获取版本更新接口地址
-	 * @return 接口地址
-	 * @Author Administrator
-	 * @Date 2014年6月27日 上午11:57:55
-	 * 
-	 */
-	public static String getVersionCheckUrl() {
-		int index = SharedPreferenceUtil.getIntegerValueByKey(QJApplicationBase.CONTEXT, ConstantSet.KEY_API_URL_FILE,
-				ConstantSet.KEY_API_URL_INDEX);
-		if (SharedPreferenceUtil.INVALID_CODE == index) {
-			index = 0;
-		}
-		return VERSION_URL_ARRAY[index % VERSION_URL_ARRAY.length];
 	}
 }
