@@ -4,6 +4,7 @@
     <string name="app_name">药盾</string>
     <string name="use_right_now">马上开始体验</string>
     <string name="text_about">关于</string>
+    <string name="knowledge_detail">文章详细</string>
     <string name="text_more">更多</string>
     <string name="text_doctor_consult">药师咨询</string>
     <string name="exit_dialog_title">您的操作将会退出</string>

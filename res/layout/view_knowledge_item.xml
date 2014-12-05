@@ -2,65 +2,97 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@color/main_bg"
+    android:background="@drawable/more_item_mid_bg"
     android:orientation="horizontal"
     android:padding="10dp" >
 
     <ImageView
         android:id="@+id/iv_knowledge_img"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_gravity="center_vertical"
         android:contentDescription="@null"
         android:scaleType="fitXY"
         android:src="@drawable/ic_launcher" />
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="fill_parent"
         android:layout_gravity="center_vertical"
         android:layout_marginLeft="10dp"
-        android:orientation="vertical" >
+        android:layout_marginRight="10dp" >
 
         <TextView
             android:id="@+id/tv_knowledge_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:textSize="@dimen/size_3" />
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textColor="#FF666666"
+            android:textSize="@dimen/size_4" />
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="5dp"
             android:orientation="horizontal" >
 
             <TextView
                 android:id="@+id/tv_knowledge_type"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:textColor="@color/black"
-                android:textSize="@dimen/size_3" />
+                android:drawableLeft="@drawable/icon_type"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="#FF666666"
+                android:textSize="@dimen/size_4" />
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/register_stroke_color"
+                android:contentDescription="@null"
+                android:drawableLeft="@drawable/icon_weixin"
+                android:drawablePadding="5dp" />
 
             <TextView
                 android:id="@+id/tv_knowledge_date"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:textColor="@color/black"
-                android:textSize="@dimen/size_3" />
+                android:drawableLeft="@drawable/icon_date"
+                android:ellipsize="end"
+                android:paddingLeft="5dp"
+                android:singleLine="true"
+                android:textColor="#FF666666"
+                android:textSize="@dimen/size_4" />
+
+            <ImageView
+                android:layout_width="1dp"
+                android:layout_height="fill_parent"
+                android:layout_marginBottom="3dp"
+                android:layout_marginTop="3dp"
+                android:background="@color/register_stroke_color"
+                android:contentDescription="@null"
+                android:drawableLeft="@drawable/icon_weixin"
+                android:drawablePadding="5dp" />
 
             <TextView
                 android:id="@+id/tv_knowledge_count"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:textColor="@color/black"
-                android:textSize="@dimen/size_3" />
+                android:drawableLeft="@drawable/icon_count"
+                android:ellipsize="end"
+                android:paddingLeft="5dp"
+                android:singleLine="true"
+                android:textColor="#FF6EBE23"
+                android:textSize="@dimen/size_4" />
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

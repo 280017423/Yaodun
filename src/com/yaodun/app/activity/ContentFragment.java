@@ -7,14 +7,14 @@ import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 
 import com.qianjiang.framework.imageloader.core.ImageLoader;
-import com.qianjiang.framework.widget.BottomTab.BottomTabModeFlag;
 import com.qianjiang.framework.widget.pulltorefresh.PullToRefreshBase.Mode;
 import com.qianjiang.framework.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener2;
 import com.qianjiang.framework.widget.pulltorefresh.PullToRefreshListView;
@@ -27,7 +27,7 @@ import com.yaodun.app.model.KnowledgeModel;
 import com.yaodun.app.req.KnowledgeReq;
 import com.yaodun.app.util.ConstantSet;
 
-public class ContentFragment extends Fragment {
+public class ContentFragment extends YaodunFragmentBase implements OnItemClickListener {
 	private static final String KEY_TYPE = "KEY_TYPE";
 	private static final int GET_DATA_SUCCESSED = 0;
 	private static final int GET_DATA_FAIL = 1;
@@ -41,7 +41,6 @@ public class ContentFragment extends Fragment {
 	private int mPage;
 	private boolean mIsGettingData;
 
-	// 需要从第一页开始取，第0页是属于默认取值
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			mPullToRefreshListView.onRefreshComplete();
@@ -102,8 +101,8 @@ public class ContentFragment extends Fragment {
 		mPullToRefreshListView = (PullToRefreshListView) view.findViewById(R.id.lv_medicine_knowledge);
 		ListView listView = mPullToRefreshListView.getRefreshableView();
 		listView.setAdapter(mAdapter);
-		listView.setDivider(null);
 		listView.setSelector(new BitmapDrawable());
+		listView.setOnItemClickListener(this);
 		listView.setCacheColorHint(getResources().getColor(R.color.transparent));
 		listView.setFadingEdgeLength(0);
 		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener2() {
@@ -119,12 +118,13 @@ public class ContentFragment extends Fragment {
 			}
 		});
 		mPullToRefreshListView.setHeaderVisible(true);
-		mPullToRefreshListView.setMode(Mode.PULL_DOWN_TO_REFRESH);
+		mPullToRefreshListView.setMode(Mode.BOTH);
 		mPullToRefreshListView.setIsShowHeaderFresh(true);
 		return view;
 	}
 
 	private void getKnowledgeModels(final int pullStatus) {
+
 		if (mIsGettingData) {
 			return;
 		}
@@ -160,5 +160,11 @@ public class ContentFragment extends Fragment {
 	public void onSaveInstanceState(Bundle outState) {
 		super.onSaveInstanceState(outState);
 		outState.putInt(KEY_TYPE, mType);
+	}
+
+	@Override
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+		// TODO Auto-generated method stub
+
 	}
 }

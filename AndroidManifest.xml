@@ -132,6 +132,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".activity.KnowledgeDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".activity.DoctorConsultActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >

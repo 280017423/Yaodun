@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.yaodun.app.activity.ContentFragment;
 
 public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
-	private static final String[] CONTENT = new String[] { "综合", "妇女", "儿童", "老人", "抗生素" };
 	private static final String[] TITLE = new String[] { "综合", "妇女", "儿童", "老人", "抗生素" };
 
 	public TabFragmentPagerAdapter(Context context, FragmentManager fm) {
@@ -27,6 +26,6 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public int getCount() {
-		return CONTENT.length;
+		return TITLE.length;
 	}
 }

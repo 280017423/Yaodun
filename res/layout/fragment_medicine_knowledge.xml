@@ -11,10 +11,8 @@
         android:layout_height="fill_parent"
         android:cacheColorHint="@android:color/transparent"
         android:clickable="true"
-        android:divider="@color/divider_line_color"
+        android:divider="@color/header_divider"
         android:dividerHeight="0.7dp"
-        android:fadingEdge="none"
-        android:listSelector="@android:color/transparent"
         android:scrollbars="vertical"
         app:headerDivider="@color/header_divider"
         app:isShowFooter="true" />

@@ -1,6 +1,7 @@
 package com.yaodun.app.model;
 
 import com.qianjiang.framework.orm.BaseModel;
+import com.yaodun.app.util.DateUtil;
 
 public class KnowledgeModel extends BaseModel {
 
@@ -58,6 +59,10 @@ public class KnowledgeModel extends BaseModel {
 
 	public void setCountDiscuss(int countDiscuss) {
 		this.countDiscuss = countDiscuss;
+	}
+
+	public String getDisplayTime() {
+		return DateUtil.getTimeStr(com.qianjiang.framework.util.DateUtil.getSysDate(), createtime);
 	}
 
 }

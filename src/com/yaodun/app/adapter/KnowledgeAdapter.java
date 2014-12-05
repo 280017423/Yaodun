@@ -35,6 +35,7 @@ import com.yaodun.app.model.KnowledgeModel;
  * @version 1.0
  */
 public class KnowledgeAdapter extends BaseAdapter {
+	private static final String[] TITLE = new String[] { "综合", "妇女", "儿童", "老人", "抗生素" };
 	private List<KnowledgeModel> mVedioModels;
 	private Context mContext;
 	private ImageLoader mImageLoader;
@@ -109,9 +110,9 @@ public class KnowledgeAdapter extends BaseAdapter {
 			holder.mTvTitle.setText(title);
 		}
 		int type = vedioModel.getType();
-		holder.mTvCount.setText("" + type);
-		String date = vedioModel.getCreatetime();
-		holder.mTvCount.setText("" + date);
+		holder.mTvType.setText(TITLE[type - 1]);
+		String date = vedioModel.getDisplayTime();
+		holder.mTvDate.setText(date);
 		int count = vedioModel.getCountDiscuss();
 		holder.mTvCount.setText("" + count);
 
