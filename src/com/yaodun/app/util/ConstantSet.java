@@ -21,6 +21,7 @@ public class ConstantSet {
 	public static final String KEY_NEWER_GUIDING_FINISH = "KEY_NEWER_GUIDING_FINISH";
 	public static final String FILE_JYT_CONFIG = "com.qianjiang.system.config";
 	public static final String EXTRA_LOGIN_STATUS = "EXTRA_LOGIN_STATUS";
+	public static final String EXTRA_KNOWLEDGEMODEL = "EXTRA_KNOWLEDGEMODEL";
 
 	public static final String ACTION_WEIXIN_LOGIN = "weixin login";
 	public static final String EXTRA_TOKEN = "token";

@@ -3,6 +3,7 @@ package com.yaodun.app.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
@@ -70,7 +71,7 @@ public class ContentFragment extends YaodunFragmentBase implements OnItemClickLi
 						break;
 					case GET_DATA_FAIL:
 						if (1 == msg.arg2) {
-							// showErrorMsg((ActionResult) result);
+							showErrorMsg((ActionResult) result);
 						}
 						break;
 					default:
@@ -164,7 +165,11 @@ public class ContentFragment extends YaodunFragmentBase implements OnItemClickLi
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		// TODO Auto-generated method stub
-
+		KnowledgeModel model = (KnowledgeModel) parent.getAdapter().getItem(position);
+		if (null != model) {
+			Intent intent = new Intent(getActivity(), KnowledgeDetailActivity.class);
+			intent.putExtra(ConstantSet.EXTRA_KNOWLEDGEMODEL, model);
+			startActivity(intent);
+		}
 	}
 }

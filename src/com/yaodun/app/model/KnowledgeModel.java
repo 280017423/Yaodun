@@ -22,7 +22,7 @@ public class KnowledgeModel extends BaseModel {
 	}
 
 	public String getTitle() {
-		return title;
+		return null == title ? "" : title;
 	}
 
 	public void setTitle(String title) {

@@ -4,7 +4,6 @@
     <string name="app_name">药盾</string>
     <string name="use_right_now">马上开始体验</string>
     <string name="text_about">关于</string>
-    <string name="knowledge_detail">文章详细</string>
     <string name="text_more">更多</string>
     <string name="text_doctor_consult">药师咨询</string>
     <string name="exit_dialog_title">您的操作将会退出</string>
@@ -63,6 +62,10 @@
     <string name="manual_input_msg">请输入产品条形码：</string>
     <string name="manual_input_title">手动输入条形码</string>
     <string name="capture_manual_txt">手动输入</string>
+
+    <!-- 用药知识 -->
+    <string name="knowledge_detail">文章详细</string>
+    <string name="knowledge_detail_collect_count">收藏（<xliff:g>%1$s</xliff:g>）</string>
 
     <!-- 药师咨询 -->
     <string name="tips_doctor_consule_empty_view">暂时没有药师咨询记录</string>

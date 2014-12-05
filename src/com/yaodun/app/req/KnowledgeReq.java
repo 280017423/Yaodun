@@ -12,6 +12,7 @@ import com.qianjiang.framework.app.QJApplicationBase;
 import com.qianjiang.framework.util.HttpClientUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
+import com.yaodun.app.model.KnowledgeDetailModel;
 import com.yaodun.app.model.KnowledgeModel;
 import com.yaodun.app.util.ServerAPIConstant;
 
@@ -25,8 +26,10 @@ public class KnowledgeReq {
 	/**
 	 * 获取文章列表
 	 * 
-	 * @param model
-	 *            用户对象
+	 * @param type
+	 *            文章类型
+	 * @param page
+	 *            页数
 	 * @return ActionResult 请求结构数据
 	 */
 	public static ActionResult getKnowledgeList(int type, int page) {
@@ -41,9 +44,43 @@ public class KnowledgeReq {
 				if (jsonResult.isOK()) {
 					List<KnowledgeModel> models = jsonResult.getData(new TypeToken<List<KnowledgeModel>>() {
 					}.getType());
-					result.ResultObject = models; // 登录成功有积分提示语
+					result.ResultObject = models;
 				} else {
-					result.ResultObject = jsonResult.Msg; // 登录成功有积分提示语
+					result.ResultObject = jsonResult.Msg;
+				}
+				result.ResultCode = jsonResult.Code;
+			} else {
+				result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+				result.ResultObject = QJApplicationBase.CONTEXT.getString(R.string.network_is_not_available);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+		}
+		return result;
+	}
+
+	/**
+	 * 获取文章详细
+	 * 
+	 * @param id
+	 *            文章id
+	 * @return ActionResult 请求结构数据
+	 */
+	public static ActionResult getKnowledgeDetail(String id) {
+		ActionResult result = new ActionResult();
+		String url = ServerAPIConstant.getUrl(ServerAPIConstant.KNOWLEDGE_DETAIL);
+		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_KNOWLEDGEID, "" + id));
+		try {
+			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
+			if (jsonResult != null) {
+				if (jsonResult.isOK()) {
+					KnowledgeDetailModel model = jsonResult.getData(new TypeToken<KnowledgeDetailModel>() {
+					}.getType());
+					result.ResultObject = model;
+				} else {
+					result.ResultObject = jsonResult.Msg;
 				}
 				result.ResultCode = jsonResult.Code;
 			} else {
