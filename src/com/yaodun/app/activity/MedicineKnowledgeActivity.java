@@ -18,8 +18,8 @@ import com.yaodun.app.widget.LineTabIndicator;
  */
 public class MedicineKnowledgeActivity extends FragmentActivity implements OnClickListener {
 
-	private LineTabIndicator lineTabIndicator;
-	private ViewPager viewPager;
+	private LineTabIndicator mLineTabIndicator;
+	private ViewPager mViewPager;
 
 	@Override
 	protected void onCreate(Bundle bundle) {
@@ -31,10 +31,10 @@ public class MedicineKnowledgeActivity extends FragmentActivity implements OnCli
 	private void initView() {
 		TextView titleTextView = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
 		titleTextView.setText(R.string.bottom_tab_medicine_knowledge);
-		lineTabIndicator = (LineTabIndicator) findViewById(R.id.line_tab_indicator);
-		viewPager = (ViewPager) findViewById(R.id.view_pager);
-		viewPager.setAdapter(new TabFragmentPagerAdapter(this, getSupportFragmentManager()));
-		lineTabIndicator.setViewPager(viewPager);
+		mLineTabIndicator = (LineTabIndicator) findViewById(R.id.line_tab_indicator);
+		mViewPager = (ViewPager) findViewById(R.id.view_pager);
+		mViewPager.setAdapter(new TabFragmentPagerAdapter(this, getSupportFragmentManager()));
+		mLineTabIndicator.setViewPager(mViewPager);
 	}
 
 	@Override

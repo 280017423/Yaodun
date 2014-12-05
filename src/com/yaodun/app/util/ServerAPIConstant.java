@@ -18,6 +18,7 @@ public class ServerAPIConstant {
 	public static final String LOGIN_INTERFACE = "/User/loginInterface";
 	public static final String ADD_INTERFACE = "/User/addInterface";
 	public static final String CHANGE_PASSWORD = "/User/changePassword";
+	public static final String KNOWLEDGE_LIST = "/User/knowledgeList";
 
 	public static final String SEARCH_MEDICINE_API = "/DrugBasicCheck/searchDrug";
 	public static final String GET_TEACHERS_API = "/sms/gettearchers";
@@ -49,6 +50,9 @@ public class ServerAPIConstant {
 	public static final String KEY_TELEPHONE = "telephone";
 	public static final String KEY_SEX = "sex";
 	public static final String KEY_BIRTHDAY = "birthday";
+	
+	public static final String KEY_KNOWLEDGETYPE = "knowledgeType";
+	public static final String KEY_PAGENUM = "pageNum";
 
 	public static final String KEY_APP = "app";
 	public static final String KEY_FROME_ID = "from_id";

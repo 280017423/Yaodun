@@ -17,7 +17,7 @@ public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
 
 	@Override
 	public Fragment getItem(int position) {
-		return ContentFragment.newInstance(CONTENT[position % CONTENT.length]);
+		return new ContentFragment(position + 1);
 	}
 
 	@Override
