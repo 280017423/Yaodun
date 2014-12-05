@@ -17,6 +17,7 @@
     <string name="button_text_yes">好的</string>
     <string name="button_text_no">取消</string>
     <string name="button_text_tips">提示</string>
+    <string name="button_logout">登出</string>
     <string name="btn_txt_no">否</string>
     <string name="btn_txt_yes">是</string>
     <!-- 登录 -->

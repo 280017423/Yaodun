@@ -30,7 +30,6 @@ import com.tencent.tauth.UiError;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.authentication.LoginProcessor;
-import com.yaodun.app.manager.UserMgr;
 import com.yaodun.app.model.UserInfoModel;
 import com.yaodun.app.req.UserReq;
 import com.yaodun.app.util.ConstantSet;

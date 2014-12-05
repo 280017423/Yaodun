@@ -73,7 +73,7 @@ public class MainActivityGroup extends YaodunActivityBase {
 		initStartIndex();
 	}
 
-	private void initStartIndex() {
+	public void initStartIndex() {
 		// 默认显示第一个界面
 		mBottomTab.setSelectedIndex(0);
 	}
@@ -152,7 +152,7 @@ public class MainActivityGroup extends YaodunActivityBase {
 			if (ACTIVITYGROUP_TAB_LOGIN == requestCode) {
 				if (null != data && data.getBooleanExtra(ConstantSet.EXTRA_LOGIN_STATUS, false)) {
 					mCurrentPosition = MORE_TAB;
-					mBottomTab.setSelectedIndex(mCurrentPosition);
+					setCurActivity(null, mCurrentPosition);
 				} else {
 					mBottomTab.setSelectedIndex(mCurrentPosition);
 				}

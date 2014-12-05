@@ -86,6 +86,9 @@ public class UserReq {
 			if (jsonResult != null) {
 				if (jsonResult.isOK()) {
 					UserInfoModel userInfoModel = jsonResult.getData(UserInfoModel.class);
+					if (null != userInfoModel) {
+						userInfoModel.setPassword(pwd);
+					}
 					// 保存用户信息
 					UserMgr.saveUserInfo(userInfoModel);
 				}

@@ -71,13 +71,13 @@
             android:value="true" />
         <meta-data
             android:name="api_root_url"
-            android:value="http://120.24.70.42:8080/kzms" />
+            android:value="http://120.24.70.42:8080/yaodun" />
         <meta-data
             android:name="is_developing"
             android:value="false" />
         <meta-data
             android:name="appSign"
-            android:value="qianjiang" />
+            android:value="yaodun" />
 
         <activity
             android:name=".activity.LoadingActivity"

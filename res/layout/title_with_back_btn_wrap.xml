@@ -67,8 +67,12 @@
             android:duplicateParentState="true"
             android:focusable="false"
             android:gravity="center"
+            android:paddingBottom="3dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="3dp"
             android:textColor="@color/white"
-            android:textSize="@dimen/size_2" />
+            android:textSize="@dimen/size_3" />
     </LinearLayout>
 
 </RelativeLayout>

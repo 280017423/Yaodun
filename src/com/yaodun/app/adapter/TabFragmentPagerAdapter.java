@@ -8,8 +8,8 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.yaodun.app.activity.ContentFragment;
 
 public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
-	private static final String[] CONTENT = new String[] { "热点", "育儿", "两性", "情感", "专题" };
-	private static final String[] TITLE = new String[] { "热点", "育儿", "两性", "情感", "专题" };
+	private static final String[] CONTENT = new String[] { "综合", "妇女", "儿童", "老人", "抗生素" };
+	private static final String[] TITLE = new String[] { "综合", "妇女", "儿童", "老人", "抗生素" };
 
 	public TabFragmentPagerAdapter(Context context, FragmentManager fm) {
 		super(fm);
