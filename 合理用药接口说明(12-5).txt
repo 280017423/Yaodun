@@ -1,0 +1,302 @@
+合理用药接口
+
+
+服务器地址:http://120.24.70.42:8080/yaodun
+
+
+1.药品查询接口 
+接口名称： searchDrug
+RequestMethod  ：post
+传入参数:{"drugName":"m"}
+示例：DrugBasicCheck/searchDrug
+返回jsonarray:
+
+返回参数说明：
+ drugname:药品名称
+ productName:产品名
+ basicid :用药检测使用的唯一id
+ unit:用量单位。
+返回参数说明：{"code":"1000","msg":"success","data":[{"id":4,"drugname":"可定","productName":"瑞舒伐他汀钙片","basicid":1633,"unit":"mg"},
+{"id":168,"drugname":"安吉尔宁","productName":"克拉霉素片","basicid":143,"unit":"g"}]}
+成功返回code=1000  msg为success data 为药品jsonarray.
+        code =1001 msg为failure  data 为错误信息
+
+
+1.用药检测查询接口 
+接口名称： drugCheckinterface
+RequestMethod  ：post
+传入参数:matchInfo 为药品的拼音和汉字
+示例：DrugBasicCheck/drugCheckinterface
+传入参数示例:
+{
+"baseInfo":{"male":"0","age":"0","height":"","weight":"","isLiver":"0","kidney":"0","checkType","5"},
+"drugInfo":
+	[{"drugname":"注射用普鲁卡因青霉素","usage":"","dosage":"","frequery":""},
+	 {"drugname":"1_注射用普鲁卡因青霉素","usage":"","dosage":"","frequery":""}
+	]
+}
+参数说明：
+baseInfo:个人基本信息
+	male: 0代表男。1代表女,
+	age:0代表不详，1代表小孩，2代表中年，3代表老年人。
+	height：身高（int）,
+	weight：体重（int）,
+	isliver:肝功能 0正常1轻中度 2重度，
+	kindney: 0正常, 1肾小球滤过率每分钟大于50,2肾小球滤过率每分钟10~50,3肾小球滤过率每分钟小于10;
+
+druginfo:药品基本信息
+	drugname：如："1_注射用普鲁卡因青霉素" :1代表药品basicid. 注射用普鲁卡因青霉素：为药品输入框的内容，如果id为空
+            只传入药品输入框的名称。
+        usage:用法id 如果id为空传入usage输入框内容
+  	dosage:用量+用量单位
+ 	frequery:频次id 如果id为空传入frequery输入框内容
+返回参数说明：{"code":"1000","msg":"success","data":[{}]}
+成功返回code=1000  msg为success data 为检测结果jsonarray.
+        code =1001 msg为错误信息  data null
+
+
+
+1.其它信息查询接口 
+接口名称： searchOtherInfo
+RequestMethod  ：post
+传入参数:{"otherInfo","1"}  int类型
+示例：DrugBasicCheck/searchOtherInfo
+返回json:{"code":"1000","msg":"success","data":[{"id":1,"title":"重复用药检测","data":"规则1，规则2，规则3","type":""}]}
+成功返回code=1000  msg为success data 为searchotherInfo 对象转化的json.
+         code =1001 msg为错误信息  data null
+
+儿童用药查询{"otherInfo":"10"}  
+孕妇用药查询{"otherInfo":"11"} 
+老人用药查询{"otherInfo":"12"} 
+重复用药查询{"otherInfo":"5"} 
+药品禁忌用药查询{"otherInfo":"0"}
+抗生素用药查询{"otherInfo":"13"}
+大众用药{"otherInfo":"14"}
+公司简介{"otherInfo":"100"}
+关于我们{"otherInfo":"101"}
+声明{"otherInfo":"102"}
+
+
+1.用户登陆接口
+接口名称： kzms/User/loginInterface
+RequestMethod  ：post
+传入参数:{userName:"huzongjian",passWord:"123456"}
+示例：{userName:"huzongjian",passWord:"123456"}用户名可以是电话号码，也可以是昵称或者邮箱地址。
+返回json:{"code":"1000","msg":"success","data":{"id":1,"userName":"a","password":"e10adc3949ba59abbe56e057f20f883e"}}
+成功返回code=1000  msg为success data 为user 对象转化的json.
+        code =1002 msg为failure  data 为null登陆失败
+         code =1001 msg为错误信息  data null
+
+
+1.用户添加接口
+
+接口名称： kzms/User/addInterface
+RequestMethod  ：post
+传入参数:{userName:"ab",passWord:"123456",email:"5249513@qq.com",telephone:"13509660995",sex:"0",birthday:"2012-12-01"}
+性别0为男。1为女。
+示例：{userName:"ab",passWord:"123456",email:"5249513@qq.com",telephone:"13509660995",sex:"0"，birthday:"2012-12-01"}
+返回json:{"code":"1000","msg":"success","data":{"id":1,"userName":"a","password":"e10adc3949ba59abbe56e057f20f883e"...}}
+成功返回code=1000  msg为success data 为user 对象转化的json.
+        code =1002 msg为failure  data 为null用户已添加.
+         code =1001 msg为错误信息  data null
+
+1.修改密码接口
+
+接口名称：kzms/User/changePassword
+RequestMethod  ：post
+传入参数:{id:1,passWord:"123456"}
+示例:{id:1,passWord:"123456"}
+返回json:{"code":"1000","msg":"success","data":{"id":1,"userName":"a","password":"e10adc3949ba59abbe56e057f20f883e"}}
+成功返回code=1000 data 为user 对象转化的json.
+ code =1001 msg为错误信息  data null
+
+
+药师列表接口
+接口名称：User/doctorList
+RequestMethod  ：post
+示例：无参数
+返回json:{"code":"1000","msg":"success","data":[{"id":1,"userName":"ab","email":"5249513@qq.com","gender":"0","telephone":"13509660995","userType":"1","birthday":"2012-12-01 00:00:00.0"}]}
+成功返回code=1000  msg为success data 为doctor user json.
+        code =1002 msg为failure  data 为null用户已添加.
+         code =1001 msg为错误信息  data null
+
+
+关注药师
+接口名称：User/attentionDoctor
+RequestMethod  ：post
+示例：{"userId":"2","doctorId":"1","operation":"1"}
+operation为空是代表关注，为1时代表取消关注
+userId 与doctorId.分别都为用户id.和关注的医生的用户id;
+返回json:{"code":"1000","msg":"success"}
+成功返回code=1000  msg为success data null.
+        code =1002 msg为failure  data 为null用户已添加.
+         code =1001 msg为错误信息  data null
+
+
+
+我关注的药师
+接口名称：User/attentionDoctorList
+RequestMethod  ：post
+示例：{"userId":"2"}
+operation为空是代表关注，为1时代表取消关注
+userId 与doctorId.分别都为用户id.和关注的医生的用户id;
+返回json:{"code":"1000","msg":"success","data":[{"id":1,"userName":"ab","email":"5249513@qq.com","gender":"0","telephone":"13509660995","userType":"1"}]}
+成功返回code=1000  msg为success data 为doctor user 对象转化的json.
+        code =1002 msg为failure  data 为null用户已添加.
+         code =1001 msg为错误信息  data null
+
+
+
+收藏或者取消收藏文章
+接口名称：User/attentionKnowledge
+RequestMethod  ：post
+示例：{"userId":"2","knowledgeId":"1","operation":"1"}
+operation为空是代表关注，为1时代表取消关注
+userId 与knowledgeId.分别都为用户id.和关注文章id;
+返回json:{"code":"1000","msg":"success"}
+成功返回code=1000  msg为success data 为null
+        code =1002 msg为failure  data 为null
+         code =1001 msg为错误信息  data null
+
+
+
+文章列表接口(按类型查询)
+接口名称：User/knowledgeList
+RequestMethod  ：post
+示例：{"knowledgeType":"1","pageNum":"1"}
+为空的时候查询所有
+type 如下
+综合 ""(说明综合传空字符串)    1 妇女
+ 2 儿童
+ 3 老人
+ 4 抗生素 
+
+
+返回json:{"code":"1000","msg":"success","data":[{"id":1,"title":"标题","type":"1","img":"xxx","createtime":"2014-12-09 14:50:14.0","countDiscuss":2}]}
+成功返回code=1000  msg为success data 
+                                  title 标题
+                                 countDiscuss 评论人员总数
+                                  createtime提问时间
+                                   img图标地址.
+         code =1001 msg为错误信息  data null
+
+
+
+
+文章内容和收藏数量接口
+接口名称：User/knowledgeDetail
+RequestMethod  ：post
+示例：{"knowledgeid":"1"}
+文章的编号
+返回json:{"code":"1000","msg":"success","data":{"description":"内容","countAttention":2,"createtime":"2014-12-09 14:50:14.0"}}
+成功返回code=1000  msg为success data 
+                                  title 标题
+                                  description 内容
+                                  createtime提问时间
+                                   countAttention收藏总数.
+        code =1002 msg为failure  data 为null文章明细不存在
+         code =1001 msg为错误信息  data null
+
+文章评论保存
+接口名称：User/knowledgeReply
+RequestMethod  ：post
+示例：{"knowledgeId":"1","userId":"2","discuss":"xxxxxxx"}
+userId 为用户id.knowledegId为文章id;
+返回json:
+成功返回code=1000  msg为success data为""
+
+        code =1002 msg为failure  data null
+         code =1001 msg为错误信息  data null
+
+
+
+
+
+
+
+我收藏的文章
+接口名称：User/attentionKnowledgeList
+RequestMethod  ：post
+示例：{"userId":"2"}
+
+综合
+ 0 妇女
+ 1 儿童
+ 3 老人
+ 3 抗生素 4
+
+返回json:{"code":"1000","msg":"success","data":[{"id":1,"title":"标","description":"容","type":"1","img":"xxx"，"createtime":"2014-12-09 14:50:14.0"}]}
+成功返回code=1000  msg为success data 
+                                  title 标题
+                                  description 内容
+                                  createtime提问时间
+                                   img图标地址
+
+        code =1002 msg为failure  data 为null.
+         code =1001 msg为错误信息  data null
+
+
+
+
+我的咨询
+
+接口名称：User/ownConsultList
+RequestMethod  ：post
+示例：{"userId":"2"}
+如果查看所有咨询传入空
+返回json:
+{"code":"1000","msg":"success","data":[{"id":1,"descrition":"xxx","doctor":{"id":1,"userName":"ab","email":"5249513@qq.com","gender":"0","telephone":"13509660995","userType":"1"},"user":{"id":2,"userName":"abc","email":"5249513@qq.com","gender":"0","telephone":"13509660995"}}]}
+
+成功返回code=1000  msg为success data 
+                                 description 问题描述
+                                 user 提问人
+                                 doctor 被提问的医生
+
+        code =1002 msg为failure  data 为null.
+         code =1001 msg为错误信息  data null
+
+
+
+问题回复列表
+接口名称：User/questionReplyList
+RequestMethod  ：post
+示例：{"questionId":"2"}
+operation为空是代表关注，为1时代表取消关注
+userId 与doctorId.分别都为用户id.和关注的医生的用户id;
+返回json:
+{"code":"1000","msg":"success","data":[{"id":1,"reply":"yyyy","userQuestion":{"id":1,"descrition":"xxx"},"user":{"id":2,"userName":"abc","email":"5249513@qq.com","gender":"0","telephone":"13509660995"},"askuser":{"id":2,"userName":"abc","email":"5249513@qq.com","gender":"0","telephone":"13509660995"},"createtime":"2014-12-09 16:37:09.0"}]}
+成功返回code=1000  msg为success data 
+                   user当前回复的人
+                   askuser 提问人
+                   userquestion 问题的id和描述 时间
+                   createtime：回复时间
+                   reply :回复内容
+
+        code =1002 msg为failure  data null
+         code =1001 msg为错误信息  data null
+
+
+
+问题回复保存
+接口名称：User/questionReply
+RequestMethod  ：post
+示例：{"questionId":"1","userId":"2","reply":"xxxxxxx"}
+operation为空是代表关注，为1时代表取消关注
+userId 为用户id.和问题id;
+返回json:
+成功返回code=1000  msg为success data ""           
+        code =1002 msg为failure  data null
+         code =1001 msg为错误信息  data null
+
+
+用户反馈
+接口名称：User/feedBack
+RequestMethod  ：post
+示例：{"userId":"2","description":"xxxxxxx"}
+userId 为用户id  description为问题描述;
+返回json:
+成功返回code=1000  msg为success data为""
+
+        code =1002 msg为failure  data null
+         code =1001 msg为错误信息  data null
+
