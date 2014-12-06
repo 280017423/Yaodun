@@ -45,8 +45,8 @@
     <string name="text_400_tel">客服电话：400&#8211;8362&#8211;808</string>
     <string name="text_tel_no">0755&#8211;83055641</string>
     <string name="text_400_no">400&#8211;836&#8211;2808</string>
-    <string name="text_copy_right">©深圳市爱壳思网络科技有限公司&#160;版权所有</string>
-    <string name="text_app_description">&#160;&#160;&#160;&#160;深圳市爱壳思网络科技有限公司紧抓当前移动互联网信息产业高速发展的契机，坚持“追求卓越、服务第一”的经营理念， 尊重人才、注重技术，以不懈的努力、更高的目标来要求自己,不断完善自身管理模式和服务品质。</string>
+    <string name="text_copy_right">©药盾软件 版权所有</string>
+    <string name="text_app_description">这里是药盾软件的简介</string>
     <string name="bottom_tab_yaodun">药盾</string>
     <string name="bottom_tab_medicine_knowledge">用药知识</string>
     <string name="bottom_tab_more">更多</string>
@@ -69,5 +69,11 @@
 
     <!-- 药师咨询 -->
     <string name="tips_doctor_consule_empty_view">暂时没有药师咨询记录</string>
+
+    <!-- 反馈 -->
+    <string name="feedback_hint">感谢您对我们提出的反馈,限制输入100字以内</string>
+    <string name="feedback_empty">请输入反馈内容再提交</string>
+    <string name="feedback_title">意见反馈</string>
+    <string name="submit">提交</string>
 
 </resources>

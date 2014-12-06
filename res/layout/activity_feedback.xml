@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include layout="@layout/title_with_back_btn_wrap" />
+
+    <EditText
+        android:id="@+id/edt_feedback_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/edt_register_bg"
+        android:gravity="left"
+        android:hint="@string/feedback_hint"
+        android:maxLength="100"
+        android:minHeight="200dp"
+        android:padding="5dp" />
+
+</LinearLayout>

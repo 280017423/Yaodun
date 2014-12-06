@@ -152,6 +152,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".activity.FeedBackActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".activity.QrCodeActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >

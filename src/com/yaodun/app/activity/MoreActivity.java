@@ -1,5 +1,6 @@
 package com.yaodun.app.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -42,7 +43,11 @@ public class MoreActivity extends YaodunActivityBase implements OnClickListener 
 			case R.id.rl_more_share:
 			case R.id.rl_more_introduce:
 			case R.id.rl_more_about:
+				jumpToActivity(AboutActivity.class);
+				break;
 			case R.id.rl_more_suggest:
+				jumpToActivity(FeedBackActivity.class);
+				break;
 			case R.id.rl_more_declare:
 			case R.id.rl_more_check_version:
 				Toast.makeText(MoreActivity.this, "正在开发中...", Toast.LENGTH_LONG).show();
@@ -53,6 +58,11 @@ public class MoreActivity extends YaodunActivityBase implements OnClickListener 
 			default:
 				break;
 		}
+	}
+
+	private void jumpToActivity(Class<?> cls) {
+		Intent intent = new Intent(MoreActivity.this, cls);
+		startActivity(intent);
 	}
 
 	private void logout() {

@@ -19,6 +19,7 @@ public class ServerAPIConstant {
 	public static final String CHANGE_PASSWORD = "/User/changePassword";
 	public static final String KNOWLEDGE_LIST = "/User/knowledgeList";
 	public static final String KNOWLEDGE_DETAIL = "/User/knowledgeDetail";
+	public static final String FEEDBACK = "/User/feedBack";
 
 	public static final String SEARCH_MEDICINE_API = "/DrugBasicCheck/searchDrug";
 	public static final String GET_TEACHERS_API = "/sms/gettearchers";
@@ -41,9 +42,7 @@ public class ServerAPIConstant {
 	public static final String GET_EXCHANGE_LIST = "/points/exchangelist";
 	public static final String EXCHANGE = "/points/exchange ";
 	// API KEY
-	public static final String KEY_USER_NAME = "username";
-	public static final String KEY_USER_PWD = "userpwd";
-	public static final String KEY_CLASS_NAME = "className";
+	public static final String KEY_USER_ID = "userId";
 	public static final String KEY_USERNAME = "userName";
 	public static final String KEY_PASSWORD = "passWord";
 	public static final String KEY_EMAIL = "email";
@@ -54,6 +53,7 @@ public class ServerAPIConstant {
 	public static final String KEY_KNOWLEDGETYPE = "knowledgeType";
 	public static final String KEY_PAGENUM = "pageNum";
 	public static final String KEY_KNOWLEDGEID = "knowledgeid";
+	public static final String KEY_DESCRIPTION = "description";
 
 	public static final String KEY_APP = "app";
 	public static final String KEY_FROME_ID = "from_id";

@@ -199,7 +199,7 @@
                 android:layout_height="fill_parent"
                 android:gravity="left|center_vertical"
                 android:paddingLeft="40dp"
-                android:text="意见反馈"
+                android:text="@string/feedback_title"
                 android:textColor="@color/register_gray"
                 android:textSize="@dimen/size_4" />
 
