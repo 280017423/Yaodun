@@ -12,8 +12,10 @@ import com.qianjiang.framework.app.QJApplicationBase;
 import com.qianjiang.framework.util.HttpClientUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
+import com.yaodun.app.manager.UserMgr;
 import com.yaodun.app.model.KnowledgeDetailModel;
 import com.yaodun.app.model.KnowledgeModel;
+import com.yaodun.app.model.UserInfoModel;
 import com.yaodun.app.util.ServerAPIConstant;
 
 /**
@@ -94,4 +96,76 @@ public class KnowledgeReq {
 		return result;
 	}
 
+	/**
+	 * 获取文章详细
+	 * 
+	 * @param id
+	 *            文章id
+	 * @param content
+	 *            评论内容
+	 * @return ActionResult 请求结构数据
+	 */
+	public static ActionResult sendknowledgeReply(String id, String content) {
+		ActionResult result = new ActionResult();
+		String url = ServerAPIConstant.getUrl(ServerAPIConstant.KNOWLEDGE_REPLY);
+		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+		UserInfoModel model = UserMgr.getUserInfoModel();
+		String userId = "";
+		if (null != model) {
+			userId = model.getUserId();
+		}
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_KNOWLEDGEID_1, id));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_DISCUSS, content));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USER_ID, userId));
+		try {
+			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
+			if (jsonResult != null) {
+				result.ResultObject = jsonResult.Msg;
+				result.ResultCode = jsonResult.Code;
+			} else {
+				result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+				result.ResultObject = QJApplicationBase.CONTEXT.getString(R.string.network_is_not_available);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+		}
+		return result;
+	}
+	/**
+	 * 收藏文章
+	 * 
+	 * @param id
+	 *            文章id
+	 * @param operation
+	 *            operation为空是代表关注，为1时代表取消关注
+	 * @return ActionResult 请求结构数据
+	 */
+	public static ActionResult attentionKnowledge(String id, String operation) {
+		ActionResult result = new ActionResult();
+		String url = ServerAPIConstant.getUrl(ServerAPIConstant.ATTENTION_KNOWLEDGE);
+		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+		UserInfoModel model = UserMgr.getUserInfoModel();
+		String userId = "";
+		if (null != model) {
+			userId = model.getUserId();
+		}
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_KNOWLEDGEID_1, id));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_OPERATION, operation));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USER_ID, userId));
+		try {
+			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
+			if (jsonResult != null) {
+				result.ResultObject = jsonResult.Msg;
+				result.ResultCode = jsonResult.Code;
+			} else {
+				result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+				result.ResultObject = QJApplicationBase.CONTEXT.getString(R.string.network_is_not_available);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+		}
+		return result;
+	}
 }

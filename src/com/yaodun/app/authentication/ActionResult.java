@@ -12,7 +12,7 @@ import com.qianjiang.framework.authentication.BaseActionResult;
 public class ActionResult extends BaseActionResult {
 
 	/**
-	 * 网络异常
+	 * 请求成功
 	 */
 	public static final String RESULT_CODE_SUCCESS = "1000";
 	/**
@@ -20,7 +20,7 @@ public class ActionResult extends BaseActionResult {
 	 */
 	public static final String RESULT_CODE_NET_ERROR = "100";
 	/**
-	 * 家园通未登录状态
+	 * 未登录状态
 	 */
 	public static final String RESULT_CODE_NOLOGIN = "998";
 }

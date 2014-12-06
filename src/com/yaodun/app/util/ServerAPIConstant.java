@@ -19,6 +19,8 @@ public class ServerAPIConstant {
 	public static final String CHANGE_PASSWORD = "/User/changePassword";
 	public static final String KNOWLEDGE_LIST = "/User/knowledgeList";
 	public static final String KNOWLEDGE_DETAIL = "/User/knowledgeDetail";
+	public static final String ATTENTION_KNOWLEDGE = "/User/attentionKnowledge";
+	public static final String KNOWLEDGE_REPLY = "/User/knowledgeReply";
 	public static final String FEEDBACK = "/User/feedBack";
 
 	public static final String SEARCH_MEDICINE_API = "/DrugBasicCheck/searchDrug";
@@ -53,6 +55,9 @@ public class ServerAPIConstant {
 	public static final String KEY_KNOWLEDGETYPE = "knowledgeType";
 	public static final String KEY_PAGENUM = "pageNum";
 	public static final String KEY_KNOWLEDGEID = "knowledgeid";
+	public static final String KEY_KNOWLEDGEID_1 = "knowledgeId";
+	public static final String KEY_DISCUSS = "discuss";
+	public static final String KEY_OPERATION = "operation";
 	public static final String KEY_DESCRIPTION = "description";
 
 	public static final String KEY_APP = "app";

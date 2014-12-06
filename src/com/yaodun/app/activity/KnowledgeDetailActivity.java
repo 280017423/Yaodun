@@ -6,8 +6,10 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.qianjiang.framework.util.StringUtil;
 import com.qianjiang.framework.widget.LoadingUpView;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionProcessor;
@@ -27,11 +29,18 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 
 	private static final int GET_DATA_SUCCESSED = 0;
 	private static final int GET_DATA_FAIL = 1;
+	private static final int SEND_DATA_SUCCESSED = 2;
+	private static final int SEND_DATA_FAIL = 3;
+	private static final int ATTENTION_SUCCESSED = 4;
+	private static final int ATTENTION_FAIL = 5;
 	private KnowledgeModel mKnowledgeModel;
 	private TextView mTvTitle;
 	private TextView mTvCollectCount;
 	private TextView mTvDetail;
+	private EditText mEdtCommit;
 	private boolean mIsGettingData;
+	private boolean mIsSend;
+	private boolean mIsAttention;
 	private LoadingUpView mLoadingUpView;
 
 	private Handler mHandler = new Handler() {
@@ -49,15 +58,29 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 						}
 						break;
 					case GET_DATA_FAIL:
-						if (1 == msg.arg2) {
-							showErrorMsg((ActionResult) result);
-						}
+						showErrorMsg((ActionResult) result);
+						break;
+					case SEND_DATA_SUCCESSED:
+						mEdtCommit.setText("");
+						toast("评论成功");
+						break;
+					case SEND_DATA_FAIL:
+						showErrorMsg((ActionResult) result);
+						break;
+					case ATTENTION_SUCCESSED:
+						mEdtCommit.setText("");
+						toast("收藏成功");
+						break;
+					case ATTENTION_FAIL:
+						showErrorMsg((ActionResult) result);
 						break;
 					default:
 						break;
 				}
 			}
 			mIsGettingData = false;
+			mIsSend = false;
+			mIsAttention = false;
 		}
 	};
 
@@ -90,6 +113,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 		left.setOnClickListener(this);
 		TextView tvLeft = (TextView) findViewById(R.id.tv_title_with_back_left);
 		tvLeft.setBackgroundResource(R.drawable.btn_back_bg);
+		mEdtCommit = (EditText) findViewById(R.id.et_commit_content);
 		mTvTitle = (TextView) findViewById(R.id.tv_knowledge_detail_title);
 		mTvCollectCount = (TextView) findViewById(R.id.tv_knowledge_detail_collect);
 		mTvDetail = (TextView) findViewById(R.id.tv_knowledge_detail);
@@ -101,6 +125,12 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 		switch (v.getId()) {
 			case R.id.title_with_back_title_btn_left:
 				finish();
+				break;
+			case R.id.tv_knowledge_detail_collect:
+				attentionKnowledge();
+				break;
+			case R.id.btn_send:
+				sendReplay();
 				break;
 
 			default:
@@ -129,6 +159,61 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 			@Override
 			public ActionResult onAsyncRun() {
 				return KnowledgeReq.getKnowledgeDetail(mKnowledgeModel.getId());
+			}
+		});
+	}
+
+	private void sendReplay() {
+		if (mIsSend) {
+			return;
+		}
+		final String commit = mEdtCommit.getText().toString().trim();
+		if (StringUtil.isNullOrEmpty(commit)) {
+			toast("评论不能为空");
+			return;
+		}
+		showLoadingUpView(mLoadingUpView);
+		mIsSend = true;
+		new ActionProcessor().startAction(KnowledgeDetailActivity.this, new IActionListener() {
+
+			@Override
+			public void onSuccess(ActionResult result) {
+				sendHandler(SEND_DATA_SUCCESSED, result);
+			}
+
+			@Override
+			public void onError(ActionResult result) {
+				sendHandler(SEND_DATA_FAIL, result);
+			}
+
+			@Override
+			public ActionResult onAsyncRun() {
+				return KnowledgeReq.sendknowledgeReply(mKnowledgeModel.getId(), commit);
+			}
+		});
+	}
+
+	private void attentionKnowledge() {
+		if (mIsAttention) {
+			return;
+		}
+		showLoadingUpView(mLoadingUpView);
+		mIsAttention = true;
+		new ActionProcessor().startAction(KnowledgeDetailActivity.this, new IActionListener() {
+
+			@Override
+			public void onSuccess(ActionResult result) {
+				sendHandler(ATTENTION_SUCCESSED, result);
+			}
+
+			@Override
+			public void onError(ActionResult result) {
+				sendHandler(ATTENTION_FAIL, result);
+			}
+
+			@Override
+			public ActionResult onAsyncRun() {
+				return KnowledgeReq.attentionKnowledge(mKnowledgeModel.getId(), "");
 			}
 		});
 	}

@@ -32,10 +32,14 @@ public class SystemItemReq {
 	public static ActionResult sendFeedback(String content) {
 		ActionResult result = new ActionResult();
 		UserInfoModel model = UserMgr.getUserInfoModel();
+		String userId = "";
+		if (null != model) {
+			userId = model.getUserId();
+		}
 		String url = ServerAPIConstant.getUrl(ServerAPIConstant.FEEDBACK);
 		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_DESCRIPTION, content));
-		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USER_ID, model.getUserId()));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USER_ID, userId));
 		try {
 			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
 			if (jsonResult != null) {
