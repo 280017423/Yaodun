@@ -4,7 +4,7 @@ package com.yaodun.app.util;
  * 保存常量的类
  */
 public class ConstantSet {
-	public static final String APP_SIGN = "JYT";
+	public static final String APP_SIGN = "Yaodun";
 	public static final String TIME_PATTERN = "yyyy-MM-dd HH:mm";
 
 	public static final String APP_ID_QQ = "222222";// qq第三方登录的appid

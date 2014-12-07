@@ -45,8 +45,10 @@ public class MoreActivity extends YaodunActivityBase implements OnClickListener 
 			case R.id.rl_more_suggest:
 				jumpToActivity(FeedBackActivity.class);
 				break;
-			case R.id.rl_more_collect:
 			case R.id.rl_more_share:
+				jumpToActivity(ShareToWeiboActivity.class);
+				break;
+			case R.id.rl_more_collect:
 			case R.id.rl_more_introduce:
 			case R.id.rl_more_declare:
 			case R.id.rl_more_check_version:
