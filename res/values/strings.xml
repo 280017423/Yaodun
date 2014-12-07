@@ -75,5 +75,26 @@
     <string name="feedback_empty">请输入反馈内容再提交</string>
     <string name="feedback_title">意见反馈</string>
     <string name="submit">提交</string>
+    
+     <!-- 微博 -->
+    <string name="btn_title_weibo_sina">分享到新浪微博</string>
+    <string name="btn_title_weibo_qq">分享到腾讯微博</string>
+    <string name="btn_title_weibo_renren">分享到人人网</string>
+    <string name="btn_title_weibo_sms">分享到短信</string>
+    <string name="btn_title_weibo_cancle">取消</string>
+    <string name="weibo_share_btn_title">分享</string>
+    <string name="weibo_share_title">分享内容编辑</string>
+    <string name="weibo_share_tip_qq">您尚未开通腾讯微博，请开通后重新尝试！ </string>
+    <string name="weibo_share_tip_renren">人人网分享失败！ </string>
+    <string name="weibo_share_tip_renren_repeat">请您不要频繁发布相同内容！ </string>
+    <string name="weibo_share_tip_sina">请不要重复分享相同的内容！</string>
+    <string name="weibo_share_tip_fail">对不起，分享失败，请检查您的网络设置！ </string>
+    <string name="weibo_share_tip_net_error">分享功能需要连接网络，请检查网络状况</string>
+    <string name="weibo_share_tip_server_error">服务器异常，请稍后重试！</string>
+    <string name="weibo_share_tip_message_null">内容不能为空，请重新输入！</string>
+    <string name="weibo_share_tip_success">分享成功！</string>
+    <string name="weibo_bind_qq_tip_fail">绑定腾讯QQ账户失败！</string>
+    <string name="weibo_bind_renren_tip_fail">绑定人人网账户失败！</string>
+    <string name="weibo_bind_sina_tip_fail">绑定新浪微博账户失败！</string>
 
 </resources>
