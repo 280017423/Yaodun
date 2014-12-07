@@ -42,7 +42,7 @@ public class SearchedMedicineNameAdapter extends BaseAdapter {
         MedicineBean item = list.get(position);
         
         TextView tvName = (TextView) convertView.findViewById(R.id.tv);
-        tvName.setText(item.name);
+        tvName.setText(item.drugname);
         return convertView;
     }
 }
