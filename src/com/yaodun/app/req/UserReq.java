@@ -118,36 +118,4 @@ public class UserReq {
 		}
 		return result;
 	}
-
-	/**
-	 * 根据关键字搜药名
-	 * 
-	 * @param keyword
-	 * @return
-	 */
-	public static ActionResult searchMedicineName(String keyword) {
-		ActionResult result = new ActionResult();
-		String url = ServerAPIConstant.getUrl(ServerAPIConstant.SEARCH_MEDICINE_API);
-		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_KEYWORD, keyword));
-		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_APP, ServerAPIConstant.getAppSign()));
-		try {
-			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
-			if (jsonResult != null) {
-				if (jsonResult.isOK()) {
-					result.ResultObject = jsonResult.getData(ServerAPIConstant.KEY_CHILDREN_INFO,
-							new TypeToken<List<MedicineBean>>() {
-							}.getType());
-				}
-				result.ResultCode = jsonResult.Code;
-			} else {
-				result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
-				result.ResultObject = QJApplicationBase.CONTEXT.getString(R.string.network_is_not_available);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-			result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
-		}
-		return result;
-	}
 }

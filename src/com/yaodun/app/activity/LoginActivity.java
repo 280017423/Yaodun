@@ -59,6 +59,7 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 		public void onReceive(Context arg0, Intent arg1) {
 			if (arg1.hasExtra(ConstantSet.EXTRA_TOKEN)) {
 				String token = arg1.getStringExtra(ConstantSet.EXTRA_TOKEN);
+				EvtLog.d(TAG, "wxReceiver, "+token);
 			}
 		}
 
@@ -128,6 +129,7 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 						doQQLogin();
 						break;
 					case R.id.btn_login_weixin:
+					    doWeixinLogin();
 						break;
 					default:
 						break;
@@ -278,7 +280,8 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 			mWxApi.registerApp(ConstantSet.APP_ID_WX);
 		}
 		req = new SendAuth.Req();
-		req.scope = "snsapi_userinfo";
+//		req.scope = "snsapi_userinfo";
+		req.scope = "token";
 		req.state = "wechat_sdk_demo_test";
 		mWxApi.sendReq(req);
 	}

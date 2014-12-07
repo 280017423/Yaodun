@@ -26,6 +26,8 @@ import com.yaodun.app.adapter.SearchedMedicineNameAdapter;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.model.DetectRuleBean;
 import com.yaodun.app.model.MedicineBean;
+import com.yaodun.app.req.MedicineReq;
+import com.yaodun.app.req.UserReq;
 
 /**
  * 药盾--查询页面
@@ -35,7 +37,7 @@ import com.yaodun.app.model.MedicineBean;
 public class YaodunSearchActivity extends YaodunActivityBase implements OnClickListener, OnItemClickListener {
 
 	private boolean mIsSearching;
-	private boolean mIsMedicineQuery;
+	private boolean mIsMedicineCheck;
 	private TextView mTvTitle;
 	private EditText mEtName;
 	private ListView lvSearchedNames;
@@ -115,18 +117,18 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 
 			@Override
 			protected ActionResult doInBackground(String... params) {
-				// return UserReq.searchMedicineName(keyword);
-				ActionResult result = new ActionResult();
-				result.ResultCode = ActionResult.RESULT_CODE_SUCCESS;
-				List<MedicineBean> list = new ArrayList<MedicineBean>();
-				MedicineBean m1 = new MedicineBean();
-				m1.name = "阿莫";
-				MedicineBean m2 = new MedicineBean();
-				m2.name = "西林";
-				list.add(m1);
-				list.add(m2);
-				result.ResultObject = list;
-				return result;
+				 return MedicineReq.searchMedicineName(keyword);
+//				ActionResult result = new ActionResult();
+//				result.ResultCode = ActionResult.RESULT_CODE_SUCCESS;
+//				List<MedicineBean> list = new ArrayList<MedicineBean>();
+//				MedicineBean m1 = new MedicineBean();
+//				m1.name = "阿莫";
+//				MedicineBean m2 = new MedicineBean();
+//				m2.name = "西林";
+//				list.add(m1);
+//				list.add(m2);
+//				result.ResultObject = list;
+//				return result;
 			}
 
 			@Override
@@ -151,16 +153,16 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	/**
 	 * 药品检测查询
 	 */
-	void doMedicineQuery() {
-		if (mIsMedicineQuery) {
+	void doMedicineCheck() {
+		if (mIsMedicineCheck) {
 			return;
 		}
-		mIsMedicineQuery = true;
+		mIsMedicineCheck = true;
 		new AsyncTask<String, Void, ActionResult>() {
 
 			@Override
 			protected ActionResult doInBackground(String... params) {
-				// return UserReq.searchMedicineName(keyword);
+//				 return MedicineReq.searchMedicineName(keyword);
 				ActionResult result = new ActionResult();
 				result.ResultCode = ActionResult.RESULT_CODE_SUCCESS;
 				List<DetectRuleBean> list = new ArrayList<DetectRuleBean>();
@@ -188,7 +190,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 				} else {
 					showErrorMsg(result);
 				}
-				mIsMedicineQuery = false;
+				mIsMedicineCheck = false;
 			}
 		}.execute();
 
@@ -209,7 +211,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 				final View itemView = View.inflate(mContext, R.layout.item_medicine_name, null);
 				final int pos = i;
 				TextView tvName = (TextView) itemView.findViewById(R.id.tv);
-				tvName.setText(addList.get(i).name);
+				tvName.setText(addList.get(i).drugname);
 				View vMove = itemView.findViewById(R.id.iv);
 				vMove.setOnClickListener(new OnClickListener() {
 					@Override
@@ -236,7 +238,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 				startActivity(QrCodeActivity.getStartActIntent(mContext));
 				break;
 			case R.id.btn_search:
-				doMedicineQuery();
+				doMedicineCheck();
 				break;
 			default:
 				break;

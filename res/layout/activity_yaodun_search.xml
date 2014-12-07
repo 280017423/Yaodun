@@ -119,7 +119,7 @@
                 android:paddingLeft="15dp"
                 android:paddingRight="15dp"
                 android:paddingTop="15dp"
-                android:text="药师建议"
+                android:text="药师咨询"
                 android:textColor="@color/main_color"
                 android:textSize="16sp" />
 

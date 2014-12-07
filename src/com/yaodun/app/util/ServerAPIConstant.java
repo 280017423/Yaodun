@@ -23,7 +23,8 @@ public class ServerAPIConstant {
 	public static final String KNOWLEDGE_REPLY = "/User/knowledgeReply";
 	public static final String FEEDBACK = "/User/feedBack";
 
-	public static final String SEARCH_MEDICINE_API = "/DrugBasicCheck/searchDrug";
+	public static final String MEDICINE_SEARCH_API = "/DrugBasicCheck/searchDrug";
+	public static final String MEDICINE_CHECK_API = "DrugBasicCheck/drugCheckinterface";
 	public static final String GET_TEACHERS_API = "/sms/gettearchers";
 	public static final String GET_CLASS_NEWS_API = "/article/list4cls";
 	public static final String GET_SCHOOL_NEWS_API = "/article/list4sch";
@@ -64,6 +65,8 @@ public class ServerAPIConstant {
 	public static final String KEY_FROME_ID = "from_id";
 	public static final String KEY_ID = "id";
 	public static final String KEY_KEYWORD = "keyword";
+	public static final String KEY_BASEINFO = "baseInfo";
+	public static final String KEY_DRUGINFO = "drugInfo";
 	public static final String KEY_PAGE = "page";
 	public static final String KEY_VIDEOCATEGORY = "videoCategory";
 	public static final String KEY_MAX_ID = "max_id";
