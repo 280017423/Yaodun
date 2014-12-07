@@ -38,16 +38,17 @@ public class MedicineReq {
 		ActionResult result = new ActionResult();
 		String url = ServerAPIConstant.getUrl(ServerAPIConstant.MEDICINE_SEARCH_API);
 		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_KEYWORD, keyword));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_DRUGNAME, keyword));
 		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_APP, ServerAPIConstant.getAppSign()));
 		try {
 			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
 			if (jsonResult != null) {
 				if (jsonResult.isOK()) {
-					result.ResultObject = jsonResult.getData(ServerAPIConstant.KEY_CHILDREN_INFO,
-							new TypeToken<List<MedicineBean>>() {
+					result.ResultObject = jsonResult.getData(new TypeToken<List<MedicineBean>>() {
 							}.getType());
-				}
+				} else {
+                    result.ResultObject = jsonResult.Msg;
+                }
 				result.ResultCode = jsonResult.Code;
 			} else {
 				result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
@@ -71,8 +72,7 @@ public class MedicineReq {
             JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
             if (jsonResult != null) {
                 if (jsonResult.isOK()) {
-                    result.ResultObject = jsonResult.getData(ServerAPIConstant.KEY_CHILDREN_INFO,
-                            new TypeToken<List<MedicineBean>>() {
+                    result.ResultObject = jsonResult.getData(new TypeToken<List<MedicineBean>>() {
                             }.getType());
                 }
                 result.ResultCode = jsonResult.Code;
@@ -86,5 +86,36 @@ public class MedicineReq {
         }
         return result;
     }
+	
+	/**
+	 * 检测规则查询
+	 * @param keyword
+	 * @return
+	 */
+	public static ActionResult getMedicineCheckRules(int queryType) {
+        ActionResult result = new ActionResult();
+        String url = ServerAPIConstant.getUrl(ServerAPIConstant.MEDICINE_CHECK_RULE_API);
+        List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_OTHER_INFO, ""+queryType));
+        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_APP, ServerAPIConstant.getAppSign()));
+        try {
+            JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
+            if (jsonResult != null) {
+                if (jsonResult.isOK()) {
+                    result.ResultObject = jsonResult.getData(new TypeToken<List<MedicineBean>>() {
+                            }.getType());
+                }
+                result.ResultCode = jsonResult.Code;
+            } else {
+                result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+                result.ResultObject = QJApplicationBase.CONTEXT.getString(R.string.network_is_not_available);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+        }
+        return result;
+    }
+    
 }
 

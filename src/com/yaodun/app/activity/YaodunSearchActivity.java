@@ -26,6 +26,7 @@ import com.yaodun.app.adapter.SearchedMedicineNameAdapter;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.model.DetectRuleBean;
 import com.yaodun.app.model.MedicineBean;
+import com.yaodun.app.model.QueryType;
 import com.yaodun.app.req.MedicineReq;
 import com.yaodun.app.req.UserReq;
 
@@ -48,7 +49,9 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	private ListView lvDetectRules;
 	private DetectRuleAdapter detectAdapter;
 	private List<DetectRuleBean> detectList = new ArrayList<DetectRuleBean>();
-
+	private int queryType = 0;
+	public static YaodunSearchActivity INSTANCE;
+	
 	TextWatcher watcher = new TextWatcher() {
 
 		@Override
@@ -71,6 +74,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yaodun_search);
+		INSTANCE = this;
 		initView();
 	}
 
@@ -163,19 +167,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 			@Override
 			protected ActionResult doInBackground(String... params) {
 //				 return MedicineReq.searchMedicineName(keyword);
-				ActionResult result = new ActionResult();
-				result.ResultCode = ActionResult.RESULT_CODE_SUCCESS;
-				List<DetectRuleBean> list = new ArrayList<DetectRuleBean>();
-				DetectRuleBean d1 = new DetectRuleBean();
-				d1.title = "同一药物不同药名同时使用";
-				d1.content = "如：属于重复用药，建议只使用其中的xxxxxxxxxxxxxx一种";
-				DetectRuleBean d2 = new DetectRuleBean();
-				d2.title = "同一药物不同药名同时使用";
-				d2.content = "如：属于重复用药，建议只使用其中的xxxxxxxxxxxxxx一种";
-				list.add(d1);
-				list.add(d2);
-				result.ResultObject = list;
-				return result;
+				return null;
 			}
 
 			@Override
@@ -196,6 +188,49 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 
 	}
 
+	public void changeQueryType(int queryType){
+	    this.queryType = queryType;
+	    mTvTitle.setText(QueryType.getQueryTypeString(queryType));
+	    getMedicineCheckRules();
+	}
+	   void getMedicineCheckRules() {
+	        new AsyncTask<String, Void, ActionResult>() {
+
+	            @Override
+	            protected ActionResult doInBackground(String... params) {
+	               return MedicineReq.getMedicineCheckRules(queryType);
+//	                ActionResult result = new ActionResult();
+//	                result.ResultCode = ActionResult.RESULT_CODE_SUCCESS;
+//	                List<DetectRuleBean> list = new ArrayList<DetectRuleBean>();
+//	                DetectRuleBean d1 = new DetectRuleBean();
+//	                d1.title = "同一药物不同药名同时使用";
+//	                d1.content = "如：属于重复用药，建议只使用其中的xxxxxxxxxxxxxx一种";
+//	                DetectRuleBean d2 = new DetectRuleBean();
+//	                d2.title = "同一药物不同药名同时使用";
+//	                d2.content = "如：属于重复用药，建议只使用其中的xxxxxxxxxxxxxx一种";
+//	                list.add(d1);
+//	                list.add(d2);
+//	                result.ResultObject = list;
+//	                return result;
+	            }
+
+	            @Override
+	            protected void onPostExecute(ActionResult result) {
+	                if (result != null && ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
+	                    detectList.clear();
+	                    List<DetectRuleBean> tmpList = (List<DetectRuleBean>) result.ResultObject;
+	                    if (tmpList != null) {
+	                        detectList.addAll(tmpList);
+	                    }
+	                    detectAdapter.notifyDataSetChanged();
+	                } else {
+	                    showErrorMsg(result);
+	                }
+	            }
+	        }.execute();
+
+	    }
+	   
 	/**
 	 * 将选择的药名填到页面上
 	 * 

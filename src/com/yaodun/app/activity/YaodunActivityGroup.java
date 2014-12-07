@@ -48,10 +48,11 @@ public class YaodunActivityGroup extends YaodunActivityBase implements OnClickLi
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
 	}
 
-	public void goSearch() {
+	public void goSearch(int queryType) {
 		mRlContainer.removeAllViews();
 		mRlContainer.addView(searchView, new RelativeLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
+		YaodunSearchActivity.INSTANCE.changeQueryType(queryType);
 	}
 
 	@Override
