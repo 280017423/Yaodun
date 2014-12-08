@@ -280,8 +280,8 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 			mWxApi.registerApp(ConstantSet.APP_ID_WX);
 		}
 		req = new SendAuth.Req();
-//		req.scope = "snsapi_userinfo";
-		req.scope = "token";
+		req.scope = "snsapi_userinfo";
+//		req.scope = "token";
 		req.state = "wechat_sdk_demo_test";
 		mWxApi.sendReq(req);
 	}
