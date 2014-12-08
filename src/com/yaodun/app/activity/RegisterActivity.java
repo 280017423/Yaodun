@@ -8,14 +8,12 @@ import android.view.View.OnClickListener;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.qianjiang.framework.authentication.BaseLoginProcessor.LOGIN_TYPE;
 import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.NetUtil;
 import com.qianjiang.framework.util.StringUtil;
 import com.qianjiang.framework.widget.LoadingUpView;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
-import com.yaodun.app.authentication.LoginProcessor;
 import com.yaodun.app.model.UserInfoModel;
 import com.yaodun.app.req.UserReq;
 import com.yaodun.app.util.ConstantSet;

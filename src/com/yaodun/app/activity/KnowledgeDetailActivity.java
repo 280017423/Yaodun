@@ -213,6 +213,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 
 			@Override
 			public ActionResult onAsyncRun() {
+				// TODO 需要添加状态参数
 				return KnowledgeReq.attentionKnowledge(mKnowledgeModel.getId(), "");
 			}
 		});

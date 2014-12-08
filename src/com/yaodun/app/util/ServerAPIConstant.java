@@ -22,6 +22,7 @@ public class ServerAPIConstant {
 	public static final String ATTENTION_KNOWLEDGE = "/User/attentionKnowledge";
 	public static final String KNOWLEDGE_REPLY = "/User/knowledgeReply";
 	public static final String FEEDBACK = "/User/feedBack";
+	public static final String SEARCH_OTHER_INFO = "/DrugBasicCheck/searchOtherInfo";
 
 	public static final String MEDICINE_SEARCH_API = "/DrugBasicCheck/searchDrug";
 	public static final String MEDICINE_CHECK_API = "DrugBasicCheck/drugCheckinterface";
@@ -55,11 +56,11 @@ public class ServerAPIConstant {
 
 	public static final String KEY_KNOWLEDGETYPE = "knowledgeType";
 	public static final String KEY_PAGENUM = "pageNum";
-	public static final String KEY_KNOWLEDGEID = "knowledgeid";
-	public static final String KEY_KNOWLEDGEID_1 = "knowledgeId";
+	public static final String KEY_KNOWLEDGEID = "knowledgeId";
 	public static final String KEY_DISCUSS = "discuss";
 	public static final String KEY_OPERATION = "operation";
 	public static final String KEY_DESCRIPTION = "description";
+	public static final String KEY_OTHERINFO = "otherInfo";
 
 	public static final String KEY_APP = "app";
 	public static final String KEY_FROME_ID = "from_id";

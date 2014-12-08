@@ -5,20 +5,16 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONObject;
 
 import com.alibaba.fastjson.JSON;
 import com.pdw.gson.reflect.TypeToken;
 import com.qianjiang.framework.app.JsonResult;
 import com.qianjiang.framework.app.QJApplicationBase;
 import com.qianjiang.framework.util.HttpClientUtil;
-import com.qianjiang.framework.util.StringUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
-import com.yaodun.app.manager.UserMgr;
 import com.yaodun.app.model.MedicineBean;
 import com.yaodun.app.model.UserHealthModel;
-import com.yaodun.app.model.UserInfoModel;
 import com.yaodun.app.util.ServerAPIConstant;
 
 /**

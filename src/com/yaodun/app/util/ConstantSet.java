@@ -25,4 +25,9 @@ public class ConstantSet {
 
 	public static final String ACTION_WEIXIN_LOGIN = "weixin login";
 	public static final String EXTRA_TOKEN = "token";
+
+	public static final String EXTRA_JUMP_FLAG = "EXTRA_JUMP_FLAG";
+	public static final int EXTRA_INTRODUCE = 100;
+	public static final int EXTRA_ABOUT = 101;
+	public static final int EXTRA_DECLARE = 102;
 }

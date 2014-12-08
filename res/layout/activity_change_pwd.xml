@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/register_bg" >
+
+    <include
+        android:id="@+id/layout_title"
+        layout="@layout/title_with_back_btn_wrap" />
+
+    <EditText
+        android:id="@+id/edt_origin_pwd"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/layout_title"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/edt_register_bg"
+        android:drawableLeft="@drawable/icon_lock"
+        android:drawablePadding="5dp"
+        android:hint="@string/text_input_origin_pwd"
+        android:inputType="phone"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:textColorHint="@color/register_gray"
+        android:textSize="@dimen/size_4" />
+
+    <EditText
+        android:id="@+id/edt_new_pwd"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/edt_origin_pwd"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edt_register_bg"
+        android:drawableLeft="@drawable/icon_lock"
+        android:drawablePadding="5dp"
+        android:hint="@string/text_input_new_pwd"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:textColorHint="@color/register_gray"
+        android:textSize="@dimen/size_4" />
+
+    <EditText
+        android:id="@+id/edt_new_pwd_again"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_below="@id/edt_new_pwd"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edt_register_bg"
+        android:drawableLeft="@drawable/icon_lock"
+        android:drawablePadding="5dp"
+        android:hint="@string/text_input_new_pwd_again"
+        android:inputType="text"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:singleLine="true"
+        android:textColorHint="@color/register_gray"
+        android:textSize="@dimen/size_4" />
+
+    <Button
+        android:id="@+id/btn_change_pwd"
+        android:layout_width="fill_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/btn_register_selector"
+        android:gravity="center"
+        android:onClick="onClick"
+        android:text="@string/title_text_change_pwd"
+        android:textColor="@color/white"
+        android:textSize="@dimen/size_3" />
+
+</RelativeLayout>

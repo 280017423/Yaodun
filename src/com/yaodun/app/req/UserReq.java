@@ -6,7 +6,6 @@ import java.util.List;
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
-import com.pdw.gson.reflect.TypeToken;
 import com.qianjiang.framework.app.JsonResult;
 import com.qianjiang.framework.app.QJApplicationBase;
 import com.qianjiang.framework.util.HttpClientUtil;
@@ -14,7 +13,6 @@ import com.qianjiang.framework.util.StringUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.manager.UserMgr;
-import com.yaodun.app.model.MedicineBean;
 import com.yaodun.app.model.UserInfoModel;
 import com.yaodun.app.util.ServerAPIConstant;
 
@@ -93,6 +91,42 @@ public class UserReq {
 					UserMgr.saveUserInfo(userInfoModel);
 				}
 				result.ResultObject = jsonResult.Msg; // 登录成功有积分提示语
+				result.ResultCode = jsonResult.Code;
+			} else {
+				result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+		}
+		return result;
+	}
+
+	/**
+	 * 修改密码
+	 * 
+	 * @param originPwd
+	 *            原始密码
+	 * @param newPwd
+	 *            新密码
+	 * @return ActionResult 请求结构数据
+	 */
+	public static ActionResult changePwd(String originPwd, String newPwd) {
+		ActionResult result = new ActionResult();
+		String url = ServerAPIConstant.getUrl(ServerAPIConstant.LOGIN_INTERFACE);
+		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_PASSWORD, newPwd));
+		try {
+			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
+			if (jsonResult != null) {
+				if (jsonResult.isOK()) {
+					UserInfoModel model = UserMgr.getUserInfoModel();
+					if (null != model) {
+						model.setPassword(newPwd);
+						UserMgr.saveUserInfo(model);
+					}
+				}
+				result.ResultObject = jsonResult.Msg;
 				result.ResultCode = jsonResult.Code;
 			} else {
 				result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;

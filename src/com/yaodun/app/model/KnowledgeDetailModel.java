@@ -8,6 +8,7 @@ public class KnowledgeDetailModel extends BaseModel {
 	private String description;
 	private String countAttention;
 	private String createtime;
+	private int status;
 
 	public String getCreatetime() {
 		return createtime;
@@ -31,6 +32,14 @@ public class KnowledgeDetailModel extends BaseModel {
 
 	public void setCountAttention(String countAttention) {
 		this.countAttention = countAttention;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 }

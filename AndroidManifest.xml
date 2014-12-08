@@ -147,7 +147,7 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
-            android:name=".activity.AboutActivity"
+            android:name=".activity.CommonActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
@@ -163,6 +163,11 @@
         </activity>
         <activity
             android:name=".activity.ShareToWeiboActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.ChangePwdActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>

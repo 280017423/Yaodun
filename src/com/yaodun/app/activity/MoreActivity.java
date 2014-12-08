@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import com.yaodun.app.R;
 import com.yaodun.app.manager.UserMgr;
+import com.yaodun.app.util.ConstantSet;
 
 /**
  * 更多界面
@@ -40,17 +41,24 @@ public class MoreActivity extends YaodunActivityBase implements OnClickListener 
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.rl_more_about:
-				jumpToActivity(AboutActivity.class);
+				jumpToActivity(CommonActivity.class, ConstantSet.EXTRA_ABOUT);
+				break;
+			case R.id.rl_more_introduce:
+				jumpToActivity(CommonActivity.class, ConstantSet.EXTRA_INTRODUCE);
+				break;
+			case R.id.rl_more_declare:
+				jumpToActivity(CommonActivity.class, ConstantSet.EXTRA_DECLARE);
 				break;
 			case R.id.rl_more_suggest:
-				jumpToActivity(FeedBackActivity.class);
+				jumpToActivity(FeedBackActivity.class, 0);
 				break;
 			case R.id.rl_more_share:
-				jumpToActivity(ShareToWeiboActivity.class);
+				jumpToActivity(ShareToWeiboActivity.class, 0);
+				break;
+			case R.id.rl_change_pwd:
+				jumpToActivity(ChangePwdActivity.class, 0);
 				break;
 			case R.id.rl_more_collect:
-			case R.id.rl_more_introduce:
-			case R.id.rl_more_declare:
 			case R.id.rl_more_check_version:
 				Toast.makeText(MoreActivity.this, "正在开发中...", Toast.LENGTH_LONG).show();
 				break;
@@ -62,8 +70,9 @@ public class MoreActivity extends YaodunActivityBase implements OnClickListener 
 		}
 	}
 
-	private void jumpToActivity(Class<?> cls) {
+	private void jumpToActivity(Class<?> cls, int value) {
 		Intent intent = new Intent(MoreActivity.this, cls);
+		intent.putExtra(ConstantSet.EXTRA_JUMP_FLAG, value);
 		startActivity(intent);
 	}
 

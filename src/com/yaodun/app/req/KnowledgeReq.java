@@ -73,7 +73,7 @@ public class KnowledgeReq {
 		ActionResult result = new ActionResult();
 		String url = ServerAPIConstant.getUrl(ServerAPIConstant.KNOWLEDGE_DETAIL);
 		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
-		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_KNOWLEDGEID, "" + id));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_KNOWLEDGEID, id));
 		try {
 			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
 			if (jsonResult != null) {
@@ -114,7 +114,7 @@ public class KnowledgeReq {
 		if (null != model) {
 			userId = model.getUserId();
 		}
-		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_KNOWLEDGEID_1, id));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_KNOWLEDGEID, id));
 		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_DISCUSS, content));
 		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USER_ID, userId));
 		try {
@@ -132,6 +132,7 @@ public class KnowledgeReq {
 		}
 		return result;
 	}
+
 	/**
 	 * 收藏文章
 	 * 
@@ -150,7 +151,7 @@ public class KnowledgeReq {
 		if (null != model) {
 			userId = model.getUserId();
 		}
-		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_KNOWLEDGEID_1, id));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_KNOWLEDGEID, id));
 		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_OPERATION, operation));
 		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USER_ID, userId));
 		try {
