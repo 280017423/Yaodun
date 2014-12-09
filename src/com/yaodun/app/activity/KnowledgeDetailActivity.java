@@ -42,6 +42,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 	private boolean mIsSend;
 	private boolean mIsAttention;
 	private LoadingUpView mLoadingUpView;
+	private KnowledgeDetailModel mDetailModel;
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -50,11 +51,11 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 			if (result != null) {
 				switch (msg.what) {
 					case GET_DATA_SUCCESSED:
-						KnowledgeDetailModel model = (KnowledgeDetailModel) result.ResultObject;
-						if (model != null) {
+						mDetailModel = (KnowledgeDetailModel) result.ResultObject;
+						if (mDetailModel != null) {
 							mTvCollectCount.setText(getString(R.string.knowledge_detail_collect_count,
-									model.getCountAttention()));
-							mTvDetail.setText(model.getDescription());
+									mDetailModel.getCountAttention()));
+							mTvDetail.setText(mDetailModel.getDescription());
 						}
 						break;
 					case GET_DATA_FAIL:
@@ -68,8 +69,12 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 						showErrorMsg((ActionResult) result);
 						break;
 					case ATTENTION_SUCCESSED:
-						mEdtCommit.setText("");
-						toast("收藏成功");
+						if (1 == mDetailModel.getStatus()) {
+							toast("取消收藏成功");
+						} else {
+							toast("收藏成功");
+						}
+
 						break;
 					case ATTENTION_FAIL:
 						showErrorMsg((ActionResult) result);
@@ -158,7 +163,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 
 			@Override
 			public ActionResult onAsyncRun() {
-				return KnowledgeReq.getKnowledgeDetail(mKnowledgeModel.getId());
+				return KnowledgeReq.getKnowledgeDetail(mKnowledgeModel.getKnowledgeId());
 			}
 		});
 	}
@@ -188,13 +193,13 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 
 			@Override
 			public ActionResult onAsyncRun() {
-				return KnowledgeReq.sendknowledgeReply(mKnowledgeModel.getId(), commit);
+				return KnowledgeReq.sendknowledgeReply(mKnowledgeModel.getKnowledgeId(), commit);
 			}
 		});
 	}
 
 	private void attentionKnowledge() {
-		if (mIsAttention) {
+		if (mIsAttention || null == mDetailModel) {
 			return;
 		}
 		showLoadingUpView(mLoadingUpView);
@@ -213,8 +218,12 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 
 			@Override
 			public ActionResult onAsyncRun() {
-				// TODO 需要添加状态参数
-				return KnowledgeReq.attentionKnowledge(mKnowledgeModel.getId(), "");
+				// operation为空是代表关注,为1时代表取消关注
+				String operation = "";
+				if (1 == mDetailModel.getStatus()) {
+					operation = "1";
+				}
+				return KnowledgeReq.attentionKnowledge(mKnowledgeModel.getKnowledgeId(), operation);
 			}
 		});
 	}

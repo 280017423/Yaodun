@@ -113,17 +113,24 @@ public class UserReq {
 	 */
 	public static ActionResult changePwd(String originPwd, String newPwd) {
 		ActionResult result = new ActionResult();
-		String url = ServerAPIConstant.getUrl(ServerAPIConstant.LOGIN_INTERFACE);
+		String url = ServerAPIConstant.getUrl(ServerAPIConstant.CHANGE_PASSWORD);
+		UserInfoModel model = UserMgr.getUserInfoModel();
+		String userId = "";
+		if (null != model) {
+			userId = model.getUserId();
+		}
 		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USER_ID, userId));
 		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_PASSWORD, newPwd));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_OLD_PASSWORD, originPwd));
 		try {
 			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
 			if (jsonResult != null) {
 				if (jsonResult.isOK()) {
-					UserInfoModel model = UserMgr.getUserInfoModel();
-					if (null != model) {
-						model.setPassword(newPwd);
-						UserMgr.saveUserInfo(model);
+					UserInfoModel userInfoModel = UserMgr.getUserInfoModel();
+					if (null != userInfoModel) {
+						userInfoModel.setPassword(newPwd);
+						UserMgr.saveUserInfo(userInfoModel);
 					}
 				}
 				result.ResultObject = jsonResult.Msg;

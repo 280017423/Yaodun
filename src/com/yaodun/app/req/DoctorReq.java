@@ -12,6 +12,7 @@ import com.qianjiang.framework.app.QJApplicationBase;
 import com.qianjiang.framework.util.HttpClientUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
+import com.yaodun.app.model.DoctorModel;
 import com.yaodun.app.model.KnowledgeModel;
 import com.yaodun.app.util.ServerAPIConstant;
 
@@ -31,14 +32,14 @@ public class DoctorReq {
 	 */
 	public static ActionResult getDoctorList(int page) {
 		ActionResult result = new ActionResult();
-		String url = ServerAPIConstant.getUrl(ServerAPIConstant.KNOWLEDGE_LIST);
+		String url = ServerAPIConstant.getUrl(ServerAPIConstant.DOCTOR_LIST);
 		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_PAGENUM, "" + page));
 		try {
 			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
 			if (jsonResult != null) {
 				if (jsonResult.isOK()) {
-					List<KnowledgeModel> models = jsonResult.getData(new TypeToken<List<KnowledgeModel>>() {
+					List<DoctorModel> models = jsonResult.getData(new TypeToken<List<DoctorModel>>() {
 					}.getType());
 					result.ResultObject = models;
 				} else {

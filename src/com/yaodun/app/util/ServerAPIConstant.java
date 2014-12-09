@@ -18,6 +18,7 @@ public class ServerAPIConstant {
 	public static final String ADD_INTERFACE = "/User/addInterface";
 	public static final String CHANGE_PASSWORD = "/User/changePassword";
 	public static final String KNOWLEDGE_LIST = "/User/knowledgeList";
+	public static final String DOCTOR_LIST = "/User/doctorList";
 	public static final String KNOWLEDGE_DETAIL = "/User/knowledgeDetail";
 	public static final String ATTENTION_KNOWLEDGE = "/User/attentionKnowledge";
 	public static final String KNOWLEDGE_REPLY = "/User/knowledgeReply";
@@ -50,6 +51,7 @@ public class ServerAPIConstant {
 	public static final String KEY_USER_ID = "userId";
 	public static final String KEY_USERNAME = "userName";
 	public static final String KEY_PASSWORD = "passWord";
+	public static final String KEY_OLD_PASSWORD = "oldPassword";
 	public static final String KEY_EMAIL = "email";
 	public static final String KEY_TELEPHONE = "telephone";
 	public static final String KEY_SEX = "sex";

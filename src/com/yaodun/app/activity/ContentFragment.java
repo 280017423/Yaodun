@@ -70,9 +70,7 @@ public class ContentFragment extends YaodunFragmentBase implements OnItemClickLi
 						}
 						break;
 					case GET_DATA_FAIL:
-						if (1 == msg.arg2) {
-							showErrorMsg((ActionResult) result);
-						}
+						showErrorMsg((ActionResult) result);
 						break;
 					default:
 						break;

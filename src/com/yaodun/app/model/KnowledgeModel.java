@@ -6,19 +6,19 @@ import com.yaodun.app.util.DateUtil;
 public class KnowledgeModel extends BaseModel {
 
 	private static final long serialVersionUID = -7189942557184630918L;
-	private String id;
+	private String knowledgeId;
 	private String title;
 	private int type;
 	private String img;
 	private String createtime;
 	private int countDiscuss;
 
-	public String getId() {
-		return id;
+	public String getKnowledgeId() {
+		return knowledgeId;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setKnowledgeId(String knowledgeId) {
+		this.knowledgeId = knowledgeId;
 	}
 
 	public String getTitle() {

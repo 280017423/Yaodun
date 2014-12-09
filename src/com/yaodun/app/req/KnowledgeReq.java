@@ -73,14 +73,19 @@ public class KnowledgeReq {
 		ActionResult result = new ActionResult();
 		String url = ServerAPIConstant.getUrl(ServerAPIConstant.KNOWLEDGE_DETAIL);
 		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+		UserInfoModel model = UserMgr.getUserInfoModel();
+		String userId = "";
+		if (null != model) {
+			userId = model.getUserId();
+		}
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USER_ID, userId));
 		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_KNOWLEDGEID, id));
 		try {
 			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
 			if (jsonResult != null) {
 				if (jsonResult.isOK()) {
-					KnowledgeDetailModel model = jsonResult.getData(new TypeToken<KnowledgeDetailModel>() {
+					result.ResultObject = jsonResult.getData(new TypeToken<KnowledgeDetailModel>() {
 					}.getType());
-					result.ResultObject = model;
 				} else {
 					result.ResultObject = jsonResult.Msg;
 				}

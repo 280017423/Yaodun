@@ -8,7 +8,7 @@ public class KnowledgeDetailModel extends BaseModel {
 	private String description;
 	private String countAttention;
 	private String createtime;
-	private int status;
+	private int status; // 1表示已经收藏,0:表示未收藏
 
 	public String getCreatetime() {
 		return createtime;
