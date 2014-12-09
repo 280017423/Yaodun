@@ -73,6 +73,7 @@
     <!-- 药师咨询 -->
     <string name="tips_doctor_consule_empty_view">暂时没有药师咨询记录</string>
     <string name="text_doctor_consult">药师咨询</string>
+    <string name="question_detail">提问详细</string>
 
     <!-- 反馈 -->
     <string name="feedback_hint">感谢您对我们提出的反馈,限制输入100字以内</string>

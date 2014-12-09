@@ -13,7 +13,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -57,8 +56,6 @@ public class KnowledgeAdapter extends BaseAdapter {
 		this.mImageLoader = loader;
 		mOptions = new DisplayImageOptions.Builder().cacheInMemory().cacheOnDisc()
 				.displayer(new SimpleBitmapDisplayer()).build();
-		DisplayMetrics metric = new DisplayMetrics();
-		context.getWindowManager().getDefaultDisplay().getMetrics(metric);
 	}
 
 	@Override

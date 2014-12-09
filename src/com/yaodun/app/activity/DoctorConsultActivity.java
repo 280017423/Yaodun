@@ -3,6 +3,7 @@ package com.yaodun.app.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -22,6 +23,7 @@ import com.yaodun.app.authentication.ActionProcessor;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.listener.IActionListener;
 import com.yaodun.app.model.DoctorModel;
+import com.yaodun.app.model.KnowledgeModel;
 import com.yaodun.app.req.DoctorReq;
 import com.yaodun.app.util.ConstantSet;
 
@@ -167,7 +169,12 @@ public class DoctorConsultActivity extends YaodunActivityBase implements OnClick
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+		DoctorModel model = (DoctorModel) parent.getAdapter().getItem(position);
+		if (null != model) {
+			Intent intent = new Intent(this, DoctorDetailActivity.class);
+			intent.putExtra(ConstantSet.EXTRA_DOCTORMODEL, model);
+			startActivity(intent);
+		}
 	}
 
 }

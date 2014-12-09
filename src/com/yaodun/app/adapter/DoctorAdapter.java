@@ -13,7 +13,6 @@ import java.util.List;
 
 import android.app.Activity;
 import android.content.Context;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -56,8 +55,6 @@ public class DoctorAdapter extends BaseAdapter {
 		this.mImageLoader = loader;
 		mOptions = new DisplayImageOptions.Builder().cacheInMemory().cacheOnDisc()
 				.displayer(new SimpleBitmapDisplayer()).build();
-		DisplayMetrics metric = new DisplayMetrics();
-		context.getWindowManager().getDefaultDisplay().getMetrics(metric);
 	}
 
 	@Override
@@ -100,13 +97,7 @@ public class DoctorAdapter extends BaseAdapter {
 		if (!StringUtil.isNullOrEmpty(imgUrl)) {
 			mImageLoader.displayImage(imgUrl, holder.mIvImg, mOptions);
 		}
-		String name = model.getDoctorName();
-		if (StringUtil.isNullOrEmpty(name)) {
-			holder.mTvName.setVisibility(View.GONE);
-		} else {
-			holder.mTvName.setVisibility(View.VISIBLE);
-			holder.mTvName.setText(name);
-		}
+		holder.mTvName.setText(model.getDoctorName());
 		holder.mTvProfessional.setText(model.getProfessional());
 		holder.mTvDescription.setText(model.getDescription());
 
