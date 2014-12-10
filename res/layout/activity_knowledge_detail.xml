@@ -35,7 +35,6 @@
             android:clickable="true"
             android:drawableLeft="@drawable/icon_knowledge_detail_collect"
             android:ellipsize="end"
-            android:onClick="onClick"
             android:singleLine="true"
             android:textColor="#FF666666"
             android:textSize="@dimen/size_3" />

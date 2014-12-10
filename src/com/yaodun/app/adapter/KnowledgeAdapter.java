@@ -27,7 +27,7 @@ import com.yaodun.app.R;
 import com.yaodun.app.model.KnowledgeModel;
 
 /**
- * 视频列表适配器
+ * 文章列表适配器
  * 
  * @author zou.sq
  * @since 2013-03-12 下午04:37:29
@@ -35,7 +35,7 @@ import com.yaodun.app.model.KnowledgeModel;
  */
 public class KnowledgeAdapter extends BaseAdapter {
 	private static final String[] TITLE = new String[] { "综合", "妇女", "儿童", "老人", "抗生素" };
-	private List<KnowledgeModel> mVedioModels;
+	private List<KnowledgeModel> mKnowledgeModels;
 	private Context mContext;
 	private ImageLoader mImageLoader;
 	private DisplayImageOptions mOptions;
@@ -52,7 +52,7 @@ public class KnowledgeAdapter extends BaseAdapter {
 	 */
 	public KnowledgeAdapter(Activity context, List<KnowledgeModel> dataList, ImageLoader loader) {
 		this.mContext = context;
-		this.mVedioModels = dataList;
+		this.mKnowledgeModels = dataList;
 		this.mImageLoader = loader;
 		mOptions = new DisplayImageOptions.Builder().cacheInMemory().cacheOnDisc()
 				.displayer(new SimpleBitmapDisplayer()).build();
@@ -60,16 +60,16 @@ public class KnowledgeAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		if (mVedioModels != null && !mVedioModels.isEmpty()) {
-			return mVedioModels.size();
+		if (mKnowledgeModels != null && !mKnowledgeModels.isEmpty()) {
+			return mKnowledgeModels.size();
 		}
 		return 0;
 	}
 
 	@Override
 	public KnowledgeModel getItem(int position) {
-		if (mVedioModels != null) {
-			return mVedioModels.get(position);
+		if (mKnowledgeModels != null) {
+			return mKnowledgeModels.get(position);
 		}
 		return null;
 	}

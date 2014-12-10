@@ -7,6 +7,7 @@ import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qianjiang.framework.util.StringUtil;
@@ -43,6 +44,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 	private boolean mIsAttention;
 	private LoadingUpView mLoadingUpView;
 	private KnowledgeDetailModel mDetailModel;
+	private TextView mTvnRight;
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -56,6 +58,12 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 							mTvCollectCount.setText(getString(R.string.knowledge_detail_collect_count,
 									mDetailModel.getCountAttention()));
 							mTvDetail.setText(mDetailModel.getDescription());
+							mTvnRight.setVisibility(View.VISIBLE);
+							if (1 == mDetailModel.getStatus()) {
+								mTvnRight.setText(R.string.knowledge_detail_cancel_collect);
+							} else {
+								mTvnRight.setText(R.string.knowledge_detail_collect);
+							}
 						}
 						break;
 					case GET_DATA_FAIL:
@@ -70,8 +78,12 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 						break;
 					case ATTENTION_SUCCESSED:
 						if (1 == mDetailModel.getStatus()) {
+							mDetailModel.setStatus(0);
+							mTvnRight.setText(R.string.knowledge_detail_collect);
 							toast("取消收藏成功");
 						} else {
+							mDetailModel.setStatus(1);
+							mTvnRight.setText(R.string.knowledge_detail_cancel_collect);
 							toast("收藏成功");
 						}
 
@@ -114,10 +126,18 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 	private void initView() {
 		TextView titleTextView = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
 		titleTextView.setText(R.string.knowledge_detail);
+
 		View left = findViewById(R.id.title_with_back_title_btn_left);
 		left.setOnClickListener(this);
 		TextView tvLeft = (TextView) findViewById(R.id.tv_title_with_back_left);
 		tvLeft.setBackgroundResource(R.drawable.btn_back_bg);
+
+		LinearLayout llRight = (LinearLayout) findViewById(R.id.title_with_back_title_btn_right);
+		llRight.setOnClickListener(this);
+		mTvnRight = (TextView) findViewById(R.id.tv_title_with_right);
+		mTvnRight.setBackgroundResource(R.drawable.btn_logout_selector);
+		mTvnRight.setVisibility(View.GONE);
+
 		mEdtCommit = (EditText) findViewById(R.id.et_commit_content);
 		mTvTitle = (TextView) findViewById(R.id.tv_knowledge_detail_title);
 		mTvCollectCount = (TextView) findViewById(R.id.tv_knowledge_detail_collect);
@@ -131,7 +151,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 			case R.id.title_with_back_title_btn_left:
 				finish();
 				break;
-			case R.id.tv_knowledge_detail_collect:
+			case R.id.title_with_back_title_btn_right:
 				attentionKnowledge();
 				break;
 			case R.id.btn_send:

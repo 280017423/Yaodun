@@ -102,7 +102,7 @@ public class KnowledgeReq {
 	}
 
 	/**
-	 * 获取文章详细
+	 * 发表文章评论
 	 * 
 	 * @param id
 	 *            文章id

@@ -14,7 +14,7 @@ import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.manager.UserMgr;
 import com.yaodun.app.model.DoctorModel;
-import com.yaodun.app.model.QuestionDetailModel;
+import com.yaodun.app.model.QuestionModel;
 import com.yaodun.app.model.UserInfoModel;
 import com.yaodun.app.util.ServerAPIConstant;
 
@@ -36,6 +36,12 @@ public class DoctorReq {
 		ActionResult result = new ActionResult();
 		String url = ServerAPIConstant.getUrl(ServerAPIConstant.DOCTOR_LIST);
 		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+		UserInfoModel model = UserMgr.getUserInfoModel();
+		String userId = "";
+		if (null != model) {
+			userId = model.getUserId();
+		}
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USER_ID, userId));
 		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_PAGENUM, "" + page));
 		try {
 			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
@@ -60,30 +66,31 @@ public class DoctorReq {
 	}
 
 	/**
-	 * 获取提问详细
+	 * 发表提问
 	 * 
 	 * @param id
 	 *            医生id
+	 * @param content
+	 *            评论内容
 	 * @return ActionResult 请求结构数据
 	 */
-	public static ActionResult getDoctorDetail(String id) {
+	public static ActionResult sendQuestion(String id, String content) {
 		ActionResult result = new ActionResult();
-		String url = ServerAPIConstant.getUrl(ServerAPIConstant.QUESTION_DETAIL);
+		String url = ServerAPIConstant.getUrl(ServerAPIConstant.QUESTION_SAVE);
 		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 		UserInfoModel model = UserMgr.getUserInfoModel();
 		String userId = "";
 		if (null != model) {
 			userId = model.getUserId();
 		}
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_DOCTORID, id));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_DESCRIPTION, content));
 		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USER_ID, userId));
-		// TODO
-		// postParams.add(new
-		// BasicNameValuePair(ServerAPIConstant.KEY_KNOWLEDGEID, id));
 		try {
 			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
 			if (jsonResult != null) {
 				if (jsonResult.isOK()) {
-					result.ResultObject = jsonResult.getData(new TypeToken<List<QuestionDetailModel>>() {
+					result.ResultObject = jsonResult.getData(new TypeToken<QuestionModel>() {
 					}.getType());
 				} else {
 					result.ResultObject = jsonResult.Msg;

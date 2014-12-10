@@ -12,7 +12,6 @@ public class ConstantSet {
 
 	// 其他变量
 	public static final int INFO_NUM_IN_ONE_PAGE = 10;
-	public static final int VIDEO_NUM_IN_ONE_PAGE = 12;
 	public static final int MILLI_SECONDS = 1000;
 	public static final int SECONDS_TO_MINUTES = 60;
 	public static final String KEY_USERINFOMODEL = "KEY_UserInfoModel";

@@ -5,11 +5,20 @@ import com.qianjiang.framework.orm.BaseModel;
 public class DoctorModel extends BaseModel {
 
 	private static final long serialVersionUID = -7189942557184630918L;
+	private int status; // status:0 表示未关注，1表示已关注
 	private String doctorId;
 	private String doctorName;
 	private String professional;
 	private String description;
 	private String img;
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
 
 	public String getDoctorId() {
 		return doctorId;
