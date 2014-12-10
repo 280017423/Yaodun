@@ -31,7 +31,7 @@
                 android:layout_height="fill_parent"
                 android:gravity="left|center_vertical"
                 android:paddingLeft="40dp"
-                android:text="我的收藏"
+                android:text="@string/text_my_collect"
                 android:textColor="@color/register_gray"
                 android:textSize="@dimen/size_4" />
 

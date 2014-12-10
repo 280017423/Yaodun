@@ -176,6 +176,16 @@
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
+        <activity
+            android:name=".activity.MyCollectActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".activity.MyKnowledgeDetailActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+        </activity>
 
         <!-- qq登录 -->
         <activity android:name="com.tencent.connect.common.AssistActivity"

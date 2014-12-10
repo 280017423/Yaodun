@@ -18,6 +18,7 @@ public class ServerAPIConstant {
 	public static final String ADD_INTERFACE = "/User/addInterface";
 	public static final String CHANGE_PASSWORD = "/User/changePassword";
 	public static final String KNOWLEDGE_LIST = "/User/knowledgeList";
+	public static final String ATTENTION_KNOWLEDGE_LIST = "/User/attentionKnowledgeList";
 	public static final String DOCTOR_LIST = "/User/doctorList";
 	public static final String QUESTION_SAVE = "/User/questionSave";
 	public static final String KNOWLEDGE_DETAIL = "/User/knowledgeDetail";

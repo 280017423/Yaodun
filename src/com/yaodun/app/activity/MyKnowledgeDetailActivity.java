@@ -22,11 +22,11 @@ import com.yaodun.app.req.KnowledgeReq;
 import com.yaodun.app.util.ConstantSet;
 
 /**
- * 关于界面
+ * 我的收藏文章详细界面
  * 
  * @author zou.sq
  */
-public class KnowledgeDetailActivity extends YaodunActivityBase implements OnClickListener {
+public class MyKnowledgeDetailActivity extends YaodunActivityBase implements OnClickListener {
 
 	private static final int GET_DATA_SUCCESSED = 0;
 	private static final int GET_DATA_FAIL = 1;
@@ -59,13 +59,6 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 									mDetailModel.getCountAttention()));
 							mTvDetail.setText(mDetailModel.getDescription());
 
-							if (1 == mDetailModel.getStatus()) {
-								mTvnRight.setText(R.string.knowledge_detail_cancel_collect);
-								mTvnRight.setVisibility(View.GONE);
-							} else {
-								mTvnRight.setVisibility(View.VISIBLE);
-								mTvnRight.setText(R.string.knowledge_detail_collect);
-							}
 						}
 						break;
 					case GET_DATA_FAIL:
@@ -79,18 +72,12 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 						showErrorMsg((ActionResult) result);
 						break;
 					case ATTENTION_SUCCESSED:
-						if (1 == mDetailModel.getStatus()) {
-							mDetailModel.setStatus(0);
-							mTvnRight.setVisibility(View.VISIBLE);
-							mTvnRight.setText(R.string.knowledge_detail_collect);
-							toast("取消收藏成功");
-						} else {
-							mDetailModel.setStatus(1);
-							mTvnRight.setVisibility(View.GONE);
-							mTvnRight.setText(R.string.knowledge_detail_cancel_collect);
-							toast("收藏成功");
-						}
-
+						mDetailModel.setStatus(0);
+						mTvnRight.setVisibility(View.GONE);
+						mTvnRight.setText(R.string.knowledge_detail_collect);
+						toast("取消收藏成功");
+						setResult(RESULT_OK);
+						finish();
 						break;
 					case ATTENTION_FAIL:
 						showErrorMsg((ActionResult) result);
@@ -140,7 +127,8 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 		llRight.setOnClickListener(this);
 		mTvnRight = (TextView) findViewById(R.id.tv_title_with_right);
 		mTvnRight.setBackgroundResource(R.drawable.btn_logout_selector);
-		mTvnRight.setVisibility(View.GONE);
+		mTvnRight.setText(R.string.knowledge_detail_cancel_collect);
+		mTvnRight.setVisibility(View.VISIBLE);
 
 		mEdtCommit = (EditText) findViewById(R.id.et_commit_content);
 		mTvTitle = (TextView) findViewById(R.id.tv_knowledge_detail_title);
@@ -173,7 +161,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 		}
 		showLoadingUpView(mLoadingUpView);
 		mIsGettingData = true;
-		new ActionProcessor().startAction(KnowledgeDetailActivity.this, new IActionListener() {
+		new ActionProcessor().startAction(MyKnowledgeDetailActivity.this, new IActionListener() {
 
 			@Override
 			public void onSuccess(ActionResult result) {
@@ -203,7 +191,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 		}
 		showLoadingUpView(mLoadingUpView);
 		mIsSend = true;
-		new ActionProcessor().startAction(KnowledgeDetailActivity.this, new IActionListener() {
+		new ActionProcessor().startAction(MyKnowledgeDetailActivity.this, new IActionListener() {
 
 			@Override
 			public void onSuccess(ActionResult result) {
@@ -228,7 +216,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 		}
 		showLoadingUpView(mLoadingUpView);
 		mIsAttention = true;
-		new ActionProcessor().startAction(KnowledgeDetailActivity.this, new IActionListener() {
+		new ActionProcessor().startAction(MyKnowledgeDetailActivity.this, new IActionListener() {
 
 			@Override
 			public void onSuccess(ActionResult result) {
@@ -242,12 +230,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 
 			@Override
 			public ActionResult onAsyncRun() {
-				// operation为空是代表关注,为1时代表取消关注
-				String operation = "";
-				if (1 == mDetailModel.getStatus()) {
-					operation = "1";
-				}
-				return KnowledgeReq.attentionKnowledge(mKnowledgeModel.getKnowledgeId(), operation);
+				return KnowledgeReq.attentionKnowledge(mKnowledgeModel.getKnowledgeId(), "1");
 			}
 		});
 	}

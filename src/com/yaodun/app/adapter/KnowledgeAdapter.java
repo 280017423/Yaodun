@@ -89,6 +89,7 @@ public class KnowledgeAdapter extends BaseAdapter {
 			holder.mTvType = (TextView) convertView.findViewById(R.id.tv_knowledge_type);
 			holder.mTvDate = (TextView) convertView.findViewById(R.id.tv_knowledge_date);
 			holder.mTvCount = (TextView) convertView.findViewById(R.id.tv_knowledge_count);
+			holder.mViewCount = convertView.findViewById(R.id.layout_count);
 			convertView.setTag(holder);
 		} else {
 			holder = (viewHode) convertView.getTag();
@@ -111,7 +112,12 @@ public class KnowledgeAdapter extends BaseAdapter {
 		String date = vedioModel.getDisplayTime();
 		holder.mTvDate.setText(date);
 		int count = vedioModel.getCountDiscuss();
-		holder.mTvCount.setText("" + count);
+		if (0 == count) {
+			holder.mViewCount.setVisibility(View.INVISIBLE);
+		} else {
+			holder.mViewCount.setVisibility(View.VISIBLE);
+			holder.mTvCount.setText("" + count);
+		}
 
 		return convertView;
 	}
@@ -122,5 +128,6 @@ public class KnowledgeAdapter extends BaseAdapter {
 		TextView mTvType;
 		TextView mTvDate;
 		TextView mTvCount;
+		View mViewCount;
 	}
 }

@@ -47,6 +47,7 @@
     <string name="text_about">关于我们</string>
     <string name="text_introduce">公司简介</string>
     <string name="text_declare">声明</string>
+    <string name="text_my_collect">我的收藏</string>
 
     <!-- 关于我们 -->
     <string name="bottom_tab_yaodun">药盾</string>
