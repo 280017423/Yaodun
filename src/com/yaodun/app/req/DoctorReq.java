@@ -13,6 +13,7 @@ import com.qianjiang.framework.util.HttpClientUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.manager.UserMgr;
+import com.yaodun.app.model.ConsultListModel;
 import com.yaodun.app.model.DoctorModel;
 import com.yaodun.app.model.QuestionModel;
 import com.yaodun.app.model.UserInfoModel;
@@ -24,6 +25,46 @@ import com.yaodun.app.util.ServerAPIConstant;
  * @author zou.sq
  */
 public class DoctorReq {
+
+	/**
+	 * 获取我的咨询列表
+	 * 
+	 * @param page
+	 *            页数
+	 * @return ActionResult 请求结构数据
+	 */
+	public static ActionResult getConsultList(int page) {
+		ActionResult result = new ActionResult();
+		String url = ServerAPIConstant.getUrl(ServerAPIConstant.OWN_CONSULT_LIST);
+		List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+		UserInfoModel model = UserMgr.getUserInfoModel();
+		String userId = "";
+		if (null != model) {
+			userId = model.getUserId();
+		}
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USER_ID, userId));
+		postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_PAGENUM, "" + page));
+		try {
+			JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
+			if (jsonResult != null) {
+				if (jsonResult.isOK()) {
+					List<ConsultListModel> models = jsonResult.getData(new TypeToken<List<ConsultListModel>>() {
+					}.getType());
+					result.ResultObject = models;
+				} else {
+					result.ResultObject = jsonResult.Msg;
+				}
+				result.ResultCode = jsonResult.Code;
+			} else {
+				result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+				result.ResultObject = QJApplicationBase.CONTEXT.getString(R.string.network_is_not_available);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+		}
+		return result;
+	}
 
 	/**
 	 * 获取药师列表

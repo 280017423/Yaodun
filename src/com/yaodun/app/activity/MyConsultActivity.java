@@ -19,23 +19,23 @@ import com.qianjiang.framework.widget.pulltorefresh.PullToRefreshBase.Mode;
 import com.qianjiang.framework.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener2;
 import com.qianjiang.framework.widget.pulltorefresh.PullToRefreshListView;
 import com.yaodun.app.R;
-import com.yaodun.app.adapter.KnowledgeAdapter;
+import com.yaodun.app.adapter.ConsultAdapter;
 import com.yaodun.app.authentication.ActionProcessor;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.listener.IActionListener;
-import com.yaodun.app.model.KnowledgeModel;
-import com.yaodun.app.req.KnowledgeReq;
+import com.yaodun.app.model.ConsultListModel;
+import com.yaodun.app.req.DoctorReq;
 import com.yaodun.app.util.ConstantSet;
 
-public class MyCollectActivity extends YaodunActivityBase implements OnClickListener, OnItemClickListener {
+public class MyConsultActivity extends YaodunActivityBase implements OnClickListener, OnItemClickListener {
 	private static final int REQUEST_CODE = 100;
 	private static final int GET_DATA_SUCCESSED = 0;
 	private static final int GET_DATA_FAIL = 1;
 	private static final int PULL_DOWN = 0;
 	private static final int PULL_UP = 1;
 	private PullToRefreshListView mPullToRefreshListView;
-	private KnowledgeAdapter mAdapter;
-	private List<KnowledgeModel> mKnowledgeModels;
+	private ConsultAdapter mAdapter;
+	private List<ConsultListModel> mKnowledgeModels;
 	private int mPage;
 	private boolean mIsGettingData;
 
@@ -46,7 +46,7 @@ public class MyCollectActivity extends YaodunActivityBase implements OnClickList
 			if (result != null) {
 				switch (msg.what) {
 					case GET_DATA_SUCCESSED:
-						List<KnowledgeModel> moreList = (List<KnowledgeModel>) result.ResultObject;
+						List<ConsultListModel> moreList = (List<ConsultListModel>) result.ResultObject;
 						if (moreList != null) {
 							if (PULL_DOWN == msg.arg1) {
 								mKnowledgeModels.clear();
@@ -81,25 +81,25 @@ public class MyCollectActivity extends YaodunActivityBase implements OnClickList
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_my_knowledge);
+		setContentView(R.layout.activity_my_consult);
 		initVariable();
 		initView();
 	}
 
 	private void initVariable() {
-		mKnowledgeModels = new ArrayList<KnowledgeModel>();
-		mAdapter = new KnowledgeAdapter(this, mKnowledgeModels, mImageLoader);
+		mKnowledgeModels = new ArrayList<ConsultListModel>();
+		mAdapter = new ConsultAdapter(this, mKnowledgeModels);
 	}
 
 	public void initView() {
 		TextView titleTextView = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
-		titleTextView.setText(R.string.text_my_collect);
+		titleTextView.setText(R.string.text_my_consult);
 		View left = findViewById(R.id.title_with_back_title_btn_left);
 		left.setOnClickListener(this);
 		TextView tvLeft = (TextView) findViewById(R.id.tv_title_with_back_left);
 		tvLeft.setBackgroundResource(R.drawable.btn_back_bg);
 
-		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.lv_medicine_knowledge);
+		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.lv_my_consult);
 		ListView listView = mPullToRefreshListView.getRefreshableView();
 		listView.setAdapter(mAdapter);
 		listView.setSelector(new BitmapDrawable());
@@ -129,7 +129,7 @@ public class MyCollectActivity extends YaodunActivityBase implements OnClickList
 			return;
 		}
 		mIsGettingData = true;
-		new ActionProcessor().startAction(MyCollectActivity.this, new IActionListener() {
+		new ActionProcessor().startAction(MyConsultActivity.this, new IActionListener() {
 
 			@Override
 			public void onSuccess(ActionResult result) {
@@ -143,7 +143,7 @@ public class MyCollectActivity extends YaodunActivityBase implements OnClickList
 
 			@Override
 			public ActionResult onAsyncRun() {
-				return KnowledgeReq.getAttentionKnowledgeList(mPage);
+				return DoctorReq.getConsultList(mPage);
 			}
 		});
 	}
@@ -158,11 +158,12 @@ public class MyCollectActivity extends YaodunActivityBase implements OnClickList
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		KnowledgeModel model = (KnowledgeModel) parent.getAdapter().getItem(position);
+		ConsultListModel model = (ConsultListModel) parent.getAdapter().getItem(position);
 		if (null != model) {
-			Intent intent = new Intent(MyCollectActivity.this, MyKnowledgeDetailActivity.class);
-			intent.putExtra(ConstantSet.EXTRA_KNOWLEDGEMODEL, model);
-			startActivityForResult(intent, REQUEST_CODE);
+			// Intent intent = new Intent(MyConsultActivity.this,
+			// MyKnowledgeDetailActivity.class);
+			// intent.putExtra(ConstantSet.EXTRA_KNOWLEDGEMODEL, model);
+			// startActivityForResult(intent, REQUEST_CODE);
 		}
 	}
 

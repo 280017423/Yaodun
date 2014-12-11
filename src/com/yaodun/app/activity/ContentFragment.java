@@ -55,15 +55,16 @@ public class ContentFragment extends YaodunFragmentBase implements OnItemClickLi
 								mKnowledgeModels.clear();
 								mKnowledgeModels.addAll(0, moreList);
 							} else {
+								mPage++;
 								mKnowledgeModels.addAll(moreList);
-								if (moreList.size() < ConstantSet.INFO_NUM_IN_ONE_PAGE) {
-									mPullToRefreshListView.setNoMoreData();
-									mPullToRefreshListView.onRefreshComplete(false);
-								} else {
-									mPullToRefreshListView.onRefreshComplete(true);
-								}
-								mPullToRefreshListView.setMode(Mode.BOTH);
 							}
+							if (moreList.size() < ConstantSet.INFO_NUM_IN_ONE_PAGE) {
+								mPullToRefreshListView.setNoMoreData();
+								mPullToRefreshListView.onRefreshComplete(false);
+							} else {
+								mPullToRefreshListView.onRefreshComplete(true);
+							}
+							mPullToRefreshListView.setMode(Mode.BOTH);
 						}
 						if (mAdapter != null) {
 							mAdapter.notifyDataSetChanged();

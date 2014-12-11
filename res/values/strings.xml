@@ -48,6 +48,8 @@
     <string name="text_introduce">公司简介</string>
     <string name="text_declare">声明</string>
     <string name="text_my_collect">我的收藏</string>
+    <string name="text_my_consult">我的咨询</string>
+    <string name="text_my_attention">我的关注</string>
 
     <!-- 关于我们 -->
     <string name="bottom_tab_yaodun">药盾</string>
@@ -77,6 +79,8 @@
     <string name="tips_doctor_consule_empty_view">暂时没有药师咨询记录</string>
     <string name="text_doctor_consult">药师咨询</string>
     <string name="question_detail">提问详细</string>
+    <string name="has_reply">已经回复</string>
+    <string name="has_not_reply">待回复</string>
 
     <!-- 反馈 -->
     <string name="feedback_hint">感谢您对我们提出的反馈,限制输入100字以内</string>

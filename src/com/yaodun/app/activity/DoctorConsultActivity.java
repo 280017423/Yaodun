@@ -23,7 +23,6 @@ import com.yaodun.app.authentication.ActionProcessor;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.listener.IActionListener;
 import com.yaodun.app.model.DoctorModel;
-import com.yaodun.app.model.KnowledgeModel;
 import com.yaodun.app.req.DoctorReq;
 import com.yaodun.app.util.ConstantSet;
 
@@ -57,15 +56,16 @@ public class DoctorConsultActivity extends YaodunActivityBase implements OnClick
 								mDoctorModels.clear();
 								mDoctorModels.addAll(0, moreList);
 							} else {
+								mPage++;
 								mDoctorModels.addAll(moreList);
-								if (moreList.size() < ConstantSet.INFO_NUM_IN_ONE_PAGE) {
-									mPullToRefreshListView.setNoMoreData();
-									mPullToRefreshListView.onRefreshComplete(false);
-								} else {
-									mPullToRefreshListView.onRefreshComplete(true);
-								}
-								mPullToRefreshListView.setMode(Mode.BOTH);
 							}
+							if (moreList.size() < ConstantSet.INFO_NUM_IN_ONE_PAGE) {
+								mPullToRefreshListView.setNoMoreData();
+								mPullToRefreshListView.onRefreshComplete(false);
+							} else {
+								mPullToRefreshListView.onRefreshComplete(true);
+							}
+							mPullToRefreshListView.setMode(Mode.BOTH);
 						}
 						if (mDoctorAdapter != null) {
 							mDoctorAdapter.notifyDataSetChanged();

@@ -21,6 +21,8 @@
     <color name="gray">#CCCCCC</color>
     <color name="divider_line_color">#DFDFDF</color>
     <color name="white_80_alpha">#CCFFFFFF</color>
+    <color name="consule_has_reply">#6ebf38</color>
+    <color name="consule_has_not_reply">#787878</color>
 
     <!-- 查询页 -->
     <color name="main_color_pressed">#76bc31</color>

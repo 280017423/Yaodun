@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <include
+        android:id="@+id/layout_title"
+        layout="@layout/title_with_back_btn_wrap" />
+
+    <com.qianjiang.framework.widget.pulltorefresh.PullToRefreshListView
+        android:id="@+id/lv_my_consult"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:cacheColorHint="@android:color/transparent"
+        android:clickable="true"
+        android:divider="@color/header_divider"
+        android:dividerHeight="0.7dp"
+        android:scrollbars="vertical"
+        app:headerDivider="@color/header_divider"
+        app:isShowFooter="true" />
+
+</LinearLayout>

@@ -34,7 +34,7 @@ import com.yaodun.app.model.DoctorModel;
  * @version 1.0
  */
 public class DoctorAdapter extends BaseAdapter {
-	private List<DoctorModel> mVedioModels;
+	private List<DoctorModel> mDoctorModels;
 	private Context mContext;
 	private ImageLoader mImageLoader;
 	private DisplayImageOptions mOptions;
@@ -51,7 +51,7 @@ public class DoctorAdapter extends BaseAdapter {
 	 */
 	public DoctorAdapter(Activity context, List<DoctorModel> dataList, ImageLoader loader) {
 		this.mContext = context;
-		this.mVedioModels = dataList;
+		this.mDoctorModels = dataList;
 		this.mImageLoader = loader;
 		mOptions = new DisplayImageOptions.Builder().cacheInMemory().cacheOnDisc()
 				.displayer(new SimpleBitmapDisplayer()).build();
@@ -59,16 +59,16 @@ public class DoctorAdapter extends BaseAdapter {
 
 	@Override
 	public int getCount() {
-		if (mVedioModels != null && !mVedioModels.isEmpty()) {
-			return mVedioModels.size();
+		if (mDoctorModels != null && !mDoctorModels.isEmpty()) {
+			return mDoctorModels.size();
 		}
 		return 0;
 	}
 
 	@Override
 	public DoctorModel getItem(int position) {
-		if (mVedioModels != null) {
-			return mVedioModels.get(position);
+		if (mDoctorModels != null) {
+			return mDoctorModels.get(position);
 		}
 		return null;
 	}
