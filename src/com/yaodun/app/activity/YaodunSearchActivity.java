@@ -3,6 +3,10 @@ package com.yaodun.app.activity;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,6 +33,7 @@ import com.yaodun.app.model.MedicineBean;
 import com.yaodun.app.model.QueryType;
 import com.yaodun.app.req.MedicineReq;
 import com.yaodun.app.req.UserReq;
+import com.yaodun.app.util.ConstantSet;
 
 /**
  * 药盾--查询页面
@@ -69,6 +74,15 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 
 		}
 	};
+	BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context arg0, Intent arg1) {
+            if(ConstantSet.ACTION_QRCODE_OK.equals(arg1.getAction())){
+                String qrcode = arg1.getStringExtra(ConstantSet.EXTRA_QRCODE);
+                mEtName.setText(qrcode);
+            }
+        }
+    };
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +90,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		setContentView(R.layout.activity_yaodun_search);
 		INSTANCE = this;
 		initView();
+		registerReceiver(receiver, new IntentFilter(ConstantSet.ACTION_QRCODE_OK));
 	}
 
 	private void initView() {

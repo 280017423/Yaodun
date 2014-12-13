@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 
 import com.qianjiang.framework.util.EvtLog;
+import com.yaodun.app.util.ConstantSet;
 import com.zxing.decoding.QrCodeActivityBase;
 
 public class QrCodeActivity extends QrCodeActivityBase {
@@ -18,7 +19,9 @@ public class QrCodeActivity extends QrCodeActivityBase {
     protected void onDecode(String barCode, Bitmap barCodeImg) {
         super.onDecode(barCode, barCodeImg);
         EvtLog.d(TAG, "onDecode, "+barCode);
-        
+        Intent data = new Intent(ConstantSet.ACTION_QRCODE_OK);
+        data.putExtra(ConstantSet.EXTRA_QRCODE, barCode);
+        sendBroadcast(data);
         finish();
     }
 }

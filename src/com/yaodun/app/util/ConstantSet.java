@@ -7,7 +7,7 @@ public class ConstantSet {
 	public static final String APP_SIGN = "Yaodun";
 	public static final String TIME_PATTERN = "yyyy-MM-dd HH:mm";
 
-	public static final String APP_ID_QQ = "222222";// qq第三方登录的appid
+	public static final String APP_ID_QQ = "1103590952";// qq第三方登录的appid
 	public static final String APP_ID_WX = "wx6e03e62c61953966";// 微信第三方登录的appid
 
 	// 其他变量
@@ -30,4 +30,7 @@ public class ConstantSet {
 	public static final int EXTRA_INTRODUCE = 100;
 	public static final int EXTRA_ABOUT = 101;
 	public static final int EXTRA_DECLARE = 102;
+	
+	public static final String ACTION_QRCODE_OK = "qrcode ok";//扫二维码完成
+	public static final String EXTRA_QRCODE = "qrcode";
 }
