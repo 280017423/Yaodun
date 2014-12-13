@@ -10,6 +10,10 @@ public class UserInfoModel extends BaseModel {
 	private String password;
 	private String gender;
 	private String telephone;
+	
+	//上一次是第三方登录时，保存不到密码，就没办法用密码自动登录，所以要保存source和openid
+	public String source;//哪个第三方平台
+	public String openid;//授权后拿到的用户唯一标识
 
 	public String getUserId() {
 		return null == userId ? "" : userId;

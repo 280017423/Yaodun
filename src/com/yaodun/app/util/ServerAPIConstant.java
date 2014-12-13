@@ -15,6 +15,7 @@ public class ServerAPIConstant {
 	public static final String KEY_APP_SIGN = "appSign";
 
 	public static final String LOGIN_INTERFACE = "/User/loginInterface";
+	public static final String LOGIN_THIRDPARTY = "/User/thirdPartyLogin";
 	public static final String ADD_INTERFACE = "/User/addInterface";
 	public static final String CHANGE_PASSWORD = "/User/changePassword";
 	public static final String KNOWLEDGE_LIST = "/User/knowledgeList";
@@ -60,6 +61,8 @@ public class ServerAPIConstant {
 	public static final String KEY_TELEPHONE = "telephone";
 	public static final String KEY_SEX = "sex";
 	public static final String KEY_BIRTHDAY = "birthday";
+	public static final String KEY_OPENAPI_SOURCE = "source";
+	public static final String KEY_OPENAPI_OPENID = "openId";
 
 	public static final String KEY_KNOWLEDGETYPE = "knowledgeType";
 	public static final String KEY_PAGENUM = "pageNum";

@@ -24,7 +24,7 @@ public class ConstantSet {
 	public static final String EXTRA_DOCTORMODEL = "EXTRA_DOCTORMODEL";
 
 	public static final String ACTION_WEIXIN_LOGIN = "weixin login";
-	public static final String EXTRA_TOKEN = "token";
+	public static final String EXTRA_OPENAPI_AUTH_RESPONSE = "token";
 
 	public static final String EXTRA_JUMP_FLAG = "EXTRA_JUMP_FLAG";
 	public static final int EXTRA_INTRODUCE = 100;

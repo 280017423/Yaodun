@@ -32,7 +32,7 @@ public class WXEntryActivity extends Activity {
 	final String TAG = getClass().getSimpleName();
 	
 	private IWXAPI api;
-	String token;
+	String authResponse;//内容格式见https://open.weixin.qq.com/cgi-bin/frame?t=resource/res_main_tmpl&verify=1&lang=zh_CN
 	
 	IWXAPIEventHandler wxHandler = new IWXAPIEventHandler() {
 		
@@ -76,8 +76,8 @@ public class WXEntryActivity extends Activity {
 	
 	void toldShareWeixinOk(boolean isOk){
 		Intent intent = new Intent(ConstantSet.ACTION_WEIXIN_LOGIN);
-		if(!TextUtils.isEmpty(token)){
-		    intent.putExtra(ConstantSet.EXTRA_TOKEN, token);
+		if(!TextUtils.isEmpty(authResponse)){
+		    intent.putExtra(ConstantSet.EXTRA_OPENAPI_AUTH_RESPONSE, authResponse);
 		}
     	sendBroadcast(intent);
     	finish();
@@ -94,8 +94,9 @@ public class WXEntryActivity extends Activity {
                     DefaultHttpClient client = new DefaultHttpClient();
                     HttpResponse response = client.execute(get);
                     String strJSON = EntityUtils.toString(response.getEntity());
-                    JSONObject jobj = new JSONObject(strJSON);
-                    token = jobj.optString("access_token");
+//                    JSONObject jobj = new JSONObject(strJSON);
+//                    token = jobj.optString("access_token");
+                    authResponse = strJSON;
                 }catch(Exception e){
                     EvtLog.e(TAG, e);
                 }

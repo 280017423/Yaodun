@@ -101,6 +101,43 @@ public class UserReq {
 		}
 		return result;
 	}
+	
+	/**
+	 * 第三方登录
+	 * @param source 哪个第三方平台
+	 * @param openid 第三方授权后拿到的唯一标识
+	 * @return
+	 */
+	public static ActionResult openAPILogin(String source, String openid) {
+        ActionResult result = new ActionResult();
+        String url = ServerAPIConstant.getUrl(ServerAPIConstant.LOGIN_THIRDPARTY);
+        List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_OPENAPI_SOURCE, source));
+        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_OPENAPI_OPENID, openid));
+        try {
+            JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
+            if (jsonResult != null) {
+                if (jsonResult.isOK()) {
+                    UserInfoModel userInfoModel = jsonResult.getData(UserInfoModel.class);
+                    if (null != userInfoModel) {
+//                        userInfoModel.setPassword(pwd);
+                        userInfoModel.source = source;
+                        userInfoModel.openid = openid;
+                    }
+                    // 保存用户信息
+                    UserMgr.saveUserInfo(userInfoModel);
+                }
+                result.ResultObject = jsonResult.Msg; // 登录成功有积分提示语
+                result.ResultCode = jsonResult.Code;
+            } else {
+                result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+        }
+        return result;
+    }
 
 	/**
 	 * 修改密码
@@ -153,9 +190,12 @@ public class UserReq {
 	public static ActionResult autoLogin() {
 		ActionResult result = new ActionResult();
 		UserInfoModel user = UserMgr.getUserInfoModel();
-		if (null != user && !StringUtil.isNullOrEmpty(user.getUserName())
-				&& !StringUtil.isNullOrEmpty(user.getPassword())) {
-			result = login(user.getUserName(), user.getPassword());
+		if (null != user){
+		    if(!StringUtil.isNullOrEmpty(user.getUserName()) && !StringUtil.isNullOrEmpty(user.getPassword())) {
+		        result = login(user.getUserName(), user.getPassword());
+		    }else if(!StringUtil.isNullOrEmpty(user.source) && !StringUtil.isNullOrEmpty(user.openid)) {
+		        result = openAPILogin(user.source, user.openid);
+		    }
 		}
 		return result;
 	}
