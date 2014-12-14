@@ -148,4 +148,32 @@ public class DoctorReq {
 		return result;
 	}
 
+	public static ActionResult attentionDoctor(String doctorId, String operation) {
+        ActionResult result = new ActionResult();
+        String url = ServerAPIConstant.getUrl(ServerAPIConstant.ATTENTION_DOCTOR);
+        List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        UserInfoModel model = UserMgr.getUserInfoModel();
+        String userId = "";
+        if (null != model) {
+            userId = model.getUserId();
+        }
+        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USER_ID, userId));
+        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_DOCTORID, doctorId));
+        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_OPERATION, operation));
+        try {
+            JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
+            if (jsonResult != null) {
+                result.ResultObject = jsonResult.Msg;
+                result.ResultCode = jsonResult.Code;
+            } else {
+                result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+                result.ResultObject = QJApplicationBase.CONTEXT.getString(R.string.network_is_not_available);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+        }
+        return result;
+    }
+
 }

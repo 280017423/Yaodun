@@ -227,12 +227,12 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 
 			@Override
 			public ActionResult onAsyncRun() {
-				// operation为空是代表关注,为1时代表取消关注
-				String operation = "";
+				// operation为1代表关注,为0代表取消关注
+				String operation = "1";
 				if (1 == mDoctorModel.getStatus()) {
-					operation = "1";
+					operation = "0";
 				}
-				return KnowledgeReq.attentionKnowledge(mDoctorModel.getDoctorId(), operation);
+				return DoctorReq.attentionDoctor(mDoctorModel.getDoctorId(), operation);
 			}
 		});
 	}

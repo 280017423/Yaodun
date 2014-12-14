@@ -26,6 +26,7 @@ public class ServerAPIConstant {
 	public static final String KNOWLEDGE_DETAIL = "/User/knowledgeDetail";
 	public static final String QUESTION_DETAIL = "/User/questionDetail";
 	public static final String ATTENTION_KNOWLEDGE = "/User/attentionKnowledge";
+	public static final String ATTENTION_DOCTOR = "/User/attentionDoctor";
 	public static final String KNOWLEDGE_REPLY = "/User/knowledgeReply";
 	public static final String FEEDBACK = "/User/feedBack";
 	public static final String SEARCH_OTHER_INFO = "/DrugBasicCheck/searchOtherInfo";
