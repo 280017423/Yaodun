@@ -11,6 +11,17 @@ public class UserInfoModel extends BaseModel {
 	private String gender;
 	private String telephone;
 	
+	//用药检测需要的数据
+	public String age = "";//0代表不详，1代表小孩，2代表中年，3代表老年人。
+    public String height = "";
+    public String weight = "";
+    public String isLiver = "";//肝功能 0，正常，1轻中度 ，2重度
+    public String kindney = "";//0正常，1肾小球滤过率每分钟大于50，2肾小球滤过率每分钟10~50，3肾小球滤过率每分钟小于10
+    public String isGestate = "";
+    public String gestateTime = "";
+    public String isSuckling = "";
+    public int checkType;
+	
 	//上一次是第三方登录时，保存不到密码，就没办法用密码自动登录，所以要保存source和openid
 	public String source;//哪个第三方平台
 	public String openid;//授权后拿到的用户唯一标识

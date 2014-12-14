@@ -28,11 +28,12 @@ import com.yaodun.app.R;
 import com.yaodun.app.adapter.DetectRuleAdapter;
 import com.yaodun.app.adapter.SearchedMedicineNameAdapter;
 import com.yaodun.app.authentication.ActionResult;
+import com.yaodun.app.manager.UserMgr;
 import com.yaodun.app.model.DetectRuleBean;
 import com.yaodun.app.model.MedicineBean;
 import com.yaodun.app.model.QueryType;
+import com.yaodun.app.model.UserInfoModel;
 import com.yaodun.app.req.MedicineReq;
-import com.yaodun.app.req.UserReq;
 import com.yaodun.app.util.ConstantSet;
 
 /**
@@ -181,8 +182,13 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 
 			@Override
 			protected ActionResult doInBackground(String... params) {
-//				 return MedicineReq.searchMedicineName(keyword);
-				return null;
+			    UserInfoModel user = UserMgr.getUserInfoModel();
+		        if (null == user){
+		            user = new UserInfoModel();
+		        }
+		        user.checkType = queryType;
+		        
+				 return MedicineReq.medicineCheck(user, addList);
 			}
 
 			@Override
