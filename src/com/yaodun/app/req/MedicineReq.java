@@ -13,6 +13,7 @@ import com.qianjiang.framework.app.QJApplicationBase;
 import com.qianjiang.framework.util.HttpClientUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
+import com.yaodun.app.model.DetectRuleBean;
 import com.yaodun.app.model.MedicineBean;
 import com.yaodun.app.model.UserHealthModel;
 import com.yaodun.app.util.ServerAPIConstant;
@@ -98,7 +99,7 @@ public class MedicineReq {
             JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
             if (jsonResult != null) {
                 if (jsonResult.isOK()) {
-                    result.ResultObject = jsonResult.getData(new TypeToken<List<MedicineBean>>() {
+                    result.ResultObject = jsonResult.getData(new TypeToken<List<DetectRuleBean>>() {
                             }.getType());
                 }
                 result.ResultCode = jsonResult.Code;

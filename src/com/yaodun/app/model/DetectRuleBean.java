@@ -7,6 +7,7 @@ package com.yaodun.app.model;
  *
  */
 public class DetectRuleBean {
+    public String id;
     public String title;
-    public String content;
+    public String data;
 }

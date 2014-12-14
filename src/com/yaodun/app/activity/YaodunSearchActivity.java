@@ -214,19 +214,6 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	            @Override
 	            protected ActionResult doInBackground(String... params) {
 	               return MedicineReq.getMedicineCheckRules(queryType);
-//	                ActionResult result = new ActionResult();
-//	                result.ResultCode = ActionResult.RESULT_CODE_SUCCESS;
-//	                List<DetectRuleBean> list = new ArrayList<DetectRuleBean>();
-//	                DetectRuleBean d1 = new DetectRuleBean();
-//	                d1.title = "同一药物不同药名同时使用";
-//	                d1.content = "如：属于重复用药，建议只使用其中的xxxxxxxxxxxxxx一种";
-//	                DetectRuleBean d2 = new DetectRuleBean();
-//	                d2.title = "同一药物不同药名同时使用";
-//	                d2.content = "如：属于重复用药，建议只使用其中的xxxxxxxxxxxxxx一种";
-//	                list.add(d1);
-//	                list.add(d2);
-//	                result.ResultObject = list;
-//	                return result;
 	            }
 
 	            @Override

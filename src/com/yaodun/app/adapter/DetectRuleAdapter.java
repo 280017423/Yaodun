@@ -44,7 +44,7 @@ public class DetectRuleAdapter extends BaseAdapter {
         TextView tv1 = (TextView) convertView.findViewById(R.id.tv1);
         tv1.setText(item.title);
         TextView tv2 = (TextView) convertView.findViewById(R.id.tv2);
-        tv2.setText(item.content);
+        tv2.setText(item.data);
         return convertView;
     }
 }

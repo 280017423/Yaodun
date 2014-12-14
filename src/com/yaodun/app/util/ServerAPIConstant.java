@@ -31,8 +31,8 @@ public class ServerAPIConstant {
 	public static final String SEARCH_OTHER_INFO = "/DrugBasicCheck/searchOtherInfo";
 
 	public static final String MEDICINE_SEARCH_API = "/DrugBasicCheck/searchDrug";
-	public static final String MEDICINE_CHECK_API = "DrugBasicCheck/drugCheckinterface";
-	public static final String MEDICINE_CHECK_RULE_API = "DrugBasicCheck/searchOtherInfo";
+	public static final String MEDICINE_CHECK_API = "/DrugBasicCheck/drugCheckinterface";
+	public static final String MEDICINE_CHECK_RULE_API = "/DrugBasicCheck/searchOtherInfo";
 	public static final String GET_TEACHERS_API = "/sms/gettearchers";
 	public static final String GET_CLASS_NEWS_API = "/article/list4cls";
 	public static final String GET_SCHOOL_NEWS_API = "/article/list4sch";
