@@ -8,8 +8,15 @@
 -dontusemixedcaseclassnames
 -dontoptimize
 
+-dontwarn org.apache.commons.httpclient.**
+-dontwarn javax.servlet.http.**
+-dontwarn org.apache.commons.codec.binary.Base64
+-dontwarn javax.servlet.ServletException
+
+
 -keepattributes Signature
 -keepattributes *unchecked*
+
 
 #system 不进行混淆保持原样
 -keep  public class * extends android.app.Activity
@@ -156,9 +163,12 @@
 -keep class com.tencent.open.PKDialog$*
 -keep class com.tencent.open.PKDialog$* {*;}
 
+
+# weixin share sdk
+-keep class com.tencent.mm.**{*;}
+-dontwarn com.tencent.mm.**
 -keep class com.tencent.mm.sdk.openapi.WXMediaMessage {*;}
 -keep class com.tencent.mm.sdk.openapi.** implements com.tencent.mm.sdk.openapi.WXMediaMessage$IMediaObject {*;}
-
 
 -keep class com.alibaba.fastjson.** {*;}
 

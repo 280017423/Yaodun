@@ -22,6 +22,7 @@ import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.NetUtil;
 import com.qianjiang.framework.util.StringUtil;
 import com.yaodun.app.R;
+import com.yaodun.app.openapi.WeixinHelper;
 
 /**
  * 微博分享页面
@@ -43,11 +44,13 @@ public class ShareToWeiboActivity extends YaodunActivityBase implements OnClickL
 	private PopupWindow mPopupWindow;
 	private Handler mHandler = new Handler();
 
+	WeixinHelper weixinHelper;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.weibo_share);
 		initUI();
+		weixinHelper = new WeixinHelper(this);
 	}
 
 	// 分享操作
@@ -111,6 +114,27 @@ public class ShareToWeiboActivity extends YaodunActivityBase implements OnClickL
 
 			}
 		});
+		
+	      Button mWeixinShareBtn = (Button) view.findViewById(R.id.btn_weibo_share_qq);
+	      mWeixinShareBtn.setOnClickListener(new OnClickListener() {
+
+	            @Override
+	            public void onClick(View v) {
+	                String message = mShareContent.getText().toString();
+	                if (StringUtil.isNullOrEmpty(message)) {
+	                    toast(getResources().getString(R.string.weibo_share_tip_message_null));
+	                    return;
+	                }
+	                if (!NetUtil.isNetworkAvailable()) {
+	                    toast(getString(R.string.network_is_not_available));
+	                    return;
+	                }
+	                weixinHelper.setTitle("药盾");
+	                weixinHelper.setDescription(message);
+	                weixinHelper.shareToWeixin(false);
+	            }
+	        });
+
 	}
 
 	// 弹出对话框
