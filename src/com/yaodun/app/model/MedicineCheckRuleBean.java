@@ -6,7 +6,7 @@ package com.yaodun.app.model;
  * @author tom
  *
  */
-public class DetectRuleBean {
+public class MedicineCheckRuleBean {
     public String id;
     public String title;
     public String data;

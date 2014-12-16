@@ -1,9 +1,11 @@
 package com.yaodun.app.req;
 
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
+import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -16,7 +18,8 @@ import com.qianjiang.framework.util.EvtLog;
 import com.qianjiang.framework.util.HttpClientUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
-import com.yaodun.app.model.DetectRuleBean;
+import com.yaodun.app.model.MedicineCheckResultBean;
+import com.yaodun.app.model.MedicineCheckRuleBean;
 import com.yaodun.app.model.MedicineBean;
 import com.yaodun.app.model.UserInfoModel;
 import com.yaodun.app.util.HttpClientConnector;
@@ -29,6 +32,8 @@ import com.yaodun.app.util.ServerAPIConstant;
  */
 public class MedicineReq {
     static final String TAG = "MedicineReq";
+    static final String CHAR_SET = "utf-8";
+    
 	/**
 	 * 根据关键字搜药名
 	 * 
@@ -68,7 +73,8 @@ public class MedicineReq {
         JSONObject baseinfo = new JSONObject();
         JSONArray druginfo = new JSONArray();
         try{
-            baseinfo.put("male", user.getGender());
+            baseinfo.put("male", URLEncoder.encode(user.getGender(), CHAR_SET));
+            baseinfo.put("gender", URLEncoder.encode(user.getGender(), CHAR_SET));
             baseinfo.put("age", "");
             baseinfo.put("height", user.height);
             baseinfo.put("weight", user.weight);
@@ -82,11 +88,11 @@ public class MedicineReq {
             for(int i=0; i<medicines.size(); ++i){
                 MedicineBean medicin = medicines.get(i);
                 JSONObject drug = new JSONObject();
-                drug.put("basicid", medicin.basicid);
-                drug.put("drugname", medicin.drugname);
-                drug.put("usage", medicin.usage);
-                drug.put("dosage", medicin.dosage);
-                drug.put("frequery", medicin.frequery);
+                drug.put("basicid", medicin.basicId);
+                drug.put("drugname", URLEncoder.encode(medicin.drugname, CHAR_SET));
+                drug.put("usage", URLEncoder.encode(medicin.usage, CHAR_SET));
+                drug.put("dosage", URLEncoder.encode(medicin.dosage, CHAR_SET));
+                drug.put("frequery", URLEncoder.encode(medicin.frequery, CHAR_SET));
                 druginfo.put(drug);
             }
         }catch(Exception e){
@@ -106,7 +112,7 @@ public class MedicineReq {
             JsonResult jsonResult = new JsonResult(rs);
             if (jsonResult != null) {
                 if (jsonResult.isOK()) {
-                    result.ResultObject = jsonResult.getData(new TypeToken<List<MedicineBean>>() {
+                    result.ResultObject = jsonResult.getData(new TypeToken<List<MedicineCheckResultBean>>() {
                             }.getType());
                 }
                 result.ResultCode = jsonResult.Code;
@@ -136,7 +142,7 @@ public class MedicineReq {
             JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
             if (jsonResult != null) {
                 if (jsonResult.isOK()) {
-                    result.ResultObject = jsonResult.getData(new TypeToken<List<DetectRuleBean>>() {
+                    result.ResultObject = jsonResult.getData(new TypeToken<List<MedicineCheckRuleBean>>() {
                             }.getType());
                 }
                 result.ResultCode = jsonResult.Code;

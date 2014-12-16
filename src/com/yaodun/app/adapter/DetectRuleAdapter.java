@@ -9,12 +9,12 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.yaodun.app.R;
-import com.yaodun.app.model.DetectRuleBean;
+import com.yaodun.app.model.MedicineCheckRuleBean;
 
 public class DetectRuleAdapter extends BaseAdapter {
     Context context;
-    List<DetectRuleBean> list;
-    public DetectRuleAdapter(Context context, List<DetectRuleBean> list){
+    List<MedicineCheckRuleBean> list;
+    public DetectRuleAdapter(Context context, List<MedicineCheckRuleBean> list){
         this.context = context;
         this.list = list;
     }
@@ -39,7 +39,7 @@ public class DetectRuleAdapter extends BaseAdapter {
         if(convertView == null){
             convertView = View.inflate(context, R.layout.item_detect_rule, null);
         }
-        DetectRuleBean item = list.get(position);
+        MedicineCheckRuleBean item = list.get(position);
         
         TextView tv1 = (TextView) convertView.findViewById(R.id.tv1);
         tv1.setText(item.title);

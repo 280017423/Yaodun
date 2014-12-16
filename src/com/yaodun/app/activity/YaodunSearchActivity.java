@@ -10,6 +10,7 @@ import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,7 +30,8 @@ import com.yaodun.app.adapter.DetectRuleAdapter;
 import com.yaodun.app.adapter.SearchedMedicineNameAdapter;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.manager.UserMgr;
-import com.yaodun.app.model.DetectRuleBean;
+import com.yaodun.app.model.MedicineCheckResultBean;
+import com.yaodun.app.model.MedicineCheckRuleBean;
 import com.yaodun.app.model.MedicineBean;
 import com.yaodun.app.model.QueryType;
 import com.yaodun.app.model.UserInfoModel;
@@ -52,9 +54,12 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	private SearchedMedicineNameAdapter searchAdapter;
 	private List<MedicineBean> searchList = new ArrayList<MedicineBean>();
 	private List<MedicineBean> addList = new ArrayList<MedicineBean>();
+	
+	TextView tvCheckResult, tvCheckAdvice;
+	
 	private ListView lvDetectRules;
 	private DetectRuleAdapter detectAdapter;
-	private List<DetectRuleBean> detectList = new ArrayList<DetectRuleBean>();
+	private List<MedicineCheckRuleBean> detectList = new ArrayList<MedicineCheckRuleBean>();
 	private int queryType = 0;
 	public static YaodunSearchActivity INSTANCE;
 	
@@ -118,6 +123,11 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		lvSearchedNames.setOnItemClickListener(this);
 		lvSearchedNames.setVisibility(searchList.size() > 0 ? View.VISIBLE : View.GONE);
 
+		tvCheckResult = (TextView) findViewById(R.id.tv_query_result_content);
+		tvCheckAdvice = (TextView) findViewById(R.id.tv_advices_content);
+		tvCheckResult.setText("");
+		tvCheckAdvice.setText("");
+		
 		lvDetectRules = (ListView) findViewById(R.id.lv_rules);
 		detectAdapter = new DetectRuleAdapter(mContext, detectList);
 		lvDetectRules.setAdapter(detectAdapter);
@@ -195,11 +205,12 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 			protected void onPostExecute(ActionResult result) {
 				if (result != null && ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
 					detectList.clear();
-					List<DetectRuleBean> tmpList = (List<DetectRuleBean>) result.ResultObject;
-					if (tmpList != null) {
-						detectList.addAll(tmpList);
+					List<MedicineCheckResultBean> tmpList = (List<MedicineCheckResultBean>) result.ResultObject;
+					if (tmpList != null && tmpList.size()>0) {
+						MedicineCheckResultBean checkResult = tmpList.get(0);
+						tvCheckResult.setText(TextUtils.isEmpty(checkResult.result)?"":checkResult.result);
+						tvCheckAdvice.setText(TextUtils.isEmpty(checkResult.grade)?"":checkResult.grade);
 					}
-					detectAdapter.notifyDataSetChanged();
 				} else {
 					showErrorMsg(result);
 				}
@@ -226,7 +237,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	            protected void onPostExecute(ActionResult result) {
 	                if (result != null && ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
 	                    detectList.clear();
-	                    List<DetectRuleBean> tmpList = (List<DetectRuleBean>) result.ResultObject;
+	                    List<MedicineCheckRuleBean> tmpList = (List<MedicineCheckRuleBean>) result.ResultObject;
 	                    if (tmpList != null) {
 	                        detectList.addAll(tmpList);
 	                    }

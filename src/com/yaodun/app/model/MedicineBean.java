@@ -2,7 +2,7 @@
 package com.yaodun.app.model;
 
 public class MedicineBean {
-    public String basicid;
+    public String basicId;
     public String drugname;
     public String productName;
     public String unit;
