@@ -49,6 +49,7 @@ android:fillViewport="true">
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:singleLine="true"
+        android:password="true"
         android:textColorHint="@color/register_gray"
         android:textSize="@dimen/size_4" />
 
@@ -68,6 +69,7 @@ android:fillViewport="true">
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:singleLine="true"
+        android:password="true"
         android:textColorHint="@color/register_gray"
         android:textSize="@dimen/size_4" />
 

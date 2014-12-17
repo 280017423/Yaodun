@@ -36,7 +36,7 @@ public class AppReq {
 		}
 		try {
 			// TODO
-			String apiUrl = "";
+		    String url = ServerAPIConstant.getUrl(ServerAPIConstant.CHANGE_CHECK_UPDATE);
 			List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 			postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_VERSION, PackageUtil.getVersionCode() + ""));
 			postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_APP, ServerAPIConstant.getAppSign()));
@@ -45,7 +45,7 @@ public class AppReq {
 			postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_CLIENT_TYPE, "1"));
 			JsonResult jsonResult;
 
-			jsonResult = HttpClientUtil.get(apiUrl, postParams);
+			jsonResult = HttpClientUtil.get(url, postParams);
 			if (jsonResult != null && jsonResult.isOK()) {
 				VersionInfo version = jsonResult.getData(VersionInfo.class);
 				listener.onUpdateReturned(version);

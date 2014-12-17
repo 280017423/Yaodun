@@ -149,8 +149,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/more_icon_pressed"
+                    android:drawableLeft="@drawable/icon_consult"
                     android:gravity="left|center_vertical"
+                    android:drawablePadding="8dp"
                     android:text="药师建议"
                     android:textColor="@color/content_gray"
                     android:textSize="12sp" />
@@ -165,7 +166,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:drawableLeft="@drawable/more_icon_pressed"
+                    android:drawableLeft="@drawable/icon_praise"
+                    android:drawablePadding="8dp"
                     android:gravity="left|center_vertical"
                     android:text="赞（1234）"
                     android:textColor="@color/content_gray"
@@ -176,15 +178,32 @@
                     android:layout_height="match_parent"
                     android:background="@color/e8" />
 
-                <TextView
-                    android:id="@+id/tv_advice_op_tips"
+                <RelativeLayout 
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:layout_weight="1">
+                <LinearLayout 
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:orientation="horizontal">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="提示：仅供参考"
+                    android:text="提示："
+                    android:textColor="#f18c55"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/tv_advice_op_tips"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="仅供参考"
                     android:textColor="@color/content_gray"
                     android:textSize="12sp" />
+                </LinearLayout>
+                </RelativeLayout>
             </LinearLayout>
             <!-- 检测规则 -->
 

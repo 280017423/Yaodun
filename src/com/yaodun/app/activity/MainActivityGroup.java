@@ -78,7 +78,7 @@ public class MainActivityGroup extends YaodunActivityBase {
 		mBottomTab.setSelectedIndex(0);
 	}
 
-	private void checkUpdate() {
+	public void checkUpdate() {
 		EvtLog.d(TAG, "检查是否有新版本");
 		new Thread(new Runnable() {
 

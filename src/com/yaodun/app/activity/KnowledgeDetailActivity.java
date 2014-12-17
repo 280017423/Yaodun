@@ -10,6 +10,8 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.qianjiang.framework.orm.Utils;
+import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.StringUtil;
 import com.qianjiang.framework.widget.LoadingUpView;
 import com.yaodun.app.R;
@@ -74,6 +76,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 					case SEND_DATA_SUCCESSED:
 						mEdtCommit.setText("");
 						toast("评论成功");
+						ImeUtil.hideSoftInput(KnowledgeDetailActivity.this);
 						break;
 					case SEND_DATA_FAIL:
 						showErrorMsg((ActionResult) result);

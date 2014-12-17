@@ -17,6 +17,8 @@ import android.widget.TextView;
 
 import com.qianjiang.framework.imageloader.core.DisplayImageOptions;
 import com.qianjiang.framework.imageloader.core.display.SimpleBitmapDisplayer;
+import com.qianjiang.framework.orm.Utils;
+import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.StringUtil;
 import com.qianjiang.framework.widget.LoadingUpView;
 import com.yaodun.app.R;
@@ -70,6 +72,7 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 							mAdapter.notifyDataSetChanged();
 						}
 						toast("评论成功");
+						ImeUtil.hideSoftInput(DoctorDetailActivity.this);
 						break;
 					case SEND_DATA_FAIL:
 						showErrorMsg((ActionResult) result);

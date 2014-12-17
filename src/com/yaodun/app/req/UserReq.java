@@ -199,4 +199,36 @@ public class UserReq {
 		}
 		return result;
 	}
+
+	/**
+	 */
+//	public static ActionResult checkNewVersion(String curVer) {
+//        ActionResult result = new ActionResult();
+//        String url = ServerAPIConstant.getUrl(ServerAPIConstant.CHANGE_CHECK_UPDATE);
+//        List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+//        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USER_ID, userId));
+//        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_PASSWORD, newPwd));
+//        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_OLD_PASSWORD, originPwd));
+//        try {
+//            JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
+//            if (jsonResult != null) {
+//                if (jsonResult.isOK()) {
+//                    UserInfoModel userInfoModel = UserMgr.getUserInfoModel();
+//                    if (null != userInfoModel) {
+//                        userInfoModel.setPassword(newPwd);
+//                        UserMgr.saveUserInfo(userInfoModel);
+//                    }
+//                }
+//                result.ResultObject = jsonResult.Msg;
+//                result.ResultCode = jsonResult.Code;
+//            } else {
+//                result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+//            }
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//            result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+//        }
+//        return result;
+//    }
+
 }

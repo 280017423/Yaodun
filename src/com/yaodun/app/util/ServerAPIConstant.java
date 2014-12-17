@@ -18,6 +18,7 @@ public class ServerAPIConstant {
 	public static final String LOGIN_THIRDPARTY = "/User/thirdPartyLogin";
 	public static final String ADD_INTERFACE = "/User/addInterface";
 	public static final String CHANGE_PASSWORD = "/User/changePassword";
+	public static final String CHANGE_CHECK_UPDATE = "/User/checkUpdate";
 	public static final String KNOWLEDGE_LIST = "/User/knowledgeList";
 	public static final String ATTENTION_KNOWLEDGE_LIST = "/User/attentionKnowledgeList";
 	public static final String DOCTOR_LIST = "/User/doctorList";

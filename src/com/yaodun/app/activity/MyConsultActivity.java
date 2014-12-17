@@ -24,6 +24,7 @@ import com.yaodun.app.authentication.ActionProcessor;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.listener.IActionListener;
 import com.yaodun.app.model.ConsultListModel;
+import com.yaodun.app.model.DoctorModel;
 import com.yaodun.app.req.DoctorReq;
 import com.yaodun.app.util.ConstantSet;
 
@@ -158,13 +159,20 @@ public class MyConsultActivity extends YaodunActivityBase implements OnClickList
 
 	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		ConsultListModel model = (ConsultListModel) parent.getAdapter().getItem(position);
-		if (null != model) {
-			// Intent intent = new Intent(MyConsultActivity.this,
-			// MyKnowledgeDetailActivity.class);
-			// intent.putExtra(ConstantSet.EXTRA_KNOWLEDGEMODEL, model);
-			// startActivityForResult(intent, REQUEST_CODE);
-		}
+//		ConsultListModel model = (ConsultListModel) parent.getAdapter().getItem(position);
+//		if (null != model) {
+//			// Intent intent = new Intent(MyConsultActivity.this,
+//			// MyKnowledgeDetailActivity.class);
+//			// intent.putExtra(ConstantSet.EXTRA_KNOWLEDGEMODEL, model);
+//			// startActivityForResult(intent, REQUEST_CODE);
+//		}
+//	    ConsultListModel model = (ConsultListModel) parent.getAdapter().getItem(position);
+//        if (null != model) {
+//            Intent intent = new Intent(this, DoctorDetailActivity.class);
+//            intent.putExtra(ConstantSet.EXTRA_DOCTORMODEL, model.);
+//            startActivity(intent);
+//            finish();
+//        }
 	}
 
 	@Override
