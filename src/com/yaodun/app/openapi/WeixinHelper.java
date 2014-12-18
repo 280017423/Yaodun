@@ -64,12 +64,12 @@ public class WeixinHelper{
 		// 用WXTextObject对象初始化一个WXMediaMessage对象
 		WXMediaMessage msg = new WXMediaMessage();
 		if(TextUtils.isEmpty(title)){
-			msg.title = "美啦美妆社区";//空title似乎分享不出去
+			msg.title = "药盾";//空title似乎分享不出去
 		}else{
 			msg.title = title;// 发送文本类型的消息时，title字段不起作用
 		}
 		if(TextUtils.isEmpty(description)){
-			msg.description = "美啦美妆app，美女聚集最多的美妆社区。";
+			msg.description = "药盾";
 		}else{
 			msg.description = description;
 		}

@@ -1,5 +1,6 @@
 package com.yaodun.app.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Selection;
@@ -21,7 +22,9 @@ import android.widget.TextView;
 import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.NetUtil;
 import com.qianjiang.framework.util.StringUtil;
+import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.yaodun.app.R;
+import com.yaodun.app.openapi.SinaweiboHelper;
 import com.yaodun.app.openapi.WeixinHelper;
 
 /**
@@ -45,12 +48,21 @@ public class ShareToWeiboActivity extends YaodunActivityBase implements OnClickL
 	private Handler mHandler = new Handler();
 
 	WeixinHelper weixinHelper;
+	SinaweiboHelper weiboHelper;
+    
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.weibo_share);
 		initUI();
 		weixinHelper = new WeixinHelper(this);
+		weiboHelper = new SinaweiboHelper(this);
+		weiboHelper.onCreate(savedInstanceState);
+	}
+	@Override
+	protected void onNewIntent(Intent intent) {
+	    super.onNewIntent(intent);
+	    weiboHelper.onNewIntent(intent);
 	}
 
 	// 分享操作
@@ -111,7 +123,8 @@ public class ShareToWeiboActivity extends YaodunActivityBase implements OnClickL
 					toast(getString(R.string.network_is_not_available));
 					return;
 				}
-
+				weiboHelper.setTitle(message);
+				weiboHelper.shareToWeibo();
 			}
 		});
 		
