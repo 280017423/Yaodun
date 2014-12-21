@@ -148,17 +148,6 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 			@Override
 			protected ActionResult doInBackground(String... params) {
 				 return MedicineReq.searchMedicineName(keyword);
-//				ActionResult result = new ActionResult();
-//				result.ResultCode = ActionResult.RESULT_CODE_SUCCESS;
-//				List<MedicineBean> list = new ArrayList<MedicineBean>();
-//				MedicineBean m1 = new MedicineBean();
-//				m1.name = "阿莫";
-//				MedicineBean m2 = new MedicineBean();
-//				m2.name = "西林";
-//				list.add(m1);
-//				list.add(m2);
-//				result.ResultObject = list;
-//				return result;
 			}
 
 			@Override

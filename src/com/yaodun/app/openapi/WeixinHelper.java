@@ -191,7 +191,7 @@ public class WeixinHelper{
     	api.registerApp(ConstantSet.APP_ID_WX);
     	return api;
     }
-    public String buildTransaction(final String type) {
+    private String buildTransaction(final String type) {
 		return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
 	}
 	public boolean isWeixinPengyouquanSupport(){
