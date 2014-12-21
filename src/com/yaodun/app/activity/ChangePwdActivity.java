@@ -43,6 +43,11 @@ public class ChangePwdActivity extends YaodunActivityBase implements OnClickList
 	private void initView() {
 		TextView titleTextView = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
 		titleTextView.setText(R.string.title_text_change_pwd);
+		View left = findViewById(R.id.title_with_back_title_btn_left);
+        left.setOnClickListener(this);
+        TextView tvLeft = (TextView) findViewById(R.id.tv_title_with_back_left);
+        tvLeft.setBackgroundResource(R.drawable.btn_back_bg);
+
 
 		mEdtOriginPwd = (EditText) findViewById(R.id.edt_origin_pwd);
 		mEdtNewPwd = (EditText) findViewById(R.id.edt_new_pwd);
@@ -52,6 +57,9 @@ public class ChangePwdActivity extends YaodunActivityBase implements OnClickList
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+		    case R.id.title_with_back_title_btn_left:
+                finish();
+                break;
 			case R.id.btn_change_pwd:
 				checkAndSubmit();
 				break;

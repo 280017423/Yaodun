@@ -171,12 +171,14 @@
                     android:gravity="left|center_vertical"
                     android:text="赞（1234）"
                     android:textColor="@color/content_gray"
-                    android:textSize="12sp" />
+                    android:textSize="12sp"
+                    android:visibility="gone" />
 
                 <View
                     android:layout_width="1px"
                     android:layout_height="match_parent"
-                    android:background="@color/e8" />
+                    android:background="@color/e8"
+                    android:visibility="gone" />
 
                 <RelativeLayout 
                     android:layout_width="match_parent"

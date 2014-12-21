@@ -314,22 +314,69 @@ userId 为用户id  description为问题描述;
           code =998 msg代表未登陆
 
 问题详细接口
-接口名称：User/questionDetail
-RequestMethod  ：post
+接口名称：User/questionDetail
+RequestMethod ：post
 示例：{"quesitonId":"1","userId":"1"}
-userId 为用户id  quesitonId为问题id;
-返回json:{"code":"1000","msg":"success","data":{"question":"xxx","questionreply":[{"userQuestionReplyId":1,"reply":"yyyy","replyTime":"2014-12-09 16:37:09.0","userType":1},{"userQuestionReplyId":2,"reply":"xxyxyxy","replyTime":"2014-12-03 08:41:52.0","userType":0},{"userQuestionReplyId":3,"reply":"xxxxxxx","replyTime":"2014-12-08 16:34:59.0","userType":0}],"createtime":"2014-12-01 16:52:15.0"}}
+userId 为用户id  quesitonId为问题id;
+返回json:
+{
+    "code": "1000",
+    "msg": "success",
+    "data": {
+        "question": "xxx",
+        "questionreply": [
+            {
+                "userQuestionReplyId": 1,
+                "reply": "yyyy",
+                "userType": "0",
+                "replyTime": "2014-12-09 16:37:09.0"
+            },
+            {
+                "userQuestionReplyId": 2,
+                "reply": "xxyxyxy",
+                "userType": "0",
+                "replyTime": "2014-12-03 08:41:52.0"
+            },
+            {
+                "userQuestionReplyId": 3,
+                "reply": "xxxxxxx",
+                "userType": "0",
+                "replyTime": "2014-12-08 16:34:59.0"
+            },
+            {
+                "userQuestionReplyId": 4,
+                "reply": "xxxxxxx",
+                "userType": "1",
+                "replyTime": "2014-12-09 16:07:18.0"
+            },
+            {
+                "userQuestionReplyId": 5,
+                "reply": "xxxxxxx",
+                "userType": "0",
+                "replyTime": "2014-12-09 17:03:09.0"
+            }
+        ],
+        "createtime": "2014-12-01 16:52:15.0",
+        "doctorId": 1,
+        "doctorName": "ab",
+        "doctorImg": "c:/xx.png",
+        "doctorDescription": "xyz",
+        "attionStatus": "0"
+    }
+}
+
 成功返回code=1000  msg为success
                questionreply为回复的list（reply :回复内容。replytime：回复时间）
                quetion 为问题
-	    createtime为创建时间 
-            userType:1表示是药师,0:表示是用户
-
-                
+   createtime为创建时间
+               doctorId：医生id
+doctorName:医生名称
+doctorImg：医生头像http
+                 doctorDescription:医生描述
+               attionStatus：关注状态  1：为关注,0:为未关注
         code =1002 msg为提问id不存在
          code =1001 msg为错误信息  data null
           code =998 msg代表未登陆
-
 
 咨询保存接口(提问详细里面的药师咨询保存)
 接口名称：User/questionSave
