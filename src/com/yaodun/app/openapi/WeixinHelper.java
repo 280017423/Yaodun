@@ -24,7 +24,7 @@ public class WeixinHelper{
 	private final String TAG = getClass().getSimpleName();
 	
 	Activity act;
-	String title;
+	String title;//只分享文本的时候，title将被忽略，只有description生效
 	String description;
 	String webpageUrl;
 	String bmpPath;
@@ -191,7 +191,7 @@ public class WeixinHelper{
     	api.registerApp(ConstantSet.APP_ID_WX);
     	return api;
     }
-    private String buildTransaction(final String type) {
+    public String buildTransaction(final String type) {
 		return (type == null) ? String.valueOf(System.currentTimeMillis()) : type + System.currentTimeMillis();
 	}
 	public boolean isWeixinPengyouquanSupport(){

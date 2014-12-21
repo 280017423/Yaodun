@@ -222,7 +222,14 @@
         </activity>
         <!-- 微信结果页 -->
         <activity android:name="com.yaodun.app.wxapi.WXEntryActivity"
-            android:exported="true" />
+            android:exported="true"
+             >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:scheme="sdksample"/>
+            </intent-filter>
+            </activity>
     </application>
 
 </manifest>

@@ -56,7 +56,6 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
     private LoadingUpView mLoadingUpView;
     private Tencent mTencent;
     private IWXAPI mWxApi;
-    private SendAuth.Req req;
     BroadcastReceiver wxReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context arg0, Intent arg1) {
@@ -328,13 +327,14 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
 
     void doWeixinLogin() {
         if (mWxApi == null) {
-            mWxApi = WXAPIFactory.createWXAPI(this, ConstantSet.APP_ID_WX, true);
-            mWxApi.registerApp(ConstantSet.APP_ID_WX);
+            mWxApi = WXAPIFactory.createWXAPI(this, ConstantSet.APP_ID_WX);
+            boolean regOk = mWxApi.registerApp(ConstantSet.APP_ID_WX);
+            EvtLog.d(TAG, "registerApp, "+regOk);
         }
-        req = new SendAuth.Req();
+        SendAuth.Req req = new SendAuth.Req();
         req.scope = "snsapi_userinfo";
         // req.scope = "token";
-        req.state = "wechat_sdk_demo_test";
+        req.state = "none";
         mWxApi.sendReq(req);
     }
 

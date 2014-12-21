@@ -19,6 +19,7 @@ import com.tencent.mm.sdk.modelmsg.SendAuth;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.yaodun.app.openapi.WeixinHelper;
 import com.yaodun.app.util.ConstantSet;
 
 /**
@@ -31,7 +32,7 @@ import com.yaodun.app.util.ConstantSet;
 public class WXEntryActivity extends Activity {
 	final String TAG = getClass().getSimpleName();
 	
-	private IWXAPI api;
+	private WeixinHelper weixinHelper;
 	String authResponse;//内容格式见https://open.weixin.qq.com/cgi-bin/frame?t=resource/res_main_tmpl&verify=1&lang=zh_CN
 	
 	IWXAPIEventHandler wxHandler = new IWXAPIEventHandler() {
@@ -69,10 +70,17 @@ public class WXEntryActivity extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
-		WXAPIFactory.createWXAPI(this, ConstantSet.APP_ID_WX, true);
-		api.registerApp(ConstantSet.APP_ID_WX);
-		api.handleIntent(getIntent(), wxHandler);
+		weixinHelper = new WeixinHelper(WXEntryActivity.this);
+		weixinHelper.getWeixinApi().handleIntent(getIntent(), wxHandler);
 	}
+	
+	@Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        
+        setIntent(intent);
+        weixinHelper.getWeixinApi().handleIntent(intent, wxHandler);
+    }
 	
 	void toldShareWeixinOk(boolean isOk){
 		Intent intent = new Intent(ConstantSet.ACTION_WEIXIN_LOGIN);
@@ -84,7 +92,7 @@ public class WXEntryActivity extends Activity {
 	}
 	void getToken(final String code){
 	    final String url = "https://api.weixin.qq.com/sns/oauth2/access_token?appid="
-	            +ConstantSet.APP_ID_WX+"&secret=SECRET&code="
+	            +ConstantSet.APP_ID_WX+"&secret="+ConstantSet.APP_SECRET_WX+"&code="
 	            +code+"&grant_type=authorization_code";
 	    new AsyncTask<Void, Void, Void>(){
             @Override
