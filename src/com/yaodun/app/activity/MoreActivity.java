@@ -68,7 +68,7 @@ public class MoreActivity extends YaodunActivityBase implements OnClickListener 
 				jumpToActivity(MyConsultActivity.class, 0);
 				break;
 			case R.id.rl_more_my_attention:
-			    Toast.makeText(MoreActivity.this, "正在开发中...", Toast.LENGTH_LONG).show();
+			    jumpToActivity(MyAttentionDoctorsActivity.class, 0);
 			    break;
 			case R.id.rl_more_check_version:
 			    MainActivityGroup.INSTANCE.checkUpdate();

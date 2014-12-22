@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -19,31 +18,31 @@ import com.qianjiang.framework.widget.pulltorefresh.PullToRefreshBase.Mode;
 import com.qianjiang.framework.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener2;
 import com.qianjiang.framework.widget.pulltorefresh.PullToRefreshListView;
 import com.yaodun.app.R;
-import com.yaodun.app.adapter.KnowledgeAdapter;
+import com.yaodun.app.adapter.DoctorAdapter;
 import com.yaodun.app.authentication.ActionProcessor;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.listener.IActionListener;
-import com.yaodun.app.model.KnowledgeModel;
-import com.yaodun.app.req.KnowledgeReq;
+import com.yaodun.app.model.DoctorModel;
+import com.yaodun.app.req.DoctorReq;
 import com.yaodun.app.util.ConstantSet;
 
 /**
- * 我的收藏
- * @author tom
- *
+ * 药师咨询界面
+ * 
+ * @author zou.sq
  */
-public class MyCollectActivity extends YaodunActivityBase implements OnClickListener, OnItemClickListener {
-	private static final int REQUEST_CODE = 100;
+public class MyAttentionDoctorsActivity extends YaodunActivityBase implements OnClickListener, OnItemClickListener {
+
 	private static final int GET_DATA_SUCCESSED = 0;
 	private static final int GET_DATA_FAIL = 1;
 	private static final int PULL_DOWN = 0;
 	private static final int PULL_UP = 1;
+	private View mEmptyView;
 	private PullToRefreshListView mPullToRefreshListView;
-	private KnowledgeAdapter mAdapter;
-	private List<KnowledgeModel> mKnowledgeModels;
 	private int mPage;
 	private boolean mIsGettingData;
-
+	private List<DoctorModel> mDoctorModels;
+	private DoctorAdapter mDoctorAdapter;
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			mPullToRefreshListView.onRefreshComplete();
@@ -51,14 +50,14 @@ public class MyCollectActivity extends YaodunActivityBase implements OnClickList
 			if (result != null) {
 				switch (msg.what) {
 					case GET_DATA_SUCCESSED:
-						List<KnowledgeModel> moreList = (List<KnowledgeModel>) result.ResultObject;
+						List<DoctorModel> moreList = (List<DoctorModel>) result.ResultObject;
 						if (moreList != null) {
 							if (PULL_DOWN == msg.arg1) {
-								mKnowledgeModels.clear();
-								mKnowledgeModels.addAll(0, moreList);
+								mDoctorModels.clear();
+								mDoctorModels.addAll(0, moreList);
 							} else {
 								mPage++;
-								mKnowledgeModels.addAll(moreList);
+								mDoctorModels.addAll(moreList);
 							}
 							if (moreList.size() < ConstantSet.INFO_NUM_IN_ONE_PAGE) {
 								mPullToRefreshListView.setNoMoreData();
@@ -68,8 +67,8 @@ public class MyCollectActivity extends YaodunActivityBase implements OnClickList
 							}
 							mPullToRefreshListView.setMode(Mode.BOTH);
 						}
-						if (mAdapter != null) {
-							mAdapter.notifyDataSetChanged();
+						if (mDoctorAdapter != null) {
+							mDoctorAdapter.notifyDataSetChanged();
 						}
 						break;
 					case GET_DATA_FAIL:
@@ -86,55 +85,53 @@ public class MyCollectActivity extends YaodunActivityBase implements OnClickList
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_my_knowledge);
+		setContentView(R.layout.activity_doctor_consult);
 		initVariable();
 		initView();
 	}
 
 	private void initVariable() {
-		mKnowledgeModels = new ArrayList<KnowledgeModel>();
-		mAdapter = new KnowledgeAdapter(this, mKnowledgeModels, mImageLoader);
+		mDoctorModels = new ArrayList<DoctorModel>();
+		mDoctorAdapter = new DoctorAdapter(this, mDoctorModels, mImageLoader);
 	}
 
-	public void initView() {
+	private void initView() {
 		TextView titleTextView = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
-		titleTextView.setText(R.string.text_my_collect);
-		View left = findViewById(R.id.title_with_back_title_btn_left);
-		left.setOnClickListener(this);
-		TextView tvLeft = (TextView) findViewById(R.id.tv_title_with_back_left);
-		tvLeft.setBackgroundResource(R.drawable.btn_back_bg);
+		titleTextView.setText(R.string.text_my_attention);
 
-		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.lv_medicine_knowledge);
+		mEmptyView = View.inflate(this, R.layout.view_empty_layout, null);
+		TextView tvEmptyToast = (TextView) mEmptyView.findViewById(R.id.tv_empty_content);
+		tvEmptyToast.setText(R.string.tips_doctor_consule_empty_view);
+
+		mPullToRefreshListView = (PullToRefreshListView) findViewById(R.id.lv_doctor_consult);
 		ListView listView = mPullToRefreshListView.getRefreshableView();
-		listView.setAdapter(mAdapter);
-		listView.setSelector(new BitmapDrawable());
-		listView.setOnItemClickListener(this);
 		listView.setCacheColorHint(getResources().getColor(R.color.transparent));
 		listView.setFadingEdgeLength(0);
+		listView.setAdapter(mDoctorAdapter);
+		listView.setOnItemClickListener(this);
 		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener2() {
 			@Override
 			public void onPullDownToRefresh() {
 				mPage = 1;
-				getKnowledgeModels(PULL_DOWN);
+				getDoctorModels(PULL_DOWN);
 			}
 
 			@Override
 			public void onPullUpToRefresh() {
-				getKnowledgeModels(PULL_UP);
+				getDoctorModels(PULL_UP);
 			}
 		});
 		mPullToRefreshListView.setHeaderVisible(true);
-		mPullToRefreshListView.setMode(Mode.BOTH);
 		mPullToRefreshListView.setIsShowHeaderFresh(true);
+		mPullToRefreshListView.setMode(Mode.BOTH);
 	}
 
-	private void getKnowledgeModels(final int pullStatus) {
-
+	private void getDoctorModels(final int pullStatus) {
 		if (mIsGettingData) {
 			return;
 		}
 		mIsGettingData = true;
-		new ActionProcessor().startAction(MyCollectActivity.this, new IActionListener() {
+		new ActionProcessor().startAction(MyAttentionDoctorsActivity.this, new IActionListener() {
 
 			@Override
 			public void onSuccess(ActionResult result) {
@@ -148,7 +145,7 @@ public class MyCollectActivity extends YaodunActivityBase implements OnClickList
 
 			@Override
 			public ActionResult onAsyncRun() {
-				return KnowledgeReq.getAttentionKnowledgeList(mPage);
+				return DoctorReq.getAttentionDoctorList(mPage);
 			}
 		});
 	}
@@ -162,37 +159,22 @@ public class MyCollectActivity extends YaodunActivityBase implements OnClickList
 	}
 
 	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+
+			default:
+				break;
+		}
+	}
+
+	@Override
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		KnowledgeModel model = (KnowledgeModel) parent.getAdapter().getItem(position);
+		DoctorModel model = (DoctorModel) parent.getAdapter().getItem(position);
 		if (null != model) {
-			Intent intent = new Intent(MyCollectActivity.this, MyKnowledgeDetailActivity.class);
-			intent.putExtra(ConstantSet.EXTRA_KNOWLEDGEMODEL, model);
-			startActivityForResult(intent, REQUEST_CODE);
+			Intent intent = new Intent(this, DoctorDetailActivity.class);
+			intent.putExtra(ConstantSet.EXTRA_DOCTORMODEL, model);
+			startActivity(intent);
 		}
 	}
 
-	@Override
-	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		if (REQUEST_CODE == requestCode && RESULT_OK == resultCode) {
-			mPullToRefreshListView.setHeaderVisible(true);
-		}
-		super.onActivityResult(requestCode, resultCode, data);
-	}
-
-	@Override
-	public void onClick(final View v) {
-		doActionAgain(TAG, new ActionListener() {
-
-			@Override
-			public void doAction() {
-				switch (v.getId()) {
-					case R.id.title_with_back_title_btn_left:
-						finish();
-						break;
-					default:
-						break;
-				}
-			}
-		});
-	}
 }

@@ -105,6 +105,38 @@ public class DoctorReq {
 		}
 		return result;
 	}
+	public static ActionResult getAttentionDoctorList(int page) {
+        ActionResult result = new ActionResult();
+        String url = ServerAPIConstant.getUrl(ServerAPIConstant.ATTENTION_DOCTOR_LIST);
+        List<NameValuePair> postParams = new ArrayList<NameValuePair>();
+        UserInfoModel model = UserMgr.getUserInfoModel();
+        String userId = "";
+        if (null != model) {
+            userId = model.getUserId();
+        }
+        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_USER_ID, userId));
+        postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_PAGENUM, "" + page));
+        try {
+            JsonResult jsonResult = HttpClientUtil.post(url, null, postParams);
+            if (jsonResult != null) {
+                if (jsonResult.isOK()) {
+                    List<DoctorModel> models = jsonResult.getData(new TypeToken<List<DoctorModel>>() {
+                    }.getType());
+                    result.ResultObject = models;
+                } else {
+                    result.ResultObject = jsonResult.Msg;
+                }
+                result.ResultCode = jsonResult.Code;
+            } else {
+                result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+                result.ResultObject = QJApplicationBase.CONTEXT.getString(R.string.network_is_not_available);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.ResultCode = ActionResult.RESULT_CODE_NET_ERROR;
+        }
+        return result;
+    }
 
 	/**
 	 * 发表提问

@@ -22,6 +22,7 @@ public class ServerAPIConstant {
 	public static final String KNOWLEDGE_LIST = "/User/knowledgeList";
 	public static final String ATTENTION_KNOWLEDGE_LIST = "/User/attentionKnowledgeList";
 	public static final String DOCTOR_LIST = "/User/doctorList";
+	public static final String ATTENTION_DOCTOR_LIST = "/User/attentionDoctorList";
 	public static final String OWN_CONSULT_LIST = "/User/ownConsultList";
 	public static final String QUESTION_SAVE = "/User/questionSave";
 	public static final String KNOWLEDGE_DETAIL = "/User/knowledgeDetail";
