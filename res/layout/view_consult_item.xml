@@ -13,13 +13,12 @@
         android:ellipsize="end"
         android:singleLine="true"
         android:textColor="#5D5D5D"
-        android:textSize="@dimen/size_2"
+        android:textSize="@dimen/size_3"
         android:textStyle="bold" />
 
     <RelativeLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp" >
+        android:layout_height="wrap_content" >
 
         <TextView
             android:id="@+id/tv_replay_time"
@@ -28,7 +27,7 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="#787878"
-            android:textSize="@dimen/size_3" />
+            android:textSize="@dimen/size_4" />
 
         <TextView
             android:id="@+id/tv_statu"
@@ -38,7 +37,7 @@
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="@color/black"
-            android:textSize="@dimen/size_3" />
+            android:textSize="@dimen/size_4" />
     </RelativeLayout>
 
 </LinearLayout>
