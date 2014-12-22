@@ -21,6 +21,72 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <!-- 孕妇用药查询 -->
+
+            <RelativeLayout
+                android:id="@+id/layout_yunfu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp" >
+
+                <RadioGroup
+                    android:id="@+id/rg_jieduan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/rb_renshen"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+						android:checked="true"
+                        android:text="妊娠期"
+                        android:textColor="@color/title_gray"
+                        android:textSize="16sp" />
+
+                    <RadioButton
+                        android:id="@+id/rb_buru"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="false"
+                        android:text="哺乳期"
+                        android:textColor="@color/title_gray"
+                        android:textSize="16sp" />
+                </RadioGroup>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/rg_jieduan"
+                    android:orientation="horizontal" >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="妊娠时间："
+                        android:textColor="@color/title_gray"
+                        android:textSize="16sp" />
+
+                    <EditText
+                        android:id="@+id/et_renshen_time"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:inputType="number"
+                        android:maxLength="2"
+                        android:singleLine="true"
+                        android:textColor="@color/title_gray"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="个月"
+                        android:textColor="@color/title_gray"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </RelativeLayout>
             <!-- 输入框 -->
 
             <LinearLayout
@@ -150,8 +216,8 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:drawableLeft="@drawable/icon_consult"
-                    android:gravity="left|center_vertical"
                     android:drawablePadding="8dp"
+                    android:gravity="left|center_vertical"
                     android:text="药师建议"
                     android:textColor="@color/content_gray"
                     android:textSize="12sp" />
@@ -180,31 +246,34 @@
                     android:background="@color/e8"
                     android:visibility="gone" />
 
-                <RelativeLayout 
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1">
-                <LinearLayout 
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:orientation="horizontal">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="提示："
-                    android:textColor="#f18c55"
-                    android:textSize="12sp" />
-                <TextView
-                    android:id="@+id/tv_advice_op_tips"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="仅供参考"
-                    android:textColor="@color/content_gray"
-                    android:textSize="12sp" />
-                </LinearLayout>
+                    android:layout_weight="1" >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="提示："
+                            android:textColor="#f18c55"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:id="@+id/tv_advice_op_tips"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:text="仅供参考"
+                            android:textColor="@color/content_gray"
+                            android:textSize="12sp" />
+                    </LinearLayout>
                 </RelativeLayout>
             </LinearLayout>
             <!-- 检测规则 -->
