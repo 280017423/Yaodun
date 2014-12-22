@@ -298,30 +298,32 @@ public class LoginActivity extends YaodunActivityBase implements OnClickListener
     }
 
     void doQQLogin() {
-		if (!mTencent.isSessionValid()) {
-			mTencent.login(this, "all", new IUiListener() {
-
-				@Override
-				public void onError(UiError arg0) {
-					EvtLog.d(TAG, "onError");
-				}
-
-				@Override
-				public void onComplete(Object arg0) {
-					EvtLog.d(TAG, arg0.toString());
-					try{
-					    JSONObject jobj = new JSONObject(arg0.toString());
-					    openAPILogin(OpenAPILoginSource.QQ, jobj.getString("openid"));
-					}catch(Exception e){
-					    EvtLog.e(TAG, e);
-					}
-				}
-
-				@Override
-				public void onCancel() {
-					EvtLog.d(TAG, "onCancel");
-				}
-			});
+		if (mTencent.isSessionValid()) {
+		    openAPILogin(OpenAPILoginSource.QQ, mTencent.getOpenId());
+		}else{
+		    mTencent.login(this, "all", new IUiListener() {
+		        
+		        @Override
+		        public void onError(UiError arg0) {
+		            EvtLog.d(TAG, "onError");
+		        }
+		        
+		        @Override
+		        public void onComplete(Object arg0) {
+		            EvtLog.d(TAG, arg0.toString());
+		            try{
+		                JSONObject jobj = new JSONObject(arg0.toString());
+		                openAPILogin(OpenAPILoginSource.QQ, jobj.getString("openid"));
+		            }catch(Exception e){
+		                EvtLog.e(TAG, e);
+		            }
+		        }
+		        
+		        @Override
+		        public void onCancel() {
+		            EvtLog.d(TAG, "onCancel");
+		        }
+		    });
 		}
 	}
 
