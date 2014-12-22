@@ -202,9 +202,11 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
                     user = new UserInfoModel();
                 }
                 user.checkType = queryType;
-                user.isGestate = rbRenshen.isChecked()?"1":"0";
-                user.gestateTime = rbRenshen.isChecked()?mEtRenshenTime.getText().toString().trim():"";
-                user.isSuckling = rbBuru.isChecked()?"1":"0";
+                if(queryType == QueryType.medicine_yunfu){
+                    user.isGestate = rbRenshen.isChecked()?"1":"0";
+                    user.gestateTime = rbRenshen.isChecked()?mEtRenshenTime.getText().toString().trim():"";
+                    user.isSuckling = rbBuru.isChecked()?"1":"0";
+                }
                 return MedicineReq.medicineCheck(user, addList);
             }
 
