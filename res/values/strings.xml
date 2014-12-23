@@ -81,6 +81,7 @@
     <string name="question_detail">提问详细</string>
     <string name="has_reply">已经回复</string>
     <string name="has_not_reply">待回复</string>
+    <string name="knowledge_detail_cancel_attention">取消关注</string>
 
     <!-- 反馈 -->
     <string name="feedback_hint">感谢您对我们提出的反馈,限制输入100字以内</string>

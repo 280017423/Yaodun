@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.EditText;
+import android.widget.RadioGroup;
+import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 
 import com.qianjiang.framework.util.ImeUtil;
@@ -32,6 +34,7 @@ public class RegisterActivity extends YaodunActivityBase implements OnClickListe
 	private int mSexValue;
 	private boolean mIsRegister;
 	private LoadingUpView mLoadingUpView;
+	private RadioGroup mRgSex;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +42,21 @@ public class RegisterActivity extends YaodunActivityBase implements OnClickListe
 		setContentView(R.layout.activity_register);
 		initVariable();
 		initView();
+		setListener();
+	}
+
+	private void setListener() {
+		mRgSex.setOnCheckedChangeListener(new OnCheckedChangeListener() {
+
+			@Override
+			public void onCheckedChanged(RadioGroup group, int checkedId) {
+				if (R.id.radio_male == checkedId) {
+					mSexValue = 0;
+				} else {
+					mSexValue = 1;
+				}
+			}
+		});
 	}
 
 	private void initVariable() {
@@ -53,6 +71,7 @@ public class RegisterActivity extends YaodunActivityBase implements OnClickListe
 		mEdtPwd = (EditText) findViewById(R.id.edt_child_pwd);
 		mEdtPwdAgain = (EditText) findViewById(R.id.edt_child_pwd_again);
 		mEdtNickname = (EditText) findViewById(R.id.edt_child_nickname);
+		mRgSex = (RadioGroup) findViewById(R.id.rg_sex);
 	}
 
 	@Override

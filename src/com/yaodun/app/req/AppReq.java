@@ -35,17 +35,12 @@ public class AppReq {
 			return;
 		}
 		try {
-			// TODO
-		    String url = ServerAPIConstant.getUrl(ServerAPIConstant.CHANGE_CHECK_UPDATE);
+			String url = ServerAPIConstant.getUrl(ServerAPIConstant.CHANGE_CHECK_UPDATE);
 			List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 			postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_VERSION, PackageUtil.getVersionCode() + ""));
-			postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_APP, ServerAPIConstant.getAppSign()));
-			postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_PROJECT_SIGN, ServerAPIConstant.PROJECT_SIGN)); // 3表示打卡app
-			// 1 表示android
-			postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_CLIENT_TYPE, "1"));
 			JsonResult jsonResult;
 
-			jsonResult = HttpClientUtil.get(url, postParams);
+			jsonResult = HttpClientUtil.post(url, null, postParams);
 			if (jsonResult != null && jsonResult.isOK()) {
 				VersionInfo version = jsonResult.getData(VersionInfo.class);
 				listener.onUpdateReturned(version);

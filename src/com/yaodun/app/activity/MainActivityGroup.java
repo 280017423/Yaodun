@@ -88,7 +88,7 @@ public class MainActivityGroup extends YaodunActivityBase {
 
 					@Override
 					public void onUpdateReturned(VersionInfo versionInfo) {
-						if (null != versionInfo && VersionInfo.HAS_NEW_VERSION == versionInfo.hasNew) {
+						if (null != versionInfo) {
 							mCurrentVersionInfo = versionInfo;
 							mCheckVersionHandler.obtainMessage();
 							mCheckVersionHandler.sendEmptyMessage(DIALOG_HAS_NEW_VERSION);

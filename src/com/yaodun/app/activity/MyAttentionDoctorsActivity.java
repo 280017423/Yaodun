@@ -171,7 +171,7 @@ public class MyAttentionDoctorsActivity extends YaodunActivityBase implements On
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		DoctorModel model = (DoctorModel) parent.getAdapter().getItem(position);
 		if (null != model) {
-			Intent intent = new Intent(this, DoctorDetailActivity.class);
+			Intent intent = new Intent(this, MyDoctorDetailActivity.class);
 			intent.putExtra(ConstantSet.EXTRA_DOCTORMODEL, model);
 			startActivity(intent);
 		}

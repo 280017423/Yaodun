@@ -2,7 +2,6 @@ package com.yaodun.app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.Selection;
 import android.text.Spannable;
 import android.view.Gravity;
@@ -22,10 +21,6 @@ import android.widget.TextView;
 import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.NetUtil;
 import com.qianjiang.framework.util.StringUtil;
-import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
-import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.sdk.modelmsg.WXTextObject;
-import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.yaodun.app.R;
 import com.yaodun.app.openapi.SinaweiboHelper;
 import com.yaodun.app.openapi.WeixinHelper;
@@ -33,26 +28,18 @@ import com.yaodun.app.openapi.WeixinHelper;
 /**
  * 微博分享页面
  * 
- * @author zeng.ww
- * @since 2012-8-1 上午10:02:26
- * @version 2012-8-1 上午10:02:26 zeng.ww 创建文件<br>
- *          2013-03-25 xu.xb 为点击分享到不同微博选项加入相同限制，即选择一项后，要400ms才能选择另外一项<br>
- *          2013-03-28 xu.xb 修复BUG： 重复分享人人网的提示信息建议修改 #47029<br>
+ * @author zou.sq
  */
 public class ShareToWeiboActivity extends YaodunActivityBase implements OnClickListener {
-	private static final String TAG = "ShareToWeiboActivity";
-
-	private boolean mAnimationIsStart;
 
 	private EditText mShareContent;
 	private View mPopupWindowView;
 
 	private PopupWindow mPopupWindow;
-	private Handler mHandler = new Handler();
 
 	WeixinHelper weixinHelper;
 	SinaweiboHelper weiboHelper;
-    
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -62,10 +49,11 @@ public class ShareToWeiboActivity extends YaodunActivityBase implements OnClickL
 		weiboHelper = new SinaweiboHelper(this);
 		weiboHelper.onCreate(savedInstanceState);
 	}
+
 	@Override
 	protected void onNewIntent(Intent intent) {
-	    super.onNewIntent(intent);
-	    weiboHelper.onNewIntent(intent);
+		super.onNewIntent(intent);
+		weiboHelper.onNewIntent(intent);
 	}
 
 	// 分享操作
@@ -130,46 +118,47 @@ public class ShareToWeiboActivity extends YaodunActivityBase implements OnClickL
 				weiboHelper.shareToWeibo();
 			}
 		});
-		
-	      Button mWeixinShareBtn = (Button) view.findViewById(R.id.btn_weibo_share_qq);
-	      mWeixinShareBtn.setOnClickListener(new OnClickListener() {
 
-	            @Override
-	            public void onClick(View v) {
-	                String message = mShareContent.getText().toString();
-	                if (StringUtil.isNullOrEmpty(message)) {
-	                    toast(getResources().getString(R.string.weibo_share_tip_message_null));
-	                    return;
-	                }
-	                if (!NetUtil.isNetworkAvailable()) {
-	                    toast(getString(R.string.network_is_not_available));
-	                    return;
-	                }
-	                weixinHelper.setTitle("药盾");
-	                weixinHelper.setDescription(message);
-	                weixinHelper.shareToWeixin(false);
-//	                IWXAPI api = weixinHelper.getWeixinApi();
-//	             // 初始化一个WXTextObject对象
-//                    WXTextObject textObj = new WXTextObject();
-//                    textObj.text = "test";
-//
-//                    // 用WXTextObject对象初始化一个WXMediaMessage对象
-//                    WXMediaMessage msg = new WXMediaMessage();
-//                    msg.mediaObject = textObj;
-//                    // 发送文本类型的消息时，title字段不起作用
-//                    // msg.title = "Will be ignored";
-//                    msg.description = "test";
-//
-//                    // 构造一个Req
-//                    SendMessageToWX.Req req = new SendMessageToWX.Req();
-//                    req.transaction = weixinHelper.buildTransaction("text"); // transaction字段用于唯一标识一个请求
-//                    req.message = msg;
-//                    req.scene = SendMessageToWX.Req.WXSceneSession;
-//                    
-//                    // 调用api接口发送数据到微信
-//                    api.sendReq(req);
-	            }
-	        });
+		Button mWeixinShareBtn = (Button) view.findViewById(R.id.btn_weibo_share_qq);
+		mWeixinShareBtn.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				String message = mShareContent.getText().toString();
+				if (StringUtil.isNullOrEmpty(message)) {
+					toast(getResources().getString(R.string.weibo_share_tip_message_null));
+					return;
+				}
+				if (!NetUtil.isNetworkAvailable()) {
+					toast(getString(R.string.network_is_not_available));
+					return;
+				}
+				weixinHelper.setTitle("药盾");
+				weixinHelper.setDescription(message);
+				weixinHelper.shareToWeixin(false);
+				// IWXAPI api = weixinHelper.getWeixinApi();
+				// // 初始化一个WXTextObject对象
+				// WXTextObject textObj = new WXTextObject();
+				// textObj.text = "test";
+				//
+				// // 用WXTextObject对象初始化一个WXMediaMessage对象
+				// WXMediaMessage msg = new WXMediaMessage();
+				// msg.mediaObject = textObj;
+				// // 发送文本类型的消息时，title字段不起作用
+				// // msg.title = "Will be ignored";
+				// msg.description = "test";
+				//
+				// // 构造一个Req
+				// SendMessageToWX.Req req = new SendMessageToWX.Req();
+				// req.transaction = weixinHelper.buildTransaction("text"); //
+				// transaction字段用于唯一标识一个请求
+				// req.message = msg;
+				// req.scene = SendMessageToWX.Req.WXSceneSession;
+				//
+				// // 调用api接口发送数据到微信
+				// api.sendReq(req);
+			}
+		});
 
 	}
 
@@ -199,7 +188,6 @@ public class ShareToWeiboActivity extends YaodunActivityBase implements OnClickL
 		mPopupWindow.setOnDismissListener(new OnDismissListener() {
 			@Override
 			public void onDismiss() {
-				mAnimationIsStart = false;
 			}
 		});
 	}

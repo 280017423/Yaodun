@@ -17,7 +17,6 @@ import android.widget.TextView;
 
 import com.qianjiang.framework.imageloader.core.DisplayImageOptions;
 import com.qianjiang.framework.imageloader.core.display.SimpleBitmapDisplayer;
-import com.qianjiang.framework.orm.Utils;
 import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.StringUtil;
 import com.qianjiang.framework.widget.LoadingUpView;
@@ -29,7 +28,6 @@ import com.yaodun.app.listener.IActionListener;
 import com.yaodun.app.model.DoctorModel;
 import com.yaodun.app.model.QuestionModel;
 import com.yaodun.app.req.DoctorReq;
-import com.yaodun.app.req.KnowledgeReq;
 import com.yaodun.app.util.ConstantSet;
 
 /**
@@ -57,6 +55,7 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 	private ListView mListView;
 	private List<QuestionModel> mQuestionList;
 	private QuestionAdapter mAdapter;
+	private int mCurrentStatus;
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -115,6 +114,7 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 		if (null == mDoctorModel) {
 			finish();
 		}
+		mCurrentStatus = mDoctorModel.getStatus();
 		mQuestionList = new ArrayList<QuestionModel>();
 		mAdapter = new QuestionAdapter(this, mQuestionList);
 		mLoadingUpView = new LoadingUpView(this);
@@ -163,7 +163,7 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 			public void doAction() {
 				switch (v.getId()) {
 					case R.id.title_with_back_title_btn_left:
-						finish();
+						back();
 						break;
 					case R.id.btn_attention:
 						attentionKnowledge();
@@ -245,5 +245,18 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 		msg.what = what;
 		msg.obj = result;
 		mHandler.sendMessage(msg);
+	}
+
+	@Override
+	public void onBackPressed() {
+		back();
+		super.onBackPressed();
+	}
+
+	private void back() {
+		if (mCurrentStatus != mDoctorModel.getStatus()) {
+			setResult(RESULT_OK);
+		}
+		finish();
 	}
 }

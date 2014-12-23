@@ -33,6 +33,7 @@ import com.yaodun.app.util.ConstantSet;
  */
 public class DoctorConsultActivity extends YaodunActivityBase implements OnClickListener, OnItemClickListener {
 
+	private static final int REQUEST_CODE = 100;
 	private static final int GET_DATA_SUCCESSED = 0;
 	private static final int GET_DATA_FAIL = 1;
 	private static final int PULL_DOWN = 0;
@@ -173,8 +174,16 @@ public class DoctorConsultActivity extends YaodunActivityBase implements OnClick
 		if (null != model) {
 			Intent intent = new Intent(this, DoctorDetailActivity.class);
 			intent.putExtra(ConstantSet.EXTRA_DOCTORMODEL, model);
-			startActivity(intent);
+			startActivityForResult(intent, REQUEST_CODE);
 		}
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		if (REQUEST_CODE == requestCode && RESULT_OK == resultCode) {
+			mPullToRefreshListView.setHeaderVisible(true);
+		}
+		super.onActivityResult(requestCode, resultCode, data);
 	}
 
 }

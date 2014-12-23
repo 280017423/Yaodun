@@ -1,26 +1,15 @@
 package com.yaodun.app.activity;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.Gravity;
-import android.view.KeyEvent;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.qianjiang.framework.app.QJActivityBase;
 import com.qianjiang.framework.imageloader.core.ImageLoader;
-import com.qianjiang.framework.util.EvtLog;
-import com.qianjiang.framework.util.QJActivityManager;
 import com.qianjiang.framework.util.StringUtil;
 import com.qianjiang.framework.widget.LoadingUpView;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
-import com.yaodun.app.listener.IDialogProtocol;
-import com.yaodun.app.util.DialogManager;
-import com.yaodun.app.widget.CustomDialog.Builder;
 
 /**
  * 界面基类
