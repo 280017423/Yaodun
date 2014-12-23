@@ -10,8 +10,10 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.qianjiang.framework.orm.Utils;
 import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.StringUtil;
+import com.qianjiang.framework.util.UIUtil;
 import com.qianjiang.framework.widget.LoadingUpView;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionProcessor;
@@ -159,6 +161,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 				break;
 			case R.id.title_with_back_title_btn_right:
 				attentionKnowledge();
+				ImeUtil.hideInputKeyboard(KnowledgeDetailActivity.this);
 				break;
 			case R.id.btn_send:
 				sendReplay();

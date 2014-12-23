@@ -9,8 +9,7 @@ public class ConstantSet {
 
 	
 	public static final String APP_ID_QQ = "1103770176";// qq第三方登录的appid
-//	public static final String APP_ID_WX = "wx6e03e62c61953966";// 微信第三方登录的appid
-	public static final String APP_ID_WX = "wxed17d6fec09924da";
+	public static final String APP_ID_WX = "wx6e03e62c61953966";// 微信第三方登录的appid
 	public static final String APP_SECRET_WX = "36189cc98ae9258daeb434279586caf4";
 	public static final String APP_ID_sina = "3491547401";// 新浪微博第三方登录的appid
 
