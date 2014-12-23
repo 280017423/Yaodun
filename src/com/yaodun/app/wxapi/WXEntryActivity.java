@@ -44,8 +44,12 @@ public class WXEntryActivity extends Activity {
 			try{
 			switch (resp.errCode) {
 			case BaseResp.ErrCode.ERR_OK:
-			    SendAuth.Resp sendResp = (SendAuth.Resp) resp;
-			    getToken(sendResp.code);
+			    if(resp instanceof SendAuth.Resp){
+			        SendAuth.Resp sendResp = (SendAuth.Resp) resp;
+			        getToken(sendResp.code);
+			    }else{
+			        finish();
+			    }
 				break;
 			case BaseResp.ErrCode.ERR_USER_CANCEL:
 				toldShareWeixinOk(false);

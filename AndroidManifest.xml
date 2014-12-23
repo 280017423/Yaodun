@@ -227,7 +227,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="tencent1103590952" />
+                <data android:scheme="tencent1103770176" />
             </intent-filter>
         </activity>
         <!-- 微信结果页 -->
