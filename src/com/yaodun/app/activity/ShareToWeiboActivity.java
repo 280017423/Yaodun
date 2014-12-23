@@ -59,7 +59,6 @@ public class ShareToWeiboActivity extends YaodunActivityBase implements OnClickL
 	// 分享操作
 	private void initUI() {
 		mShareContent = (EditText) findViewById(R.id.et_share_content);
-		mShareContent.setText("这是分享内容");
 		TextView title = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
 		title.setText("告诉好友");
 

@@ -41,7 +41,7 @@ public class WXEntryActivity extends Activity {
 		@Override
 		public void onResp(BaseResp resp) {
 			EvtLog.d(TAG, "onResp");
-			
+			try{
 			switch (resp.errCode) {
 			case BaseResp.ErrCode.ERR_OK:
 			    SendAuth.Resp sendResp = (SendAuth.Resp) resp;
@@ -56,6 +56,9 @@ public class WXEntryActivity extends Activity {
 			default:
 				toldShareWeixinOk(false);
 				break;
+			}
+			}catch(Exception e){
+			    EvtLog.e(TAG, e);
 			}
 		}
 		

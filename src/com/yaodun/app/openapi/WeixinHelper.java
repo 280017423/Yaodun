@@ -163,12 +163,12 @@ public class WeixinHelper{
 			}
 		}
 		//分享文本
-		else if(!TextUtils.isEmpty(title)){
-			EvtLog.d(TAG, "share to weixin, text: "+title);
+		else if(!TextUtils.isEmpty(description)){
+			EvtLog.d(TAG, "share to weixin, text: "+description);
 			
 			// 初始化一个WXTextObject对象
 			WXTextObject textObj = new WXTextObject();
-			textObj.text = title;
+			textObj.text = description;
 			msg.mediaObject = textObj;
 			
 			req.transaction = buildTransaction("text"); // transaction字段用于唯一标识一个请求
