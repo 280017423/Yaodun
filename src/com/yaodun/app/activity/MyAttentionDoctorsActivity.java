@@ -98,6 +98,10 @@ public class MyAttentionDoctorsActivity extends YaodunActivityBase implements On
 	private void initView() {
 		TextView titleTextView = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
 		titleTextView.setText(R.string.text_my_attention);
+		View left = findViewById(R.id.title_with_back_title_btn_left);
+        left.setOnClickListener(this);
+        TextView tvLeft = (TextView) findViewById(R.id.tv_title_with_back_left);
+        tvLeft.setBackgroundResource(R.drawable.btn_back_bg);
 
 		mEmptyView = View.inflate(this, R.layout.view_empty_layout, null);
 		TextView tvEmptyToast = (TextView) mEmptyView.findViewById(R.id.tv_empty_content);
@@ -161,7 +165,9 @@ public class MyAttentionDoctorsActivity extends YaodunActivityBase implements On
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-
+		    case R.id.title_with_back_title_btn_left:
+                finish();
+                break;
 			default:
 				break;
 		}
