@@ -76,7 +76,7 @@ public class QuestionDetailActivity extends YaodunActivityBase implements OnClic
 								mImageLoader.displayImage(imgUrl, mIvImg, mOptions);
 							}
 							mTvName.setText(mDetailModel.getDoctorName());
-							mTvProfessional.setText("");
+							mTvProfessional.setText(mDetailModel.getProfessional());
 							mTvDescription.setText(mDetailModel.getDoctorDescription());
 							mQuestionList.clear();
 							mQuestionList.addAll(mDetailModel.getQuestionList());
@@ -96,6 +96,7 @@ public class QuestionDetailActivity extends YaodunActivityBase implements OnClic
 						MyQuestionModel model = (MyQuestionModel) result.ResultObject;
 						if (null != model) {
 							model.setUserType(0);
+							model.setReplyTime(com.qianjiang.framework.util.DateUtil.getSysDate());
 							mQuestionList.add(model);
 							mAdapter.notifyDataSetChanged();
 						}
@@ -116,6 +117,17 @@ public class QuestionDetailActivity extends YaodunActivityBase implements OnClic
 						}
 						break;
 					case ATTENTION_FAIL:
+						if ("1002".equals(((ActionResult) result).ResultCode)) {
+							if (1 == mDetailModel.getAttionStatus()) {
+								mDetailModel.setAttionStatus(0);
+								mBtnAttention.setBackgroundResource(R.drawable.btn_attention_bg);
+								toast("已取消关注");
+							} else {
+								mDetailModel.setAttionStatus(1);
+								mBtnAttention.setBackgroundResource(R.drawable.btn_attention_disable);
+								toast("关注成功");
+							}
+						}
 						showErrorMsg((ActionResult) result);
 						break;
 					default:
@@ -274,9 +286,9 @@ public class QuestionDetailActivity extends YaodunActivityBase implements OnClic
 
 			@Override
 			public ActionResult onAsyncRun() {
-				String operation = "1";
+				String operation = "0";
 				if (1 == mDetailModel.getAttionStatus()) {
-					operation = "0";
+					operation = "1";
 				}
 				return DoctorReq.attentionDoctor(mDetailModel.getDoctorId(), operation);
 			}

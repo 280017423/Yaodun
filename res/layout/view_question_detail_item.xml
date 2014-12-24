@@ -28,7 +28,7 @@
         android:layout_below="@id/tv_question_date"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
-        android:background="@drawable/question_content_bg"
+        android:background="@drawable/question_content_out_bg"
         android:gravity="center_vertical"
         android:paddingLeft="15dp"
         android:paddingRight="10dp"

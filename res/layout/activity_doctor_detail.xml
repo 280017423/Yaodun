@@ -12,7 +12,7 @@
     <RelativeLayout
         android:id="@+id/layout_1"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="80dp"
         android:layout_below="@id/layout_title"
         android:background="@color/main_bg"
         android:orientation="horizontal"
@@ -29,7 +29,7 @@
 
         <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="fill_parent"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp"
             android:layout_toRightOf="@id/iv_doctor_img"
@@ -38,8 +38,9 @@
             <TextView
                 android:id="@+id/tv_doctor_name"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:ellipsize="end"
+                android:gravity="center_vertical"
                 android:singleLine="true"
                 android:textColor="@color/main_color"
                 android:textSize="@dimen/size_2"
@@ -48,10 +49,11 @@
             <TextView
                 android:id="@+id/tv_doctor_professional"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="20dp"
                 android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/tv_doctor_name"
                 android:ellipsize="end"
+                android:gravity="center_vertical"
                 android:singleLine="true"
                 android:textColor="@color/main_color"
                 android:textSize="@dimen/size_4" />

@@ -24,6 +24,7 @@ import com.qianjiang.framework.imageloader.core.DisplayImageOptions;
 import com.qianjiang.framework.imageloader.core.DisplayImageOptions.Builder;
 import com.qianjiang.framework.imageloader.core.ImageLoader;
 import com.qianjiang.framework.imageloader.core.display.RoundedBitmapDisplayer;
+import com.qianjiang.framework.util.StringUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.model.MyQuestionModel;
 
@@ -95,19 +96,30 @@ public class MyQuestionAdapter extends BaseAdapter {
 			holder = (viewHode) convertView.getTag();
 		}
 		MyQuestionModel model = getItem(position);
+		String time = model.getDisplayTime();
 		// 1表示是药师,0:表示是用户
 		if (1 == model.getUserType()) {
 			holder.mLayoutIn.setVisibility(View.VISIBLE);
 			holder.mLayoutOut.setVisibility(View.GONE);
 			holder.mTvContentIn.setText(model.getReply());
 			holder.mIvIconIn.setVisibility(View.VISIBLE);
-			holder.mTvDateIn.setText(model.getDisplayTime());
+			if (StringUtil.isNullOrEmpty(time)) {
+				holder.mTvDateIn.setVisibility(View.GONE);
+			} else {
+				holder.mTvDateIn.setVisibility(View.VISIBLE);
+				holder.mTvDateIn.setText(time);
+			}
 			mImageLoader.displayImage(null, holder.mIvIconIn, mOptions.showImageForEmptyUri(R.drawable.ic_launcher)
 					.build());
 		} else {
 			holder.mLayoutIn.setVisibility(View.GONE);
 			holder.mLayoutOut.setVisibility(View.VISIBLE);
-			holder.mTvDateOut.setText(model.getDisplayTime());
+			if (StringUtil.isNullOrEmpty(time)) {
+				holder.mTvDateOut.setVisibility(View.GONE);
+			} else {
+				holder.mTvDateOut.setVisibility(View.VISIBLE);
+				holder.mTvDateOut.setText(time);
+			}
 			holder.mTvContentOut.setText(model.getReply());
 		}
 

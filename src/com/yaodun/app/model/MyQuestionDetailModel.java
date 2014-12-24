@@ -13,6 +13,7 @@ public class MyQuestionDetailModel extends BaseModel {
 	private String doctorId;
 	private String doctorName;
 	private String doctorImg;
+	private String professional;
 	private String doctorDescription;
 	private int attionStatus;
 	private List<MyQuestionModel> questionreply;
@@ -79,6 +80,14 @@ public class MyQuestionDetailModel extends BaseModel {
 
 	public void setQuestionList(List<MyQuestionModel> questionList) {
 		this.questionreply = questionList;
+	}
+
+	public String getProfessional() {
+		return null == professional ? "" : professional;
+	}
+
+	public void setProfessional(String professional) {
+		this.professional = professional;
 	}
 
 }
