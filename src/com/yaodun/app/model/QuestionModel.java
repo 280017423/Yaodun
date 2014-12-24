@@ -1,13 +1,14 @@
 package com.yaodun.app.model;
 
 import com.qianjiang.framework.orm.BaseModel;
+import com.yaodun.app.util.DateUtil;
 
 public class QuestionModel extends BaseModel {
 
 	private static final long serialVersionUID = -4257923920475674423L;
 	private String questionId;
 	private String description;
-	private String time;
+	private String sendTime;
 
 	public String getQuestionId() {
 		return questionId;
@@ -26,15 +27,15 @@ public class QuestionModel extends BaseModel {
 	}
 
 	public String getTime() {
-		return time;
+		return sendTime;
 	}
 
 	public void setTime(String time) {
-		this.time = time;
+		this.sendTime = time;
 	}
 
 	public String getDisplayTime() {
-		return "11-12 14:20";
+		return DateUtil.getTimeStr(com.qianjiang.framework.util.DateUtil.getSysDate(), sendTime);
 	}
 
 }

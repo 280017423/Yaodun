@@ -66,6 +66,11 @@ public class RegisterActivity extends YaodunActivityBase implements OnClickListe
 	private void initView() {
 		TextView titleTextView = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
 		titleTextView.setText(R.string.title_text_register);
+		
+		View left = findViewById(R.id.title_with_back_title_btn_left);
+		left.setOnClickListener(this);
+		TextView tvLeft = (TextView) findViewById(R.id.tv_title_with_back_left);
+		tvLeft.setBackgroundResource(R.drawable.btn_back_bg);
 
 		mEdtPhone = (EditText) findViewById(R.id.edt_child_phone);
 		mEdtPwd = (EditText) findViewById(R.id.edt_child_pwd);
@@ -77,6 +82,9 @@ public class RegisterActivity extends YaodunActivityBase implements OnClickListe
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
+			case R.id.title_with_back_title_btn_left:
+				finish();
+				break;
 			case R.id.btn_register:
 				checkAndSubmit();
 				break;

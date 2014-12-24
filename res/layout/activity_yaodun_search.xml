@@ -41,7 +41,8 @@
                         android:id="@+id/rb_renshen"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-						android:checked="true"
+                        android:button="@drawable/checkbox_woman_man_style"
+                        android:checked="true"
                         android:text="妊娠期"
                         android:textColor="@color/title_gray"
                         android:textSize="16sp" />
@@ -50,6 +51,7 @@
                         android:id="@+id/rb_buru"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:button="@drawable/checkbox_woman_man_style"
                         android:checked="false"
                         android:text="哺乳期"
                         android:textColor="@color/title_gray"
@@ -59,30 +61,36 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
                     android:layout_below="@id/rg_jieduan"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="10dp"
                     android:orientation="horizontal" >
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
                         android:text="妊娠时间："
                         android:textColor="@color/title_gray"
                         android:textSize="16sp" />
 
                     <EditText
                         android:id="@+id/et_renshen_time"
-                        android:layout_width="60dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="80dp"
+                        android:layout_height="35dp"
+                        android:button="@drawable/checkbox_woman_man_style"
                         android:inputType="number"
                         android:maxLength="2"
                         android:singleLine="true"
                         android:textColor="@color/title_gray"
-                        android:textSize="16sp" />
+                        android:textSize="14sp" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="个月"
+                        android:layout_marginLeft="5dp"
+                        android:button="@drawable/checkbox_woman_man_style"
+                        android:text="月"
                         android:textColor="@color/title_gray"
                         android:textSize="16sp" />
                 </LinearLayout>

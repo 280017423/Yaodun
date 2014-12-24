@@ -30,7 +30,7 @@ import com.yaodun.app.util.SharedPreferenceUtil;
 public class NewerAdapter extends PagerAdapter {
 
 	private static final String TAG = "NewerAdapter";
-	private static final int BOTTOM_MARGIN = 100;
+	private static final int BOTTOM_MARGIN = 80;
 	private Activity mContext;
 	private int[] mImages;
 

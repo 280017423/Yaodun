@@ -8,6 +8,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.qianjiang.framework.app.QJActivityBase;
+import com.qianjiang.framework.util.NetUtil;
 import com.qianjiang.framework.util.StringUtil;
 import com.qianjiang.framework.widget.LoadingUpView;
 import com.yaodun.app.R;
@@ -48,6 +49,10 @@ public class FeedBackActivity extends QJActivityBase implements OnClickListener 
 
 	private void submitContent(final String content) {
 		if (mIsGettingData) {
+			return;
+		}
+		if (!NetUtil.isNetworkAvailable()) {
+			toast(getString(R.string.network_is_not_available));
 			return;
 		}
 		if (StringUtil.isNullOrEmpty(content)) {

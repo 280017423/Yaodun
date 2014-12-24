@@ -71,7 +71,6 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 							mAdapter.notifyDataSetChanged();
 						}
 						toast("评论成功");
-						ImeUtil.hideSoftInput(DoctorDetailActivity.this);
 						break;
 					case SEND_DATA_FAIL:
 						showErrorMsg((ActionResult) result);
@@ -169,6 +168,7 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 						attentionKnowledge();
 						break;
 					case R.id.btn_send:
+						ImeUtil.hideSoftInput(DoctorDetailActivity.this);
 						sendReplay();
 						break;
 

@@ -10,6 +10,7 @@ import com.qianjiang.framework.util.HttpClientUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.adapter.NewerAdapter;
 import com.yaodun.app.widget.AutoScrollViewPager;
+import com.yaodun.app.widget.CircleFlowIndicator;
 
 /**
  * 新手引导界面
@@ -18,9 +19,11 @@ import com.yaodun.app.widget.AutoScrollViewPager;
  */
 public class NewerGuidingActivity extends YaodunActivityBase {
 	private static final int DIALOG_EXIT_APP = 1;
+	private static final int COUNT = 3;
 
 	private int mCurrentPosition;
 	private AutoScrollViewPager mViewPager;
+	private CircleFlowIndicator mCircleFlowIndicator;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -32,12 +35,15 @@ public class NewerGuidingActivity extends YaodunActivityBase {
 
 	private void findView() {
 		mViewPager = (AutoScrollViewPager) findViewById(R.id.vp_newer_guide);
+		mCircleFlowIndicator = (CircleFlowIndicator) findViewById(R.id.cfi_indicator);
+		mCircleFlowIndicator.setCount(COUNT);
 		mViewPager.setAdapter(new NewerAdapter(this));
 		mViewPager.setOnPageChangeListener(new OnPageChangeListener() {
 
 			@Override
 			public void onPageSelected(int position) {
 				mCurrentPosition = position;
+				mCircleFlowIndicator.setSeletion(position % COUNT);
 			}
 
 			@Override

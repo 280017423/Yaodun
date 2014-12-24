@@ -2,17 +2,14 @@ package com.yaodun.app.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.qianjiang.framework.util.WeixinUtil;
+import com.qianjiang.framework.util.NetUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.manager.UserMgr;
-import com.yaodun.app.openapi.WeixinHelper;
 import com.yaodun.app.util.ConstantSet;
 
 /**
@@ -68,10 +65,14 @@ public class MoreActivity extends YaodunActivityBase implements OnClickListener 
 				jumpToActivity(MyConsultActivity.class, 0);
 				break;
 			case R.id.rl_more_my_attention:
-			    jumpToActivity(MyAttentionDoctorsActivity.class, 0);
-			    break;
+				jumpToActivity(MyAttentionDoctorsActivity.class, 0);
+				break;
 			case R.id.rl_more_check_version:
-			    MainActivityGroup.INSTANCE.checkUpdate();
+				if (!NetUtil.isNetworkAvailable()) {
+					toast(getString(R.string.network_is_not_available));
+					return;
+				}
+				MainActivityGroup.INSTANCE.checkUpdate();
 				break;
 			case R.id.title_with_back_title_btn_right:
 				logout();

@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import com.qianjiang.framework.util.StringUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.model.QuestionModel;
 
@@ -78,8 +79,14 @@ public class QuestionAdapter extends BaseAdapter {
 			holder = (viewHode) convertView.getTag();
 		}
 		QuestionModel model = getItem(position);
+		String time = model.getDisplayTime();
 		holder.mTvContent.setText(model.getDescription());
-		holder.mTvDate.setText(model.getDisplayTime());
+		if (StringUtil.isNullOrEmpty(time)) {
+			holder.mTvDate.setVisibility(View.GONE);
+		} else {
+			holder.mTvDate.setVisibility(View.VISIBLE);
+			holder.mTvDate.setText(time);
+		}
 
 		return convertView;
 	}
