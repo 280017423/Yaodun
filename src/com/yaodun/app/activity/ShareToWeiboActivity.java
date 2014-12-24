@@ -1,6 +1,8 @@
 package com.yaodun.app.activity;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Selection;
 import android.text.Spannable;
@@ -43,7 +45,7 @@ public class ShareToWeiboActivity extends YaodunActivityBase implements OnClickL
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.weibo_share);
+		setContentView(R.layout.activity_share);
 		initUI();
 		weixinHelper = new WeixinHelper(this);
 		weiboHelper = new SinaweiboHelper(this);
@@ -164,13 +166,14 @@ public class ShareToWeiboActivity extends YaodunActivityBase implements OnClickL
 	// 弹出对话框
 	private void showWindow(View parent) {
 		if (mPopupWindow == null) {
-			mPopupWindowView = View.inflate(this, R.layout.weibo_item_list, null);
+			mPopupWindowView = View.inflate(this, R.layout.view_share_pop, null);
 			mPopupWindow = new PopupWindow(mPopupWindowView, LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 			sinaShare(mPopupWindowView);
 			doBackAction(mPopupWindowView);
 		}
-
-		mPopupWindow.setBackgroundDrawable(getResources().getDrawable(R.color.alpha_black));
+		ColorDrawable dw = new ColorDrawable(0x55000000);
+		mPopupWindow.setBackgroundDrawable(dw);
+		mPopupWindow.setOutsideTouchable(true);
 		// 这个是为了点击“返回Back”也能使其消失，并且并不会影响你的背景.
 		mPopupWindow.setAnimationStyle(R.style.share_Popwindow_anim_style);
 		mPopupWindowView.startAnimation(AnimationUtils.loadAnimation(ShareToWeiboActivity.this, R.anim.menu_show));

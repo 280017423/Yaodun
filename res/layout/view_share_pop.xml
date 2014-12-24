@@ -3,14 +3,13 @@
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="30dp" >
+    android:padding="20dp" >
 
     <Button
         android:id="@+id/btn_weibo_share_sina"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/btn_weibo_share_list_bg"
+        android:layout_height="40dp"
+        android:background="@drawable/btn_login_selector"
         android:text="新浪"
         android:textColor="@color/white"
         android:textSize="16sp" />
@@ -18,9 +17,9 @@
     <Button
         android:id="@+id/btn_weibo_share_qq"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginTop="10dp"
-        android:background="@drawable/btn_weibo_share_list_bg"
+        android:background="@drawable/btn_login_selector"
         android:text="微信"
         android:textColor="@color/white"
         android:textSize="16sp" />
@@ -28,9 +27,9 @@
     <Button
         android:id="@+id/btn_weibo_share_cancle"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/btn_weibo_share_cancle"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/btn_register_selector"
         android:text="@string/button_text_no"
         android:textColor="@color/white"
         android:textSize="16sp" />

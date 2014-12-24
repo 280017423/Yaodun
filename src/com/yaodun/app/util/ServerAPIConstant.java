@@ -25,6 +25,7 @@ public class ServerAPIConstant {
 	public static final String ATTENTION_DOCTOR_LIST = "/User/attentionDoctorList";
 	public static final String OWN_CONSULT_LIST = "/User/ownConsultList";
 	public static final String QUESTION_SAVE = "/User/questionSave";
+	public static final String QUESTION_REPLY = "/User/questionReply";
 	public static final String KNOWLEDGE_DETAIL = "/User/knowledgeDetail";
 	public static final String QUESTION_DETAIL = "/User/questionDetail";
 	public static final String ATTENTION_KNOWLEDGE = "/User/attentionKnowledge";
@@ -66,11 +67,14 @@ public class ServerAPIConstant {
 	public static final String KEY_BIRTHDAY = "birthday";
 	public static final String KEY_OPENAPI_SOURCE = "source";
 	public static final String KEY_OPENAPI_OPENID = "openId";
+	public static final String KEY_REPLY = "reply";
 
 	public static final String KEY_KNOWLEDGETYPE = "knowledgeType";
 	public static final String KEY_PAGENUM = "pageNum";
 	public static final String KEY_KNOWLEDGEID = "knowledgeId";
 	public static final String KEY_DOCTORID = "doctorId";
+	public static final String KEY_QUESTIONID = "questionId";
+	public static final String KEY_QUESITONID = "quesitonId";
 	public static final String KEY_DISCUSS = "discuss";
 	public static final String KEY_OPERATION = "operation";
 	public static final String KEY_DESCRIPTION = "description";

@@ -105,6 +105,7 @@ public class DoctorReq {
 		}
 		return result;
 	}
+	
 	public static ActionResult getAttentionDoctorList(int page) {
         ActionResult result = new ActionResult();
         String url = ServerAPIConstant.getUrl(ServerAPIConstant.ATTENTION_DOCTOR_LIST);

@@ -21,27 +21,31 @@ import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.StringUtil;
 import com.qianjiang.framework.widget.LoadingUpView;
 import com.yaodun.app.R;
-import com.yaodun.app.adapter.QuestionAdapter;
+import com.yaodun.app.adapter.MyQuestionAdapter;
 import com.yaodun.app.authentication.ActionProcessor;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.listener.IActionListener;
-import com.yaodun.app.model.DoctorModel;
-import com.yaodun.app.model.QuestionModel;
+import com.yaodun.app.model.ConsultListModel;
+import com.yaodun.app.model.MyQuestionDetailModel;
+import com.yaodun.app.model.MyQuestionModel;
+import com.yaodun.app.req.ConsultReq;
 import com.yaodun.app.req.DoctorReq;
 import com.yaodun.app.util.ConstantSet;
 
 /**
- * 提问详细界面
+ * 我的提问详细界面
  * 
  * @author zou.sq
  */
-public class DoctorDetailActivity extends YaodunActivityBase implements OnClickListener {
+public class QuestionDetailActivity extends YaodunActivityBase implements OnClickListener {
 
+	private static final int GET_DATA_SUCCESSED = 0;
+	private static final int GET_DATA_FAIL = 1;
 	private static final int SEND_DATA_SUCCESSED = 2;
 	private static final int SEND_DATA_FAIL = 3;
 	private static final int ATTENTION_SUCCESSED = 4;
 	private static final int ATTENTION_FAIL = 5;
-	private DoctorModel mDoctorModel;
+	private ConsultListModel mConsultListModel;
 	private EditText mEdtCommit;
 	private boolean mIsSend;
 	private boolean mIsAttention;
@@ -53,9 +57,10 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 	private DisplayImageOptions mOptions;
 	private Button mBtnAttention;
 	private ListView mListView;
-	private List<QuestionModel> mQuestionList;
-	private QuestionAdapter mAdapter;
-	private int mCurrentStatus;
+	private List<MyQuestionModel> mQuestionList;
+	private MyQuestionAdapter mAdapter;
+	private boolean mIsGettingData;
+	private MyQuestionDetailModel mDetailModel;
 
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
@@ -63,27 +68,50 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 			ActionResult result = (ActionResult) msg.obj;
 			if (result != null) {
 				switch (msg.what) {
+					case GET_DATA_SUCCESSED:
+						mDetailModel = (MyQuestionDetailModel) result.ResultObject;
+						if (mDetailModel != null) {
+							String imgUrl = mDetailModel.getDoctorImg();
+							if (!StringUtil.isNullOrEmpty(imgUrl)) {
+								mImageLoader.displayImage(imgUrl, mIvImg, mOptions);
+							}
+							mTvName.setText(mDetailModel.getDoctorName());
+							mTvProfessional.setText("");
+							mTvDescription.setText(mDetailModel.getDoctorDescription());
+							mQuestionList.clear();
+							mQuestionList.addAll(mDetailModel.getQuestionList());
+							mAdapter.notifyDataSetChanged();
+							if (1 == mDetailModel.getAttionStatus()) {
+								mBtnAttention.setBackgroundResource(R.drawable.btn_attention_disable);
+							} else {
+								mBtnAttention.setBackgroundResource(R.drawable.btn_attention_bg);
+							}
+						}
+						break;
+					case GET_DATA_FAIL:
+						showErrorMsg((ActionResult) result);
+						break;
 					case SEND_DATA_SUCCESSED:
 						mEdtCommit.setText("");
-						QuestionModel model = (QuestionModel) result.ResultObject;
+						MyQuestionModel model = (MyQuestionModel) result.ResultObject;
 						if (null != model) {
+							model.setUserType(0);
 							mQuestionList.add(model);
 							mAdapter.notifyDataSetChanged();
 						}
 						toast("评论成功");
-						ImeUtil.hideSoftInput(DoctorDetailActivity.this);
 						break;
 					case SEND_DATA_FAIL:
 						showErrorMsg((ActionResult) result);
 						break;
 					case ATTENTION_SUCCESSED:
-						if (1 == mDoctorModel.getStatus()) {
-							mDoctorModel.setStatus(0);
-							mBtnAttention.setEnabled(true);
+						if (1 == mDetailModel.getAttionStatus()) {
+							mDetailModel.setAttionStatus(0);
+							mBtnAttention.setBackgroundResource(R.drawable.btn_attention_bg);
 							toast("已取消关注");
 						} else {
-							mBtnAttention.setEnabled(false);
-							mDoctorModel.setStatus(1);
+							mDetailModel.setAttionStatus(1);
+							mBtnAttention.setBackgroundResource(R.drawable.btn_attention_disable);
 							toast("关注成功");
 						}
 						break;
@@ -96,6 +124,7 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 			}
 			mIsSend = false;
 			mIsAttention = false;
+			mIsGettingData = false;
 		}
 	};
 
@@ -106,17 +135,42 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 		initVariable();
 		initView();
 		setListener();
+		getDetail();
+	}
+
+	private void getDetail() {
+		if (mIsGettingData) {
+			return;
+		}
+		showLoadingUpView(mLoadingUpView);
+		mIsGettingData = true;
+		new ActionProcessor().startAction(QuestionDetailActivity.this, new IActionListener() {
+
+			@Override
+			public void onSuccess(ActionResult result) {
+				sendHandler(GET_DATA_SUCCESSED, result);
+			}
+
+			@Override
+			public void onError(ActionResult result) {
+				sendHandler(GET_DATA_FAIL, result);
+			}
+
+			@Override
+			public ActionResult onAsyncRun() {
+				return ConsultReq.getQuestionDetail(mConsultListModel.getQuestionId());
+			}
+		});
 	}
 
 	private void initVariable() {
 		Intent intent = getIntent();
-		mDoctorModel = (DoctorModel) intent.getSerializableExtra(ConstantSet.EXTRA_DOCTORMODEL);
-		if (null == mDoctorModel) {
+		mConsultListModel = (ConsultListModel) intent.getSerializableExtra(ConstantSet.EXTRA_CONSULTLISTMODEL);
+		if (null == mConsultListModel) {
 			finish();
 		}
-		mCurrentStatus = mDoctorModel.getStatus();
-		mQuestionList = new ArrayList<QuestionModel>();
-		mAdapter = new QuestionAdapter(this, mQuestionList);
+		mQuestionList = new ArrayList<MyQuestionModel>();
+		mAdapter = new MyQuestionAdapter(this, mQuestionList, mImageLoader);
 		mLoadingUpView = new LoadingUpView(this);
 		mOptions = new DisplayImageOptions.Builder().cacheInMemory().cacheOnDisc()
 				.displayer(new SimpleBitmapDisplayer()).build();
@@ -141,18 +195,7 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 		mTvProfessional = (TextView) findViewById(R.id.tv_doctor_professional);
 		mTvDescription = (TextView) findViewById(R.id.tv_doctor_description);
 		mBtnAttention = (Button) findViewById(R.id.btn_attention);
-		String imgUrl = mDoctorModel.getImg();
-		if (!StringUtil.isNullOrEmpty(imgUrl)) {
-			mImageLoader.displayImage(imgUrl, mIvImg, mOptions);
-		}
-		mTvName.setText(mDoctorModel.getDoctorName());
-		mTvProfessional.setText(mDoctorModel.getProfessional());
-		mTvDescription.setText(mDoctorModel.getDescription());
-		if (1 == mDoctorModel.getStatus()) {
-			mBtnAttention.setEnabled(false);
-		} else {
-			mBtnAttention.setEnabled(true);
-		}
+		mBtnAttention.setBackgroundResource(R.drawable.btn_attention_disable);
 	}
 
 	@Override
@@ -163,12 +206,13 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 			public void doAction() {
 				switch (v.getId()) {
 					case R.id.title_with_back_title_btn_left:
-						back();
+						finish();
 						break;
 					case R.id.btn_attention:
 						attentionKnowledge();
 						break;
 					case R.id.btn_send:
+						ImeUtil.hideSoftInput(QuestionDetailActivity.this);
 						sendReplay();
 						break;
 
@@ -191,7 +235,7 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 		}
 		showLoadingUpView(mLoadingUpView);
 		mIsSend = true;
-		new ActionProcessor().startAction(DoctorDetailActivity.this, new IActionListener() {
+		new ActionProcessor().startAction(QuestionDetailActivity.this, new IActionListener() {
 
 			@Override
 			public void onSuccess(ActionResult result) {
@@ -205,18 +249,18 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 
 			@Override
 			public ActionResult onAsyncRun() {
-				return DoctorReq.sendQuestion(mDoctorModel.getDoctorId(), commit);
+				return ConsultReq.replyQuestion(mConsultListModel.getQuestionId(), commit);
 			}
 		});
 	}
 
 	private void attentionKnowledge() {
-		if (mIsAttention || null == mDoctorModel) {
+		if (mIsAttention || null == mConsultListModel) {
 			return;
 		}
 		showLoadingUpView(mLoadingUpView);
 		mIsAttention = true;
-		new ActionProcessor().startAction(DoctorDetailActivity.this, new IActionListener() {
+		new ActionProcessor().startAction(QuestionDetailActivity.this, new IActionListener() {
 
 			@Override
 			public void onSuccess(ActionResult result) {
@@ -230,12 +274,11 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 
 			@Override
 			public ActionResult onAsyncRun() {
-				// operation为1代表关注,为0代表取消关注
 				String operation = "1";
-				if (1 == mDoctorModel.getStatus()) {
+				if (1 == mDetailModel.getAttionStatus()) {
 					operation = "0";
 				}
-				return DoctorReq.attentionDoctor(mDoctorModel.getDoctorId(), operation);
+				return DoctorReq.attentionDoctor(mDetailModel.getDoctorId(), operation);
 			}
 		});
 	}
@@ -247,16 +290,4 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 		mHandler.sendMessage(msg);
 	}
 
-	@Override
-	public void onBackPressed() {
-		back();
-		super.onBackPressed();
-	}
-
-	private void back() {
-		if (mCurrentStatus != mDoctorModel.getStatus()) {
-			setResult(RESULT_OK);
-		}
-		finish();
-	}
 }
