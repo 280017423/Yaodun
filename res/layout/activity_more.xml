@@ -9,438 +9,441 @@
         android:id="@+id/layout_title"
         layout="@layout/title_with_back_btn_wrap" />
 
-    <ScrollView 
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
-    <LinearLayout
-        android:layout_width="fill_parent"
+    <ScrollView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:paddingTop="20dp"
-        android:paddingBottom="20dp"
-        android:background="@drawable/more_content_bg"
-        android:orientation="vertical" >
-        <RelativeLayout
-            android:id="@+id/rl_more_collect"
+        android:layout_marginTop="10dp"
+        android:fadingEdge="none"
+        android:scrollbars="none" >
+
+        <LinearLayout
             android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/more_item_top_bg"
-            android:clickable="true"
-            android:onClick="onClick" >
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/more_content_bg"
+            android:orientation="vertical" >
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/rl_more_collect"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="40dp"
-                android:text="@string/text_my_collect"
-                android:textColor="@color/register_gray"
-                android:textSize="@dimen/size_4" />
+                android:layout_height="40dp"
+                android:background="@drawable/more_item_top_bg"
+                android:clickable="true"
+                android:onClick="onClick" >
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/icon_collect"
-                android:contentDescription="@null" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="40dp"
+                    android:text="@string/text_my_collect"
+                    android:textColor="@color/register_gray"
+                    android:textSize="@dimen/size_4" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/tongyong_jiantou_bg"
-                android:contentDescription="@null" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/icon_collect"
+                    android:contentDescription="@null" />
 
-            <View
-                style="@style/divider_line_style"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tongyong_jiantou_bg"
+                    android:contentDescription="@null" />
 
-        <RelativeLayout
-            android:id="@+id/rl_more_my_consult"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/more_item_mid_bg"
-            android:clickable="true"
-            android:onClick="onClick" >
+                <View
+                    style="@style/divider_line_style"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+            </RelativeLayout>
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/rl_more_my_consult"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="40dp"
-                android:text="@string/text_my_consult"
-                android:textColor="@color/register_gray"
-                android:textSize="@dimen/size_4" />
+                android:layout_height="40dp"
+                android:background="@drawable/more_item_mid_bg"
+                android:clickable="true"
+                android:onClick="onClick" >
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/icon_lock"
-                android:contentDescription="@null" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="40dp"
+                    android:text="@string/text_my_consult"
+                    android:textColor="@color/register_gray"
+                    android:textSize="@dimen/size_4" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/tongyong_jiantou_bg"
-                android:contentDescription="@null" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/icon_lock"
+                    android:contentDescription="@null" />
 
-            <View
-                style="@style/divider_line_style"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tongyong_jiantou_bg"
+                    android:contentDescription="@null" />
 
-        <RelativeLayout
-            android:id="@+id/rl_more_my_attention"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/more_item_mid_bg"
-            android:clickable="true"
-            android:onClick="onClick" >
+                <View
+                    style="@style/divider_line_style"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+            </RelativeLayout>
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/rl_more_my_attention"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="40dp"
-                android:text="@string/text_my_attention"
-                android:textColor="@color/register_gray"
-                android:textSize="@dimen/size_4" />
+                android:layout_height="40dp"
+                android:background="@drawable/more_item_mid_bg"
+                android:clickable="true"
+                android:onClick="onClick" >
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/icon_lock"
-                android:contentDescription="@null" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="40dp"
+                    android:text="@string/text_my_attention"
+                    android:textColor="@color/register_gray"
+                    android:textSize="@dimen/size_4" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/tongyong_jiantou_bg"
-                android:contentDescription="@null" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/icon_lock"
+                    android:contentDescription="@null" />
 
-            <View
-                style="@style/divider_line_style"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tongyong_jiantou_bg"
+                    android:contentDescription="@null" />
 
-        <RelativeLayout
-            android:id="@+id/rl_change_pwd"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/more_item_mid_bg"
-            android:clickable="true"
-            android:onClick="onClick" >
+                <View
+                    style="@style/divider_line_style"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+            </RelativeLayout>
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/rl_change_pwd"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="40dp"
-                android:text="@string/title_text_change_pwd"
-                android:textColor="@color/register_gray"
-                android:textSize="@dimen/size_4" />
+                android:layout_height="40dp"
+                android:background="@drawable/more_item_mid_bg"
+                android:clickable="true"
+                android:onClick="onClick" >
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/icon_lock"
-                android:contentDescription="@null" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="40dp"
+                    android:text="@string/title_text_change_pwd"
+                    android:textColor="@color/register_gray"
+                    android:textSize="@dimen/size_4" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/tongyong_jiantou_bg"
-                android:contentDescription="@null" />
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/icon_lock"
+                    android:contentDescription="@null" />
 
-            <View
-                style="@style/divider_line_style"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tongyong_jiantou_bg"
+                    android:contentDescription="@null" />
 
-        <RelativeLayout
-            android:id="@+id/rl_more_share"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/more_item_mid_bg"
-            android:clickable="true"
-            android:onClick="onClick" >
+                <View
+                    style="@style/divider_line_style"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+            </RelativeLayout>
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/rl_more_share"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="40dp"
-                android:text="告诉朋友"
-                android:textColor="@color/register_gray"
-                android:textSize="@dimen/size_4" />
+                android:layout_height="40dp"
+                android:background="@drawable/more_item_mid_bg"
+                android:clickable="true"
+                android:onClick="onClick" >
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/tongyong_jiantou_bg"
-                android:contentDescription="@null" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="40dp"
+                    android:text="告诉朋友"
+                    android:textColor="@color/register_gray"
+                    android:textSize="@dimen/size_4" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/icon_share"
-                android:contentDescription="@null" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tongyong_jiantou_bg"
+                    android:contentDescription="@null" />
 
-            <View
-                style="@style/divider_line_style"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/icon_share"
+                    android:contentDescription="@null" />
 
-        <RelativeLayout
-            android:id="@+id/rl_more_introduce"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/more_item_mid_bg"
-            android:clickable="true"
-            android:onClick="onClick" >
+                <View
+                    style="@style/divider_line_style"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+            </RelativeLayout>
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/rl_more_introduce"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="40dp"
-                android:text="@string/text_introduce"
-                android:textColor="@color/register_gray"
-                android:textSize="@dimen/size_4" />
+                android:layout_height="40dp"
+                android:background="@drawable/more_item_mid_bg"
+                android:clickable="true"
+                android:onClick="onClick" >
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/tongyong_jiantou_bg"
-                android:contentDescription="@null" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="40dp"
+                    android:text="@string/text_introduce"
+                    android:textColor="@color/register_gray"
+                    android:textSize="@dimen/size_4" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/icon_introduce"
-                android:contentDescription="@null" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tongyong_jiantou_bg"
+                    android:contentDescription="@null" />
 
-            <View
-                style="@style/divider_line_style"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/icon_introduce"
+                    android:contentDescription="@null" />
 
-        <RelativeLayout
-            android:id="@+id/rl_more_about"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/more_item_mid_bg"
-            android:clickable="true"
-            android:onClick="onClick" >
+                <View
+                    style="@style/divider_line_style"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+            </RelativeLayout>
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/rl_more_about"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="40dp"
-                android:text="@string/text_about"
-                android:textColor="@color/register_gray"
-                android:textSize="@dimen/size_4" />
+                android:layout_height="40dp"
+                android:background="@drawable/more_item_mid_bg"
+                android:clickable="true"
+                android:onClick="onClick" >
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/tongyong_jiantou_bg"
-                android:contentDescription="@null" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="40dp"
+                    android:text="@string/text_about"
+                    android:textColor="@color/register_gray"
+                    android:textSize="@dimen/size_4" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/icon_about"
-                android:contentDescription="@null" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tongyong_jiantou_bg"
+                    android:contentDescription="@null" />
 
-            <View
-                style="@style/divider_line_style"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/icon_about"
+                    android:contentDescription="@null" />
 
-        <RelativeLayout
-            android:id="@+id/rl_more_suggest"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/more_item_mid_bg"
-            android:clickable="true"
-            android:onClick="onClick" >
+                <View
+                    style="@style/divider_line_style"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+            </RelativeLayout>
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/rl_more_suggest"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="40dp"
-                android:text="@string/feedback_title"
-                android:textColor="@color/register_gray"
-                android:textSize="@dimen/size_4" />
+                android:layout_height="40dp"
+                android:background="@drawable/more_item_mid_bg"
+                android:clickable="true"
+                android:onClick="onClick" >
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/tongyong_jiantou_bg"
-                android:contentDescription="@null" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="40dp"
+                    android:text="@string/feedback_title"
+                    android:textColor="@color/register_gray"
+                    android:textSize="@dimen/size_4" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/icon_suggest"
-                android:contentDescription="@null" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tongyong_jiantou_bg"
+                    android:contentDescription="@null" />
 
-            <View
-                style="@style/divider_line_style"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/icon_suggest"
+                    android:contentDescription="@null" />
 
-        <RelativeLayout
-            android:id="@+id/rl_more_declare"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/more_item_mid_bg"
-            android:clickable="true"
-            android:onClick="onClick" >
+                <View
+                    style="@style/divider_line_style"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+            </RelativeLayout>
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/rl_more_declare"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="40dp"
-                android:text="@string/text_declare"
-                android:textColor="@color/register_gray"
-                android:textSize="@dimen/size_4" />
+                android:layout_height="40dp"
+                android:background="@drawable/more_item_mid_bg"
+                android:clickable="true"
+                android:onClick="onClick" >
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/tongyong_jiantou_bg"
-                android:contentDescription="@null" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="40dp"
+                    android:text="@string/text_declare"
+                    android:textColor="@color/register_gray"
+                    android:textSize="@dimen/size_4" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/icon_declare"
-                android:contentDescription="@null" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tongyong_jiantou_bg"
+                    android:contentDescription="@null" />
 
-            <View
-                style="@style/divider_line_style"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
-        </RelativeLayout>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/icon_declare"
+                    android:contentDescription="@null" />
 
-        <RelativeLayout
-            android:id="@+id/rl_more_check_version"
-            android:layout_width="fill_parent"
-            android:layout_height="40dp"
-            android:background="@drawable/more_item_bottom_bg"
-            android:clickable="true"
-            android:onClick="onClick" >
+                <View
+                    style="@style/divider_line_style"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+            </RelativeLayout>
 
-            <TextView
+            <RelativeLayout
+                android:id="@+id/rl_more_check_version"
                 android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:gravity="left|center_vertical"
-                android:paddingLeft="40dp"
-                android:text="检查更新"
-                android:textColor="@color/register_gray"
-                android:textSize="@dimen/size_4" />
+                android:layout_height="40dp"
+                android:background="@drawable/more_item_bottom_bg"
+                android:clickable="true"
+                android:onClick="onClick" >
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/tongyong_jiantou_bg"
-                android:contentDescription="@null" />
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="40dp"
+                    android:text="检查更新"
+                    android:textColor="@color/register_gray"
+                    android:textSize="@dimen/size_4" />
 
-            <ImageView
-                android:layout_width="20dp"
-                android:layout_height="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/icon_check_version"
-                android:contentDescription="@null" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/tongyong_jiantou_bg"
+                    android:contentDescription="@null" />
 
-            <View
-                style="@style/divider_line_style"
-                android:layout_alignParentBottom="true"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp" />
-        </RelativeLayout>
-    </LinearLayout>
-</ScrollView>
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/icon_check_version"
+                    android:contentDescription="@null" />
+
+                <View
+                    style="@style/divider_line_style"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp" />
+            </RelativeLayout>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>
