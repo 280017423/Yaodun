@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -25,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
 import android.widget.RadioButton;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.qianjiang.framework.util.UIUtil;
@@ -48,7 +50,7 @@ import com.yaodun.app.util.ConstantSet;
  */
 public class YaodunSearchActivity extends YaodunActivityBase implements OnClickListener, OnItemClickListener,
 		OnCheckedChangeListener {
-
+	private static final int TEACHER_VIEW_HEIGHT = 400;
 	private boolean mIsSearching;
 	private boolean mIsMedicineCheck;
 	private TextView mTvTitle;
@@ -61,8 +63,8 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	private List<MedicineBean> searchList = new ArrayList<MedicineBean>();
 	private List<MedicineBean> addList = new ArrayList<MedicineBean>();
 
-	TextView tvCheckResult, tvCheckAdvice;
-
+	private TextView tvCheckResult, tvCheckAdvice;
+	private ScrollView mScrollView;
 	private ListView lvDetectRules;
 	private DetectRuleAdapter detectAdapter;
 	private List<MedicineCheckRuleBean> detectList = new ArrayList<MedicineCheckRuleBean>();
@@ -114,6 +116,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		mTvTitle = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
 		mTvTitle.setText("大众用药查询");
 
+		mScrollView = (ScrollView) findViewById(R.id.sv_layout);
 		layoutYunfu = findViewById(R.id.layout_yunfu);
 		rbRenshen = (RadioButton) findViewById(R.id.rb_renshen);
 		rbBuru = (RadioButton) findViewById(R.id.rb_buru);
@@ -137,6 +140,10 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		lvSearchedNames.setOnItemClickListener(this);
 		lvSearchedNames.setVisibility(searchList.size() > 0 ? View.VISIBLE : View.GONE);
 
+		android.view.ViewGroup.LayoutParams layoutParams = lvSearchedNames.getLayoutParams();
+		layoutParams.height = UIUtil.dip2px(this, TEACHER_VIEW_HEIGHT);
+		lvSearchedNames.setLayoutParams(layoutParams);
+
 		tvCheckResult = (TextView) findViewById(R.id.tv_query_result_content);
 		tvCheckAdvice = (TextView) findViewById(R.id.tv_advices_content);
 		tvCheckResult.setText("");
@@ -145,6 +152,17 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		lvDetectRules = (ListView) findViewById(R.id.lv_rules);
 		detectAdapter = new DetectRuleAdapter(mContext, detectList);
 		lvDetectRules.setAdapter(detectAdapter);
+
+		new CountDownTimer(200, 200) {
+			@Override
+			public void onTick(long millisUntilFinished) {
+			}
+
+			@Override
+			public void onFinish() {
+				mScrollView.scrollTo(0, 0);
+			}
+		}.start();
 	}
 
 	/**

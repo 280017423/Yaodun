@@ -49,8 +49,7 @@
             android:layout_toLeftOf="@id/iv_doctor_img_in"
             android:background="@drawable/question_content_in_bg"
             android:gravity="center_vertical"
-            android:paddingLeft="15dp"
-            android:paddingRight="10dp"
+            android:padding="10dp"
             android:textColor="#5B5B5B"
             android:textSize="@dimen/size_3" />
     </RelativeLayout>
