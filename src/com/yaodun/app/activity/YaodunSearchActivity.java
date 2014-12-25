@@ -29,6 +29,8 @@ import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.qianjiang.framework.orm.Utils;
+import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.UIUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.adapter.DetectRuleAdapter;
@@ -171,34 +173,63 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	 * @param keyword
 	 */
 	void searchMedicineName(final String keyword) {
+	    if(TextUtils.isEmpty(keyword)){
+	        updateKeywordMatchList(null);
+	        mIsSearching = false;
+	        return;
+	    }
+	    
 		if (mIsSearching) {
 			return;
 		}
 		mIsSearching = true;
 		new AsyncTask<String, Void, ActionResult>() {
-
+		    String passinKeyword = null;
 			@Override
 			protected ActionResult doInBackground(String... params) {
-				return MedicineReq.searchMedicineName(keyword);
+			    passinKeyword = params[0];
+				return MedicineReq.searchMedicineName(passinKeyword);
 			}
 
 			@Override
 			protected void onPostExecute(ActionResult result) {
-				if (result != null && ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
-					searchList.clear();
-					List<MedicineBean> tmpList = (List<MedicineBean>) result.ResultObject;
-					if (tmpList != null) {
-						searchList.addAll(tmpList);
-					}
-					searchAdapter.notifyDataSetChanged();
-					lvSearchedNames.setVisibility(searchList.size() > 0 ? View.VISIBLE : View.GONE);
-				} else {
-					showErrorMsg(result);
-				}
+			    if(passinKeyword.equals(keyword)){//防止这种情况：第一个请求比第二个请求后返回，结果覆盖掉第二个请求的结果
+    				if (result != null && ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
+    					List<MedicineBean> tmpList = (List<MedicineBean>) result.ResultObject;
+    					updateKeywordMatchList(tmpList);
+    					
+    				} else {
+    					showErrorMsg(result);
+    				}
+			    }
 				mIsSearching = false;
 			}
-		}.execute();
+		}.execute(keyword);
 
+	}
+	
+	void updateKeywordMatchList(List<MedicineBean> tmpList){
+	    searchList.clear();
+        if (tmpList != null) {
+            searchList.addAll(tmpList);
+        }
+        searchAdapter.notifyDataSetChanged();
+        
+	    if(searchList.size() > 0){
+	        lvSearchedNames.setVisibility(View.VISIBLE);
+	        android.widget.RelativeLayout.LayoutParams lp = (android.widget.RelativeLayout.LayoutParams) lvSearchedNames.getLayoutParams();
+	        if(lp != null){
+	            int marginTop = 97;
+	            if(queryType == QueryType.medicine_yunfu){
+	                marginTop += 150;
+	            }
+	            lp.topMargin = UIUtil.dip2px(getApplicationContext(), marginTop);
+	            lvSearchedNames.setLayoutParams(lp);
+	        }
+	    }else{
+	        lvSearchedNames.setVisibility(View.GONE);
+	    }
+	    
 	}
 
 	/**
@@ -313,6 +344,9 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.title_with_back_title_btn_left:
+			    mEtName.setText("");
+			    updateKeywordMatchList(null);
+			    ImeUtil.hideInputKeyboard(YaodunSearchActivity.this);
 				goClassify();
 				break;
 			case R.id.iv_qrcode:
