@@ -124,6 +124,7 @@
         </activity>
         <activity
             android:name=".activity.YaodunClassifyActivity"
+            android:windowSoftInputMode="stateAlwaysHidden"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >
         </activity>
@@ -191,7 +192,6 @@
             android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>

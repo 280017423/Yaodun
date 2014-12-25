@@ -2,6 +2,7 @@ package com.yaodun.app.activity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Handler;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -29,7 +30,6 @@ import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.qianjiang.framework.orm.Utils;
 import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.UIUtil;
 import com.yaodun.app.R;
@@ -72,6 +72,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	private List<MedicineCheckRuleBean> detectList = new ArrayList<MedicineCheckRuleBean>();
 	private int queryType = 0;
 	public static YaodunSearchActivity INSTANCE;
+	android.os.Handler handler = new android.os.Handler();
 
 	TextWatcher watcher = new TextWatcher() {
 
@@ -346,7 +347,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 			case R.id.title_with_back_title_btn_left:
 			    mEtName.setText("");
 			    updateKeywordMatchList(null);
-			    ImeUtil.hideInputKeyboard(YaodunSearchActivity.this);
+			    hideIme();
 				goClassify();
 				break;
 			case R.id.iv_qrcode:
@@ -358,6 +359,16 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 			default:
 				break;
 		}
+	}
+	void hideIme(){
+	    ImeUtil.hideInputKeyboard(YaodunSearchActivity.this);//有时候光调用这个方法收不起来，加个延迟再调用一次
+	    ImeUtil.hideSoftInput(YaodunSearchActivity.this, mEtName);
+	    handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                ImeUtil.hideInputKeyboard(YaodunSearchActivity.this);
+            }
+        }, 200);
 	}
 
 	@Override
