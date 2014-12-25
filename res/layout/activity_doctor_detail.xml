@@ -78,7 +78,8 @@
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
             android:background="@drawable/btn_attention_bg"
-            android:onClick="onClick" />
+            android:onClick="onClick"
+            android:textColor="@color/white" />
     </RelativeLayout>
 
     <RelativeLayout

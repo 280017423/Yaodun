@@ -56,13 +56,16 @@
 
     <Button
         android:id="@+id/btn_attention"
-        android:layout_width="60dp"
-        android:layout_height="26dp"
+        android:layout_width="83dp"
+        android:layout_height="36dp"
         android:layout_alignParentRight="true"
         android:layout_centerVertical="true"
         android:layout_marginRight="10dp"
-        android:background="@drawable/btn_attention_disable"
+        android:background="@drawable/btn_cancel_attention_selector"
+        android:gravity="center"
         android:onClick="true"
+        android:text="@string/knowledge_detail_cancel_attention"
+        android:textColor="@color/white"
         android:visibility="gone" />
 
 </RelativeLayout>

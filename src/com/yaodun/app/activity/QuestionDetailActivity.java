@@ -82,8 +82,10 @@ public class QuestionDetailActivity extends YaodunActivityBase implements OnClic
 							mQuestionList.addAll(mDetailModel.getQuestionList());
 							mAdapter.notifyDataSetChanged();
 							if (1 == mDetailModel.getAttionStatus()) {
-								mBtnAttention.setBackgroundResource(R.drawable.btn_attention_disable);
+								mBtnAttention.setBackgroundResource(R.drawable.btn_cancel_attention_selector);
+								mBtnAttention.setText(R.string.knowledge_detail_cancel_attention);
 							} else {
+								mBtnAttention.setText("");
 								mBtnAttention.setBackgroundResource(R.drawable.btn_attention_bg);
 							}
 						}
@@ -109,10 +111,12 @@ public class QuestionDetailActivity extends YaodunActivityBase implements OnClic
 						if (1 == mDetailModel.getAttionStatus()) {
 							mDetailModel.setAttionStatus(0);
 							mBtnAttention.setBackgroundResource(R.drawable.btn_attention_bg);
+							mBtnAttention.setText("");
 							toast("已取消关注");
 						} else {
 							mDetailModel.setAttionStatus(1);
-							mBtnAttention.setBackgroundResource(R.drawable.btn_attention_disable);
+							mBtnAttention.setText(R.string.knowledge_detail_cancel_attention);
+							mBtnAttention.setBackgroundResource(R.drawable.btn_cancel_attention_selector);
 							toast("关注成功");
 						}
 						break;
@@ -196,7 +200,8 @@ public class QuestionDetailActivity extends YaodunActivityBase implements OnClic
 		mTvProfessional = (TextView) findViewById(R.id.tv_doctor_professional);
 		mTvDescription = (TextView) findViewById(R.id.tv_doctor_description);
 		mBtnAttention = (Button) findViewById(R.id.btn_attention);
-		mBtnAttention.setBackgroundResource(R.drawable.btn_attention_disable);
+		mBtnAttention.setBackgroundResource(R.drawable.btn_cancel_attention_selector);
+		mBtnAttention.setText(R.string.knowledge_detail_cancel_attention);
 	}
 
 	@Override
