@@ -3,22 +3,20 @@ package com.yaodun.app.activity;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.qianjiang.framework.widget.LoadingUpView;
 import com.qianjiang.framework.widget.pulltorefresh.PullToRefreshBase.Mode;
 import com.qianjiang.framework.widget.pulltorefresh.PullToRefreshBase.OnRefreshListener2;
 import com.qianjiang.framework.widget.pulltorefresh.PullToRefreshListView;
 import com.yaodun.app.R;
-import com.yaodun.app.adapter.DoctorAdapter;
+import com.yaodun.app.adapter.MyDoctorAdapter;
 import com.yaodun.app.authentication.ActionProcessor;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.listener.IActionListener;
@@ -31,18 +29,22 @@ import com.yaodun.app.util.ConstantSet;
  * 
  * @author zou.sq
  */
-public class MyAttentionDoctorsActivity extends YaodunActivityBase implements OnClickListener, OnItemClickListener {
+public class MyAttentionDoctorsActivity extends YaodunActivityBase implements OnClickListener {
 
 	private static final int GET_DATA_SUCCESSED = 0;
 	private static final int GET_DATA_FAIL = 1;
 	private static final int PULL_DOWN = 0;
 	private static final int PULL_UP = 1;
+	private static final int ATTENTION_SUCCESSED = 4;
+	private static final int ATTENTION_FAIL = 5;
 	private View mEmptyView;
 	private PullToRefreshListView mPullToRefreshListView;
 	private int mPage;
 	private boolean mIsGettingData;
 	private List<DoctorModel> mDoctorModels;
-	private DoctorAdapter mDoctorAdapter;
+	private MyDoctorAdapter mDoctorAdapter;
+	private boolean mIsAttention;
+	private LoadingUpView mLoadingUpView;
 	private Handler mHandler = new Handler() {
 		public void handleMessage(Message msg) {
 			mPullToRefreshListView.onRefreshComplete();
@@ -74,11 +76,20 @@ public class MyAttentionDoctorsActivity extends YaodunActivityBase implements On
 					case GET_DATA_FAIL:
 						showErrorMsg((ActionResult) result);
 						break;
+					case ATTENTION_SUCCESSED:
+						toast("取消关注成功");
+						mPullToRefreshListView.setHeaderVisible(true);
+						break;
+					case ATTENTION_FAIL:
+						showErrorMsg((ActionResult) result);
+						break;
 					default:
 						break;
 				}
 			}
+			dismissLoadingUpView(mLoadingUpView);
 			mIsGettingData = false;
+			mIsAttention = false;
 		}
 	};
 
@@ -91,17 +102,18 @@ public class MyAttentionDoctorsActivity extends YaodunActivityBase implements On
 	}
 
 	private void initVariable() {
+		mLoadingUpView = new LoadingUpView(this);
 		mDoctorModels = new ArrayList<DoctorModel>();
-		mDoctorAdapter = new DoctorAdapter(this, mDoctorModels, mImageLoader);
+		mDoctorAdapter = new MyDoctorAdapter(this, mDoctorModels, mImageLoader, this);
 	}
 
 	private void initView() {
 		TextView titleTextView = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
 		titleTextView.setText(R.string.text_my_attention);
 		View left = findViewById(R.id.title_with_back_title_btn_left);
-        left.setOnClickListener(this);
-        TextView tvLeft = (TextView) findViewById(R.id.tv_title_with_back_left);
-        tvLeft.setBackgroundResource(R.drawable.btn_back_bg);
+		left.setOnClickListener(this);
+		TextView tvLeft = (TextView) findViewById(R.id.tv_title_with_back_left);
+		tvLeft.setBackgroundResource(R.drawable.btn_back_bg);
 
 		mEmptyView = View.inflate(this, R.layout.view_empty_layout, null);
 		TextView tvEmptyToast = (TextView) mEmptyView.findViewById(R.id.tv_empty_content);
@@ -112,7 +124,6 @@ public class MyAttentionDoctorsActivity extends YaodunActivityBase implements On
 		listView.setCacheColorHint(getResources().getColor(R.color.transparent));
 		listView.setFadingEdgeLength(0);
 		listView.setAdapter(mDoctorAdapter);
-		listView.setOnItemClickListener(this);
 		mPullToRefreshListView.setOnRefreshListener(new OnRefreshListener2() {
 			@Override
 			public void onPullDownToRefresh() {
@@ -165,22 +176,49 @@ public class MyAttentionDoctorsActivity extends YaodunActivityBase implements On
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
-		    case R.id.title_with_back_title_btn_left:
-                finish();
-                break;
+			case R.id.title_with_back_title_btn_left:
+				finish();
+				break;
+			case R.id.btn_attention:
+				DoctorModel model = (DoctorModel) v.getTag();
+				cancelAttention(model);
+				break;
 			default:
 				break;
 		}
 	}
 
-	@Override
-	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-		DoctorModel model = (DoctorModel) parent.getAdapter().getItem(position);
-		if (null != model) {
-			Intent intent = new Intent(this, MyDoctorDetailActivity.class);
-			intent.putExtra(ConstantSet.EXTRA_DOCTORMODEL, model);
-			startActivity(intent);
+	private void cancelAttention(final DoctorModel mDoctorModel) {
+		if (mIsAttention || null == mDoctorModel) {
+			return;
 		}
+		showLoadingUpView(mLoadingUpView);
+		mIsAttention = true;
+		new ActionProcessor().startAction(MyAttentionDoctorsActivity.this, new IActionListener() {
+
+			@Override
+			public void onSuccess(ActionResult result) {
+				sendHandler(ATTENTION_SUCCESSED, result);
+			}
+
+			@Override
+			public void onError(ActionResult result) {
+				sendHandler(ATTENTION_FAIL, result);
+			}
+
+			@Override
+			public ActionResult onAsyncRun() {
+				// operation为1代表关注,为0代表取消关注
+				return DoctorReq.attentionDoctor(mDoctorModel.getDoctorId(), "0");
+			}
+		});
+	}
+
+	private void sendHandler(int what, ActionResult result) {
+		Message msg = mHandler.obtainMessage();
+		msg.what = what;
+		msg.obj = result;
+		mHandler.sendMessage(msg);
 	}
 
 }

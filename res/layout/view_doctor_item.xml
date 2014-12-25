@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/more_item_mid_bg"
-    android:orientation="horizontal"
     android:padding="10dp" >
 
     <ImageView
@@ -20,6 +19,7 @@
         android:layout_height="fill_parent"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_toRightOf="@id/iv_doctor_img"
         android:gravity="center_vertical" >
 
         <TextView
@@ -54,4 +54,15 @@
             android:textSize="@dimen/size_4" />
     </RelativeLayout>
 
-</LinearLayout>
+    <Button
+        android:id="@+id/btn_attention"
+        android:layout_width="60dp"
+        android:layout_height="26dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/btn_attention_disable"
+        android:onClick="true"
+        android:visibility="gone" />
+
+</RelativeLayout>

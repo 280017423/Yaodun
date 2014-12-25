@@ -166,11 +166,6 @@
             android:windowSoftInputMode="stateAlwaysHidden" >
         </activity>
         <activity
-            android:name=".activity.MyDoctorDetailActivity"
-            android:launchMode="singleTop"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name=".activity.MoreActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait" >

@@ -117,17 +117,6 @@ public class QuestionDetailActivity extends YaodunActivityBase implements OnClic
 						}
 						break;
 					case ATTENTION_FAIL:
-						if ("1002".equals(((ActionResult) result).ResultCode)) {
-							if (1 == mDetailModel.getAttionStatus()) {
-								mDetailModel.setAttionStatus(0);
-								mBtnAttention.setBackgroundResource(R.drawable.btn_attention_bg);
-								toast("已取消关注");
-							} else {
-								mDetailModel.setAttionStatus(1);
-								mBtnAttention.setBackgroundResource(R.drawable.btn_attention_disable);
-								toast("关注成功");
-							}
-						}
 						showErrorMsg((ActionResult) result);
 						break;
 					default:
@@ -286,9 +275,9 @@ public class QuestionDetailActivity extends YaodunActivityBase implements OnClic
 
 			@Override
 			public ActionResult onAsyncRun() {
-				String operation = "0";
+				String operation = "1";
 				if (1 == mDetailModel.getAttionStatus()) {
-					operation = "1";
+					operation = "0";
 				}
 				return DoctorReq.attentionDoctor(mDetailModel.getDoctorId(), operation);
 			}
