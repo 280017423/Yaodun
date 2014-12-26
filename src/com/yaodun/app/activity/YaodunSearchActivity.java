@@ -2,7 +2,6 @@ package com.yaodun.app.activity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Handler;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
