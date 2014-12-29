@@ -173,63 +173,65 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	 * @param keyword
 	 */
 	void searchMedicineName(final String keyword) {
-	    if(TextUtils.isEmpty(keyword)){
-	        updateKeywordMatchList(null);
-	        mIsSearching = false;
-	        return;
-	    }
-	    
+		if (TextUtils.isEmpty(keyword)) {
+			updateKeywordMatchList(null);
+			mIsSearching = false;
+			return;
+		}
+
 		if (mIsSearching) {
 			return;
 		}
 		mIsSearching = true;
 		new AsyncTask<String, Void, ActionResult>() {
-		    String passinKeyword = null;
+			String passinKeyword = null;
+
 			@Override
 			protected ActionResult doInBackground(String... params) {
-			    passinKeyword = params[0];
+				passinKeyword = params[0];
 				return MedicineReq.searchMedicineName(passinKeyword);
 			}
 
 			@Override
 			protected void onPostExecute(ActionResult result) {
-			    if(passinKeyword.equals(keyword)){//防止这种情况：第一个请求比第二个请求后返回，结果覆盖掉第二个请求的结果
-    				if (result != null && ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
-    					List<MedicineBean> tmpList = (List<MedicineBean>) result.ResultObject;
-    					updateKeywordMatchList(tmpList);
-    					
-    				} else {
-    					showErrorMsg(result);
-    				}
-			    }
+				if (passinKeyword.equals(keyword)) {// 防止这种情况：第一个请求比第二个请求后返回，结果覆盖掉第二个请求的结果
+					if (result != null && ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
+						List<MedicineBean> tmpList = (List<MedicineBean>) result.ResultObject;
+						updateKeywordMatchList(tmpList);
+
+					} else {
+						showErrorMsg(result);
+					}
+				}
 				mIsSearching = false;
 			}
 		}.execute(keyword);
 
 	}
-	
-	void updateKeywordMatchList(List<MedicineBean> tmpList){
-	    searchList.clear();
-        if (tmpList != null) {
-            searchList.addAll(tmpList);
-        }
-        searchAdapter.notifyDataSetChanged();
-        
-	    if(searchList.size() > 0){
-	        lvSearchedNames.setVisibility(View.VISIBLE);
-	        android.widget.RelativeLayout.LayoutParams lp = (android.widget.RelativeLayout.LayoutParams) lvSearchedNames.getLayoutParams();
-	        if(lp != null){
-	            int marginTop = 97;
-	            if(queryType == QueryType.medicine_yunfu){
-	                marginTop += 150;
-	            }
-	            lp.topMargin = UIUtil.dip2px(getApplicationContext(), marginTop);
-	            lvSearchedNames.setLayoutParams(lp);
-	        }
-	    }else{
-	        lvSearchedNames.setVisibility(View.GONE);
-	    }
-	    
+
+	void updateKeywordMatchList(List<MedicineBean> tmpList) {
+		searchList.clear();
+		if (tmpList != null) {
+			searchList.addAll(tmpList);
+		}
+		searchAdapter.notifyDataSetChanged();
+
+		if (searchList.size() > 0) {
+			lvSearchedNames.setVisibility(View.VISIBLE);
+			android.widget.RelativeLayout.LayoutParams lp = (android.widget.RelativeLayout.LayoutParams) lvSearchedNames
+					.getLayoutParams();
+			if (lp != null) {
+				int marginTop = 97;
+				if (queryType == QueryType.medicine_yunfu) {
+					marginTop += 150;
+				}
+				lp.topMargin = UIUtil.dip2px(getApplicationContext(), marginTop);
+				lvSearchedNames.setLayoutParams(lp);
+			}
+		} else {
+			lvSearchedNames.setVisibility(View.GONE);
+		}
+
 	}
 
 	/**
@@ -313,7 +315,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	 * 
 	 * @param addList
 	 */
-	void addMedicineNames() {
+	private void addMedicineNames() {
 		if (addList == null || addList.size() == 0) {
 			layoutAddedNames.setVisibility(View.GONE);
 		} else {
@@ -328,8 +330,8 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 				vMove.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View arg0) {
-						layoutAddedNames.removeViewAt(pos);
 						addList.remove(pos);
+						addMedicineNames();
 					}
 				});
 				LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
@@ -344,9 +346,11 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.title_with_back_title_btn_left:
-			    mEtName.setText("");
-			    updateKeywordMatchList(null);
-			    hideIme();
+				mEtName.setText("");
+				updateKeywordMatchList(null);
+				addList.clear();
+				addMedicineNames();
+				hideIme();
 				goClassify();
 				break;
 			case R.id.iv_qrcode:
@@ -359,22 +363,27 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 				break;
 		}
 	}
-	void hideIme(){
-	    ImeUtil.hideInputKeyboard(YaodunSearchActivity.this);//有时候光调用这个方法收不起来，加个延迟再调用一次
-	    ImeUtil.hideSoftInput(YaodunSearchActivity.this, mEtName);
-	    handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                ImeUtil.hideInputKeyboard(YaodunSearchActivity.this);
-            }
-        }, 200);
+
+	private void hideIme() {
+		ImeUtil.hideInputKeyboard(YaodunSearchActivity.this);// 有时候光调用这个方法收不起来，加个延迟再调用一次
+		ImeUtil.hideSoftInput(YaodunSearchActivity.this, mEtName);
+		handler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				ImeUtil.hideInputKeyboard(YaodunSearchActivity.this);
+			}
+		}, 200);
 	}
 
 	@Override
-	public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3) {
-		lvSearchedNames.setVisibility(View.GONE);
+	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		addList.add(searchList.get(position));
+		searchList.clear();
+		searchAdapter.notifyDataSetChanged();
+		lvSearchedNames.setVisibility(View.GONE);
+		mEtName.setText("");
 		addMedicineNames();
+		hideIme();
 	}
 
 	void goClassify() {
