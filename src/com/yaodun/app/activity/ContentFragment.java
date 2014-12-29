@@ -43,6 +43,7 @@ public class ContentFragment extends YaodunFragmentBase implements OnItemClickLi
 	private boolean mIsGettingData;
 
 	private Handler mHandler = new Handler() {
+		@Override
 		public void handleMessage(Message msg) {
 			mPullToRefreshListView.onRefreshComplete();
 			ActionResult result = (ActionResult) msg.obj;

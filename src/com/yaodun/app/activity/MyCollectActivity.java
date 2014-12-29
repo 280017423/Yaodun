@@ -45,6 +45,7 @@ public class MyCollectActivity extends YaodunActivityBase implements OnClickList
 	private boolean mIsGettingData;
 
 	private Handler mHandler = new Handler() {
+		@Override
 		public void handleMessage(Message msg) {
 			mPullToRefreshListView.onRefreshComplete();
 			ActionResult result = (ActionResult) msg.obj;

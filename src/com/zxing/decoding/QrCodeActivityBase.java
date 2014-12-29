@@ -3,7 +3,6 @@ package com.zxing.decoding;
 import java.io.IOException;
 import java.util.Vector;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.res.AssetFileDescriptor;
 import android.graphics.Bitmap;
@@ -50,13 +49,12 @@ public class QrCodeActivityBase extends YaodunActivityBase implements Callback {
 
 	private Intent intent;
 	private Camera camera;
-	private boolean hasStartPreview = false;
 	private Parameters parameter;
 	private ImageView btnCancel; // 取消
 	private TextView btnManual; // 手动输入
 	private Button btnOpen; // 开灯
 	private boolean isOpen = true; // 控制开关灯
-	
+
 	public static final String KEY_BARCODE_RESULT = "barcode_result";
 	public static final String KEY_CAPTURE_FOR = "capture_for";
 	public static final int CAPTURE_FOR_NONE = 10;
@@ -64,12 +62,12 @@ public class QrCodeActivityBase extends YaodunActivityBase implements Callback {
 	public static final int CAPTURE_FOR_SEARCH = 12;
 	public static final int CAPTURE_FOR_BARCODE = 13;
 	private int captureFor = CAPTURE_FOR_COMMENT;
-	
-	//搜到能属于我们自己的产品
+
+	// 搜到能属于我们自己的产品
 	public static final String ACTION_CAPTURE_HAS_MATCH_PRODUCT = "capture_has_matched_product";
-	//搜到产品信息，但是不是我们的面膜产品
+	// 搜到产品信息，但是不是我们的面膜产品
 	public static final String ACTION_CAPTURE_HAS_NOTMATCH_PRODUCT = "capture_has_not_match_product";
-	//搜不到产品
+	// 搜不到产品
 	public static final String ACTION_CAPTURE_NO_PRODUCT = "capture_has_product";
 
 	/** Called when the activity is first created. */
@@ -103,11 +101,12 @@ public class QrCodeActivityBase extends YaodunActivityBase implements Callback {
 		btnOpen.setOnClickListener(openListener);
 	}
 
-	protected void hideCancelBtn(){
-		if(btnCancel != null){
+	protected void hideCancelBtn() {
+		if (btnCancel != null) {
 			btnCancel.setVisibility(View.GONE);
 		}
 	}
+
 	@Override
 	public void onResume() {
 		super.onResume();
@@ -157,14 +156,12 @@ public class QrCodeActivityBase extends YaodunActivityBase implements Callback {
 			return;
 		}
 		if (handler == null) {
-			handler = new CaptureActivityHandler(this, decodeFormats,
-					characterSet);
+			handler = new CaptureActivityHandler(this, decodeFormats, characterSet);
 		}
 	}
 
 	@Override
-	public void surfaceChanged(SurfaceHolder holder, int format, int width,
-			int height) {
+	public void surfaceChanged(SurfaceHolder holder, int format, int width, int height) {
 
 	}
 
@@ -214,11 +211,13 @@ public class QrCodeActivityBase extends YaodunActivityBase implements Callback {
 
 	/**
 	 * 子类重载此方法，处理扫描结果
+	 * 
 	 * @param barCode
 	 * @param barCodeImg
 	 */
-	protected void onDecode(String barCode, Bitmap barCodeImg){}
-	
+	protected void onDecode(String barCode, Bitmap barCodeImg) {
+	}
+
 	private void initBeepSound() {
 		if (playBeep && mediaPlayer == null) {
 			// The volume on STREAM_SYSTEM is not adjustable, and users found it
@@ -229,11 +228,9 @@ public class QrCodeActivityBase extends YaodunActivityBase implements Callback {
 			mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			mediaPlayer.setOnCompletionListener(beepListener);
 
-			AssetFileDescriptor file = getResources().openRawResourceFd(
-					R.raw.beep);
+			AssetFileDescriptor file = getResources().openRawResourceFd(R.raw.beep);
 			try {
-				mediaPlayer.setDataSource(file.getFileDescriptor(),
-						file.getStartOffset(), file.getLength());
+				mediaPlayer.setDataSource(file.getFileDescriptor(), file.getStartOffset(), file.getLength());
 				file.close();
 				mediaPlayer.setVolume(BEEP_VOLUME, BEEP_VOLUME);
 				mediaPlayer.prepare();
@@ -259,6 +256,7 @@ public class QrCodeActivityBase extends YaodunActivityBase implements Callback {
 	 * When the beep has finished playing, rewind to queue up another one.
 	 */
 	private final OnCompletionListener beepListener = new OnCompletionListener() {
+		@Override
 		public void onCompletion(MediaPlayer mediaPlayer) {
 			mediaPlayer.seekTo(0);
 		}
@@ -292,8 +290,9 @@ public class QrCodeActivityBase extends YaodunActivityBase implements Callback {
 	private OnClickListener manualInputListener = new OnClickListener() {
 		@Override
 		public void onClick(View v) {
-//			intent = new Intent(CaptureActivity.this, ManualInputActivity.class);
-//			startActivity(intent);
+			// intent = new Intent(CaptureActivity.this,
+			// ManualInputActivity.class);
+			// startActivity(intent);
 		}
 	};
 

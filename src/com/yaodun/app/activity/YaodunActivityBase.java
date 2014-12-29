@@ -109,7 +109,7 @@ public class YaodunActivityBase extends QJActivityBase implements IDialogProtoco
 
 	}
 
-	protected boolean showLoadingUpView(LoadingUpView loadingUpView) {
+	protected static boolean showLoadingUpView(LoadingUpView loadingUpView) {
 		if (loadingUpView != null && !loadingUpView.isShowing()) {
 			loadingUpView.showPopup();
 			return true;
@@ -117,7 +117,7 @@ public class YaodunActivityBase extends QJActivityBase implements IDialogProtoco
 		return false;
 	}
 
-	protected boolean dismissLoadingUpView(LoadingUpView loadingUpView) {
+	protected static boolean dismissLoadingUpView(LoadingUpView loadingUpView) {
 		if (loadingUpView != null && loadingUpView.isShowing()) {
 			loadingUpView.dismiss();
 			return true;

@@ -47,6 +47,7 @@ public class MyKnowledgeDetailActivity extends YaodunActivityBase implements OnC
 	private TextView mTvnRight;
 
 	private Handler mHandler = new Handler() {
+		@Override
 		public void handleMessage(Message msg) {
 			dismissLoadingUpView(mLoadingUpView);
 			ActionResult result = (ActionResult) msg.obj;

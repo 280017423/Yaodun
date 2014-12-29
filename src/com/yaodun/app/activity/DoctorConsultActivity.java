@@ -45,6 +45,7 @@ public class DoctorConsultActivity extends YaodunActivityBase implements OnClick
 	private List<DoctorModel> mDoctorModels;
 	private DoctorAdapter mDoctorAdapter;
 	private Handler mHandler = new Handler() {
+		@Override
 		public void handleMessage(Message msg) {
 			mPullToRefreshListView.onRefreshComplete();
 			ActionResult result = (ActionResult) msg.obj;

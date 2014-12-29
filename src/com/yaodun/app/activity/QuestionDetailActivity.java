@@ -63,6 +63,7 @@ public class QuestionDetailActivity extends YaodunActivityBase implements OnClic
 	private MyQuestionDetailModel mDetailModel;
 
 	private Handler mHandler = new Handler() {
+		@Override
 		public void handleMessage(Message msg) {
 			dismissLoadingUpView(mLoadingUpView);
 			ActionResult result = (ActionResult) msg.obj;

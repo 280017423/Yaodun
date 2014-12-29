@@ -46,6 +46,7 @@ public class MyAttentionDoctorsActivity extends YaodunActivityBase implements On
 	private boolean mIsAttention;
 	private LoadingUpView mLoadingUpView;
 	private Handler mHandler = new Handler() {
+		@Override
 		public void handleMessage(Message msg) {
 			mPullToRefreshListView.onRefreshComplete();
 			ActionResult result = (ActionResult) msg.obj;

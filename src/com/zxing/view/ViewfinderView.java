@@ -1,17 +1,17 @@
 /*
  * Copyright (C) 2008 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.zxing.view;
@@ -46,14 +46,13 @@ import com.zxing.camera.CameraManager;
  */
 public final class ViewfinderView extends View {
 
-	private static final int[] SCANNER_ALPHA = { 0, 64, 128, 192, 255, 192,
-			128, 64 };
+	private static final int[] SCANNER_ALPHA = { 0, 64, 128, 192, 255, 192, 128, 64 };
 	private static final long ANIMATION_DELAY = 100L;
 	private static final int OPAQUE = 0xFF;
 
 	private RectF frameRectF;
 	private PorterDuffXfermode clearXmode;
-	
+
 	private final Paint paint;
 	private Bitmap resultBitmap;
 	private final int maskColor;
@@ -73,7 +72,7 @@ public final class ViewfinderView extends View {
 		// time in onDraw().
 		paint = new Paint();
 		clearXmode = new PorterDuffXfermode(PorterDuff.Mode.DST_OUT);
-		
+
 		Resources resources = getResources();
 		maskColor = resources.getColor(R.color.viewfinder_mask);
 		resultColor = resources.getColor(R.color.result_view);
@@ -90,22 +89,21 @@ public final class ViewfinderView extends View {
 		if (frame == null) {
 			return;
 		}
-		
-		//draw the recognise area, draw smaller than real area, so user can put whole barcode or two-dimension code into the recognise area
-		if(frameRectF == null){
+
+		// draw the recognise area, draw smaller than real area, so user can put
+		// whole barcode or two-dimension code into the recognise area
+		if (frameRectF == null) {
 			frameRectF = new RectF(frame);
-			float delta = (float) (frameRectF.width()*0.13);
+			float delta = (float) (frameRectF.width() * 0.13);
 			frameRectF.left += delta;
 			frameRectF.top += delta;
 			frameRectF.right -= delta;
 			frameRectF.bottom -= delta;
 		}
-		int sc = canvas.saveLayer(0, 0, getWidth(), getHeight(), null,
-                Canvas.MATRIX_SAVE_FLAG |
-                Canvas.CLIP_SAVE_FLAG |
-                Canvas.HAS_ALPHA_LAYER_SAVE_FLAG |
-                Canvas.FULL_COLOR_LAYER_SAVE_FLAG |
-                Canvas.CLIP_TO_LAYER_SAVE_FLAG);
+		int sc = canvas
+				.saveLayer(0, 0, getWidth(), getHeight(), null, Canvas.MATRIX_SAVE_FLAG | Canvas.CLIP_SAVE_FLAG
+						| Canvas.HAS_ALPHA_LAYER_SAVE_FLAG | Canvas.FULL_COLOR_LAYER_SAVE_FLAG
+						| Canvas.CLIP_TO_LAYER_SAVE_FLAG);
 		Xfermode oldMode = paint.getXfermode();
 		paint.setColor(Color.parseColor("#80000000"));
 		canvas.drawRect(0, 0, getWidth(), getHeight(), paint);
@@ -114,7 +112,7 @@ public final class ViewfinderView extends View {
 		paint.setAntiAlias(true);
 		canvas.drawRoundRect(frameRectF, 16, 16, paint);
 		paint.setXfermode(oldMode);
-        canvas.restoreToCount(sc);
+		canvas.restoreToCount(sc);
 
 		// Draw the exterior (i.e. outside the framing rect) darkened
 		// paint.setColor(resultBitmap != null ? resultColor : maskColor);
@@ -147,8 +145,7 @@ public final class ViewfinderView extends View {
 			paint.setAlpha(SCANNER_ALPHA[scannerAlpha]);
 			scannerAlpha = (scannerAlpha + 1) % SCANNER_ALPHA.length;
 			float middle = frameRectF.height() / 2 + frameRectF.top;
-			canvas.drawRect(frameRectF.left + 2, middle - 1, frameRectF.right - 1,
-					middle + 2, paint);
+			canvas.drawRect(frameRectF.left + 2, middle - 1, frameRectF.right - 1, middle + 2, paint);
 
 			Collection<ResultPoint> currentPossible = possibleResultPoints;
 			Collection<ResultPoint> currentLast = lastPossibleResultPoints;
@@ -160,24 +157,21 @@ public final class ViewfinderView extends View {
 				paint.setAlpha(OPAQUE);
 				paint.setColor(resultPointColor);
 				for (ResultPoint point : currentPossible) {
-					canvas.drawCircle(frame.left + point.getX(), frame.top
-							+ point.getY(), 6.0f, paint);
+					canvas.drawCircle(frame.left + point.getX(), frame.top + point.getY(), 6.0f, paint);
 				}
 			}
 			if (currentLast != null) {
 				paint.setAlpha(OPAQUE / 2);
 				paint.setColor(resultPointColor);
 				for (ResultPoint point : currentLast) {
-					canvas.drawCircle(frame.left + point.getX(), frame.top
-							+ point.getY(), 3.0f, paint);
+					canvas.drawCircle(frame.left + point.getX(), frame.top + point.getY(), 3.0f, paint);
 				}
 			}
 
 			// Request another update at the animation interval, but only
 			// repaint the laser line,
 			// not the entire viewfinder mask.
-			postInvalidateDelayed(ANIMATION_DELAY, frame.left, frame.top,
-					frame.right, frame.bottom);
+			postInvalidateDelayed(ANIMATION_DELAY, frame.left, frame.top, frame.right, frame.bottom);
 		}
 	}
 

@@ -58,6 +58,7 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 	private int mCurrentStatus;
 
 	private Handler mHandler = new Handler() {
+		@Override
 		public void handleMessage(Message msg) {
 			dismissLoadingUpView(mLoadingUpView);
 			ActionResult result = (ActionResult) msg.obj;

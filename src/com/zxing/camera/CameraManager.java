@@ -1,17 +1,17 @@
 /*
  * Copyright (C) 2008 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.zxing.camera;
@@ -28,7 +28,6 @@ import android.os.Handler;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.SurfaceHolder;
-
 
 /**
  * This object wraps the Camera service object and expects to be the only one
@@ -120,8 +119,7 @@ public final class CameraManager {
 		// Build.VERSION_CODES.CUPCAKE;
 		useOneShotPreviewCallback = Build.VERSION.SDK_INT > 3; // 3
 
-		previewCallback = new PreviewCallback(configManager,
-				useOneShotPreviewCallback);
+		previewCallback = new PreviewCallback(configManager, useOneShotPreviewCallback);
 		autoFocusCallback = new AutoFocusCallback();
 	}
 
@@ -270,20 +268,22 @@ public final class CameraManager {
 			// int topOffset = Utils.dip2px(context, context.getResources()
 			// .getDimension(R.dimen.px_255));
 
-			
-//			int width = context.getResources().getDimensionPixelSize(R.dimen.px_590);
-//			int height = context.getResources().getDimensionPixelSize(R.dimen.px_319);
-//
-//			int leftOffset = context.getResources().getDimensionPixelSize(R.dimen.px_22);
-//			int topOffset = context.getResources().getDimensionPixelSize(R.dimen.px_300);
-			
-			int width = (int) (Math.min(dm.widthPixels, dm.heightPixels)*0.88);
-			int height = width;
-			int leftOffset = (dm.widthPixels - width)/2;
-			int topOffset = (int) ((dm.heightPixels-height)*0.4);
+			// int width =
+			// context.getResources().getDimensionPixelSize(R.dimen.px_590);
+			// int height =
+			// context.getResources().getDimensionPixelSize(R.dimen.px_319);
+			//
+			// int leftOffset =
+			// context.getResources().getDimensionPixelSize(R.dimen.px_22);
+			// int topOffset =
+			// context.getResources().getDimensionPixelSize(R.dimen.px_300);
 
-			framingRect = new Rect(leftOffset, topOffset, leftOffset + width,
-					topOffset + height);
+			int width = (int) (Math.min(dm.widthPixels, dm.heightPixels) * 0.88);
+			int height = width;
+			int leftOffset = (dm.widthPixels - width) / 2;
+			int topOffset = (int) ((dm.heightPixels - height) * 0.4);
+
+			framingRect = new Rect(leftOffset, topOffset, leftOffset + width, topOffset + height);
 			Log.d(TAG, String.valueOf(width));
 			Log.d(TAG, "Calculated framing rect: " + framingRect);
 		}
@@ -347,8 +347,7 @@ public final class CameraManager {
 	 *            The height of the image.
 	 * @return A PlanarYUVLuminanceSource instance.
 	 */
-	public PlanarYUVLuminanceSource buildLuminanceSource(byte[] data,
-			int width, int height) {
+	public PlanarYUVLuminanceSource buildLuminanceSource(byte[] data, int width, int height) {
 		Rect rect = getFramingRectInPreview();
 		int previewFormat = configManager.getPreviewFormat();
 		String previewFormatString = configManager.getPreviewFormatString();
@@ -356,25 +355,27 @@ public final class CameraManager {
 		// This is the standard Android format which all devices are REQUIRED to
 		// support.
 		// In theory, it's the only one we should ever care about.
-		case PixelFormat.YCbCr_420_SP:
-			// This format has never been seen in the wild, but is compatible as
-			// we only care
-			// about the Y channel, so allow it.
-		case PixelFormat.YCbCr_422_SP:
-			return new PlanarYUVLuminanceSource(data, width, height, rect.left,
-					rect.top, rect.width(), rect.height());
-		default:
-			// The Samsung Moment incorrectly uses this variant instead of the
-			// 'sp' version.
-			// Fortunately, it too has all the Y data up front, so we can read
-			// it.
-			if ("yuv420p".equals(previewFormatString)) {
-				return new PlanarYUVLuminanceSource(data, width, height,
-						rect.left, rect.top, rect.width(), rect.height());
-			}
+			case PixelFormat.YCbCr_420_SP:
+				// This format has never been seen in the wild, but is
+				// compatible as
+				// we only care
+				// about the Y channel, so allow it.
+			case PixelFormat.YCbCr_422_SP:
+				return new PlanarYUVLuminanceSource(
+						data, width, height, rect.left, rect.top, rect.width(), rect.height());
+			default:
+				// The Samsung Moment incorrectly uses this variant instead of
+				// the
+				// 'sp' version.
+				// Fortunately, it too has all the Y data up front, so we can
+				// read
+				// it.
+				if ("yuv420p".equals(previewFormatString)) {
+					return new PlanarYUVLuminanceSource(
+							data, width, height, rect.left, rect.top, rect.width(), rect.height());
+				}
 		}
-		throw new IllegalArgumentException("Unsupported picture format: "
-				+ previewFormat + '/' + previewFormatString);
+		throw new IllegalArgumentException("Unsupported picture format: " + previewFormat + '/' + previewFormatString);
 	}
 
 	public static Camera getCamera() {

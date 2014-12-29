@@ -48,6 +48,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 	private TextView mTvnRight;
 
 	private Handler mHandler = new Handler() {
+		@Override
 		public void handleMessage(Message msg) {
 			dismissLoadingUpView(mLoadingUpView);
 			ActionResult result = (ActionResult) msg.obj;

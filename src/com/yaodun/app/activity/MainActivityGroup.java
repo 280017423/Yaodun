@@ -266,6 +266,7 @@ public class MainActivityGroup extends YaodunActivityBase {
 				}
 				if (tvProgress != null) {
 					runOnUiThread(new Runnable() {
+						@Override
 						public void run() {
 							tvProgress.setText("当前进度: " + progress + "%");
 						}

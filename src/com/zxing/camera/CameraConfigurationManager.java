@@ -1,17 +1,17 @@
 /*
  * Copyright (C) 2010 ZXing authors
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License. You may obtain a copy of
+ * the License at
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+ * License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.zxing.camera;
@@ -29,8 +29,7 @@ import android.view.WindowManager;
 
 final class CameraConfigurationManager {
 
-	private static final String TAG = CameraConfigurationManager.class
-			.getSimpleName();
+	private static final String TAG = CameraConfigurationManager.class.getSimpleName();
 
 	private static final int TEN_DESIRED_ZOOM = 27;
 	private static final int DESIRED_SHARPNESS = 30;
@@ -54,10 +53,8 @@ final class CameraConfigurationManager {
 		Camera.Parameters parameters = camera.getParameters();
 		previewFormat = parameters.getPreviewFormat();
 		previewFormatString = parameters.get("preview-format");
-		Log.d(TAG, "Default preview format: " + previewFormat + '/'
-				+ previewFormatString);
-		WindowManager manager = (WindowManager) context
-				.getSystemService(Context.WINDOW_SERVICE);
+		Log.d(TAG, "Default preview format: " + previewFormat + '/' + previewFormatString);
+		WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
 		Display display = manager.getDefaultDisplay();
 		screenResolution = new Point(display.getWidth(), display.getHeight());
 		Log.d(TAG, "Screen resolution: " + screenResolution);
@@ -74,8 +71,7 @@ final class CameraConfigurationManager {
 	 */
 	void setDesiredCameraParameters(Camera camera) {
 		try {
-			Method rotateMethod = android.hardware.Camera.class.getMethod(
-					"setDisplayOrientation", int.class);
+			Method rotateMethod = android.hardware.Camera.class.getMethod("setDisplayOrientation", int.class);
 			rotateMethod.invoke(camera, 90);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -86,18 +82,20 @@ final class CameraConfigurationManager {
 		parameters.setPreviewSize(cameraResolution.x, cameraResolution.y);
 
 		if (Build.VERSION.SDK_INT >= 8)
-		   setDisplayOrientation(camera, 90);
-		  else {
-//		   if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
-		    parameters.set("orientation", "portrait");
-		    parameters.set("rotation", 90);
-		   }
+			setDisplayOrientation(camera, 90);
+		else {
+			// if (getResources().getConfiguration().orientation ==
+			// Configuration.ORIENTATION_PORTRAIT) {
+			parameters.set("orientation", "portrait");
+			parameters.set("rotation", 90);
+		}
 
-//		   if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-//		    parameters.set("orientation", "landscape");
-//		    parameters.set("rotation", 90);
-//		   }
-//		}
+		// if (getResources().getConfiguration().orientation ==
+		// Configuration.ORIENTATION_LANDSCAPE) {
+		// parameters.set("orientation", "landscape");
+		// parameters.set("rotation", 90);
+		// }
+		// }
 
 		setFlash(parameters);
 		setZoom(parameters);
@@ -108,8 +106,7 @@ final class CameraConfigurationManager {
 	protected void setDisplayOrientation(Camera camera, int angle) {
 		Method downPolymorphic;
 		try {
-			downPolymorphic = camera.getClass().getMethod(
-					"setDisplayOrientation", new Class[] { int.class });
+			downPolymorphic = camera.getClass().getMethod("setDisplayOrientation", new Class[] { int.class });
 			if (downPolymorphic != null)
 				downPolymorphic.invoke(camera, new Object[] { angle });
 		} catch (Exception e1) {
@@ -132,8 +129,7 @@ final class CameraConfigurationManager {
 		return previewFormatString;
 	}
 
-	private static Point getCameraResolution(Camera.Parameters parameters,
-			Point screenResolution) {
+	private static Point getCameraResolution(Camera.Parameters parameters, Point screenResolution) {
 
 		String previewSizeValueString = parameters.get("preview-size-values");
 		// saw this on Xperia
@@ -144,24 +140,20 @@ final class CameraConfigurationManager {
 		Point cameraResolution = null;
 
 		if (previewSizeValueString != null) {
-			Log.d(TAG, "preview-size-values parameter: "
-					+ previewSizeValueString);
-			cameraResolution = findBestPreviewSizeValue(previewSizeValueString,
-					screenResolution);
+			Log.d(TAG, "preview-size-values parameter: " + previewSizeValueString);
+			cameraResolution = findBestPreviewSizeValue(previewSizeValueString, screenResolution);
 		}
 
 		if (cameraResolution == null) {
 			// Ensure that the camera resolution is a multiple of 8, as the
 			// screen may not be.
-			cameraResolution = new Point((screenResolution.x >> 3) << 3,
-					(screenResolution.y >> 3) << 3);
+			cameraResolution = new Point((screenResolution.x >> 3) << 3, (screenResolution.y >> 3) << 3);
 		}
 
 		return cameraResolution;
 	}
 
-	private static Point findBestPreviewSizeValue(
-			CharSequence previewSizeValueString, Point screenResolution) {
+	private static Point findBestPreviewSizeValue(CharSequence previewSizeValueString, Point screenResolution) {
 		int bestX = 0;
 		int bestY = 0;
 		int diff = Integer.MAX_VALUE;
@@ -184,8 +176,7 @@ final class CameraConfigurationManager {
 				continue;
 			}
 
-			int newDiff = Math.abs(newX - screenResolution.x)
-					+ Math.abs(newY - screenResolution.y);
+			int newDiff = Math.abs(newX - screenResolution.x) + Math.abs(newY - screenResolution.y);
 			if (newDiff == 0) {
 				bestX = newX;
 				bestY = newY;
@@ -204,8 +195,7 @@ final class CameraConfigurationManager {
 		return null;
 	}
 
-	private static int findBestMotZoomValue(CharSequence stringValues,
-			int tenDesiredZoom) {
+	private static int findBestMotZoomValue(CharSequence stringValues, int tenDesiredZoom) {
 		int tenBestValue = 0;
 		for (String stringValue : COMMA_PATTERN.split(stringValues)) {
 			stringValue = stringValue.trim();
@@ -216,8 +206,7 @@ final class CameraConfigurationManager {
 				return tenDesiredZoom;
 			}
 			int tenValue = (int) (10.0 * value);
-			if (Math.abs(tenDesiredZoom - value) < Math.abs(tenDesiredZoom
-					- tenBestValue)) {
+			if (Math.abs(tenDesiredZoom - value) < Math.abs(tenDesiredZoom - tenBestValue)) {
 				tenBestValue = tenValue;
 			}
 		}
@@ -246,8 +235,7 @@ final class CameraConfigurationManager {
 	private void setZoom(Camera.Parameters parameters) {
 
 		String zoomSupportedString = parameters.get("zoom-supported");
-		if (zoomSupportedString != null
-				&& !Boolean.parseBoolean(zoomSupportedString)) {
+		if (zoomSupportedString != null && !Boolean.parseBoolean(zoomSupportedString)) {
 			return;
 		}
 
@@ -256,8 +244,7 @@ final class CameraConfigurationManager {
 		String maxZoomString = parameters.get("max-zoom");
 		if (maxZoomString != null) {
 			try {
-				int tenMaxZoom = (int) (10.0 * Double
-						.parseDouble(maxZoomString));
+				int tenMaxZoom = (int) (10.0 * Double.parseDouble(maxZoomString));
 				if (tenDesiredZoom > tenMaxZoom) {
 					tenDesiredZoom = tenMaxZoom;
 				}
@@ -266,8 +253,7 @@ final class CameraConfigurationManager {
 			}
 		}
 
-		String takingPictureZoomMaxString = parameters
-				.get("taking-picture-zoom-max");
+		String takingPictureZoomMaxString = parameters.get("taking-picture-zoom-max");
 		if (takingPictureZoomMaxString != null) {
 			try {
 				int tenMaxZoom = Integer.parseInt(takingPictureZoomMaxString);
@@ -275,22 +261,19 @@ final class CameraConfigurationManager {
 					tenDesiredZoom = tenMaxZoom;
 				}
 			} catch (NumberFormatException nfe) {
-				Log.w(TAG, "Bad taking-picture-zoom-max: "
-						+ takingPictureZoomMaxString);
+				Log.w(TAG, "Bad taking-picture-zoom-max: " + takingPictureZoomMaxString);
 			}
 		}
 
 		String motZoomValuesString = parameters.get("mot-zoom-values");
 		if (motZoomValuesString != null) {
-			tenDesiredZoom = findBestMotZoomValue(motZoomValuesString,
-					tenDesiredZoom);
+			tenDesiredZoom = findBestMotZoomValue(motZoomValuesString, tenDesiredZoom);
 		}
 
 		String motZoomStepString = parameters.get("mot-zoom-step");
 		if (motZoomStepString != null) {
 			try {
-				double motZoomStep = Double.parseDouble(motZoomStepString
-						.trim());
+				double motZoomStep = Double.parseDouble(motZoomStepString.trim());
 				int tenZoomStep = (int) (10.0 * motZoomStep);
 				if (tenZoomStep > 1) {
 					tenDesiredZoom -= tenDesiredZoom % tenZoomStep;
