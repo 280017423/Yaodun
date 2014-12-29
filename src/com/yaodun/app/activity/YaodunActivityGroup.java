@@ -3,22 +3,21 @@ package com.yaodun.app.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.RelativeLayout;
 import android.widget.RelativeLayout.LayoutParams;
 
 import com.yaodun.app.R;
 
 /**
- * 关于界面
+ * YaodunActivityGroup界面
  * 
  * @author zou.sq
  */
-public class YaodunActivityGroup extends YaodunActivityBase implements OnClickListener {
+public class YaodunActivityGroup extends YaodunActivityBase {
 
 	RelativeLayout mRlContainer;
-	Intent classifyIntent, searchIntent;
-	View classifyView, searchView;
+	Intent classifyIntent;
+	View classifyView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -31,36 +30,12 @@ public class YaodunActivityGroup extends YaodunActivityBase implements OnClickLi
 	private void initView() {
 		mRlContainer = (RelativeLayout) findViewById(R.id.layout_container);
 		classifyIntent = new Intent(this, YaodunClassifyActivity.class);
-		searchIntent = new Intent(this, YaodunSearchActivity.class);
 		classifyView = getLocalActivityManager().startActivity(classifyIntent.getComponent().getShortClassName(),
 				classifyIntent).getDecorView();
-		searchView = getLocalActivityManager().startActivity(searchIntent.getComponent().getShortClassName(),
-				searchIntent).getDecorView();
 
 		mRlContainer.removeAllViews();
 		mRlContainer.addView(classifyView, new RelativeLayout.LayoutParams(
 				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-	}
-
-	public void goClassify() {
-		mRlContainer.removeAllViews();
-		mRlContainer.addView(classifyView, new RelativeLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-	}
-
-	public void goSearch(int queryType) {
-		mRlContainer.removeAllViews();
-		mRlContainer.addView(searchView, new RelativeLayout.LayoutParams(
-				LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
-		YaodunSearchActivity.INSTANCE.changeQueryType(queryType);
-	}
-
-	@Override
-	public void onClick(View v) {
-		switch (v.getId()) {
-			default:
-				break;
-		}
 	}
 
 }

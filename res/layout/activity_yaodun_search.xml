@@ -27,7 +27,7 @@
             <RelativeLayout
                 android:id="@+id/layout_yunfu"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:gravity="center_vertical" >
 
                 <RadioGroup

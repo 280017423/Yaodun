@@ -17,7 +17,8 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="-1dp"
             android:background="@drawable/icon_medicine_common"
-            android:contentDescription="@null" />
+            android:contentDescription="@null"
+            android:onClick="onClick" />
     </RelativeLayout>
 
     <LinearLayout
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:clickable="true"
             android:gravity="center_vertical"
+            android:onClick="onClick"
             android:orientation="horizontal" >
 
             <ImageView
@@ -60,6 +62,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:gravity="center_vertical"
+            android:onClick="onClick"
             android:orientation="horizontal" >
 
             <ImageView
@@ -86,6 +89,7 @@
             android:layout_marginLeft="80dp"
             android:layout_marginTop="15dp"
             android:gravity="center_vertical"
+            android:onClick="onClick"
             android:orientation="horizontal" >
 
             <ImageView
@@ -113,6 +117,7 @@
             android:layout_marginLeft="80dp"
             android:layout_marginTop="20dp"
             android:gravity="center_vertical"
+            android:onClick="onClick"
             android:orientation="horizontal" >
 
             <ImageView
@@ -140,6 +145,7 @@
             android:layout_marginLeft="40dp"
             android:layout_marginTop="15dp"
             android:gravity="center_vertical"
+            android:onClick="onClick"
             android:orientation="horizontal" >
 
             <ImageView
@@ -165,6 +171,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
+            android:onClick="onClick"
             android:orientation="horizontal" >
 
             <ImageView

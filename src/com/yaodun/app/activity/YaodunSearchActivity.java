@@ -70,7 +70,6 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	private DetectRuleAdapter detectAdapter;
 	private List<MedicineCheckRuleBean> detectList = new ArrayList<MedicineCheckRuleBean>();
 	private int queryType = 0;
-	public static YaodunSearchActivity INSTANCE;
 	android.os.Handler handler = new android.os.Handler();
 
 	TextWatcher watcher = new TextWatcher() {
@@ -104,19 +103,27 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_yaodun_search);
-		INSTANCE = this;
+		initVariable();
 		initView();
+		getMedicineCheckRules();
 		registerReceiver(receiver, new IntentFilter(ConstantSet.ACTION_QRCODE_OK));
 	}
 
+	private void initVariable() {
+		Intent intent = getIntent();
+		queryType = intent.getIntExtra(ConstantSet.EXTRA_JUMP_TYPE, -1);
+		if (-1 == queryType) {
+			finish();
+		}
+	}
+
 	private void initView() {
-		// title
 		View left = findViewById(R.id.title_with_back_title_btn_left);
 		left.setOnClickListener(this);
 		TextView tvLeft = (TextView) findViewById(R.id.tv_title_with_back_left);
 		tvLeft.setBackgroundResource(R.drawable.btn_back_bg);
 		mTvTitle = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
-		mTvTitle.setText("大众用药查询");
+		mTvTitle.setText(QueryType.getQueryTypeString(queryType));
 
 		mScrollView = (ScrollView) findViewById(R.id.sv_layout);
 		layoutYunfu = findViewById(R.id.layout_yunfu);
@@ -172,7 +179,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	 * 
 	 * @param keyword
 	 */
-	void searchMedicineName(final String keyword) {
+	private void searchMedicineName(final String keyword) {
 		if (TextUtils.isEmpty(keyword)) {
 			updateKeywordMatchList(null);
 			mIsSearching = false;
@@ -209,7 +216,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 
 	}
 
-	void updateKeywordMatchList(List<MedicineBean> tmpList) {
+	private void updateKeywordMatchList(List<MedicineBean> tmpList) {
 		searchList.clear();
 		if (tmpList != null) {
 			searchList.addAll(tmpList);
@@ -221,9 +228,9 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 			android.widget.RelativeLayout.LayoutParams lp = (android.widget.RelativeLayout.LayoutParams) lvSearchedNames
 					.getLayoutParams();
 			if (lp != null) {
-				int marginTop = 97;
+				int marginTop = 95;
 				if (queryType == QueryType.medicine_yunfu) {
-					marginTop += 150;
+					marginTop += 85;
 				}
 				lp.topMargin = UIUtil.dip2px(getApplicationContext(), marginTop);
 				lvSearchedNames.setLayoutParams(lp);
@@ -237,7 +244,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	/**
 	 * 药品检测查询
 	 */
-	void doMedicineCheck() {
+	private void doMedicineCheck() {
 		if (mIsMedicineCheck) {
 			return;
 		}
@@ -269,6 +276,8 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 						tvCheckResult.setText(TextUtils.isEmpty(checkResult.result) ? "" : checkResult.result);
 						tvCheckAdvice.setText(TextUtils.isEmpty(checkResult.grade) ? "" : checkResult.grade);
 					}
+					detectAdapter.notifyDataSetChanged();
+					mScrollView.scrollTo(0, 0);// 要加这一句才不会滚
 				} else {
 					showErrorMsg(result);
 				}
@@ -278,14 +287,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 
 	}
 
-	public void changeQueryType(int queryType) {
-		this.queryType = queryType;
-		mTvTitle.setText(QueryType.getQueryTypeString(queryType));
-		layoutYunfu.setVisibility(queryType == QueryType.medicine_yunfu ? View.VISIBLE : View.GONE);
-		getMedicineCheckRules();
-	}
-
-	void getMedicineCheckRules() {
+	private void getMedicineCheckRules() {
 		new AsyncTask<String, Void, ActionResult>() {
 
 			@Override
@@ -302,6 +304,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 						detectList.addAll(tmpList);
 					}
 					detectAdapter.notifyDataSetChanged();
+					mScrollView.scrollTo(0, 0);// 要加这一句才不会滚
 				} else {
 					showErrorMsg(result);
 				}
@@ -346,12 +349,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	public void onClick(View v) {
 		switch (v.getId()) {
 			case R.id.title_with_back_title_btn_left:
-				mEtName.setText("");
-				updateKeywordMatchList(null);
-				addList.clear();
-				addMedicineNames();
-				hideIme();
-				goClassify();
+				finish();
 				break;
 			case R.id.iv_qrcode:
 				startActivity(QrCodeActivity.getStartActIntent(mContext));
@@ -384,11 +382,6 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		mEtName.setText("");
 		addMedicineNames();
 		hideIme();
-	}
-
-	void goClassify() {
-		YaodunActivityGroup parent = (YaodunActivityGroup) getParent();
-		parent.goClassify();
 	}
 
 	@Override

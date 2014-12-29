@@ -32,6 +32,7 @@ public class ConstantSet {
 	public static final String EXTRA_OPENAPI_AUTH_RESPONSE = "token";
 
 	public static final String EXTRA_JUMP_FLAG = "EXTRA_JUMP_FLAG";
+	public static final String EXTRA_JUMP_TYPE = "EXTRA_JUMP_TYPE";
 	public static final int EXTRA_INTRODUCE = 100;
 	public static final int EXTRA_ABOUT = 101;
 	public static final int EXTRA_DECLARE = 102;
