@@ -41,6 +41,7 @@ public class MyQuestionAdapter extends BaseAdapter {
 	private Context mContext;
 	private ImageLoader mImageLoader;
 	private Builder mOptions;
+	private String mImgUrl;
 
 	/**
 	 * 实例化对象
@@ -56,6 +57,10 @@ public class MyQuestionAdapter extends BaseAdapter {
 		this.mImageLoader = imageLoader;
 		mOptions = new DisplayImageOptions.Builder().cacheInMemory().cacheOnDisc()
 				.displayer(new RoundedBitmapDisplayer(mContext.getResources().getColor(R.color.white), ROUND_PIXELS));
+	}
+
+	public void setImgUrl(String imgUrl) {
+		mImgUrl = imgUrl;
 	}
 
 	@Override
@@ -109,7 +114,7 @@ public class MyQuestionAdapter extends BaseAdapter {
 				holder.mTvDateIn.setVisibility(View.VISIBLE);
 				holder.mTvDateIn.setText(time);
 			}
-			mImageLoader.displayImage(null, holder.mIvIconIn, mOptions.showImageForEmptyUri(R.drawable.ic_launcher)
+			mImageLoader.displayImage(mImgUrl, holder.mIvIconIn, mOptions.showImageForEmptyUri(R.drawable.ic_launcher)
 					.build());
 		} else {
 			holder.mLayoutIn.setVisibility(View.GONE);

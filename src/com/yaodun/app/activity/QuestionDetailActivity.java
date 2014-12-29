@@ -76,6 +76,7 @@ public class QuestionDetailActivity extends YaodunActivityBase implements OnClic
 							if (!StringUtil.isNullOrEmpty(imgUrl)) {
 								mImageLoader.displayImage(imgUrl, mIvImg, mOptions);
 							}
+							mAdapter.setImgUrl(imgUrl);
 							mTvName.setText(mDetailModel.getDoctorName());
 							mTvProfessional.setText(mDetailModel.getProfessional());
 							mTvDescription.setText(mDetailModel.getDoctorDescription());
