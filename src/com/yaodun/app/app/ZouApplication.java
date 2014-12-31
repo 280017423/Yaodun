@@ -1,9 +1,14 @@
 package com.yaodun.app.app;
 
+import android.content.pm.PackageManager.NameNotFoundException;
+
 import com.qianjiang.framework.app.QJApplicationBase;
 import com.qianjiang.framework.imageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.qianjiang.framework.imageloader.core.ImageLoader;
 import com.qianjiang.framework.imageloader.core.ImageLoaderConfiguration;
+import com.qianjiang.framework.util.PackageUtil;
+import com.tencent.bugly.crashreport.CrashReport;
+import com.tencent.bugly.crashreport.CrashReport.UserStrategy;
 import com.yaodun.app.util.ConstantSet;
 import com.yaodun.app.util.DBUtil;
 
@@ -35,6 +40,7 @@ public class ZouApplication extends QJApplicationBase {
 	public void onCreate() {
 		super.onCreate();
 		CONTEXT = this;
+		initCrashReport();
 		initImageLoader();
 		new Thread(new Runnable() {
 			@Override
@@ -43,6 +49,18 @@ public class ZouApplication extends QJApplicationBase {
 
 			}
 		}).start();
+	}
+
+	private void initCrashReport() {
+		UserStrategy strategy = new UserStrategy(getApplicationContext());
+		strategy.setAppChannel("");
+		try {
+			strategy.setAppVersion(PackageUtil.getVersionName());
+		} catch (NameNotFoundException e) {
+			e.printStackTrace();
+		}
+		strategy.setAppReportDelay(5000); // 设置SDK处理延时，毫秒
+		CrashReport.initCrashReport(getApplicationContext(), "900001543", false, strategy);
 	}
 
 	@Override
