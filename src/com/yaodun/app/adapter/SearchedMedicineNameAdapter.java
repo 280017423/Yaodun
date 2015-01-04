@@ -12,37 +12,37 @@ import com.yaodun.app.R;
 import com.yaodun.app.model.MedicineBean;
 
 public class SearchedMedicineNameAdapter extends BaseAdapter {
-    Context context;
-    List<MedicineBean> list;
-    public SearchedMedicineNameAdapter(Context context, List<MedicineBean> list){
-        this.context = context;
-        this.list = list;
-    }
-    
-    @Override
-    public int getCount() {
-        return list.size();
-    }
+	Context context;
+	List<MedicineBean> list;
 
-    @Override
-    public Object getItem(int arg0) {
-        return list.get(arg0);
-    }
+	public SearchedMedicineNameAdapter(Context context, List<MedicineBean> list) {
+		this.context = context;
+		this.list = list;
+	}
 
-    @Override
-    public long getItemId(int arg0) {
-        return arg0;
-    }
+	@Override
+	public int getCount() {
+		return list.size();
+	}
 
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        if(convertView == null){
-            convertView = View.inflate(context, R.layout.item_medicine_name_simple, null);
-        }
-        MedicineBean item = list.get(position);
-        
-        TextView tvName = (TextView) convertView.findViewById(R.id.tv);
-        tvName.setText(item.drugname);
-        return convertView;
-    }
+	@Override
+	public Object getItem(int arg0) {
+		return list.get(arg0);
+	}
+
+	@Override
+	public long getItemId(int arg0) {
+		return arg0;
+	}
+
+	@Override
+	public View getView(int position, View convertView, ViewGroup parent) {
+		if (convertView == null) {
+			convertView = View.inflate(context, R.layout.item_medicine_name_simple, null);
+		}
+		MedicineBean item = list.get(position);
+		TextView tvName = (TextView) convertView.findViewById(R.id.tv);
+		tvName.setText(item.getDrugname());
+		return convertView;
+	}
 }

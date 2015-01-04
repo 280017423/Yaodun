@@ -5,12 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.NameValuePair;
-import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.alibaba.fastjson.JSON;
 import com.pdw.gson.reflect.TypeToken;
 import com.qianjiang.framework.app.JsonResult;
 import com.qianjiang.framework.app.QJApplicationBase;
@@ -18,9 +16,9 @@ import com.qianjiang.framework.util.EvtLog;
 import com.qianjiang.framework.util.HttpClientUtil;
 import com.yaodun.app.R;
 import com.yaodun.app.authentication.ActionResult;
+import com.yaodun.app.model.MedicineBean;
 import com.yaodun.app.model.MedicineCheckResultBean;
 import com.yaodun.app.model.MedicineCheckRuleBean;
-import com.yaodun.app.model.MedicineBean;
 import com.yaodun.app.model.UserInfoModel;
 import com.yaodun.app.util.HttpClientConnector;
 import com.yaodun.app.util.ServerAPIConstant;
@@ -88,11 +86,11 @@ public class MedicineReq {
             for(int i=0; i<medicines.size(); ++i){
                 MedicineBean medicin = medicines.get(i);
                 JSONObject drug = new JSONObject();
-                drug.put("basicid", medicin.basicId);
-                drug.put("drugname", URLEncoder.encode(medicin.drugname, CHAR_SET));
-                drug.put("usage", URLEncoder.encode(medicin.usage, CHAR_SET));
-                drug.put("dosage", URLEncoder.encode(medicin.dosage, CHAR_SET));
-                drug.put("frequery", URLEncoder.encode(medicin.frequery, CHAR_SET));
+                drug.put("basicid", medicin.getBasicId());
+                drug.put("drugname", URLEncoder.encode(medicin.getDrugname(), CHAR_SET));
+                drug.put("usage", URLEncoder.encode(medicin.getUsage(), CHAR_SET));
+                drug.put("dosage", URLEncoder.encode(medicin.getDosage(), CHAR_SET));
+                drug.put("frequery", URLEncoder.encode(medicin.getFrequery(), CHAR_SET));
                 druginfo.put(drug);
             }
         }catch(Exception e){

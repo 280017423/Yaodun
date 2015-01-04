@@ -31,6 +31,7 @@ import android.widget.TextView;
 
 import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.UIUtil;
+import com.qianjiang.framework.widget.LoadingUpView;
 import com.yaodun.app.R;
 import com.yaodun.app.adapter.DetectRuleAdapter;
 import com.yaodun.app.adapter.SearchedMedicineNameAdapter;
@@ -66,10 +67,12 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 
 	private TextView tvCheckResult, tvCheckAdvice;
 	private ScrollView mScrollView;
+	private View mViewResult;
 	private ListView lvDetectRules;
 	private DetectRuleAdapter detectAdapter;
 	private List<MedicineCheckRuleBean> detectList = new ArrayList<MedicineCheckRuleBean>();
-	private int queryType = 0;
+	private int queryType;
+	private LoadingUpView mLoadingUpView;
 	android.os.Handler handler = new android.os.Handler();
 
 	TextWatcher watcher = new TextWatcher() {
@@ -110,6 +113,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	}
 
 	private void initVariable() {
+		mLoadingUpView = new LoadingUpView(this, true);
 		Intent intent = getIntent();
 		queryType = intent.getIntExtra(ConstantSet.EXTRA_JUMP_TYPE, -1);
 		if (-1 == queryType) {
@@ -125,6 +129,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		mTvTitle = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
 		mTvTitle.setText(QueryType.getQueryTypeString(queryType));
 
+		mViewResult = findViewById(R.id.layout_result);
 		mScrollView = (ScrollView) findViewById(R.id.sv_layout);
 		layoutYunfu = findViewById(R.id.layout_yunfu);
 		rbRenshen = (RadioButton) findViewById(R.id.rb_renshen);
@@ -248,6 +253,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		if (mIsMedicineCheck) {
 			return;
 		}
+		showLoadingUpView(mLoadingUpView);
 		mIsMedicineCheck = true;
 		new AsyncTask<String, Void, ActionResult>() {
 
@@ -278,9 +284,11 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 					}
 					detectAdapter.notifyDataSetChanged();
 					mScrollView.scrollTo(0, 0);// 要加这一句才不会滚
+					mViewResult.setVisibility(View.VISIBLE);
 				} else {
 					showErrorMsg(result);
 				}
+				dismissLoadingUpView(mLoadingUpView);
 				mIsMedicineCheck = false;
 			}
 		}.execute();
@@ -328,7 +336,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 				final View itemView = View.inflate(mContext, R.layout.item_medicine_name, null);
 				final int pos = i;
 				TextView tvName = (TextView) itemView.findViewById(R.id.tv);
-				tvName.setText(addList.get(i).drugname);
+				tvName.setText(addList.get(i).getDrugname());
 				View vMove = itemView.findViewById(R.id.iv);
 				vMove.setOnClickListener(new OnClickListener() {
 					@Override
