@@ -339,7 +339,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 				});
 				LayoutParams lp = new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
 				int dp10 = UIUtil.dip2px(mContext, 10);
-				lp.setMargins(dp10, dp10, dp10, 0);
+				lp.setMargins(dp10, 0, dp10, 0);
 				layoutAddedNames.addView(itemView, lp);
 			}
 		}

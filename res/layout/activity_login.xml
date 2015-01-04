@@ -119,7 +119,8 @@
         android:layout_height="35dp"
         android:layout_below="@id/btn_login"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp" >
+        android:layout_marginTop="100dp"
+        android:visibility="gone" >
 
         <ImageView
             android:id="@+id/iv_line_1"
