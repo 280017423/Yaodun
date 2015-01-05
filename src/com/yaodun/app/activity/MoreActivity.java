@@ -91,7 +91,7 @@ public class MoreActivity extends YaodunActivityBase implements OnClickListener 
 	private void logout() {
 		UserMgr.logout();
 		MainActivityGroup activityGroup = (MainActivityGroup) getParent();
-		activityGroup.initStartIndex();
+		activityGroup.initStartIndex(0);
 	}
 
 }

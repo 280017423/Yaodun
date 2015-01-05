@@ -70,12 +70,12 @@ public class MainActivityGroup extends YaodunActivityBase {
 		INSTANCE = this;
 		initView();
 		// checkUpdate();
-		initStartIndex();
+		initStartIndex(0);
 	}
 
-	public void initStartIndex() {
+	public void initStartIndex(int index) {
 		// 默认显示第一个界面
-		mBottomTab.setSelectedIndex(0);
+		mBottomTab.setSelectedIndex(index);
 	}
 
 	public void checkUpdate() {

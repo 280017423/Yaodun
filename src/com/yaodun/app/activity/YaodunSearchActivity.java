@@ -267,21 +267,20 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 
 			@Override
 			protected void onPostExecute(ActionResult result) {
+				dismissLoadingUpView(mLoadingUpView);
+				mIsMedicineCheck = false;
 				if (result != null && ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
 					detectList.clear();
+					detectAdapter.notifyDataSetChanged();
+					mScrollView.scrollTo(0, 0);// 要加这一句才不会滚
 					List<MedicineCheckResultBean> tmpList = (List<MedicineCheckResultBean>) result.ResultObject;
 					if (null != tmpList && !tmpList.isEmpty()) {
 						MedicineCheckResultBean checkResult = tmpList.get(0);
 						showPop(checkResult);
 					}
-					detectAdapter.notifyDataSetChanged();
-					mScrollView.scrollTo(0, 0);// 要加这一句才不会滚
-
 				} else {
 					showErrorMsg(result);
 				}
-				dismissLoadingUpView(mLoadingUpView);
-				mIsMedicineCheck = false;
 			}
 		}.execute();
 	}
@@ -293,11 +292,21 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		}
 		final PopWindowUtil popUtil = new PopWindowUtil(contentView, null);
 		TextView tvCheckResult = (TextView) contentView.findViewById(R.id.tv_query_result_content);
-		TextView tvCheckAdvice = (TextView) findViewById(R.id.tv_advices_content);
+		TextView tvCheckAdvice = (TextView) contentView.findViewById(R.id.tv_advices_content);
+		ImageView ivClose = (ImageView) contentView.findViewById(R.id.iv_close);
+		Button btnAskDoctor = (Button) contentView.findViewById(R.id.btn_ask_doctor);
 		tvCheckResult.setText(checkResult.getResult());
 		tvCheckAdvice.setText(checkResult.getGrade());
+		btnAskDoctor.setOnClickListener(new OnClickListener() {
 
-		contentView.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				popUtil.dismiss();
+				finish();
+				MainActivityGroup.INSTANCE.initStartIndex(2);
+			}
+		});
+		ivClose.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {

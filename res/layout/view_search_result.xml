@@ -10,20 +10,38 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:background="@drawable/edt_register_bg"
+        android:orientation="vertical"
+        android:padding="10dp" >
 
-        <!-- 查询结果 -->
-
-        <TextView
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="15dp"
-            android:text="查询结果"
-            android:textColor="@color/main_color"
-            android:textSize="16sp" />
+            android:layout_height="wrap_content" >
+
+            <!-- 查询结果 -->
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:paddingBottom="10dp"
+                android:paddingLeft="15dp"
+                android:paddingRight="15dp"
+                android:paddingTop="10dp"
+                android:text="查询结果"
+                android:textColor="@color/main_color"
+                android:textSize="16sp" />
+
+            <ImageView
+                android:id="@+id/iv_close"
+                android:layout_width="48dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@null"
+                android:scaleType="centerInside"
+                android:src="@drawable/delete_photo" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/tv_query_result_content"
@@ -38,6 +56,22 @@
             android:textSize="14sp" />
         <!-- 药师建议 -->
 
+        <Button
+            android:id="@+id/btn_ask_doctor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/btn_login_selector"
+            android:gravity="center"
+            android:paddingBottom="5dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="5dp"
+            android:text="我要问药师"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -47,7 +81,8 @@
             android:paddingTop="15dp"
             android:text="药师咨询"
             android:textColor="@color/main_color"
-            android:textSize="16sp" />
+            android:textSize="16sp"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_advices_content"
@@ -58,11 +93,13 @@
             android:paddingRight="15dp"
             android:text="建议只用一种"
             android:textColor="@color/title_gray"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
             android:background="@drawable/stroke_e8_ff"
             android:gravity="center_vertical"
             android:orientation="horizontal"
