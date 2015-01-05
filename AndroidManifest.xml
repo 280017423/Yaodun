@@ -125,6 +125,11 @@
             android:screenOrientation="portrait" >
         </activity>
         <activity
+            android:name=".activity.PhotoFragmentActivity"
+            android:launchMode="singleTop"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
             android:name=".activity.KnowledgeDetailActivity"
             android:launchMode="singleTop"
             android:screenOrientation="portrait"

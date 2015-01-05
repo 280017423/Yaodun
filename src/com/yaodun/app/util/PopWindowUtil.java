@@ -1,6 +1,7 @@
 package com.yaodun.app.util;
 
 import android.graphics.drawable.ColorDrawable;
+import android.os.CountDownTimer;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -18,27 +19,20 @@ import com.yaodun.app.listener.OnPopDismissListener;
 public class PopWindowUtil {
 	private View mMenuView;
 	private PopupWindow mPopupWindow;
-	private View mView;
 	private OnPopDismissListener mListener;
 
 	/**
 	 * @param menuView
 	 *            需要显示的view
-	 * @param view
-	 *            PopWindow相对位置的视图
 	 * @param listener
 	 *            PopWindow消失监听
 	 */
-	public PopWindowUtil(View menuView, View view, OnPopDismissListener listener) {
+	public PopWindowUtil(View menuView, OnPopDismissListener listener) {
 		this.mMenuView = menuView;
-		mView = view;
 		mListener = listener;
 		initView();
 	}
 
-	/**
-	 * 初始化
-	 */
 	private void initView() {
 		mPopupWindow = new PopupWindow(mMenuView, LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
 		mPopupWindow.setContentView(mMenuView);
@@ -59,23 +53,9 @@ public class PopWindowUtil {
 	}
 
 	/**
-	 * 用来显示和关闭PopWindow
-	 */
-	public void changeStatus() {
-		if (null == mPopupWindow) {
-			return;
-		}
-		if (mPopupWindow.isShowing()) {
-			mPopupWindow.dismiss();
-		} else {
-			mPopupWindow.showAtLocation(mView, Gravity.BOTTOM, 0, 0);
-		}
-	}
-
-	/**
 	 * 消失Pop
 	 */
-	public void dissmiss() {
+	public void dismiss() {
 		if (null == mPopupWindow) {
 			return;
 		}
@@ -86,14 +66,53 @@ public class PopWindowUtil {
 
 	/**
 	 * 显示Pop
+	 * 
+	 * @param view
+	 *            PopWindow相对位置的视图
 	 */
-	public void show() {
+	public void showAsDropDown(View view) {
 		if (null == mPopupWindow) {
 			return;
 		}
 		if (!mPopupWindow.isShowing()) {
-			mPopupWindow.showAsDropDown(mView);
+			mPopupWindow.showAsDropDown(view);
 		}
+	}
+
+	/**
+	 * 显示Pop
+	 */
+	public void show() {
+		show(Gravity.CENTER);
+	}
+
+	/**
+	 * 显示Pop
+	 */
+	public void show(int gravity) {
+		if (null == mPopupWindow) {
+			return;
+		}
+		if (!mPopupWindow.isShowing()) {
+			mPopupWindow.showAtLocation(mMenuView, gravity, 0, 0);
+		}
+	}
+
+	/**
+	 * 显示Pop
+	 */
+	public void showAndDismiss() {
+		show();
+		new CountDownTimer(3000, 3000) {
+			@Override
+			public void onTick(long millisUntilFinished) {
+			}
+
+			@Override
+			public void onFinish() {
+				dismiss();
+			}
+		}.start();
 	}
 
 }

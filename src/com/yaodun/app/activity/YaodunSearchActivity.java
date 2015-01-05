@@ -44,6 +44,7 @@ import com.yaodun.app.model.QueryType;
 import com.yaodun.app.model.UserInfoModel;
 import com.yaodun.app.req.MedicineReq;
 import com.yaodun.app.util.ConstantSet;
+import com.yaodun.app.util.PopWindowUtil;
 
 /**
  * 药盾--查询页面
@@ -65,9 +66,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	private List<MedicineBean> searchList = new ArrayList<MedicineBean>();
 	private List<MedicineBean> addList = new ArrayList<MedicineBean>();
 
-	private TextView tvCheckResult, tvCheckAdvice;
 	private ScrollView mScrollView;
-	private View mViewResult;
 	private ListView lvDetectRules;
 	private DetectRuleAdapter detectAdapter;
 	private List<MedicineCheckRuleBean> detectList = new ArrayList<MedicineCheckRuleBean>();
@@ -129,7 +128,6 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		mTvTitle = (TextView) findViewById(R.id.title_with_back_title_btn_mid);
 		mTvTitle.setText(QueryType.getQueryTypeString(queryType));
 
-		mViewResult = findViewById(R.id.layout_result);
 		mScrollView = (ScrollView) findViewById(R.id.sv_layout);
 		layoutYunfu = findViewById(R.id.layout_yunfu);
 		rbRenshen = (RadioButton) findViewById(R.id.rb_renshen);
@@ -157,11 +155,6 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		android.view.ViewGroup.LayoutParams layoutParams = lvSearchedNames.getLayoutParams();
 		layoutParams.height = UIUtil.dip2px(this, TEACHER_VIEW_HEIGHT);
 		lvSearchedNames.setLayoutParams(layoutParams);
-
-		tvCheckResult = (TextView) findViewById(R.id.tv_query_result_content);
-		tvCheckAdvice = (TextView) findViewById(R.id.tv_advices_content);
-		tvCheckResult.setText("");
-		tvCheckAdvice.setText("");
 
 		lvDetectRules = (ListView) findViewById(R.id.lv_rules);
 		detectAdapter = new DetectRuleAdapter(mContext, detectList);
@@ -277,14 +270,13 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 				if (result != null && ActionResult.RESULT_CODE_SUCCESS.equals(result.ResultCode)) {
 					detectList.clear();
 					List<MedicineCheckResultBean> tmpList = (List<MedicineCheckResultBean>) result.ResultObject;
-					if (tmpList != null && tmpList.size() > 0) {
+					if (null != tmpList && !tmpList.isEmpty()) {
 						MedicineCheckResultBean checkResult = tmpList.get(0);
-						tvCheckResult.setText(TextUtils.isEmpty(checkResult.result) ? "" : checkResult.result);
-						tvCheckAdvice.setText(TextUtils.isEmpty(checkResult.grade) ? "" : checkResult.grade);
+						showPop(checkResult);
 					}
 					detectAdapter.notifyDataSetChanged();
 					mScrollView.scrollTo(0, 0);// 要加这一句才不会滚
-					mViewResult.setVisibility(View.VISIBLE);
+
 				} else {
 					showErrorMsg(result);
 				}
@@ -292,7 +284,27 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 				mIsMedicineCheck = false;
 			}
 		}.execute();
+	}
 
+	protected void showPop(MedicineCheckResultBean checkResult) {
+		View contentView = null;
+		if (null == contentView) {
+			contentView = View.inflate(this, R.layout.view_search_result, null);
+		}
+		final PopWindowUtil popUtil = new PopWindowUtil(contentView, null);
+		TextView tvCheckResult = (TextView) contentView.findViewById(R.id.tv_query_result_content);
+		TextView tvCheckAdvice = (TextView) findViewById(R.id.tv_advices_content);
+		tvCheckResult.setText(checkResult.getResult());
+		tvCheckAdvice.setText(checkResult.getGrade());
+
+		contentView.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				popUtil.dismiss();
+			}
+		});
+		popUtil.show();
 	}
 
 	private void getMedicineCheckRules() {
@@ -395,5 +407,13 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	@Override
 	public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
 		mEtRenshenTime.setEnabled(rbRenshen.isChecked());
+	}
+
+	@Override
+	protected void onDestroy() {
+		if (null != receiver) {
+			unregisterReceiver(receiver);
+		}
+		super.onDestroy();
 	}
 }
