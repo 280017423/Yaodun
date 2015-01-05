@@ -26,7 +26,7 @@ public class YaodunClassifyActivity extends YaodunActivityBase implements OnClic
 	public void onClick(View v) {
 		int queryType = 0;
 		switch (v.getId()) {
-			case R.id.iv_people:
+			case R.id.layout_people:
 				queryType = QueryType.medicine_dazhong;
 				break;
 			case R.id.layout_kid:
@@ -40,9 +40,6 @@ public class YaodunClassifyActivity extends YaodunActivityBase implements OnClic
 				break;
 			case R.id.layout_old:
 				queryType = QueryType.medicine_laoren;
-				break;
-			case R.id.layout_repeat:
-				queryType = QueryType.medicine_chongfu;
 				break;
 			case R.id.layout_pregnant:
 				queryType = QueryType.medicine_yunfu;

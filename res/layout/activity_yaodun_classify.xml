@@ -12,20 +12,18 @@
         android:layout_centerVertical="true" >
 
         <ImageView
-            android:id="@+id/iv_people"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="-1dp"
-            android:background="@drawable/icon_medicine_common"
-            android:contentDescription="@null"
-            android:onClick="onClick" />
+            android:background="@drawable/icon_medicine"
+            android:contentDescription="@null" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="70dp"
+        android:layout_marginLeft="60dp"
         android:orientation="vertical" >
 
         <!-- 儿童 -->
@@ -60,7 +58,8 @@
             android:id="@+id/layout_pregnant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:onClick="onClick"
             android:orientation="horizontal" >
@@ -86,8 +85,8 @@
             android:id="@+id/layout_old"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="30dp"
             android:gravity="center_vertical"
             android:onClick="onClick"
             android:orientation="horizontal" >
@@ -111,11 +110,11 @@
         <!-- 重复用药 -->
 
         <LinearLayout
-            android:id="@+id/layout_repeat"
+            android:id="@+id/layout_people"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="80dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="30dp"
             android:gravity="center_vertical"
             android:onClick="onClick"
             android:orientation="horizontal" >
@@ -123,7 +122,7 @@
             <ImageView
                 android:layout_width="@dimen/btn_w"
                 android:layout_height="@dimen/btn_h"
-                android:background="@drawable/icon_medicine_repeat"
+                android:background="@drawable/icon_medicine_common"
                 android:contentDescription="@null" >
             </ImageView>
 
@@ -131,7 +130,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="重复用药查询"
+                android:text="大众用药查询"
                 android:textColor="@color/white"
                 android:textSize="@dimen/size_4" />
         </LinearLayout>
@@ -146,7 +145,8 @@
             android:layout_marginTop="15dp"
             android:gravity="center_vertical"
             android:onClick="onClick"
-            android:orientation="horizontal" >
+            android:orientation="horizontal"
+            android:visibility="gone" >
 
             <ImageView
                 android:layout_width="@dimen/btn_w"
@@ -170,6 +170,7 @@
             android:id="@+id/layout_antibiotic"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
             android:gravity="center_vertical"
             android:onClick="onClick"
             android:orientation="horizontal" >
