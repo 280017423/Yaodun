@@ -294,10 +294,10 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		TextView tvCheckResult = (TextView) contentView.findViewById(R.id.tv_query_result_content);
 		TextView tvCheckAdvice = (TextView) contentView.findViewById(R.id.tv_advices_content);
 		ImageView ivClose = (ImageView) contentView.findViewById(R.id.iv_close);
-		Button btnAskDoctor = (Button) contentView.findViewById(R.id.btn_ask_doctor);
+		View viewAskDoctor = contentView.findViewById(R.id.ll_ask_doctor);
 		tvCheckResult.setText(checkResult.getResult());
 		tvCheckAdvice.setText(checkResult.getGrade());
-		btnAskDoctor.setOnClickListener(new OnClickListener() {
+		viewAskDoctor.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
