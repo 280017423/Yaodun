@@ -11,12 +11,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/edt_register_bg"
-        android:orientation="vertical"
-        android:padding="10dp" >
+        android:orientation="vertical" >
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:padding="10dp" >
 
             <!-- 查询结果 -->
 
@@ -24,13 +24,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:paddingBottom="10dp"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:paddingTop="10dp"
                 android:text="查询结果"
                 android:textColor="@color/main_color"
-                android:textSize="16sp" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <ImageView
                 android:id="@+id/iv_close"
@@ -48,10 +45,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/stroke_df_f0"
-            android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:paddingTop="10dp"
+            android:padding="10dp"
             android:textColor="@color/title_gray"
             android:textSize="14sp" />
         <!-- 药师建议 -->
@@ -84,6 +78,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
+            android:layout_marginRight="10dp"
             android:layout_marginTop="10dp"
             android:gravity="right" >
 
@@ -110,7 +105,7 @@
             android:id="@+id/ll_ask_doctor"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
+            android:layout_margin="10dp"
             android:background="@drawable/btn_login_selector"
             android:paddingBottom="10dp"
             android:paddingTop="10dp" >
@@ -119,7 +114,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:drawableLeft="@drawable/icon_weixin"
+                android:drawableLeft="@drawable/icon_ask_doctor"
                 android:drawablePadding="10dp"
                 android:text="我要问药师"
                 android:textColor="@color/white"
