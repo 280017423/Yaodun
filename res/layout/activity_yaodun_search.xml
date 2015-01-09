@@ -89,18 +89,20 @@
                         android:textColor="@color/title_gray"
                         android:textSize="16sp" />
 
-                    <EditText
-                        android:id="@+id/et_renshen_time"
+                    <TextView
+                        android:id="@+id/tv_renshen_time"
                         android:layout_width="80dp"
                         android:layout_height="30dp"
                         android:background="@drawable/edt_register_bg"
-                        android:inputType="number"
-                        android:maxLength="2"
-                        android:paddingLeft="5dp"
-                        android:paddingRight="5dp"
-                        android:singleLine="true"
+                        android:clickable="true"
+                        android:drawablePadding="5dp"
+                        android:gravity="center_vertical"
+                        android:onClick="onClick"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="1"
                         android:textColor="@color/title_gray"
-                        android:textSize="14sp" />
+                        android:textSize="@dimen/size_3" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -139,7 +141,7 @@
                     android:layout_marginLeft="10dp"
                     android:layout_weight="1"
                     android:background="@null"
-                    android:hint="请输入药品名称"
+                    android:hint="请输入药品名称或拼音首字母"
                     android:textColor="@color/content_gray"
                     android:textSize="@dimen/size_4" />
 

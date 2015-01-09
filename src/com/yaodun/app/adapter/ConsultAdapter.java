@@ -70,7 +70,7 @@ public class ConsultAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		viewHode holder = new viewHode();
+		ViewHode holder = new ViewHode();
 		if (convertView == null) {
 			convertView = View.inflate(mContext, R.layout.view_consult_item, null);
 			holder.mTvDescription = (TextView) convertView.findViewById(R.id.tv_description);
@@ -78,7 +78,7 @@ public class ConsultAdapter extends BaseAdapter {
 			holder.mTvStatus = (TextView) convertView.findViewById(R.id.tv_statu);
 			convertView.setTag(holder);
 		} else {
-			holder = (viewHode) convertView.getTag();
+			holder = (ViewHode) convertView.getTag();
 		}
 
 		ConsultListModel model = getItem(position);
@@ -96,7 +96,7 @@ public class ConsultAdapter extends BaseAdapter {
 		return convertView;
 	}
 
-	class viewHode {
+	class ViewHode {
 		TextView mTvDescription;
 		TextView mTvDate;
 		TextView mTvStatus;

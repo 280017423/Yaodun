@@ -7,6 +7,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -25,6 +27,8 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
 import android.widget.ListView;
+import android.widget.PopupWindow;
+import android.widget.PopupWindow.OnDismissListener;
 import android.widget.RadioButton;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -35,6 +39,7 @@ import com.qianjiang.framework.util.UIUtil;
 import com.qianjiang.framework.widget.LoadingUpView;
 import com.yaodun.app.R;
 import com.yaodun.app.adapter.DetectRuleAdapter;
+import com.yaodun.app.adapter.MonthAdapter;
 import com.yaodun.app.adapter.SearchedMedicineNameAdapter;
 import com.yaodun.app.authentication.ActionResult;
 import com.yaodun.app.manager.UserMgr;
@@ -60,7 +65,8 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	private TextView mTvTitle;
 	private View layoutYunfu;
 	private RadioButton rbRenshen, rbBuru;
-	private EditText mEtRenshenTime, mEtName;
+	private EditText mEtName;
+	private TextView mTvRenshenTime;
 	private View mViewMonth;
 	private ListView lvSearchedNames;
 	private LinearLayout layoutAddedNames;
@@ -137,7 +143,8 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		rbRenshen.setOnCheckedChangeListener(this);
 		rbBuru.setOnCheckedChangeListener(this);
 		mViewMonth = findViewById(R.id.ll_month);
-		mEtRenshenTime = (EditText) findViewById(R.id.et_renshen_time);
+		mTvRenshenTime = (TextView) findViewById(R.id.tv_renshen_time);
+		mTvRenshenTime.setCompoundDrawables(getArrowDrawable(R.drawable.expand_down), null, null, null);
 		layoutYunfu.setVisibility(queryType == QueryType.medicine_yunfu ? View.VISIBLE : View.GONE);
 
 		mEtName = (EditText) findViewById(R.id.et_name);
@@ -251,7 +258,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		}
 		if (queryType == QueryType.medicine_yunfu) {
 			if (rbRenshen.isChecked()) {
-				String month = mEtRenshenTime.getText().toString().trim();
+				String month = mTvRenshenTime.getText().toString().trim();
 				if (StringUtil.isNullOrEmpty(month)) {
 					toast("请输入月份");
 					return;
@@ -277,7 +284,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 				user.checkType = queryType;
 				if (queryType == QueryType.medicine_yunfu) {
 					user.isGestate = rbRenshen.isChecked() ? "1" : "0";
-					user.gestateTime = rbRenshen.isChecked() ? mEtRenshenTime.getText().toString().trim() : "";
+					user.gestateTime = rbRenshen.isChecked() ? mTvRenshenTime.getText().toString().trim() : "";
 					user.isSuckling = rbBuru.isChecked() ? "1" : "0";
 				}
 				return MedicineReq.medicineCheck(user, addList);
@@ -304,10 +311,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	}
 
 	protected void showPop(MedicineCheckResultBean checkResult) {
-		View contentView = null;
-		if (null == contentView) {
-			contentView = View.inflate(this, R.layout.view_search_result, null);
-		}
+		View contentView = View.inflate(this, R.layout.view_search_result, null);
 		final PopWindowUtil popUtil = new PopWindowUtil(contentView, null);
 		TextView tvCheckResult = (TextView) contentView.findViewById(R.id.tv_query_result_content);
 		TextView tvCheckAdvice = (TextView) contentView.findViewById(R.id.tv_advices_content);
@@ -404,9 +408,42 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 			case R.id.btn_search:
 				doMedicineCheck();
 				break;
+			case R.id.tv_renshen_time:
+				showMonthPop();
+				break;
 			default:
 				break;
 		}
+	}
+
+	private void showMonthPop() {
+		View contentView = View.inflate(this, R.layout.view_month_layout, null);
+		final PopupWindow popupWindow = new PopupWindow(
+				contentView, LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		popupWindow.setOnDismissListener(new OnDismissListener() {
+
+			@Override
+			public void onDismiss() {
+				mTvRenshenTime.setCompoundDrawables(getArrowDrawable(R.drawable.expand_down), null, null, null);
+			}
+		});
+		popupWindow.setContentView(contentView);
+		popupWindow.setFocusable(true);
+		ColorDrawable dw = new ColorDrawable(0x00);
+		popupWindow.setBackgroundDrawable(dw);
+		popupWindow.setOutsideTouchable(true);
+		ListView lvMonth = (ListView) contentView.findViewById(R.id.lv_month);
+		lvMonth.setAdapter(new MonthAdapter(YaodunSearchActivity.this));
+		lvMonth.setOnItemClickListener(new OnItemClickListener() {
+
+			@Override
+			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+				mTvRenshenTime.setText((position + 1) + "");
+				popupWindow.dismiss();
+			}
+		});
+		popupWindow.showAsDropDown(mTvRenshenTime);
+		mTvRenshenTime.setCompoundDrawables(getArrowDrawable(R.drawable.expand_up), null, null, null);
 	}
 
 	private void hideIme() {
@@ -436,7 +473,6 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		boolean isRenshen = rbRenshen.isChecked();
 		if (isRenshen) {
 			mViewMonth.setVisibility(View.VISIBLE);
-			mEtRenshenTime.requestFocus();
 		} else {
 			mViewMonth.setVisibility(View.GONE);
 		}
@@ -448,5 +484,12 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 			unregisterReceiver(receiver);
 		}
 		super.onDestroy();
+	}
+
+	private Drawable getArrowDrawable(int id) {
+		Drawable drawable = getResources().getDrawable(id);
+		// / 这一步必须要做,否则不会显示.
+		drawable.setBounds(0, 0, drawable.getMinimumWidth(), drawable.getMinimumHeight());
+		return drawable;
 	}
 }
