@@ -144,7 +144,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		rbBuru.setOnCheckedChangeListener(this);
 		mViewMonth = findViewById(R.id.ll_month);
 		mTvRenshenTime = (TextView) findViewById(R.id.tv_renshen_time);
-		mTvRenshenTime.setCompoundDrawables(getArrowDrawable(R.drawable.expand_down), null, null, null);
+		mTvRenshenTime.setCompoundDrawables(null, null, getArrowDrawable(R.drawable.expand_down), null);
 		layoutYunfu.setVisibility(queryType == QueryType.medicine_yunfu ? View.VISIBLE : View.GONE);
 
 		mEtName = (EditText) findViewById(R.id.et_name);
@@ -424,7 +424,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 
 			@Override
 			public void onDismiss() {
-				mTvRenshenTime.setCompoundDrawables(getArrowDrawable(R.drawable.expand_down), null, null, null);
+				mTvRenshenTime.setCompoundDrawables(null, null, getArrowDrawable(R.drawable.expand_down), null);
 			}
 		});
 		popupWindow.setContentView(contentView);
@@ -443,7 +443,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 			}
 		});
 		popupWindow.showAsDropDown(mTvRenshenTime);
-		mTvRenshenTime.setCompoundDrawables(getArrowDrawable(R.drawable.expand_up), null, null, null);
+		mTvRenshenTime.setCompoundDrawables(null, null, getArrowDrawable(R.drawable.expand_up), null);
 	}
 
 	private void hideIme() {
