@@ -30,6 +30,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.qianjiang.framework.util.ImeUtil;
+import com.qianjiang.framework.util.StringUtil;
 import com.qianjiang.framework.util.UIUtil;
 import com.qianjiang.framework.widget.LoadingUpView;
 import com.yaodun.app.R;
@@ -60,6 +61,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	private View layoutYunfu;
 	private RadioButton rbRenshen, rbBuru;
 	private EditText mEtRenshenTime, mEtName;
+	private View mViewMonth;
 	private ListView lvSearchedNames;
 	private LinearLayout layoutAddedNames;
 	private SearchedMedicineNameAdapter searchAdapter;
@@ -134,6 +136,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		rbBuru = (RadioButton) findViewById(R.id.rb_buru);
 		rbRenshen.setOnCheckedChangeListener(this);
 		rbBuru.setOnCheckedChangeListener(this);
+		mViewMonth = findViewById(R.id.ll_month);
 		mEtRenshenTime = (EditText) findViewById(R.id.et_renshen_time);
 		layoutYunfu.setVisibility(queryType == QueryType.medicine_yunfu ? View.VISIBLE : View.GONE);
 
@@ -245,6 +248,21 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 	private void doMedicineCheck() {
 		if (mIsMedicineCheck) {
 			return;
+		}
+		if (queryType == QueryType.medicine_yunfu) {
+			if (rbRenshen.isChecked()) {
+				String month = mEtRenshenTime.getText().toString().trim();
+				if (StringUtil.isNullOrEmpty(month)) {
+					toast("请输入月份");
+					return;
+				} else {
+					int monthValue = Integer.parseInt(month);
+					if (monthValue < 1 || monthValue > 12) {
+						toast("请输入正确月份");
+						return;
+					}
+				}
+			}
 		}
 		showLoadingUpView(mLoadingUpView);
 		mIsMedicineCheck = true;
@@ -415,7 +433,13 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 
 	@Override
 	public void onCheckedChanged(CompoundButton arg0, boolean arg1) {
-		mEtRenshenTime.setEnabled(rbRenshen.isChecked());
+		boolean isRenshen = rbRenshen.isChecked();
+		if (isRenshen) {
+			mViewMonth.setVisibility(View.VISIBLE);
+			mEtRenshenTime.requestFocus();
+		} else {
+			mViewMonth.setVisibility(View.GONE);
+		}
 	}
 
 	@Override

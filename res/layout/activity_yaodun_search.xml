@@ -41,7 +41,8 @@
                 android:id="@+id/layout_yunfu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center_vertical" >
+                android:gravity="center_vertical"
+                android:padding="5dp" >
 
                 <RadioGroup
                     android:id="@+id/rg_jieduan"
@@ -72,6 +73,7 @@
                 </RadioGroup>
 
                 <LinearLayout
+                    android:id="@+id/ll_month"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/rg_jieduan"
@@ -90,10 +92,12 @@
                     <EditText
                         android:id="@+id/et_renshen_time"
                         android:layout_width="80dp"
-                        android:layout_height="35dp"
-                        android:button="@drawable/checkbox_woman_man_style"
+                        android:layout_height="30dp"
+                        android:background="@drawable/edt_register_bg"
                         android:inputType="number"
                         android:maxLength="2"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
                         android:singleLine="true"
                         android:textColor="@color/title_gray"
                         android:textSize="14sp" />
