@@ -27,8 +27,8 @@ import android.widget.TextView;
 
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.Result;
-import com.yaodun.app.R;
-import com.yaodun.app.activity.YaodunActivityBase;
+import com.pregnancy.app.R;
+import com.pregnancy.app.activity.YaodunActivityBase;
 import com.zxing.camera.CameraManager;
 import com.zxing.view.ViewfinderView;
 

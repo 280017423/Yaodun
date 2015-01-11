@@ -9,7 +9,7 @@
         android:id="@+id/layout_title"
         layout="@layout/title_with_back_btn_wrap" />
 
-    <com.yaodun.app.widget.LineTabIndicator
+    <com.pregnancy.app.widget.LineTabIndicator
         android:id="@+id/line_tab_indicator"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

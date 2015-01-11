@@ -178,7 +178,7 @@
                 android:textColor="@color/main_color"
                 android:textSize="16sp" />
 
-            <com.yaodun.app.widget.MListView
+            <com.pregnancy.app.widget.MListView
                 android:id="@+id/lv_rules"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

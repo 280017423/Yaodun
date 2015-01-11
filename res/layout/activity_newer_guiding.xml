@@ -5,19 +5,20 @@
     android:layout_height="fill_parent"
     android:orientation="vertical" >
 
-    <com.yaodun.app.widget.AutoScrollViewPager
+    <com.pregnancy.app.widget.AutoScrollViewPager
         android:id="@+id/vp_newer_guide"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:fadingEdge="none"
         android:spacing="0dp" />
 
-    <com.yaodun.app.widget.CircleFlowIndicator
+    <com.pregnancy.app.widget.CircleFlowIndicator
         android:id="@+id/cfi_indicator"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="20dp"
+        android:visibility="gone"
         app:point_normal_drawable="@drawable/icon_dot_unchecked"
         app:point_radius="5dp"
         app:point_seleted_drawable="@drawable/icon_dot_checked"

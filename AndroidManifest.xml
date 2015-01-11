@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.yaodun.app"
+    package="com.pregnancy.app"
     android:versionCode="10000"
     android:versionName="1.0.0" >
 
@@ -25,7 +25,7 @@
     <uses-permission android:name="android.permission.READ_LOGS" />
 
     <application
-        android:name="com.yaodun.app.app.ZouApplication"
+        android:name="com.pregnancy.app.app.ZouApplication"
         android:allowBackup="true"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
@@ -35,19 +35,19 @@
             android:value="1" />
         <meta-data
             android:name="db_name"
-            android:value="yaodun.db" />
+            android:value="pregnancy.db" />
         <meta-data
             android:name="crash_log_path"
-            android:value="/sdcard/yaodun/crash/" />
+            android:value="/sdcard/pregnancy/crash/" />
         <meta-data
             android:name="crash_report_ext"
             android:value=".log" />
         <meta-data
             android:name="image_dir"
-            android:value="yaodun/com.yaodun.app/image" />
+            android:value="yaodun/com.pregnancy.app/image" />
         <meta-data
             android:name="http_cache_dir"
-            android:value="yaodun/com.yaodun.app/cache" />
+            android:value="yaodun/com.pregnancy.app/cache" />
         <meta-data
             android:name="status_ok_value"
             android:value="1" />
@@ -68,7 +68,7 @@
             android:value="false" />
         <meta-data
             android:name="appSign"
-            android:value="yaodun" />
+            android:value="pregnancy" />
 
         <activity
             android:name=".activity.LoadingActivity"
@@ -228,7 +228,7 @@
         </activity>
         <!-- 微信结果页 -->
         <activity
-            android:name="com.yaodun.app.wxapi.WXEntryActivity"
+            android:name=".wxapi.WXEntryActivity"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />

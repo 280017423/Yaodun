@@ -9,7 +9,7 @@
         android:layout_height="fill_parent"
         android:layout_above="@+id/bottom_tab" />
 
-    <com.yaodun.app.widget.JYTBottomTab
+    <com.pregnancy.app.widget.JYTBottomTab
         android:id="@+id/bottom_tab"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
