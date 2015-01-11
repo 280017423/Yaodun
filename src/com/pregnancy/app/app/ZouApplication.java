@@ -60,7 +60,7 @@ public class ZouApplication extends QJApplicationBase {
 			e.printStackTrace();
 		}
 		strategy.setAppReportDelay(5000); // 设置SDK处理延时，毫秒
-		CrashReport.initCrashReport(getApplicationContext(), "900001543", false, strategy);
+		CrashReport.initCrashReport(getApplicationContext(), "900001608", false, strategy);
 	}
 
 	@Override
