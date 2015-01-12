@@ -104,7 +104,7 @@ public class ServerAPIConstant {
 	public static final String KEY_TIME = "time";
 	public static final String KEY_MESSAGE_ID = "KEY_MESSAGE_ID";
 	public static final String KEY_VERSION = "version";
-	public static final String KEY_CLIENT_TYPE = "clientType";
+	public static final String KEY_APP_TYPE = "appType";
 	public static final String KEY_PROJECT_SIGN = "projectSign";
 	public static final String PROJECT_SIGN = "1";
 	public static final String KEY_VIDEO_ID = "videoId";

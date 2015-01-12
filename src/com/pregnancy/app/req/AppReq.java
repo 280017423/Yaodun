@@ -38,6 +38,7 @@ public class AppReq {
 			String url = ServerAPIConstant.getUrl(ServerAPIConstant.CHANGE_CHECK_UPDATE);
 			List<NameValuePair> postParams = new ArrayList<NameValuePair>();
 			postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_VERSION, PackageUtil.getVersionCode() + ""));
+			postParams.add(new BasicNameValuePair(ServerAPIConstant.KEY_APP_TYPE, "1"));
 			JsonResult jsonResult;
 
 			jsonResult = HttpClientUtil.post(url, null, postParams);
