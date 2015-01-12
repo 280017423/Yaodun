@@ -292,8 +292,11 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 					mScrollView.scrollTo(0, 0);// 要加这一句才不会滚
 					List<MedicineCheckResultBean> tmpList = (List<MedicineCheckResultBean>) result.ResultObject;
 					if (null != tmpList && !tmpList.isEmpty()) {
-						MedicineCheckResultBean checkResult = tmpList.get(0);
-						showPop(checkResult);
+						StringBuilder builder = new StringBuilder();
+						for (int i = 0; i < tmpList.size(); i++) {
+							builder.append(tmpList.get(i).getResult() + "\r\n");
+						}
+						showPop(builder.toString());
 					}
 				} else {
 					showErrorMsg(result);
@@ -302,15 +305,13 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		}.execute();
 	}
 
-	protected void showPop(MedicineCheckResultBean checkResult) {
+	protected void showPop(String checkResult) {
 		View contentView = View.inflate(this, R.layout.view_search_result, null);
 		final PopWindowUtil popUtil = new PopWindowUtil(contentView, null);
 		TextView tvCheckResult = (TextView) contentView.findViewById(R.id.tv_query_result_content);
-		TextView tvCheckAdvice = (TextView) contentView.findViewById(R.id.tv_advices_content);
 		ImageView ivClose = (ImageView) contentView.findViewById(R.id.iv_close);
 		View viewAskDoctor = contentView.findViewById(R.id.ll_ask_doctor);
-		tvCheckResult.setText(checkResult.getResult());
-		tvCheckAdvice.setText(checkResult.getGrade());
+		tvCheckResult.setText(checkResult);
 		viewAskDoctor.setOnClickListener(new OnClickListener() {
 
 			@Override
