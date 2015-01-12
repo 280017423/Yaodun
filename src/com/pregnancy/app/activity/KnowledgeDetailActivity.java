@@ -64,9 +64,9 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 
 							if (1 == mDetailModel.getStatus()) {
 								mBtnCollect.setText(R.string.knowledge_detail_cancel_collect);
-								mBtnCollect.setVisibility(View.GONE);
+								mBtnCollect.setEnabled(false);
 							} else {
-								mBtnCollect.setVisibility(View.VISIBLE);
+								mBtnCollect.setEnabled(true);
 								mBtnCollect.setText(R.string.knowledge_detail_collect);
 							}
 						}
@@ -85,12 +85,12 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 					case ATTENTION_SUCCESSED:
 						if (1 == mDetailModel.getStatus()) {
 							mDetailModel.setStatus(0);
-							mBtnCollect.setVisibility(View.VISIBLE);
+							mBtnCollect.setEnabled(true);
 							mBtnCollect.setText(R.string.knowledge_detail_collect);
 							toast("取消收藏成功");
 						} else {
 							mDetailModel.setStatus(1);
-							mBtnCollect.setVisibility(View.GONE);
+							mBtnCollect.setEnabled(false);
 							mBtnCollect.setText(R.string.knowledge_detail_cancel_collect);
 							toast("收藏成功");
 						}

@@ -25,8 +25,8 @@
             android:layout_centerVertical="true"
             android:background="@drawable/btn_collect_bg"
             android:onClick="onClick"
-            android:textColor="@color/white"
-            android:visibility="gone" />
+            android:text="@string/knowledge_detail_collect"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/tv_knowledge_detail_title"
