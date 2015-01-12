@@ -27,8 +27,7 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:ellipsize="end"
-            android:ellipsize="end"
-            android:singleLine="1"
+            android:singleLine="true"
             android:textColor="#FF666666"
             android:textSize="@dimen/size_4" />
 
