@@ -63,7 +63,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 							mTvDetail.setText(mDetailModel.getDescription());
 
 							if (1 == mDetailModel.getStatus()) {
-								mBtnCollect.setText(R.string.knowledge_detail_cancel_collect);
+								mBtnCollect.setText(R.string.knowledge_detail_has_collect);
 								mBtnCollect.setEnabled(false);
 							} else {
 								mBtnCollect.setEnabled(true);
@@ -91,7 +91,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 						} else {
 							mDetailModel.setStatus(1);
 							mBtnCollect.setEnabled(false);
-							mBtnCollect.setText(R.string.knowledge_detail_cancel_collect);
+							mBtnCollect.setText(R.string.knowledge_detail_has_collect);
 							toast("收藏成功");
 						}
 
@@ -144,6 +144,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 		llRight.setOnClickListener(this);
 
 		mBtnCollect = (Button) findViewById(R.id.btn_collect);
+		mBtnCollect.setVisibility(View.VISIBLE);
 		mEdtCommit = (EditText) findViewById(R.id.et_commit_content);
 		mTvTitle = (TextView) findViewById(R.id.tv_knowledge_detail_title);
 		mTvCollectCount = (TextView) findViewById(R.id.tv_knowledge_detail_collect);

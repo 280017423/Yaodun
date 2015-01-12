@@ -23,10 +23,11 @@
             android:layout_height="33dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:text="@string/knowledge_detail_collect"
             android:background="@drawable/btn_collect_bg"
             android:onClick="onClick"
-            android:textColor="@color/white" />
+            android:text="@string/knowledge_detail_collect"
+            android:textColor="@color/white"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_knowledge_detail_title"
