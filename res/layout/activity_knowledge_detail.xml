@@ -17,10 +17,23 @@
         android:background="#ededed"
         android:padding="10dp" >
 
+        <Button
+            android:id="@+id/btn_collect"
+            android:layout_width="77dp"
+            android:layout_height="33dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/btn_collect_bg"
+            android:onClick="onClick"
+            android:textColor="@color/white"
+            android:visibility="gone" />
+
         <TextView
             android:id="@+id/tv_knowledge_detail_title"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginRight="5dp"
+            android:layout_toLeftOf="@id/btn_collect"
             android:ellipsize="end"
             android:singleLine="true"
             android:textColor="#494949"
@@ -77,8 +90,8 @@
         android:layout_height="match_parent"
         android:layout_above="@id/layout_2"
         android:layout_below="@+id/layout_1"
-        android:fillViewport="true"
         android:fadingEdge="none"
+        android:fillViewport="true"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
         android:scrollbars="none" >
