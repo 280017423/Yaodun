@@ -108,7 +108,7 @@ public class KnowledgeAdapter extends BaseAdapter {
 			holder.mTvTitle.setText(title);
 		}
 		int type = vedioModel.getType();
-		holder.mTvType.setText(TITLE[type - 1]);
+		holder.mTvType.setText(TITLE[type]);
 		String date = vedioModel.getDisplayTime();
 		holder.mTvDate.setText(date);
 		int count = vedioModel.getCountDiscuss();
