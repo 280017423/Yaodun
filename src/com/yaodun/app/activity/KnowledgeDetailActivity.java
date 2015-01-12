@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -45,7 +46,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 	private boolean mIsAttention;
 	private LoadingUpView mLoadingUpView;
 	private KnowledgeDetailModel mDetailModel;
-	private TextView mTvnRight;
+	private Button mBtnCollect;
 
 	private Handler mHandler = new Handler() {
 		@Override
@@ -62,11 +63,11 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 							mTvDetail.setText(mDetailModel.getDescription());
 
 							if (1 == mDetailModel.getStatus()) {
-								mTvnRight.setText(R.string.knowledge_detail_cancel_collect);
-								mTvnRight.setVisibility(View.GONE);
+								mBtnCollect.setText(R.string.knowledge_detail_cancel_collect);
+								mBtnCollect.setEnabled(false);
 							} else {
-								mTvnRight.setVisibility(View.VISIBLE);
-								mTvnRight.setText(R.string.knowledge_detail_collect);
+								mBtnCollect.setEnabled(true);
+								mBtnCollect.setText(R.string.knowledge_detail_collect);
 							}
 						}
 						break;
@@ -84,13 +85,13 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 					case ATTENTION_SUCCESSED:
 						if (1 == mDetailModel.getStatus()) {
 							mDetailModel.setStatus(0);
-							mTvnRight.setVisibility(View.VISIBLE);
-							mTvnRight.setText(R.string.knowledge_detail_collect);
+							mBtnCollect.setEnabled(true);
+							mBtnCollect.setText(R.string.knowledge_detail_collect);
 							toast("取消收藏成功");
 						} else {
 							mDetailModel.setStatus(1);
-							mTvnRight.setVisibility(View.GONE);
-							mTvnRight.setText(R.string.knowledge_detail_cancel_collect);
+							mBtnCollect.setEnabled(false);
+							mBtnCollect.setText(R.string.knowledge_detail_cancel_collect);
 							toast("收藏成功");
 						}
 
@@ -141,10 +142,8 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 
 		LinearLayout llRight = (LinearLayout) findViewById(R.id.title_with_back_title_btn_right);
 		llRight.setOnClickListener(this);
-		mTvnRight = (TextView) findViewById(R.id.tv_title_with_right);
-		mTvnRight.setBackgroundResource(R.drawable.btn_logout_selector);
-		mTvnRight.setVisibility(View.GONE);
 
+		mBtnCollect = (Button) findViewById(R.id.btn_collect);
 		mEdtCommit = (EditText) findViewById(R.id.et_commit_content);
 		mTvTitle = (TextView) findViewById(R.id.tv_knowledge_detail_title);
 		mTvCollectCount = (TextView) findViewById(R.id.tv_knowledge_detail_collect);
@@ -158,7 +157,7 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 			case R.id.title_with_back_title_btn_left:
 				finish();
 				break;
-			case R.id.title_with_back_title_btn_right:
+			case R.id.btn_collect:
 				attentionKnowledge();
 				ImeUtil.hideInputKeyboard(KnowledgeDetailActivity.this);
 				break;
@@ -248,9 +247,6 @@ public class KnowledgeDetailActivity extends YaodunActivityBase implements OnCli
 			public ActionResult onAsyncRun() {
 				// operation为空是代表关注,为1时代表取消关注
 				String operation = "";
-				if (1 == mDetailModel.getStatus()) {
-					operation = "1";
-				}
 				return KnowledgeReq.attentionKnowledge(mKnowledgeModel.getKnowledgeId(), operation);
 			}
 		});
