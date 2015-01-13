@@ -82,8 +82,18 @@ public class ContentFragment extends YaodunFragmentBase implements OnItemClickLi
 		}
 	};
 
-	public ContentFragment(int type) {
-		mType = type;
+	/**
+	 * @Name ContentFragment
+	 * @param type
+	 *            解决方法：自定义的fragment最好有一个Public的参数为空的构造函数，若需要传入一个参数，可以使用下面的方法</br
+	 *            缺陷： Unable to instantiate fragment
+	 *            com.yaodun.app.activity.ContentFragment: make sure class name
+	 *            exists, is public, and has an empty constructor that is public
+	 */
+	public static ContentFragment getInstance(int type) {
+		ContentFragment fileViewFragment = new ContentFragment();
+		fileViewFragment.mType = type;
+		return fileViewFragment;
 	}
 
 	@Override
