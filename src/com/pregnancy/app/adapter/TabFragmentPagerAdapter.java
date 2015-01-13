@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.pregnancy.app.activity.ContentFragment;
 
 public class TabFragmentPagerAdapter extends FragmentPagerAdapter {
-	private static final String[] TITLE = new String[] { "孕妇", "抗生素" };
+	private static final String[] TITLE = new String[] { "妇女", "抗生素" };
 
 	public TabFragmentPagerAdapter(Context context, FragmentManager fm) {
 		super(fm);
