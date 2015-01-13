@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android=" http://schemas.android.com/apk/res/android" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
-    <string name="app_name">安全用药查询</string>
+    <string name="app_name">用药安全咨询</string>
     <string name="use_right_now">马上开始体验</string>
     <string name="text_more">更多</string>
     <string name="exit_dialog_title">您的操作将会退出</string>
