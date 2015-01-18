@@ -114,12 +114,8 @@ public class KnowledgeAdapter extends BaseAdapter {
 		String date = vedioModel.getDisplayTime();
 		holder.mTvDate.setText(date);
 		int count = vedioModel.getCountDiscuss();
-		if (0 == count) {
-			holder.mViewCount.setVisibility(View.INVISIBLE);
-		} else {
-			holder.mViewCount.setVisibility(View.VISIBLE);
-			holder.mTvCount.setText("" + count);
-		}
+		holder.mViewCount.setVisibility(View.VISIBLE);
+		holder.mTvCount.setText("" + count);
 
 		return convertView;
 	}

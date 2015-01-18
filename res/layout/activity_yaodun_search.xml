@@ -46,17 +46,22 @@
 
                 <RadioGroup
                     android:id="@+id/rg_jieduan"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp" >
 
                     <RadioButton
                         android:id="@+id/rb_renshen"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:button="@drawable/checkbox_woman_man_style"
+                        android:layout_weight="1"
+                        android:button="@null"
                         android:checked="true"
+                        android:drawableLeft="@drawable/checkbox_woman_man_style"
+                        android:drawablePadding="10dp"
                         android:text="妊娠期"
                         android:textColor="@color/title_gray"
                         android:textSize="16sp" />
@@ -65,8 +70,11 @@
                         android:id="@+id/rb_buru"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:button="@drawable/checkbox_woman_man_style"
+                        android:layout_weight="1"
+                        android:button="@null"
                         android:checked="false"
+                        android:drawableLeft="@drawable/checkbox_woman_man_style"
+                        android:drawablePadding="10dp"
                         android:text="哺乳期"
                         android:textColor="@color/title_gray"
                         android:textSize="16sp" />
