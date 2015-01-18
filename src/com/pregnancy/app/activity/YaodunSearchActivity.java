@@ -317,7 +317,6 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 			@Override
 			public void onClick(View v) {
 				popUtil.dismiss();
-				finish();
 				MainActivityGroup.INSTANCE.initStartIndex(2);
 			}
 		});
