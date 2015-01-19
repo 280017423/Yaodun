@@ -25,6 +25,7 @@ import com.yaodun.app.listener.IActionListener;
 import com.yaodun.app.model.DoctorModel;
 import com.yaodun.app.req.DoctorReq;
 import com.yaodun.app.util.ConstantSet;
+import com.yaodun.app.util.SharedPreferenceUtil;
 
 /**
  * 药师咨询界面
@@ -173,9 +174,13 @@ public class DoctorConsultActivity extends YaodunActivityBase implements OnClick
 	public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 		DoctorModel model = (DoctorModel) parent.getAdapter().getItem(position);
 		if (null != model) {
+			String info = SharedPreferenceUtil.getStringValueByKey(DoctorConsultActivity.this,
+					ConstantSet.FILE_JYT_CONFIG, ConstantSet.KEY_MEDICINE_INFO);
 			Intent intent = new Intent(this, DoctorDetailActivity.class);
 			intent.putExtra(ConstantSet.EXTRA_DOCTORMODEL, model);
+			intent.putExtra(ConstantSet.KEY_MEDICINE_INFO, info);
 			startActivityForResult(intent, REQUEST_CODE);
+			SharedPreferenceUtil.removeValue(this, ConstantSet.FILE_JYT_CONFIG, ConstantSet.KEY_MEDICINE_INFO);
 		}
 	}
 
@@ -185,6 +190,12 @@ public class DoctorConsultActivity extends YaodunActivityBase implements OnClick
 			mPullToRefreshListView.setHeaderVisible(true);
 		}
 		super.onActivityResult(requestCode, resultCode, data);
+	}
+
+	@Override
+	protected void onPause() {
+		SharedPreferenceUtil.removeValue(this, ConstantSet.FILE_JYT_CONFIG, ConstantSet.KEY_MEDICINE_INFO);
+		super.onPause();
 	}
 
 }

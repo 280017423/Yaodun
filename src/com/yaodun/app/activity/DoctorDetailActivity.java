@@ -56,6 +56,7 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 	private List<QuestionModel> mQuestionList;
 	private QuestionAdapter mAdapter;
 	private int mCurrentStatus;
+	private String mMedicineInfo;
 
 	private Handler mHandler = new Handler() {
 		@Override
@@ -111,6 +112,7 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 	private void initVariable() {
 		Intent intent = getIntent();
 		mDoctorModel = (DoctorModel) intent.getSerializableExtra(ConstantSet.EXTRA_DOCTORMODEL);
+		mMedicineInfo = intent.getStringExtra(ConstantSet.KEY_MEDICINE_INFO);
 		if (null == mDoctorModel) {
 			finish();
 		}
@@ -136,6 +138,9 @@ public class DoctorDetailActivity extends YaodunActivityBase implements OnClickL
 		mListView = (ListView) findViewById(R.id.lv_question_detail);
 		mListView.setAdapter(mAdapter);
 		mEdtCommit = (EditText) findViewById(R.id.et_commit_content);
+		if (null != mMedicineInfo) {
+			mEdtCommit.setText(mMedicineInfo);
+		}
 		mIvImg = (ImageView) findViewById(R.id.iv_doctor_img);
 		mTvName = (TextView) findViewById(R.id.tv_doctor_name);
 		mTvProfessional = (TextView) findViewById(R.id.tv_doctor_professional);
