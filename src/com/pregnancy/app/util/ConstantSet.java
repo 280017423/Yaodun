@@ -39,4 +39,5 @@ public class ConstantSet {
 
 	public static final String ACTION_QRCODE_OK = "qrcode ok";// 扫二维码完成
 	public static final String EXTRA_QRCODE = "qrcode";
+	public static final String KEY_MEDICINE_INFO = "KEY_MEDICINE_INFO";
 }
