@@ -23,7 +23,7 @@ public class QueryType {
 			case medicine_ertong:
 				return "儿童用药查询";
 			case medicine_yunfu:
-				return "孕妇用药查询";
+				return "孕哺用药查询";
 			case medicine_laoren:
 				return "老人用药查询";
 			case medicine_chongfu:

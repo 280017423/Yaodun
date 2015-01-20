@@ -101,6 +101,8 @@
             android:id="@+id/tv_knowledge_detail"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="15dp"
             android:textColor="#FF666666"
             android:textSize="@dimen/size_3" />
     </ScrollView>

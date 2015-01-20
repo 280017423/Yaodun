@@ -47,6 +47,7 @@ import com.pregnancy.app.model.UserInfoModel;
 import com.pregnancy.app.req.MedicineReq;
 import com.pregnancy.app.util.ConstantSet;
 import com.pregnancy.app.util.PopWindowUtil;
+import com.pregnancy.app.util.SharedPreferenceUtil;
 import com.qianjiang.framework.util.ImeUtil;
 import com.qianjiang.framework.util.StringUtil;
 import com.qianjiang.framework.util.UIUtil;
@@ -248,6 +249,10 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		if (mIsMedicineCheck) {
 			return;
 		}
+		if (null == addList || addList.isEmpty()) {
+			toast("请输入药品再查询");
+			return;
+		}
 		if (queryType == QueryType.medicine_yunfu) {
 			if (rbRenshen.isChecked()) {
 				String month = mTvRenshenTime.getText().toString().trim();
@@ -305,7 +310,7 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 		}.execute();
 	}
 
-	protected void showPop(String checkResult) {
+	protected void showPop(final String checkResult) {
 		View contentView = View.inflate(this, R.layout.view_search_result, null);
 		final PopWindowUtil popUtil = new PopWindowUtil(contentView, null);
 		TextView tvCheckResult = (TextView) contentView.findViewById(R.id.tv_query_result_content);
@@ -316,8 +321,15 @@ public class YaodunSearchActivity extends YaodunActivityBase implements OnClickL
 
 			@Override
 			public void onClick(View v) {
+				String info = "";
+				if (null != addList && !addList.isEmpty()) {
+					for (int i = 0; i < addList.size(); i++) {
+						info += addList.get(i).getDrugname();
+					}
+				}
+				SharedPreferenceUtil.saveValue(YaodunSearchActivity.this, ConstantSet.FILE_JYT_CONFIG,
+						ConstantSet.KEY_MEDICINE_INFO, info + checkResult);
 				popUtil.dismiss();
-				finish();
 				MainActivityGroup.INSTANCE.initStartIndex(2);
 			}
 		});

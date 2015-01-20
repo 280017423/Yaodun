@@ -12,9 +12,9 @@
         android:background="@drawable/more_content_bg"
         android:cacheColorHint="@android:color/transparent"
         android:divider="@color/header_divider"
-        android:dividerHeight="1dp"
+        android:dividerHeight="0.7dp"
         android:fadingEdge="none"
         android:listSelector="@android:color/transparent"
-        android:scrollbars="vertical" />
+        android:scrollbars="none" />
 
 </RelativeLayout>
